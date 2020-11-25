@@ -44,10 +44,10 @@ namespace SP
         [SerializeField]
         float fallingSpeed = 80;
 
-        [Header("Stamina Costs")]
+        /*[Header("Stamina Costs")]
         float rollStaminaCost = 10;
         float sprintStaminaCost = 1;
-        float jumpStaminaCost = 15;
+        float jumpStaminaCost = 15;*/
 
         private void Awake()
         {

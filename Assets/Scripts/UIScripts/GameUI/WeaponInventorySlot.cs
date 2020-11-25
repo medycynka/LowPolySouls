@@ -6,20 +6,13 @@ using UnityEngine.UI;
 namespace SP
 {
 
-    public class WeaponInventorySlot : MonoBehaviour
+    public class WeaponInventorySlot : InventorySlotBase
     {
-        public PlayerInventory playerInventory;
-        public WeaponSlotManager weaponSlotManager;
-        public UIManager uiManager;
-
-        public Image icon;
         WeaponItem item;
 
         private void Awake()
         {
-            //playerInventory = FindObjectOfType<PlayerInventory>();
-            //weaponSlotManager = FindObjectOfType<WeaponSlotManager>();
-            //uiManager = FindObjectOfType<UIManager>();
+
         }
 
         public void AddItem(WeaponItem newItem)

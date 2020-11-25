@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Shield_003
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: a49a8c205c636d54f9afd64d511ff836, type: 3}
-  itemName: Sword_003
+  itemName: Shield_003
+  itemType: 1
   modelPrefab: {fileID: 129334, guid: 6836f0f2ce9932d47876849863f59ffd, type: 3}
   isUnarmed: 0
+  pivotPositionTransform: {x: 0, y: 0, z: 0}
+  pivotRotationTransform: {x: 0, y: 0, z: 0}
+  backSlotPosition: {x: 0, y: 0, z: 0}
   Light_Attack_Damage: 0
   Heavy_Attack_Damage: 0
   Weight: 0

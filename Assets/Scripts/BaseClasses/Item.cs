@@ -9,6 +9,7 @@ namespace SP
         [Header("Item Information")]
         public Sprite itemIcon;
         public string itemName;
+        public ItemType itemType;
     }
 
 }

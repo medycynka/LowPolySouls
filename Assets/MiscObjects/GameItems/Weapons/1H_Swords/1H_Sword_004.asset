@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 1H_Sword_004
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: d9a567dbf02fdaa48a5e8db4abbf9a1a, type: 3}
-  itemName: 1H_Sword_003
+  itemName: 1H_Sword_004
+  itemType: 0
   modelPrefab: {fileID: 148790, guid: 191c879605314b340aedde445f8366ae, type: 3}
   isUnarmed: 0
   pivotPositionTransform: {x: -8, y: -1.35, z: 0}

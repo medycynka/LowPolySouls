@@ -8,15 +8,11 @@ using BattleDrakeStudios.ModularCharacters;
 namespace SP
 {
 
-    public class EquipmentInventorySlot : MonoBehaviour
+    public class EquipmentInventorySlot : InventorySlotBase
     {
-        public PlayerInventory playerInventory;
-        public WeaponSlotManager weaponSlotManager;
         public CurrentEquipments currentEquipments;
         public ModularCharacterManager modularCharacterManager;
-        public UIManager uiManager;
 
-        public Image icon;
         EquipmentItem item;
         public bool equipUnEquip = false;
 

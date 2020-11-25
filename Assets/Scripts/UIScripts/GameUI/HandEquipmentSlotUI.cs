@@ -6,11 +6,8 @@ using UnityEngine.UI;
 namespace SP
 {
 
-    public class HandEquipmentSlotUI : MonoBehaviour
+    public class HandEquipmentSlotUI : InventorySlotBase
     {
-        public UIManager uiManager;
-
-        public Image icon;
         WeaponItem weapon;
 
         public bool rightHandSlot01;
