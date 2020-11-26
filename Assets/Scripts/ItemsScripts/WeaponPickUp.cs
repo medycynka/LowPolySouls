@@ -8,7 +8,7 @@ namespace SP
 
     public class WeaponPickUp : Interactable
     {
-        public WeaponItem weapon;
+        public WeaponItem[] weapons;
 
         public override void Interact(PlayerManager playerManager)
         {
@@ -30,19 +30,25 @@ namespace SP
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
 
-            if (weapon != null)
+            if (weapons.Length > 0)
             {
-                if (weapon.itemType == ItemType.Weapon)
+                foreach (var weapon in weapons)
                 {
-                    playerInventory.weaponsInventory.Add(weapon);
-                }
-                else if(weapon.itemType == ItemType.Shield)
-                {
-                    playerInventory.weaponsInventory.Add(weapon);
+                    if (weapon != null)
+                    {
+                        if (weapon.itemType == ItemType.Weapon)
+                        {
+                            playerInventory.weaponsInventory.Add(weapon);
+                        }
+                        else if (weapon.itemType == ItemType.Shield)
+                        {
+                            playerInventory.shieldsInventory.Add(weapon);
+                        }
+                    }
                 }
 
-                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
-                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapons[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapons[0].itemIcon.texture;
             }
             
             playerManager.itemInteractableGameObject.SetActive(true);

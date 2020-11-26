@@ -70,6 +70,7 @@ namespace SP
 
             uiManager.equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
             uiManager.ResetAllSelectedSlots();
+            PlayerManager pm = uiManager.playerInventory.GetComponent<PlayerManager>();
         }
     }
 

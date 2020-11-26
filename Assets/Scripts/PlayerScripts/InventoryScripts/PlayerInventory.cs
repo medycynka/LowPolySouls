@@ -20,7 +20,15 @@ namespace SP
         public int currentLeftWeaponIndex = 0;
 
         public List<WeaponItem> weaponsInventory;
-        public List<EquipmentItem> equipmentInventory;
+        public List<WeaponItem> shieldsInventory;
+        public List<EquipmentItem> helmetsInventory;
+        public List<EquipmentItem> chestsInventory;
+        public List<EquipmentItem> shouldersInventory;
+        public List<EquipmentItem> handsInventory;
+        public List<EquipmentItem> legsInventory;
+        public List<EquipmentItem> feetInventory;
+        public List<EquipmentItem> ringsInventory;
+        public List<EquipmentItem> consumablesInventory;
 
         private void Awake()
         {

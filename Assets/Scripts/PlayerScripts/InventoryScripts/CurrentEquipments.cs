@@ -26,7 +26,16 @@ namespace SP
             }
         }
 
+        public class RingPart
+        {
+            public ItemType ring_ = ItemType.Ring;
+            public int id_ = -1;
+            public int slotID = 0;
+            public int armorValue = 0;
+        }
+
         public Dictionary<ModularBodyPart, EquipmentPart> currentEq;
+        public RingPart[] currentRings = { new RingPart(), new RingPart(), new RingPart()};
 
         private void Start()
         {
@@ -93,6 +102,11 @@ namespace SP
             foreach(var kvp_ in currentEq)
             {
                 sum_ += kvp_.Value.armorValue;
+            }
+
+            foreach(var ring_ in currentRings)
+            {
+                sum_ += ring_.armorValue;
             }
 
             return sum_;
