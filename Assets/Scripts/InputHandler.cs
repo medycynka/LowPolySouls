@@ -41,6 +41,7 @@ namespace SP
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        PlayerStats playerStats;
         WeaponSlotManager weaponSlotManager;
 
         public CameraHandler cameraHandler;
@@ -54,6 +55,7 @@ namespace SP
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         }
 
@@ -87,17 +89,20 @@ namespace SP
 
         public void TickInput(float delta)
         {
-            if (!inventoryFlag)
+            if (playerStats.isPlayerAlive)
             {
-                HandleMoveInput(delta);
-                HandleRollInput(delta);
-                HandleAttackInput(delta);
-                HandleQuickSlotsInput();
-                HandleLockOnInput();
-                HandleTwoHandInput();
+                if (!inventoryFlag)
+                {
+                    HandleMoveInput(delta);
+                    HandleRollInput(delta);
+                    HandleAttackInput(delta);
+                    HandleQuickSlotsInput();
+                    HandleLockOnInput();
+                    HandleTwoHandInput();
+                }
+
+                HandleInventoryInput();
             }
-            
-            HandleInventoryInput();
         }
 
         private void HandleMoveInput(float delta)
@@ -132,57 +137,60 @@ namespace SP
 
         private void HandleAttackInput(float delta)
         {
-            #region Handle Light Attack
-            if (rb_Input)
+            if (playerStats.currentStamina > 0)
             {
-                if (playerManager.canDoCombo)
+                #region Handle Light Attack
+                if (rb_Input)
                 {
-                    comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
-                }
-                else
-                {
-                    if (playerManager.isInteracting)
-                    {
-                        return;
-                    }
-
                     if (playerManager.canDoCombo)
                     {
-                        return;
+                        comboFlag = true;
+                        playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                        comboFlag = false;
                     }
-
-                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-                }
-            }
-            #endregion
-
-            #region Handle Heavy Attack
-            if (rt_Input)
-            {
-                if (playerManager.canDoCombo)
-                {
-                    comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
-                }
-                else
-                {
-                    if (playerManager.isInteracting)
+                    else
                     {
-                        return;
-                    }
+                        if (playerManager.isInteracting)
+                        {
+                            return;
+                        }
 
+                        if (playerManager.canDoCombo)
+                        {
+                            return;
+                        }
+
+                        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                    }
+                }
+                #endregion
+
+                #region Handle Heavy Attack
+                if (rt_Input)
+                {
                     if (playerManager.canDoCombo)
                     {
-                        return;
+                        comboFlag = true;
+                        playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                        comboFlag = false;
                     }
+                    else
+                    {
+                        if (playerManager.isInteracting)
+                        {
+                            return;
+                        }
 
-                    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                        if (playerManager.canDoCombo)
+                        {
+                            return;
+                        }
+
+                        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                    }
                 }
+                #endregion
             }
-            #endregion
         }
 
         private void HandleQuickSlotsInput()

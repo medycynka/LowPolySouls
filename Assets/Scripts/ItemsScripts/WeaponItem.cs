@@ -14,6 +14,7 @@ namespace SP
         public Vector3 pivotPositionTransform;
         public Vector3 pivotRotationTransform;
         public Vector3 backSlotPosition;
+        public Vector3 backSlotRotation;
 
         [Header("Stats")]
         public int Light_Attack_Damage;

@@ -12,6 +12,7 @@ namespace SP
         Transform cameraObject;
         InputHandler inputHandler;
         PlayerStats playerStats;
+        CapsuleCollider playerCollider;
         public Vector3 moveDirection;
 
         [HideInInspector]
@@ -26,23 +27,21 @@ namespace SP
         [SerializeField]
         float groundDetectionRayStartPoint = 0.5f;
         [SerializeField]
-        float minimumDistanceNeededToBeginFall = 1f;
+        float minimumDistanceNeededToBeginFall = 0.5f;
         [SerializeField]
         float groundDirectionRayDistance = 0.2f;
         LayerMask ignoreForGroundCheck;
         public float inAirTimer;
 
         [Header("Movement Stats")]
-        [SerializeField]
-        float movementSpeed = 5;
-        [SerializeField]
-        float walkingSpeed = 1;
-        [SerializeField]
-        float sprintSpeed = 7;
-        [SerializeField]
-        float rotationSpeed = 10;
-        [SerializeField]
-        float fallingSpeed = 80;
+        public float movementSpeed = 5;
+        public float walkingSpeed = 1;
+        public float sprintSpeed = 7;
+        public float rotationSpeed = 10;
+        public float fallingSpeed = 80;
+        public float jumpMult = 10;
+
+        public float nextJump = 0;
 
         /*[Header("Stamina Costs")]
         float rollStaminaCost = 10;
@@ -61,6 +60,7 @@ namespace SP
             inputHandler = GetComponent<InputHandler>();
             playerStats = GetComponent<PlayerStats>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerCollider = GetComponent<CapsuleCollider>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
@@ -224,8 +224,7 @@ namespace SP
 
             if (playerManager.isInAir)
             {
-                rigidbody.AddForce(-Vector3.up * fallingSpeed);
-                rigidbody.AddForce(moveDirection * (fallingSpeed / 10f));
+                rigidbody.velocity = Vector3.down * fallingSpeed * 0.05f + moveDirection * (fallingSpeed * 0.005f);
             }
 
             Vector3 dir = moveDirection;
@@ -291,7 +290,7 @@ namespace SP
 
         }
 
-        public void HandleJumping()
+        public void HandleJumping(float delta)
         {
             if (playerManager.isInteracting)
             {
@@ -302,16 +301,35 @@ namespace SP
             {
                 if (inputHandler.moveAmount > 0)
                 {
+                    playerManager.shouldAddJumpForce = true;
                     moveDirection = cameraObject.forward * inputHandler.vertical;
                     moveDirection += cameraObject.right * inputHandler.horizontal;
                     animatorHandler.PlayTargetAnimation("Jump", true);
                     moveDirection.y = 0;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
+                    nextJump = Time.time + 2;
                 }
             }
         }
 
+        public void AddJumpForce(float delta)
+        {
+            if (inputHandler.sprintFlag)
+            {
+                rigidbody.AddForce(new Vector3(moveDirection.x * sprintSpeed * jumpMult * 0.25f,
+                    0f/*jumpMult * 7.5f*/,
+                    moveDirection.z * sprintSpeed * jumpMult * 0.05f) * delta,
+                    ForceMode.Impulse);
+            }
+            else
+            {
+                rigidbody.AddForce(new Vector3(moveDirection.x * movementSpeed * jumpMult * 0.25f,
+                    0f/*jumpMult * 7.5f*/,
+                    moveDirection.z * movementSpeed * jumpMult * 0.05f) * delta,
+                    ForceMode.Impulse);
+            }
+        }
         #endregion
     }
 }

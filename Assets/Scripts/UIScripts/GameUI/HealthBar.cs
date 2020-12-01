@@ -7,22 +7,25 @@ namespace SP
 {
     public class HealthBar : MonoBehaviour
     {
-        public Slider slider;
+        public Slider healthBarSlider;
+        public Slider backgroundSlider;
 
         private void Start()
         {
-            slider = GetComponent<Slider>();
+            healthBarSlider = GetComponent<Slider>();
         }
 
         public void SetMaxHealth(float maxHealth)
         {
-            slider.maxValue = maxHealth;
-            slider.value = maxHealth;
+            healthBarSlider.maxValue = maxHealth;
+            healthBarSlider.value = maxHealth;
+            backgroundSlider.maxValue = maxHealth;
+            backgroundSlider.value = maxHealth;
         }
 
         public void SetCurrentHealth(float currentHealth)
         {
-            slider.value = currentHealth;
+            healthBarSlider.value = currentHealth;
         }
     }
 

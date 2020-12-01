@@ -8,22 +8,22 @@ namespace SP
 
     public class StaminaBar : MonoBehaviour
     {
-        public Slider slider;
+        public Slider staminaBarSlider;
 
         private void Start()
         {
-            slider = GetComponent<Slider>();
+            staminaBarSlider = GetComponent<Slider>();
         }
 
         public void SetMaxStamina(float maxStamina)
         {
-            slider.maxValue = maxStamina;
-            slider.value = maxStamina;
+            staminaBarSlider.maxValue = maxStamina;
+            staminaBarSlider.value = maxStamina;
         }
 
         public void SetCurrentStamina(float currentStamina)
         {
-            slider.value = currentStamina;
+            staminaBarSlider.value = currentStamina;
         }
     }
 

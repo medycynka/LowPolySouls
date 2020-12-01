@@ -17,7 +17,12 @@ namespace SP
         public GameObject itemInteractableGameObject;
 
         public bool isInteracting;
-        public bool shouldRefillStamina;
+
+        [Header("Heleper bools")]
+        public bool shouldRefillStamina = false;
+        public bool shouldRefillHealthBg = false;
+        public bool shouldRefillStaminaBg = false;
+        public bool shouldAddJumpForce = false;
 
         [Header("Player Flags")]
         public bool isSprinting;
@@ -25,10 +30,9 @@ namespace SP
         public bool isGrounded;
         public bool canDoCombo;
 
+        float healhBgRefillTimer = 0.0f;
         float staminaRefillTimer = 0.0f;
-
-        [Header("Health & Stamina Refiil Values")]
-        public float staminaRefillAmount = 1.0f;
+        float addJumpForceTimer = 1f;
 
         private void Awake()
         {
@@ -52,9 +56,16 @@ namespace SP
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
-            playerLocomotion.HandleJumping();
+
+            if (Time.time > playerLocomotion.nextJump)
+            {
+                playerLocomotion.HandleJumping(delta);
+            }
 
             CheckForInteractableObject();
+            FillHealthBarBackGround(delta);
+            CheckForStaminaRefill(delta);
+            CheckForJumpForce(delta);
         }
 
         private void FixedUpdate()
@@ -75,7 +86,6 @@ namespace SP
             inputHandler.d_Pad_Left = false;
             inputHandler.d_Pad_Right = false;
             inputHandler.a_Input = false;
-            inputHandler.jump_Input = false;
             inputHandler.jump_Input = false;
             inputHandler.inventory_Input = false;
 
@@ -138,15 +148,37 @@ namespace SP
             }
         }
 
-        public void CheckForStaminaRefill(float delta)
+        private void FillHealthBarBackGround(float delta)
         {
-            shouldRefillStamina = !isInteracting && !inputHandler.comboFlag;
+            shouldRefillHealthBg = playerStats.healthBar.backgroundSlider.value > playerStats.healthBar.healthBarSlider.value;
+
+            if (shouldRefillHealthBg)
+            {
+                if(healhBgRefillTimer > 1.5f)
+                {
+                    playerStats.healthBar.backgroundSlider.value -= playerStats.healthBgRefillAmount * delta;
+
+                    if(playerStats.healthBar.backgroundSlider.value <= playerStats.healthBar.healthBarSlider.value)
+                    {
+                        playerStats.healthBar.backgroundSlider.value = playerStats.healthBar.healthBarSlider.value;
+                    }
+                }
+                else
+                {
+                    healhBgRefillTimer += delta;
+                }
+            }
+        }
+
+        private void CheckForStaminaRefill(float delta)
+        {
+            shouldRefillStamina = !isInteracting && !inputHandler.comboFlag && (playerStats.currentStamina < playerStats.maxStamina);
 
             if (shouldRefillStamina)
             {
                 if (staminaRefillTimer > 1.0f)
                 {
-                    playerStats.RefillStamina(staminaRefillAmount);
+                    playerStats.RefillStamina();
                 }
                 else
                 {
@@ -156,6 +188,21 @@ namespace SP
             else
             {
                 staminaRefillTimer = 0.0f;
+            }
+        }
+
+        private void CheckForJumpForce(float delta)
+        {
+            if (shouldAddJumpForce)
+            {
+                addJumpForceTimer -= delta;
+                playerLocomotion.AddJumpForce(delta);
+
+                if(addJumpForceTimer <= 0)
+                {
+                    shouldAddJumpForce = false;
+                    addJumpForceTimer = 1f;
+                }
             }
         }
     }

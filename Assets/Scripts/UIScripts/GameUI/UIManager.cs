@@ -63,21 +63,13 @@ namespace SP
 
         private void Start()
         {
-            weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-            shieldInventorySlots = shieldInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-            helmetInventorySlots = helmetInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            chestInventorySlots = chestInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            shoulderInventorySlots = shoulderInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            handInventorySlots = handInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            GetInventorySlots();
             equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI()
         {
+            GetInventorySlots();
             UpdateWeaponInventory();
             UpdateShieldInventory();
             UpdateHelmetInventory();
@@ -118,6 +110,20 @@ namespace SP
         }
 
         #region Update Inventory Tabs
+        private void GetInventorySlots()
+        {
+            weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+            shieldInventorySlots = shieldInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+            helmetInventorySlots = helmetInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            chestInventorySlots = chestInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            shoulderInventorySlots = shoulderInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            handInventorySlots = handInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
         private void UpdateWeaponInventory()
         {
             #region Weapon Inventory Slots

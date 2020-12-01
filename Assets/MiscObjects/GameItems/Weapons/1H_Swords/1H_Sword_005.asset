@@ -17,9 +17,10 @@ MonoBehaviour:
   itemType: 0
   modelPrefab: {fileID: 185350, guid: c9576268205bb4144a891cbfa89ff33c, type: 3}
   isUnarmed: 0
-  pivotPositionTransform: {x: 0, y: 0, z: 0}
-  pivotRotationTransform: {x: 0, y: 0, z: 0}
-  backSlotPosition: {x: 0, y: 0, z: 0}
+  pivotPositionTransform: {x: -8, y: -1.9, z: 0}
+  pivotRotationTransform: {x: 0, y: -90, z: -90}
+  backSlotPosition: {x: 4.8, y: -8.3, z: 3.3}
+  backSlotRotation: {x: 15, y: 0, z: 0}
   Light_Attack_Damage: 0
   Heavy_Attack_Damage: 0
   Weight: 0

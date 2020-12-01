@@ -3318,10 +3318,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4966070491420200267}
-  - component: {fileID: 4966070491420200264}
   - component: {fileID: 4966070491420200271}
+  - component: {fileID: 4966070491420200264}
   - component: {fileID: 4966070491420200275}
-  - component: {fileID: 4966070491420200274}
+  - component: {fileID: 4281836137122507302}
   - component: {fileID: 4966070491420200269}
   - component: {fileID: 4966070491420200268}
   - component: {fileID: 4966070491420200270}
@@ -3342,7 +3342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4966070491420200266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -82.527, y: 107.301, z: -5.2}
+  m_LocalPosition: {x: -85.756996, y: 107.301, z: 309.48602}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966070490633484137}
@@ -3350,20 +3350,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4966070491420200264
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4966070491420200266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &4966070491420200271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3380,6 +3366,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &4966070491420200264
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966070491420200266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4966070491420200275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,7 +3420,7 @@ MonoBehaviour:
   rollInputTimer: 0
   cameraHandler: {fileID: 0}
   uiManager: {fileID: 0}
---- !u!114 &4966070491420200274
+--- !u!114 &4281836137122507302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3445,7 +3445,10 @@ MonoBehaviour:
   walkingSpeed: 1
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 400
+  fallingSpeed: 150
+  jumpSpeed: 5
+  jumpMult: 5
+  nextJump: 0
 --- !u!114 &4966070491420200269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3469,7 +3472,6 @@ MonoBehaviour:
   isInAir: 0
   isGrounded: 0
   canDoCombo: 0
-  staminaRefillAmount: 1
 --- !u!114 &4966070491420200268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3487,14 +3489,22 @@ MonoBehaviour:
   unarmedWeapon: {fileID: 11400000, guid: 179a4f0368fb0c64c8a791d4150536d1, type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
-  - {fileID: 11400000, guid: e46cdd48310c58f49b47dfdcbf9c9c6a, type: 2}
+  - {fileID: 11400000, guid: 1f9ac8a3e1dab4c41baf0baf42b0c313, type: 2}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   - {fileID: 11400000, guid: 1f9ac8a3e1dab4c41baf0baf42b0c313, type: 2}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
   weaponsInventory: []
-  equipmentInventory: []
+  shieldsInventory: []
+  helmetsInventory: []
+  chestsInventory: []
+  shouldersInventory: []
+  handsInventory: []
+  legsInventory: []
+  feetInventory: []
+  ringsInventory: []
+  consumablesInventory: []
 --- !u!114 &4966070491420200270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3530,6 +3540,7 @@ MonoBehaviour:
   staminaBar: {fileID: 0}
   soulsAmount: 0
   currentArmorValue: 0
+  staminaRefillAmount: 20
 --- !u!114 &540771581
 MonoBehaviour:
   m_ObjectHideFlags: 0

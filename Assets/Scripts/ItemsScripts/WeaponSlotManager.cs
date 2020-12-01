@@ -49,11 +49,6 @@ namespace SP
         {
             if (isLeft)
             {
-                leftHandSlot.currentWeapon = weaponItem;
-                leftHandSlot.LoadWeaponModel(weaponItem);
-                LoadLeftWeaponDamageCollider();
-                quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
-
                 #region Handle Left Weapon Idle Animation
                 if (weaponItem != null)
                 {
@@ -64,6 +59,21 @@ namespace SP
                     animator.CrossFade("Left Arm Empty", 0.2f);
                 }
                 #endregion
+
+                if (!inputHandler.twoHandFlag)
+                {
+                    leftHandSlot.currentWeapon = weaponItem;
+                    leftHandSlot.LoadWeaponModel(weaponItem);
+                    LoadLeftWeaponDamageCollider();
+                    quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+                }
+                else
+                {
+                    backSlot.currentWeapon = weaponItem;
+                    backSlot.LoadWeaponModel(weaponItem);
+                    LoadLeftWeaponDamageCollider();
+                    quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+                }
             }
             else
             {

@@ -61,13 +61,15 @@ namespace SP
                 if (isBackSlot)
                 {
                     model.transform.localPosition = weaponItem.backSlotPosition;
+                    model.transform.localEulerAngles = weaponItem.backSlotRotation;
                 }
                 else
                 {
                     model.transform.localPosition = Vector3.zero;
+                    model.transform.localRotation = Quaternion.identity;
                 }
                 
-                model.transform.localRotation = Quaternion.identity;
+                //model.transform.localRotation = Quaternion.identity;
                 model.transform.localScale = Vector3.one;
             }
 

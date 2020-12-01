@@ -19,7 +19,8 @@ MonoBehaviour:
   isUnarmed: 0
   pivotPositionTransform: {x: -8, y: -1.35, z: 0}
   pivotRotationTransform: {x: 0, y: -90, z: -90}
-  backSlotPosition: {x: 0, y: 0, z: 0}
+  backSlotPosition: {x: 4, y: -8, z: 2}
+  backSlotRotation: {x: 15, y: 0, z: 0}
   Light_Attack_Damage: 0
   Heavy_Attack_Damage: 0
   Weight: 0

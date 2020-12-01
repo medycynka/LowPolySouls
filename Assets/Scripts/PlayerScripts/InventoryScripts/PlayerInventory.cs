@@ -10,7 +10,6 @@ namespace SP
 
         public WeaponItem rightWeapon;
         public WeaponItem leftWeapon;
-
         public WeaponItem unarmedWeapon;
 
         public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
@@ -88,7 +87,6 @@ namespace SP
             {
                 currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
             }
-
             else if (currentLeftWeaponIndex == 1 && weaponsInLeftHandSlots[1] != null)
             {
                 leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 2731c946f99b8ae44b054d58c9937930, type: 3}
   itemName: 1H_Sword_002
+  itemType: 0
   modelPrefab: {fileID: 164074, guid: 5200ad7847af7de4f83477e863f27244, type: 3}
   isUnarmed: 0
-  needTransformInverse: 1
   pivotPositionTransform: {x: -6.7, y: -1.1, z: 0}
   pivotRotationTransform: {x: 90, y: 0, z: 0}
-  backSlotPosition: {x: 0, y: 0, z: 0}
+  backSlotPosition: {x: 3, y: -7, z: 1}
+  backSlotRotation: {x: 15, y: 0, z: 0}
   Light_Attack_Damage: 0
   Heavy_Attack_Damage: 0
   Weight: 0

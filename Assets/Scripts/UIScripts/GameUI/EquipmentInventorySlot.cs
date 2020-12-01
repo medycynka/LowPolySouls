@@ -58,7 +58,7 @@ namespace SP
         {
             if (item.itemType == ItemType.Ring)
             {
-
+                
             }
             else
             {

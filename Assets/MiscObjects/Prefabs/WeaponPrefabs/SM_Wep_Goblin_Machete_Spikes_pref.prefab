@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94d6f3468f10e04a94980655e9bd542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTrigered: 0
   currentWeaponDamage: 35
 --- !u!65 &1775256282727822445
 BoxCollider:
@@ -161,11 +162,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7777133911714605451}
-  m_LocalRotation: {x: -0.58566445, y: 0.32619384, z: -0.58615285, w: 0.454994}
-  m_LocalPosition: {x: 5.6, y: 4.3, z: 1.1}
-  m_LocalScale: {x: 70, y: 90, z: 70}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 8, y: 1.9, z: 0}
+  m_LocalScale: {x: 70, y: 100, z: 70}
   m_Children:
   - {fileID: 1775256282727469210}
   m_Father: {fileID: 471280}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -171.341, y: -95.875, z: 67.824}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}

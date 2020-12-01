@@ -8,8 +8,15 @@ namespace SP
     {
         public HealthBar healthBar;
         public StaminaBar staminaBar;
+        public GameObject youDiedLogo;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
+
+        [Header("Health & Stamina refill values")]
+        public float healthBgRefillAmount = 20f;
+        public float staminaRefillAmount = 20f;
+
+        public bool isPlayerAlive = true;
 
         AnimatorHandler animatorHandler;
 
@@ -18,7 +25,7 @@ namespace SP
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
-        void Start()
+        private void Start()
         {
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
@@ -29,6 +36,8 @@ namespace SP
             currentStamina = maxStamina;
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
+
+            youDiedLogo.SetActive(false);
         }
 
         private float SetMaxHealthFromHealthLevel()
@@ -56,7 +65,22 @@ namespace SP
             {
                 currentHealth = 0;
                 animatorHandler.PlayTargetAnimation("Dead_01", true);
+                isPlayerAlive = false;
+                youDiedLogo.SetActive(true);
             }
+        }
+
+        public void RefillHealth()
+        {
+            currentHealth += healthBgRefillAmount * Time.deltaTime;
+
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+
+            healthBar.healthBarSlider.value += healthBgRefillAmount * Time.deltaTime;
+            healthBar.backgroundSlider.value += healthBgRefillAmount * Time.deltaTime;
         }
 
         public void TakeStaminaDamage(float drain)
@@ -71,16 +95,16 @@ namespace SP
             staminaBar.SetCurrentStamina(currentStamina);
         }
 
-        public void RefillStamina(float refill)
+        public void RefillStamina()
         {
-            currentStamina = currentStamina + refill;
+            currentStamina += staminaRefillAmount * Time.deltaTime;
 
-            if(currentStamina > maxStamina)
+            if (currentStamina > maxStamina)
             {
                 currentStamina = maxStamina;
             }
 
-            staminaBar.SetCurrentStamina(currentStamina);
+            staminaBar.staminaBarSlider.value += staminaRefillAmount * Time.deltaTime;
         }
     }
 
