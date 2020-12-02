@@ -27,7 +27,7 @@ namespace SP
         public List<EquipmentItem> legsInventory;
         public List<EquipmentItem> feetInventory;
         public List<EquipmentItem> ringsInventory;
-        public List<EquipmentItem> consumablesInventory;
+        public List<ConsumableItem> consumablesInventory;
 
         private void Awake()
         {

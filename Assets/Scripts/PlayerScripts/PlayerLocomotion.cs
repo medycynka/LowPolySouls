@@ -43,10 +43,9 @@ namespace SP
 
         public float nextJump = 0;
 
-        /*[Header("Stamina Costs")]
-        float rollStaminaCost = 10;
-        float sprintStaminaCost = 1;
-        float jumpStaminaCost = 15;*/
+        [Header("Stamina Costs")]
+        public float rollStaminaCost = 10;
+        public float sprintStaminaCost = 5;
 
         private void Awake()
         {
@@ -147,7 +146,7 @@ namespace SP
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
+            if (playerStats.currentStamina > 0 && inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
             {
                 playerManager.isSprinting = true;
                 moveDirection *= sprintSpeed;
@@ -191,21 +190,26 @@ namespace SP
                 return;
             }
 
-            if (inputHandler.rollFlag)
+            if (playerStats.currentStamina > 0)
             {
-                moveDirection = cameraObject.forward * inputHandler.vertical;
-                moveDirection += cameraObject.right * inputHandler.horizontal;
+                if (inputHandler.rollFlag)
+                {
+                    moveDirection = cameraObject.forward * inputHandler.vertical;
+                    moveDirection += cameraObject.right * inputHandler.horizontal;
 
-                if (inputHandler.moveAmount > 0)
-                {
-                    animatorHandler.PlayTargetAnimation("Rolling", true);
-                    moveDirection.y = 0;
-                    Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
-                    myTransform.rotation = rollRotation;
-                }
-                else
-                {
-                    animatorHandler.PlayTargetAnimation("Backstep", true);
+                    if (inputHandler.moveAmount > 0)
+                    {
+                        animatorHandler.PlayTargetAnimation("Rolling", true);
+                        moveDirection.y = 0;
+                        Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                        myTransform.rotation = rollRotation;
+                    }
+                    else
+                    {
+                        animatorHandler.PlayTargetAnimation("Backstep", true);
+                    }
+
+                    playerStats.TakeStaminaDamage(rollStaminaCost);
                 }
             }
         }
@@ -317,17 +321,11 @@ namespace SP
         {
             if (inputHandler.sprintFlag)
             {
-                rigidbody.AddForce(new Vector3(moveDirection.x * sprintSpeed * jumpMult * 0.25f,
-                    0f/*jumpMult * 7.5f*/,
-                    moveDirection.z * sprintSpeed * jumpMult * 0.05f) * delta,
-                    ForceMode.Impulse);
+                rigidbody.AddForce(moveDirection * jumpMult * sprintSpeed * 0.01f * delta, ForceMode.Impulse);
             }
             else
             {
-                rigidbody.AddForce(new Vector3(moveDirection.x * movementSpeed * jumpMult * 0.25f,
-                    0f/*jumpMult * 7.5f*/,
-                    moveDirection.z * movementSpeed * jumpMult * 0.05f) * delta,
-                    ForceMode.Impulse);
+                rigidbody.AddForce(moveDirection * jumpMult * movementSpeed * 0.01f * delta, ForceMode.Impulse);
             }
         }
         #endregion

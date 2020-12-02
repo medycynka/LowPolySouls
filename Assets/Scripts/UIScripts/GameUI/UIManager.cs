@@ -54,7 +54,7 @@ namespace SP
         EquipmentInventorySlot[] legInventorySlots;
         EquipmentInventorySlot[] footInventorySlots;
         EquipmentInventorySlot[] ringInventorySlots;
-        EquipmentInventorySlot[] consumableInventorySlots;
+        ConsumableInventorySlot[] consumableInventorySlots;
 
         private void Awake()
         {
@@ -121,7 +121,7 @@ namespace SP
             legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
             footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
             ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
-            consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+            consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
         }
 
         private void UpdateWeaponInventory()
@@ -339,10 +339,9 @@ namespace SP
                     if (consumableInventorySlots.Length < playerInventory.consumablesInventory.Count)
                     {
                         Instantiate(consumableInventorySlotsPrefab, consumableInventorySlotsParent);
-                        consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+                        consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
                     }
                     consumableInventorySlots[i].AddItem(playerInventory.consumablesInventory[i]);
-                    consumableInventorySlots[i].equipUnEquip = false;
                 }
                 else
                 {

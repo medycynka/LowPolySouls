@@ -6,6 +6,8 @@ namespace SP
 {
     public class PlayerStats : CharacterStats
     {
+        PlayerManager playerManager;
+
         public HealthBar healthBar;
         public StaminaBar staminaBar;
         public GameObject youDiedLogo;
@@ -13,6 +15,7 @@ namespace SP
         public float currentArmorValue = 0;
 
         [Header("Health & Stamina refill values")]
+        public float healthRefillAmount = 20f;
         public float healthBgRefillAmount = 20f;
         public float staminaRefillAmount = 20f;
 
@@ -23,6 +26,7 @@ namespace SP
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
@@ -56,6 +60,7 @@ namespace SP
 
         public void TakeDamage(float damage)
         {
+            playerManager.shouldRefillHealth = false;
             currentHealth -= damage;
             healthBar.SetCurrentHealth(currentHealth);
 
@@ -72,15 +77,15 @@ namespace SP
 
         public void RefillHealth()
         {
-            currentHealth += healthBgRefillAmount * Time.deltaTime;
+            currentHealth += healthRefillAmount * Time.deltaTime;
 
             if(currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
             }
 
-            healthBar.healthBarSlider.value += healthBgRefillAmount * Time.deltaTime;
-            healthBar.backgroundSlider.value += healthBgRefillAmount * Time.deltaTime;
+            healthBar.healthBarSlider.value += healthRefillAmount * Time.deltaTime;
+            healthBar.backgroundSlider.value += healthRefillAmount * Time.deltaTime;
         }
 
         public void TakeStaminaDamage(float drain)

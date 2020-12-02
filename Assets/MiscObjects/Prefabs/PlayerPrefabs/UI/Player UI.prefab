@@ -12108,7 +12108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5661620403724652951}
-  - component: {fileID: 5661620403724652950}
+  - component: {fileID: 1835381465506297923}
   m_Layer: 5
   m_Name: Equipment Invemtory Slot
   m_TagString: UI
@@ -12137,7 +12137,7 @@ RectTransform:
   m_AnchoredPosition: {x: 63, y: -63}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5661620403724652950
+--- !u!114 &1835381465506297923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12146,16 +12146,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5661620403724652948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfdeeecc5953936409daa01cdf845e21, type: 3}
+  m_Script: {fileID: 11500000, guid: b16e40fb50937e742a5d68c289ba388e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
   weaponSlotManager: {fileID: 0}
   uiManager: {fileID: 1576880051}
   icon: {fileID: 5661620404224186645}
-  currentEquipments: {fileID: 0}
-  modularCharacterManager: {fileID: 0}
-  equipUnEquip: 0
+  playerStats: {fileID: 0}
 --- !u!1 &5661620403762670462
 GameObject:
   m_ObjectHideFlags: 0
@@ -12338,7 +12336,7 @@ MonoBehaviour:
   playerInventory: {fileID: 0}
   weaponSlotManager: {fileID: 0}
   uiManager: {fileID: 1576880051}
-  icon: {fileID: 5661620404238953169}
+  icon: {fileID: 5661620404224186645}
   currentEquipments: {fileID: 0}
   modularCharacterManager: {fileID: 0}
   equipUnEquip: 0
@@ -12925,8 +12923,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5661620403724652950}
-        m_MethodName: HandleEquiping
+      - m_Target: {fileID: 1835381465506297923}
+        m_MethodName: UseThisItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

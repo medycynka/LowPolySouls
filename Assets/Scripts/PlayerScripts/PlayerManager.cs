@@ -19,6 +19,7 @@ namespace SP
         public bool isInteracting;
 
         [Header("Heleper bools")]
+        public bool shouldRefillHealth = false;
         public bool shouldRefillStamina = false;
         public bool shouldRefillHealthBg = false;
         public bool shouldRefillStaminaBg = false;
@@ -57,15 +58,12 @@ namespace SP
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
 
+            CheckAllFunctions(delta);
+
             if (Time.time > playerLocomotion.nextJump)
             {
                 playerLocomotion.HandleJumping(delta);
             }
-
-            CheckForInteractableObject();
-            FillHealthBarBackGround(delta);
-            CheckForStaminaRefill(delta);
-            CheckForJumpForce(delta);
         }
 
         private void FixedUpdate()
@@ -109,6 +107,17 @@ namespace SP
             {
                 playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
             }
+        }
+
+        #region Checking Funkctions
+        public void CheckAllFunctions(float delta)
+        {
+            CheckForJumpForce(delta);
+            CheckForInteractableObject();
+            FillHealthBarBackGround(delta);
+            CheckForHealthRefill();
+            CheckForStaminaRefill(delta);
+            CheckForSprintStaminaDrain(delta);
         }
 
         public void CheckForInteractableObject()
@@ -170,9 +179,22 @@ namespace SP
             }
         }
 
+        private void CheckForHealthRefill()
+        {
+            if (shouldRefillHealth)
+            {
+                playerStats.RefillHealth();
+
+                if(playerStats.currentHealth >= playerStats.maxHealth)
+                {
+                    shouldRefillHealth = false;
+                }
+            }
+        }
+
         private void CheckForStaminaRefill(float delta)
         {
-            shouldRefillStamina = !isInteracting && !inputHandler.comboFlag && (playerStats.currentStamina < playerStats.maxStamina);
+            shouldRefillStamina = !isInteracting && !inputHandler.comboFlag && !inputHandler.sprintFlag && (playerStats.currentStamina < playerStats.maxStamina);
 
             if (shouldRefillStamina)
             {
@@ -205,5 +227,19 @@ namespace SP
                 }
             }
         }
+
+        private void CheckForSprintStaminaDrain(float delta)
+        {
+            if (isSprinting)
+            {
+                playerStats.TakeStaminaDamage(playerLocomotion.sprintStaminaCost * delta);
+
+                if(playerStats.currentStamina <= 0f)
+                {
+                    isSprinting = false;
+                }
+            }
+        }
+        #endregion
     }
 }
