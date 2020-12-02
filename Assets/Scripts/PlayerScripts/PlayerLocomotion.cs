@@ -309,7 +309,7 @@ namespace SP
                     moveDirection = cameraObject.forward * inputHandler.vertical;
                     moveDirection += cameraObject.right * inputHandler.horizontal;
                     animatorHandler.PlayTargetAnimation("Jump", true);
-                    moveDirection.y = 0;
+                    moveDirection.y = 0f;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
                     nextJump = Time.time + 2;

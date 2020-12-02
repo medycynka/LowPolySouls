@@ -8,7 +8,6 @@ namespace SP
     public class DamageCollider : MonoBehaviour
     {
         Collider damageCollider;
-        public int isTrigered = 0;
         public float currentWeaponDamage = 25;
 
         private void Awake()
@@ -31,8 +30,6 @@ namespace SP
 
         private void OnTriggerEnter(Collider collision)
         {
-            isTrigered++;
-
             if (collision.tag == "Player")
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();

@@ -10,17 +10,16 @@ namespace SP
     {
         EnemyManager enemyManager;
         EnemyAnimatorManager enemyAnimatorManager;
-        NavMeshAgent navmeshAgent;
+        public NavMeshAgent navmeshAgent;
         public Rigidbody enemyRigidBody;
 
         public CharacterStats currentTarget;
         public LayerMask detectionLayer;
-        public LayerMask environmentLayer;
 
         [Header("A.I Movement Stats")]
         public float distanceFromTarget;
         public float stoppingDistance = 1.25f;
-        public float rotationSpeed = 25;
+        public float rotationSpeed = 100;
 
         private void Awake()
         {
@@ -61,6 +60,9 @@ namespace SP
 
         public void HandleMoveToTarget()
         {
+            if (enemyManager.isPreformingAction)
+                return;
+
             Vector3 targetDirection = currentTarget.transform.position - transform.position;
             distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
             float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
@@ -80,7 +82,6 @@ namespace SP
                 else if (distanceFromTarget <= stoppingDistance)
                 {
                     enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                    navmeshAgent.enabled = false;
                 }
             }
 
