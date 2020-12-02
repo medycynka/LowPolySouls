@@ -306,10 +306,7 @@ namespace SP
                 if (inputHandler.moveAmount > 0)
                 {
                     playerManager.shouldAddJumpForce = true;
-                    moveDirection = cameraObject.forward * inputHandler.vertical;
-                    moveDirection += cameraObject.right * inputHandler.horizontal;
                     animatorHandler.PlayTargetAnimation("Jump", true);
-                    moveDirection.y = 0f;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
                     nextJump = Time.time + 2;
@@ -317,15 +314,33 @@ namespace SP
             }
         }
 
-        public void AddJumpForce(float delta)
+        public void AddJumpForce(float delta, bool reverse)
         {
-            if (inputHandler.sprintFlag)
+            if (reverse)
             {
-                rigidbody.AddForce(moveDirection * jumpMult * sprintSpeed * 0.01f * delta, ForceMode.Impulse);
+                if (inputHandler.sprintFlag)
+                {
+                    rigidbody.AddForce(moveDirection * jumpMult * sprintSpeed * 0.1f * delta, ForceMode.Impulse);
+                }
+                else
+                {
+                    rigidbody.AddForce(moveDirection * jumpMult * movementSpeed * 0.2f * delta, ForceMode.Impulse);
+                }
             }
             else
             {
-                rigidbody.AddForce(moveDirection * jumpMult * movementSpeed * 0.01f * delta, ForceMode.Impulse);
+                if (inputHandler.sprintFlag)
+                {
+                    rigidbody.AddForce(new Vector3(moveDirection.x * jumpMult * sprintSpeed * 0.1f,
+                        jumpMult * 5f,
+                        moveDirection.z * jumpMult * sprintSpeed * 0.1f) * delta, ForceMode.Impulse);
+                }
+                else
+                {
+                    rigidbody.AddForce(new Vector3(moveDirection.x * jumpMult * movementSpeed * 0.2f,
+                        jumpMult * 5f,
+                        moveDirection.z * jumpMult * movementSpeed * 0.2f) * delta, ForceMode.Impulse);
+                }
             }
         }
         #endregion

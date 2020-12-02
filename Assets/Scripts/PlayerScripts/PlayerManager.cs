@@ -33,7 +33,7 @@ namespace SP
 
         float healhBgRefillTimer = 0.0f;
         float staminaRefillTimer = 0.0f;
-        float addJumpForceTimer = 1f;
+        float addJumpForceTimer = 1.25f;
 
         private void Awake()
         {
@@ -218,19 +218,19 @@ namespace SP
             if (shouldAddJumpForce)
             {
                 addJumpForceTimer -= delta;
-                playerLocomotion.AddJumpForce(delta);
+                playerLocomotion.AddJumpForce(delta, addJumpForceTimer <= 0.5);
 
                 if(addJumpForceTimer <= 0)
                 {
                     shouldAddJumpForce = false;
-                    addJumpForceTimer = 1f;
+                    addJumpForceTimer = 1.25f;
                 }
             }
         }
 
         private void CheckForSprintStaminaDrain(float delta)
         {
-            if (isSprinting)
+            if (inputHandler.sprintFlag)
             {
                 playerStats.TakeStaminaDamage(playerLocomotion.sprintStaminaCost * delta);
 
