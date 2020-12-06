@@ -36,7 +36,6 @@ namespace SP
         public float unlockedPivotPosition = 1.65f;
 
         public Transform currentLockOnTarget;
-        Transform currentLockOnTransform;
 
         List<CharacterManager> availableTargets = new List<CharacterManager>();
         public Transform nearestLockOnTarget;
@@ -167,32 +166,35 @@ namespace SP
                 }
             }
 
-            for (int k = 0; k < availableTargets.Count; k++)
+            if (currentLockOnTarget != null)
             {
-                float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTargets[k].transform.position);
-
-                if (distanceFromTarget < shortestDistance)
+                for (int k = 0; k < availableTargets.Count; k++)
                 {
-                    shortestDistance = distanceFromTarget;
-                    nearestLockOnTarget = availableTargets[k].lockOnTransform;
-                }
+                    float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTargets[k].transform.position);
 
-                if (inputHandler.lockOnFlag)
-                {
-                    Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTargets[k].transform.position);
-                    var distanceFromLeftTarget = currentLockOnTarget.transform.position.x - availableTargets[k].transform.position.x;
-                    var distanceFromRightTarget = currentLockOnTarget.transform.position.x + availableTargets[k].transform.position.x;
-
-                    if (relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
+                    if (distanceFromTarget < shortestDistance)
                     {
-                        shortestDistanceOfLeftTarget = distanceFromLeftTarget;
-                        leftLockTarget = availableTargets[k].lockOnTransform;
+                        shortestDistance = distanceFromTarget;
+                        nearestLockOnTarget = availableTargets[k].lockOnTransform;
                     }
 
-                    if (relativeEnemyPosition.x < 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget)
+                    if (inputHandler.lockOnFlag)
                     {
-                        shortestDistanceOfRightTarget = distanceFromRightTarget;
-                        rightLockTarget = availableTargets[k].lockOnTransform;
+                        Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTargets[k].transform.position);
+                        var distanceFromLeftTarget = currentLockOnTarget.transform.position.x - availableTargets[k].transform.position.x;
+                        var distanceFromRightTarget = currentLockOnTarget.transform.position.x + availableTargets[k].transform.position.x;
+
+                        if (relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
+                        {
+                            shortestDistanceOfLeftTarget = distanceFromLeftTarget;
+                            leftLockTarget = availableTargets[k].lockOnTransform;
+                        }
+
+                        if (relativeEnemyPosition.x < 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget)
+                        {
+                            shortestDistanceOfRightTarget = distanceFromRightTarget;
+                            rightLockTarget = availableTargets[k].lockOnTransform;
+                        }
                     }
                 }
             }

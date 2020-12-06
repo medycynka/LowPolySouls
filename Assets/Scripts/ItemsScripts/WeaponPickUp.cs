@@ -19,13 +19,10 @@ namespace SP
 
         private void PickUpItem(PlayerManager playerManager)
         {
-            PlayerInventory playerInventory;
-            PlayerLocomotion playerLocomotion;
-            AnimatorHandler animatorHandler;
-
-            playerInventory = playerManager.GetComponent<PlayerInventory>();
-            playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            PlayerInventory playerInventory = playerManager.GetComponent<PlayerInventory>();
+            PlayerLocomotion playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
+            AnimatorHandler animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            UIManager uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
@@ -39,10 +36,14 @@ namespace SP
                         if (weapon.itemType == ItemType.Weapon)
                         {
                             playerInventory.weaponsInventory.Add(weapon);
+                            uIManager.GetWeaponInventorySlot();
+                            uIManager.UpdateWeaponInventory();
                         }
                         else if (weapon.itemType == ItemType.Shield)
                         {
                             playerInventory.shieldsInventory.Add(weapon);
+                            uIManager.GetShieldInventorySlot();
+                            uIManager.UpdateShieldInventory();
                         }
                     }
                 }

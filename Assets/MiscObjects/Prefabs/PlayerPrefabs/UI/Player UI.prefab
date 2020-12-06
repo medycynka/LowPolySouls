@@ -8130,25 +8130,35 @@ MonoBehaviour:
   leftHandSlot01Selected: 0
   leftHandSlot02Selected: 0
   weaponInventorySlotPrefab: {fileID: 4321132620197629401}
-  weaponInventorySlotsParent: {fileID: 3451943217345491115}
+  weaponInventorySlotsParent: {fileID: 3451943217345491114}
   shieldInventorySlotPrefab: {fileID: 5661620404407562737}
-  shieldInventorySlotsParent: {fileID: 2168583273588944915}
+  shieldInventorySlotsParent: {fileID: 2168583273588944908}
   helmetInventorySlotsPrefab: {fileID: 3709724094830265220}
-  helmetInventorySlotsParent: {fileID: 6005931949713615193}
+  helmetInventorySlotsParent: {fileID: 6005931949713615192}
   chestInventorySlotsPrefab: {fileID: 5661620404051772382}
-  chestInventorySlotsParent: {fileID: 2168583273305382635}
+  chestInventorySlotsParent: {fileID: 2168583273305382628}
   shoulderInventorySlotsPrefab: {fileID: 5661620404593015651}
-  shoulderInventorySlotsParent: {fileID: 2168583272589257159}
+  shoulderInventorySlotsParent: {fileID: 2168583272589257152}
   handInventorySlotsPrefab: {fileID: 5661620404336760262}
-  handInventorySlotsParent: {fileID: 2168583273774083873}
+  handInventorySlotsParent: {fileID: 2168583273774083874}
   legInventorySlotsPrefab: {fileID: 5661620402960793231}
-  legInventorySlotsParent: {fileID: 2168583273562951883}
+  legInventorySlotsParent: {fileID: 2168583273562951876}
   footInventorySlotsPrefab: {fileID: 5661620404131799207}
-  footInventorySlotsParent: {fileID: 2168583272313066678}
+  footInventorySlotsParent: {fileID: 2168583272313066679}
   ringInventorySlotsPrefab: {fileID: 5661620403920099524}
-  ringInventorySlotsParent: {fileID: 2168583273666335906}
+  ringInventorySlotsParent: {fileID: 2168583273666335907}
   consumableInventorySlotsPrefab: {fileID: 5661620403724652948}
-  consumableInventorySlotsParent: {fileID: 2168583273259353315}
+  consumableInventorySlotsParent: {fileID: 2168583273259353308}
+  weaponInventorySlots: []
+  shieldInventorySlots: []
+  helmetInventorySlots: []
+  chestInventorySlots: []
+  shoulderInventorySlots: []
+  handInventorySlots: []
+  legInventorySlots: []
+  footInventorySlots: []
+  ringInventorySlots: []
+  consumableInventorySlots: []
 --- !u!1 &3454041924535095421
 GameObject:
   m_ObjectHideFlags: 0
@@ -12154,6 +12164,8 @@ MonoBehaviour:
   uiManager: {fileID: 1576880051}
   icon: {fileID: 5661620404224186645}
   playerStats: {fileID: 0}
+  playerManager: {fileID: 0}
+  animatorHandler: {fileID: 0}
 --- !u!1 &5661620403762670462
 GameObject:
   m_ObjectHideFlags: 0

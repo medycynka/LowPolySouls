@@ -35,12 +35,7 @@ namespace SP
         float staminaRefillTimer = 0.0f;
         float addJumpForceTimer = 1.25f;
 
-        private void Awake()
-        {
-            //cameraHandler = FindObjectOfType<CameraHandler>();
-        }
-
-        void Start()
+        private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();

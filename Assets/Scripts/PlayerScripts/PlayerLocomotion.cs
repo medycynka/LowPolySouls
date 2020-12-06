@@ -47,11 +47,6 @@ namespace SP
         public float rollStaminaCost = 10;
         public float sprintStaminaCost = 5;
 
-        private void Awake()
-        {
-            //cameraHandler = FindObjectOfType<CameraHandler>();    
-        }
-
         void Start()
         {
             playerManager = GetComponent<PlayerManager>();

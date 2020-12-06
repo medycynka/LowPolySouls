@@ -15,11 +15,6 @@ namespace SP
         public bool leftHandSlot01;
         public bool leftHandSlot02;
 
-        private void Awake()
-        {
-            //uiManager = FindObjectOfType<UIManager>();
-        }
-
         public void AddItem(WeaponItem newWeapon)
         {
             weapon = newWeapon;

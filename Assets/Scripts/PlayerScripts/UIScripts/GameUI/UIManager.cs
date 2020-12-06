@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SP
 {
@@ -25,61 +26,47 @@ namespace SP
 
         [Header("Inventory")]
         public GameObject weaponInventorySlotPrefab;
-        public Transform weaponInventorySlotsParent;
+        public GameObject weaponInventorySlotsParent;
         public GameObject shieldInventorySlotPrefab;
-        public Transform shieldInventorySlotsParent;
+        public GameObject shieldInventorySlotsParent;
         public GameObject helmetInventorySlotsPrefab;
-        public Transform helmetInventorySlotsParent;
+        public GameObject helmetInventorySlotsParent;
         public GameObject chestInventorySlotsPrefab;
-        public Transform chestInventorySlotsParent;
+        public GameObject chestInventorySlotsParent;
         public GameObject shoulderInventorySlotsPrefab;
-        public Transform shoulderInventorySlotsParent;
+        public GameObject shoulderInventorySlotsParent;
         public GameObject handInventorySlotsPrefab;
-        public Transform handInventorySlotsParent;
+        public GameObject handInventorySlotsParent;
         public GameObject legInventorySlotsPrefab;
-        public Transform legInventorySlotsParent;
+        public GameObject legInventorySlotsParent;
         public GameObject footInventorySlotsPrefab;
-        public Transform footInventorySlotsParent;
+        public GameObject footInventorySlotsParent;
         public GameObject ringInventorySlotsPrefab;
-        public Transform ringInventorySlotsParent;
+        public GameObject ringInventorySlotsParent;
         public GameObject consumableInventorySlotsPrefab;
-        public Transform consumableInventorySlotsParent;
+        public GameObject consumableInventorySlotsParent;
 
-        WeaponInventorySlot[] weaponInventorySlots;
-        WeaponInventorySlot[] shieldInventorySlots;
-        EquipmentInventorySlot[] helmetInventorySlots;
-        EquipmentInventorySlot[] chestInventorySlots;
-        EquipmentInventorySlot[] shoulderInventorySlots;
-        EquipmentInventorySlot[] handInventorySlots;
-        EquipmentInventorySlot[] legInventorySlots;
-        EquipmentInventorySlot[] footInventorySlots;
-        EquipmentInventorySlot[] ringInventorySlots;
-        ConsumableInventorySlot[] consumableInventorySlots;
-
-        private void Awake()
-        {
-            
-        }
+        [SerializeField] WeaponInventorySlot[] weaponInventorySlots;
+        [SerializeField] WeaponInventorySlot[] shieldInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] helmetInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] chestInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] shoulderInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] handInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] legInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] footInventorySlots;
+        [SerializeField] EquipmentInventorySlot[] ringInventorySlots;
+        [SerializeField] ConsumableInventorySlot[] consumableInventorySlots;
 
         private void Start()
         {
-            GetInventorySlots();
+            GetAllInventorySlots();
             equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI()
         {
-            GetInventorySlots();
-            UpdateWeaponInventory();
-            UpdateShieldInventory();
-            UpdateHelmetInventory();
-            UpdateChestInventory();
-            UpdateShoulderInventory();
-            UpdateHandInventory();
-            UpdateLegInventory();
-            UpdateFootInventory();
-            UpdateRingInventory();
-            UpdateConsumableInventory();
+            GetAllInventorySlots();
+            UpdateAllInventoryTabs();
         }
 
         public void OpenSelectWindow()
@@ -109,22 +96,104 @@ namespace SP
             leftHandSlot02Selected = false;
         }
 
-        #region Update Inventory Tabs
-        private void GetInventorySlots()
+        #region Manage Inventory Tabs
+
+        public void ResetTabsSelection()
+        {
+            weaponInventorySlotsParent.SetActive(true);
+            shieldInventorySlotsParent.SetActive(false);
+            helmetInventorySlotsParent.SetActive(false);
+            chestInventorySlotsParent.SetActive(false);
+            shoulderInventorySlotsParent.SetActive(false);
+            handInventorySlotsParent.SetActive(false);
+            legInventorySlotsParent.SetActive(false);
+            footInventorySlotsParent.SetActive(false);
+            ringInventorySlotsParent.SetActive(false);
+            consumableInventorySlotsParent.SetActive(false);
+        }
+
+        #region Get Current Items list
+        public void GetWeaponInventorySlot()
         {
             weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        }
+
+        public void GetShieldInventorySlot()
+        {
             shieldInventorySlots = shieldInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+        }
+
+        public void GetHelmetInventorySlot()
+        {
             helmetInventorySlots = helmetInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetChestInventorySlot()
+        {
             chestInventorySlots = chestInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetShoulderInventorySlot()
+        {
             shoulderInventorySlots = shoulderInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetHandInventorySlot()
+        {
             handInventorySlots = handInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetLegInventorySlot()
+        {
             legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetFootInventorySlot()
+        {
             footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetRingInventorySlot()
+        {
             ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
+        }
+
+        public void GetConsumableInventorySlot()
+        {
             consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
         }
 
-        private void UpdateWeaponInventory()
+        public void GetAllInventorySlots()
+        {
+            GetWeaponInventorySlot();
+            GetShieldInventorySlot();
+            GetHelmetInventorySlot();
+            GetChestInventorySlot();
+            GetShoulderInventorySlot();
+            GetHandInventorySlot();
+            GetLegInventorySlot();
+            GetFootInventorySlot();
+            GetRingInventorySlot();
+            GetConsumableInventorySlot();
+        }
+        #endregion
+
+        #region Update Inventory Tabs
+        public void UpdateAllInventoryTabs()
+        {
+            UpdateWeaponInventory();
+            UpdateShieldInventory();
+            UpdateHelmetInventory();
+            UpdateChestInventory();
+            UpdateShoulderInventory();
+            UpdateHandInventory();
+            UpdateLegInventory();
+            UpdateFootInventory();
+            UpdateRingInventory();
+            UpdateConsumableInventory();
+        }
+        
+        public void UpdateWeaponInventory()
         {
             #region Weapon Inventory Slots
             for (int i = 0; i < weaponInventorySlots.Length; i++)
@@ -133,20 +202,20 @@ namespace SP
                 {
                     if (weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
                     {
-                        Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
+                        Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent.transform);
                         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                     }
                     weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
                 }
                 else
                 {
-                    weaponInventorySlots[i].ClearInventorySlot();
+                    weaponInventorySlots[i].ClearInventorySlot(playerInventory.weaponsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateShieldInventory()
+        public void UpdateShieldInventory()
         {
             #region Shield Inventory Slots
             for (int i = 0; i < shieldInventorySlots.Length; i++)
@@ -155,20 +224,20 @@ namespace SP
                 {
                     if (shieldInventorySlots.Length < playerInventory.shieldsInventory.Count)
                     {
-                        Instantiate(shieldInventorySlotPrefab, shieldInventorySlotsParent);
-                        shieldInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+                        Instantiate(shieldInventorySlotPrefab, shieldInventorySlotsParent.transform);
+                        shieldInventorySlots = shieldInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
                     }
                     shieldInventorySlots[i].AddItem(playerInventory.shieldsInventory[i]);
                 }
                 else
                 {
-                    shieldInventorySlots[i].ClearInventorySlot();
+                    shieldInventorySlots[i].ClearInventorySlot(playerInventory.shieldsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateHelmetInventory()
+        public void UpdateHelmetInventory()
         {
             #region Helmet Inventory Slots
             for (int i = 0; i < helmetInventorySlots.Length; i++)
@@ -177,7 +246,7 @@ namespace SP
                 {
                     if (helmetInventorySlots.Length < playerInventory.helmetsInventory.Count)
                     {
-                        Instantiate(helmetInventorySlotsPrefab, helmetInventorySlotsParent);
+                        Instantiate(helmetInventorySlotsPrefab, helmetInventorySlotsParent.transform);
                         helmetInventorySlots = helmetInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     helmetInventorySlots[i].AddItem(playerInventory.helmetsInventory[i]);
@@ -185,13 +254,13 @@ namespace SP
                 }
                 else
                 {
-                    helmetInventorySlots[i].ClearInventorySlot();
+                    helmetInventorySlots[i].ClearInventorySlot(playerInventory.helmetsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateChestInventory()
+        public void UpdateChestInventory()
         {
             #region Chest Inventory Slots
             for (int i = 0; i < chestInventorySlots.Length; i++)
@@ -200,7 +269,7 @@ namespace SP
                 {
                     if (chestInventorySlots.Length < playerInventory.chestsInventory.Count)
                     {
-                        Instantiate(chestInventorySlotsPrefab, chestInventorySlotsParent);
+                        Instantiate(chestInventorySlotsPrefab, chestInventorySlotsParent.transform);
                         chestInventorySlots = chestInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     chestInventorySlots[i].AddItem(playerInventory.chestsInventory[i]);
@@ -208,13 +277,13 @@ namespace SP
                 }
                 else
                 {
-                    chestInventorySlots[i].ClearInventorySlot();
+                    chestInventorySlots[i].ClearInventorySlot(playerInventory.chestsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateShoulderInventory()
+        public void UpdateShoulderInventory()
         {
             #region Shoulder Inventory Slots
             for (int i = 0; i < shoulderInventorySlots.Length; i++)
@@ -223,7 +292,7 @@ namespace SP
                 {
                     if (shoulderInventorySlots.Length < playerInventory.shouldersInventory.Count)
                     {
-                        Instantiate(shoulderInventorySlotsPrefab, shoulderInventorySlotsParent);
+                        Instantiate(shoulderInventorySlotsPrefab, shoulderInventorySlotsParent.transform);
                         shoulderInventorySlots = shoulderInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     shoulderInventorySlots[i].AddItem(playerInventory.shouldersInventory[i]);
@@ -231,13 +300,13 @@ namespace SP
                 }
                 else
                 {
-                    shoulderInventorySlots[i].ClearInventorySlot();
+                    shoulderInventorySlots[i].ClearInventorySlot(playerInventory.shouldersInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateHandInventory()
+        public void UpdateHandInventory()
         {
             #region Hand Inventory Slots
             for (int i = 0; i < handInventorySlots.Length; i++)
@@ -246,7 +315,7 @@ namespace SP
                 {
                     if (handInventorySlots.Length < playerInventory.handsInventory.Count)
                     {
-                        Instantiate(handInventorySlotsPrefab, handInventorySlotsParent);
+                        Instantiate(handInventorySlotsPrefab, handInventorySlotsParent.transform);
                         handInventorySlots = handInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     handInventorySlots[i].AddItem(playerInventory.handsInventory[i]);
@@ -254,13 +323,13 @@ namespace SP
                 }
                 else
                 {
-                    handInventorySlots[i].ClearInventorySlot();
+                    handInventorySlots[i].ClearInventorySlot(playerInventory.handsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateLegInventory()
+        public void UpdateLegInventory()
         {
             #region Leg Inventory Slots
             for (int i = 0; i < legInventorySlots.Length; i++)
@@ -269,7 +338,7 @@ namespace SP
                 {
                     if (legInventorySlots.Length < playerInventory.legsInventory.Count)
                     {
-                        Instantiate(legInventorySlotsPrefab, legInventorySlotsParent);
+                        Instantiate(legInventorySlotsPrefab, legInventorySlotsParent.transform);
                         legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     legInventorySlots[i].AddItem(playerInventory.legsInventory[i]);
@@ -277,13 +346,13 @@ namespace SP
                 }
                 else
                 {
-                    legInventorySlots[i].ClearInventorySlot();
+                    legInventorySlots[i].ClearInventorySlot(playerInventory.legsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateFootInventory()
+        public void UpdateFootInventory()
         {
             #region Foot Inventory Slots
             for (int i = 0; i < footInventorySlots.Length; i++)
@@ -292,7 +361,7 @@ namespace SP
                 {
                     if (footInventorySlots.Length < playerInventory.feetInventory.Count)
                     {
-                        Instantiate(footInventorySlotsPrefab, footInventorySlotsParent);
+                        Instantiate(footInventorySlotsPrefab, footInventorySlotsParent.transform);
                         footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     footInventorySlots[i].AddItem(playerInventory.feetInventory[i]);
@@ -300,13 +369,13 @@ namespace SP
                 }
                 else
                 {
-                    footInventorySlots[i].ClearInventorySlot();
+                    footInventorySlots[i].ClearInventorySlot(playerInventory.feetInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateRingInventory()
+        public void UpdateRingInventory()
         {
             #region Ring Inventory Slots
             for (int i = 0; i < ringInventorySlots.Length; i++)
@@ -315,7 +384,7 @@ namespace SP
                 {
                     if (ringInventorySlots.Length < playerInventory.ringsInventory.Count)
                     {
-                        Instantiate(ringInventorySlotsPrefab, ringInventorySlotsParent);
+                        Instantiate(ringInventorySlotsPrefab, ringInventorySlotsParent.transform);
                         ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
                     }
                     ringInventorySlots[i].AddItem(playerInventory.ringsInventory[i]);
@@ -323,13 +392,13 @@ namespace SP
                 }
                 else
                 {
-                    ringInventorySlots[i].ClearInventorySlot();
+                    ringInventorySlots[i].ClearInventorySlot(playerInventory.ringsInventory.Count == 0);
                 }
             }
             #endregion
         }
 
-        private void UpdateConsumableInventory()
+        public void UpdateConsumableInventory()
         {
             #region Consumable Inventory Slots
             for (int i = 0; i < consumableInventorySlots.Length; i++)
@@ -338,18 +407,20 @@ namespace SP
                 {
                     if (consumableInventorySlots.Length < playerInventory.consumablesInventory.Count)
                     {
-                        Instantiate(consumableInventorySlotsPrefab, consumableInventorySlotsParent);
+                        Instantiate(consumableInventorySlotsPrefab, consumableInventorySlotsParent.transform);
                         consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
                     }
                     consumableInventorySlots[i].AddItem(playerInventory.consumablesInventory[i]);
                 }
                 else
                 {
-                    consumableInventorySlots[i].ClearInventorySlot();
+                    consumableInventorySlots[i].ClearInventorySlot(playerInventory.consumablesInventory.Count == 0);
                 }
             }
             #endregion
         }
+        #endregion
+
         #endregion
     }
 

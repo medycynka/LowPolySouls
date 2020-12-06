@@ -31,27 +31,64 @@ namespace SP
             gameObject.SetActive(true);
         }
 
-        public void ClearInventorySlot()
+        public void ClearInventorySlot(bool last_slot)
         {
             item = null;
             icon.sprite = null;
             icon.enabled = false;
-            gameObject.SetActive(false);
+            gameObject.SetActive(last_slot);
         }
 
         public void HandleEquiping()
         {
-            equipUnEquip = !equipUnEquip;
+            if (item != null)
+            {
+                equipUnEquip = !equipUnEquip;
 
-            if (equipUnEquip)
-            {
-                EquipThisItem();
-                uiManager.UpdateUI();
-                equipUnEquip = true;
-            }
-            else
-            {
-                UnequipThisItem();
+                if (equipUnEquip)
+                {
+                    EquipThisItem();
+
+                    switch (item.itemType)
+                    {
+                        case ItemType.Helmet:
+                            uiManager.GetHelmetInventorySlot();
+                            uiManager.UpdateHelmetInventory();
+                            break;
+                        case ItemType.ChestArmor:
+                            uiManager.GetChestInventorySlot();
+                            uiManager.UpdateChestInventory();
+                            break;
+                        case ItemType.ShoulderArmor:
+                            uiManager.GetShoulderInventorySlot();
+                            uiManager.UpdateShoulderInventory();
+                            break;
+                        case ItemType.HandArmor:
+                            uiManager.GetHandInventorySlot();
+                            uiManager.UpdateHandInventory();
+                            break;
+                        case ItemType.LegArmor:
+                            uiManager.GetLegInventorySlot();
+                            uiManager.UpdateLegInventory();
+                            break;
+                        case ItemType.FootArmor:
+                            uiManager.GetFootInventorySlot();
+                            uiManager.UpdateFootInventory();
+                            break;
+                        case ItemType.Ring:
+                            uiManager.GetRingInventorySlot();
+                            uiManager.UpdateRingInventory();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    equipUnEquip = true;
+                }
+                else
+                {
+                    UnequipThisItem();
+                }
             }
         }
         public void EquipThisItem()

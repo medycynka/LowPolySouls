@@ -41,6 +41,7 @@ namespace SP
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
         WeaponSlotManager weaponSlotManager;
 
@@ -55,6 +56,7 @@ namespace SP
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         }
@@ -210,12 +212,20 @@ namespace SP
             if (inventory_Input)
             {
                 uiManager.UpdateUI();
+                uiManager.ResetTabsSelection();
                 inventoryFlag = !inventoryFlag;
 
                 if (inventoryFlag)
                 {
+                    horizontal = 0f;
+                    vertical = 0f;
+                    moveAmount = 0f;
+                    mouseX = cameraInput.x;
+                    mouseY = cameraInput.y;
+
                     uiManager.OpenSelectWindow();
                     uiManager.UpdateUI();
+                    uiManager.ResetTabsSelection();
                     uiManager.hudWindow.SetActive(false);
                 }
                 else

@@ -20,13 +20,10 @@ namespace SP
 
         private void PickUpItem(PlayerManager playerManager)
         {
-            PlayerInventory playerInventory;
-            PlayerLocomotion playerLocomotion;
-            AnimatorHandler animatorHandler;
-
-            playerInventory = playerManager.GetComponent<PlayerInventory>();
-            playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            PlayerInventory playerInventory = playerManager.GetComponent<PlayerInventory>();
+            PlayerLocomotion playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
+            AnimatorHandler animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            UIManager uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
@@ -36,6 +33,8 @@ namespace SP
                 playerInventory.consumablesInventory.Add(consumableItem);
                 playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = consumableItem.itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItem.itemIcon.texture;
+                uIManager.GetConsumableInventorySlot();
+                uIManager.UpdateConsumableInventory();
             }
 
             playerManager.itemInteractableGameObject.SetActive(true);

@@ -14,11 +14,6 @@ namespace SP
 
         public HandEquipmentSlotUI[] handEquipmentSlotUI;
 
-        private void Start()
-        {
-            //handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>();
-        }
-
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
         {
             for (int i = 0; i < handEquipmentSlotUI.Length; i++)
