@@ -8,8 +8,11 @@ namespace SP
     {
         EnemyLocomotionManager enemyLocomotionManager;
         EnemyAnimatorManager enemyAnimatorManager;
+        EnemyStats enemyStats;
+        EnemyDrops enemyDrops;
 
         public bool isPreformingAction;
+        public bool shouldDrop = true;
 
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
@@ -26,6 +29,8 @@ namespace SP
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
             enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+            enemyStats = GetComponent<EnemyStats>();
+            enemyDrops = GetComponent<EnemyDrops>();
         }
 
         private void Update()
@@ -40,21 +45,28 @@ namespace SP
 
         private void HandleCurrentAction()
         {
-            if (enemyLocomotionManager.currentTarget != null)
+            if (enemyStats.currentHealth > 0)
             {
-                enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+                if (enemyLocomotionManager.currentTarget != null)
+                {
+                    enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+                }
+                if (enemyLocomotionManager.currentTarget == null)
+                {
+                    enemyLocomotionManager.HandleDetection();
+                }
+                else if (enemyLocomotionManager.distanceFromTarget > enemyLocomotionManager.stoppingDistance)
+                {
+                    enemyLocomotionManager.HandleMoveToTarget();
+                }
+                else if (enemyLocomotionManager.distanceFromTarget <= enemyLocomotionManager.stoppingDistance)
+                {
+                    AttackTarget();
+                }
             }
-            if (enemyLocomotionManager.currentTarget == null)
+            else
             {
-                enemyLocomotionManager.HandleDetection();
-            }
-            else if (enemyLocomotionManager.distanceFromTarget > enemyLocomotionManager.stoppingDistance)
-            {
-                enemyLocomotionManager.HandleMoveToTarget();
-            }
-            else if (enemyLocomotionManager.distanceFromTarget <= enemyLocomotionManager.stoppingDistance)
-            {
-                AttackTarget();
+                HandleDeath();
             }
         }
 
@@ -75,7 +87,6 @@ namespace SP
         }
 
         #region Attacks
-
         private void AttackTarget()
         {
             if (isPreformingAction)
@@ -144,6 +155,20 @@ namespace SP
             }
         }
         #endregion
+
+        private void HandleDeath()
+        {
+            enemyStats.currentHealth = 0;
+            enemyStats.animator.Play("Dead_01");
+            enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
+            Destroy(enemyStats.enemyObject, 5.0f);
+
+            if (shouldDrop)
+            {
+                enemyDrops.DropPickUp();
+                shouldDrop = false;
+            }
+        }
 
         private void OnDrawGizmosSelected()
         {

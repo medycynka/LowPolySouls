@@ -6,7 +6,7 @@ namespace SP
 {
     public class EnemyStats : CharacterStats
     {
-        Animator animator;
+        public Animator animator;
 
         [Header("Souls & souls target")]
         public float soulsGiveAmount;
@@ -35,14 +35,6 @@ namespace SP
             currentHealth -= damage;
 
             animator.Play("Damage_01");
-
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
-                animator.Play("Dead_01");
-                playerStats.soulsAmount += soulsGiveAmount;
-                Destroy(enemyObject, 5.0f);
-            }
         }
     }
 

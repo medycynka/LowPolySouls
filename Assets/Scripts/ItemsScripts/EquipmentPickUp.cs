@@ -17,15 +17,9 @@ namespace SP
             PickUpItem(playerManager);
         }
 
-        private void PickUpItem(PlayerManager playerManager)
+        public override void PickUpItem(PlayerManager playerManager)
         {
-            PlayerInventory playerInventory = playerManager.GetComponent<PlayerInventory>();
-            PlayerLocomotion playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            AnimatorHandler animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
-            UIManager uIManager = playerManager.GetComponent<InputHandler>().uiManager;
-
-            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
+            base.PickUpItem(playerManager);
 
             if (equipments.Length > 0)
             {

@@ -9,7 +9,7 @@ namespace SP
     public class ConsumablePickUp : Interactable
 
     {
-        public ConsumableItem consumableItem;
+        public ConsumableItem[] consumableItems;
 
         public override void Interact(PlayerManager playerManager)
         {
@@ -18,23 +18,24 @@ namespace SP
             PickUpItem(playerManager);
         }
 
-        private void PickUpItem(PlayerManager playerManager)
+        public override void PickUpItem(PlayerManager playerManager)
         {
-            PlayerInventory playerInventory = playerManager.GetComponent<PlayerInventory>();
-            PlayerLocomotion playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            AnimatorHandler animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
-            UIManager uIManager = playerManager.GetComponent<InputHandler>().uiManager;
+            base.PickUpItem(playerManager);
 
-            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
-
-            if(consumableItem != null)
+            if(consumableItems.Length > 0)
             {
-                playerInventory.consumablesInventory.Add(consumableItem);
-                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = consumableItem.itemName;
-                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItem.itemIcon.texture;
-                uIManager.GetConsumableInventorySlot();
-                uIManager.UpdateConsumableInventory();
+                foreach (var consumableItem in consumableItems)
+                {
+                    if (consumableItem != null)
+                    {
+                        playerInventory.consumablesInventory.Add(consumableItem);
+                        uIManager.GetConsumableInventorySlot();
+                        uIManager.UpdateConsumableInventory();
+                    }
+                }
+
+                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = consumableItems[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItems[0].itemIcon.texture;
             }
 
             playerManager.itemInteractableGameObject.SetActive(true);

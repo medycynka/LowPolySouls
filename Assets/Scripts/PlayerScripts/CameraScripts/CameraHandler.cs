@@ -37,7 +37,7 @@ namespace SP
 
         public Transform currentLockOnTarget;
 
-        List<CharacterManager> availableTargets = new List<CharacterManager>();
+        [SerializeField] List<CharacterManager> availableTargets = new List<CharacterManager>();
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;
         public Transform rightLockTarget;
@@ -166,34 +166,34 @@ namespace SP
                 }
             }
 
-            if (currentLockOnTarget != null)
+            if (currentLockOnTarget == null)
             {
-                for (int k = 0; k < availableTargets.Count; k++)
+                foreach (var availableTarget in availableTargets)
                 {
-                    float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTargets[k].transform.position);
+                    float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
 
                     if (distanceFromTarget < shortestDistance)
                     {
                         shortestDistance = distanceFromTarget;
-                        nearestLockOnTarget = availableTargets[k].lockOnTransform;
+                        nearestLockOnTarget = availableTarget.lockOnTransform;
                     }
 
                     if (inputHandler.lockOnFlag)
                     {
-                        Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTargets[k].transform.position);
-                        var distanceFromLeftTarget = currentLockOnTarget.transform.position.x - availableTargets[k].transform.position.x;
-                        var distanceFromRightTarget = currentLockOnTarget.transform.position.x + availableTargets[k].transform.position.x;
+                        Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTarget.transform.position);
+                        var distanceFromLeftTarget = currentLockOnTarget.transform.position.x - availableTarget.transform.position.x;
+                        var distanceFromRightTarget = currentLockOnTarget.transform.position.x + availableTarget.transform.position.x;
 
                         if (relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
                         {
                             shortestDistanceOfLeftTarget = distanceFromLeftTarget;
-                            leftLockTarget = availableTargets[k].lockOnTransform;
+                            leftLockTarget = availableTarget.lockOnTransform;
                         }
 
                         if (relativeEnemyPosition.x < 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget)
                         {
                             shortestDistanceOfRightTarget = distanceFromRightTarget;
-                            rightLockTarget = availableTargets[k].lockOnTransform;
+                            rightLockTarget = availableTarget.lockOnTransform;
                         }
                     }
                 }
