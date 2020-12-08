@@ -17,6 +17,9 @@ namespace SP
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
 
+        public CharacterStats currentTarget;
+        public State currentState;
+
         [Header("A.I Settings")]
         public float detectionRadius = 15;
         //The higher, and lower, respectively these angles are, the greater detection FIELD OF VIEW (basically like eye sight)
@@ -43,15 +46,33 @@ namespace SP
             HandleCurrentAction();
         }
 
+        private void HandleStateMachine()
+        {
+            if (currentState != null)
+            {
+                State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+
+                if(nextState != null)
+                {
+                    SwitchToNextState(nextState);
+                }
+            }
+        }
+
+        private void SwitchToNextState(State state)
+        {
+            currentState = state;
+        }
+
         private void HandleCurrentAction()
         {
             if (enemyStats.currentHealth > 0)
             {
-                if (enemyLocomotionManager.currentTarget != null)
+                if (currentTarget != null)
                 {
-                    enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+                    enemyLocomotionManager.distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
                 }
-                if (enemyLocomotionManager.currentTarget == null)
+                if (currentTarget == null)
                 {
                     enemyLocomotionManager.HandleDetection();
                 }
@@ -109,9 +130,9 @@ namespace SP
 
         private void GetNewAttack()
         {
-            Vector3 targetsDirection = enemyLocomotionManager.currentTarget.transform.position - transform.position;
+            Vector3 targetsDirection = currentTarget.transform.position - transform.position;
             float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-            enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+            enemyLocomotionManager.distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
 
             int maxScore = 0;
 
