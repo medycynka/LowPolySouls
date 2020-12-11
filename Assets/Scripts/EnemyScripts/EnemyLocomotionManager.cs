@@ -129,7 +129,6 @@ namespace SP
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navmeshAgent.enabled = true;
-
                 navmeshAgent.isStopped = false;
                 navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyRigidBody.velocity = targetVelocity;

@@ -27,7 +27,7 @@ namespace SP {
                         {
                             enemyManager.enemyLocomotionManager.StopMoving();
 
-                            return this;
+                            return combatStanceState;
                         }
 
                         enemyManager.enemyLocomotionManager.HandleMoveToTarget();

@@ -20,8 +20,18 @@ namespace SP
                 //if in attack range return attack State
                 //if we are in a cool down after attacking, return this state and continue circling player
                 //if the player runs out of range return the pursuetarget state
+                enemyManager.enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
-                return this;
+                if (enemyManager.enemyLocomotionManager.distanceFromTarget > enemyManager.enemyLocomotionManager.stoppingDistance)
+                {
+                    return pursueTargetState;
+                }
+                else
+                {
+                    enemyManager.enemyLocomotionManager.StopMoving();
+
+                    return this;
+                }
             }
             else
             {

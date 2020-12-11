@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace SP
+{
+
+    public class BonfireActivator : Interactable
+    {
+        BonfireManager bonfireManager;
+
+        private void Awake()
+        {
+            bonfireManager = GetComponent<BonfireManager>();
+        }
+
+        public override void Interact(PlayerManager playerManager)
+        {
+            base.Interact(playerManager);
+
+            ActivateFireplace(playerManager);
+        }
+
+        private void ActivateFireplace(PlayerManager playerManager)
+        {
+            base.PickUpItem(playerManager);
+
+            bonfireManager.bonfireParticleSystem.Play();
+            bonfireManager.bonfireLight.enabled = true;
+
+            StartCoroutine(DisplayScreen());
+            bonfireManager.isActivated = true;
+        }
+
+        private IEnumerator DisplayScreen()
+        {
+            bonfireManager.bonfireLitScreen.SetActive(true);
+
+            yield return new WaitForSeconds(bonfireManager.bonfireLitScreenTime);
+
+            bonfireManager.bonfireLitScreen.SetActive(false);
+        }
+    }
+
+}

@@ -121,19 +121,54 @@ namespace SP
 
             if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
             {
-                if (hit.collider.tag == "Interactable")
+                if (hit.collider.tag == "Interactable" || hit.collider.tag == "Bonfire")
                 {
-                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-
-                    if (interactableObject != null)
+                    if (hit.collider.tag == "Bonfire")
                     {
-                        string interactableText = interactableObject.interactableText;
-                        interactableUI.interactableText.text = interactableText;
-                        interactableUIGameObject.SetActive(true);
-
-                        if (inputHandler.a_Input)
+                        if (!hit.collider.GetComponent<BonfireManager>().isActivated)
                         {
-                            hit.collider.GetComponent<Interactable>().Interact(this);
+                            BonfireActivator interactableObject = hit.collider.GetComponent<BonfireActivator>();
+
+                            if (interactableObject != null)
+                            {
+                                interactableUI.interactableText.text = interactableObject.interactableText;
+                                interactableUIGameObject.SetActive(true);
+
+                                if (inputHandler.a_Input)
+                                {
+                                    interactableObject.Interact(this);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            BonfireInteraction interactableObject = hit.collider.GetComponent<BonfireInteraction>();
+
+                            if (interactableObject != null)
+                            {
+                                interactableUI.interactableText.text = interactableObject.interactableText;
+                                interactableUIGameObject.SetActive(true);
+
+                                if (inputHandler.a_Input)
+                                {
+                                    interactableObject.Interact(this);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                        if (interactableObject != null)
+                        {
+                            interactableUI.interactableText.text = interactableObject.interactableText;
+                            interactableUIGameObject.SetActive(true);
+
+                            if (inputHandler.a_Input)
+                            {
+                                interactableObject.Interact(this);
+                            }
                         }
                     }
                 }
