@@ -86,9 +86,6 @@ MonoBehaviour:
   playerLocomotion: {fileID: 0}
   animatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
-  light: {fileID: 2454158943806804480}
-  particleSystem: {fileID: 448311542154533181}
-  bonfireLitScreen: {fileID: 0}
 --- !u!114 &2094540011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +104,6 @@ MonoBehaviour:
   playerLocomotion: {fileID: 0}
   animatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
-  restUI: {fileID: 0}
 --- !u!114 &2094540012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +116,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11447507ecf9f7b4ea0d2ce12ce825cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonfireLitScreenTime: 2
   isActivated: 0
+  bonfireLight: {fileID: 2454158943806804480}
+  bonfireParticleSystem: {fileID: 448311542154533181}
+  bonfireLitScreen: {fileID: 0}
+  playerUI: {fileID: 0}
+  uiWindow: {fileID: 0}
+  restUI: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &6532777734007141858
 MonoBehaviour:
   m_ObjectHideFlags: 0

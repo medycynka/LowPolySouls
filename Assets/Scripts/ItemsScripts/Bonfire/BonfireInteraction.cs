@@ -32,6 +32,14 @@ namespace SP
             animatorHandler.PlayTargetAnimation("Sit Down", true); //Plays the animation of looting the item
 
             playerStats.RefillHealth();
+            bonfireManager.ActivateRestUI();
+            //bonfireManager.RespawnEnemis();
+        }
+
+        public void GetUp()
+        {
+            bonfireManager.CloseRestUI();
+            animatorHandler.PlayTargetAnimation("Stand Up", true);
         }
     }
 }

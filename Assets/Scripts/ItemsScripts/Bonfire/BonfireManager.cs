@@ -15,6 +15,7 @@ namespace SP
 
         [Header("UI objects")]
         public GameObject playerUI;
+        public GameObject uiWindow;
         public GameObject restUI;
 
         [Header("Player Stats")]
@@ -29,13 +30,20 @@ namespace SP
         public void ActivateRestUI()
         {
             playerUI.SetActive(false);
+            uiWindow.SetActive(true);
             restUI.SetActive(true);
         }
 
-        public void DeactivateRestUI()
+        public void CloseRestUI()
         {
             restUI.SetActive(false);
+            uiWindow.SetActive(false);
             playerUI.SetActive(true);
+        }
+
+        public void RespawnEnemis()
+        {
+
         }
     }
 }
