@@ -6,13 +6,15 @@ namespace SP
 {
     public class EnemyManager : CharacterManager
     {
-        EnemyLocomotionManager enemyLocomotionManager;
+        public EnemyLocomotionManager enemyLocomotionManager;
         EnemyAnimatorManager enemyAnimatorManager;
         EnemyStats enemyStats;
         EnemyDrops enemyDrops;
 
         public bool isPreformingAction;
         public bool shouldDrop = true;
+        public bool isAlive = true;
+        public bool shouldFollowTarget = false;
 
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
@@ -43,7 +45,7 @@ namespace SP
 
         private void FixedUpdate()
         {
-            HandleCurrentAction();
+            HandleStateMachine();
         }
 
         private void HandleStateMachine()
@@ -52,7 +54,7 @@ namespace SP
             {
                 State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
 
-                if(nextState != null)
+                if (nextState != null)
                 {
                     SwitchToNextState(nextState);
                 }
@@ -84,10 +86,6 @@ namespace SP
                 {
                     AttackTarget();
                 }
-            }
-            else
-            {
-                HandleDeath();
             }
         }
 
@@ -177,7 +175,7 @@ namespace SP
         }
         #endregion
 
-        private void HandleDeath()
+        public void HandleDeath()
         {
             enemyStats.currentHealth = 0;
             enemyStats.animator.Play("Dead_01");

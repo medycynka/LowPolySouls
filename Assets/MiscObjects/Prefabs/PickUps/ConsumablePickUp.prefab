@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3246414813715160946}
   - component: {fileID: 1885721409664299414}
   - component: {fileID: 2407895679905884246}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: ConsumablePickUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -4742,4 +4742,4 @@ MonoBehaviour:
   playerLocomotion: {fileID: 0}
   animatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
-  consumableItem: {fileID: 0}
+  consumableItems: []

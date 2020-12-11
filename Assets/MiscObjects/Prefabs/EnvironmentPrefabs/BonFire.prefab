@@ -25,12 +25,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4035152931953455847}
-  - component: {fileID: 5378969056242126262}
-  - component: {fileID: 1115402363}
-  - component: {fileID: 1115402362}
+  - component: {fileID: 3335765835667132145}
+  - component: {fileID: 3591348863707460989}
   m_Layer: 16
-  m_Name: BoneFire
-  m_TagString: Environment
+  m_Name: BonFire
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,33 +42,18 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4035152931953455844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.27198, y: 107.265, z: 310.304}
+  m_LocalPosition: {x: -90.78, y: 107.265, z: 310.304}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4035152931204255759}
   - {fileID: 1858837995454378535}
+  - {fileID: 219333187504413480}
   - {fileID: 448311542173932669}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5378969056242126262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4035152931953455844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
---- !u!136 &1115402363
-CapsuleCollider:
+--- !u!135 &3335765835667132145
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -78,11 +62,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.75
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &1115402362
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &3591348863707460989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,10 +74,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4035152931953455844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c0f7c33f235514cb42fc99893190d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 39bdd8a5fa35bec458b8dc5eec5e9a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  radius: 1
+  interactableText: Activate Bonfire
+  playerInventory: {fileID: 0}
+  playerLocomotion: {fileID: 0}
+  animatorHandler: {fileID: 0}
+  uIManager: {fileID: 0}
+  light: {fileID: 2454158943806804480}
+  particleSystem: {fileID: 448311542154533181}
 --- !u!1 &8965765195346296377
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219333187504413480}
   - component: {fileID: 2454158943806804480}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,12 +109,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8965765195346296377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.40000153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 448311542173932669}
-  m_RootOrder: 0
+  m_Father: {fileID: 4035152931953455847}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &2454158943806804480
 Light:
@@ -144,7 +134,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -177,7 +167,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -236,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0ca899321fcc4e345828e4e78ca8650e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0ca899321fcc4e345828e4e78ca8650e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -275,6 +265,12 @@ PrefabInstance:
 --- !u!4 &448311542173932669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0ca899321fcc4e345828e4e78ca8650e,
+    type: 3}
+  m_PrefabInstance: {fileID: 448311542173796093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &448311542154533181 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800000, guid: 0ca899321fcc4e345828e4e78ca8650e,
     type: 3}
   m_PrefabInstance: {fileID: 448311542173796093}
   m_PrefabAsset: {fileID: 0}

@@ -16,6 +16,11 @@ namespace SP
         {
             if (enemyStats.currentHealth > 0)
             {
+                if (!enemyManager.shouldFollowTarget)
+                {
+                    enemyManager.enemyLocomotionManager.StopMoving();
+                }
+
                 #region Handle Enemy Target Detection
                 Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
                 for (int i = 0; i < colliders.Length; i++)
@@ -40,6 +45,8 @@ namespace SP
                 #region Handle Switching To Next State
                 if (enemyManager.currentTarget != null)
                 {
+                    enemyManager.shouldFollowTarget = true;
+
                     return pursueTargetState;
                 }
                 else

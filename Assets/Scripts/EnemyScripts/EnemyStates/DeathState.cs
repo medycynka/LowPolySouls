@@ -8,6 +8,12 @@ namespace SP
     {
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
         {
+            if (enemyManager.isAlive)
+            {
+                enemyManager.isAlive = false;
+                enemyManager.HandleDeath();
+            }
+            
             return this;
         }
     }

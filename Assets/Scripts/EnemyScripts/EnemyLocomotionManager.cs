@@ -70,6 +70,7 @@ namespace SP
             if (enemyManager.isPreformingAction)
             {
                 enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                navmeshAgent.isStopped = true;
                 navmeshAgent.enabled = false;
             }
             else
@@ -87,6 +88,21 @@ namespace SP
             HandleRotateTowardsTarget();
             navmeshAgent.transform.localPosition = Vector3.zero;
             navmeshAgent.transform.localRotation = Quaternion.identity;
+        }
+
+        public void StopMoving()
+        {
+            distanceFromTarget = 0;
+            enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        }
+
+        public void OutOfRangeTargetStop()
+        {
+            distanceFromTarget = enemyManager.detectionRadius * 2;
+            navmeshAgent.enabled = true;
+            navmeshAgent.isStopped = true;
+            navmeshAgent.transform.localPosition = Vector3.zero;
+            navmeshAgent.enabled = false;
         }
 
         private void HandleRotateTowardsTarget()
@@ -113,8 +129,11 @@ namespace SP
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navmeshAgent.enabled = true;
+
+                navmeshAgent.isStopped = false;
                 navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyRigidBody.velocity = targetVelocity;
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
             }
         }
