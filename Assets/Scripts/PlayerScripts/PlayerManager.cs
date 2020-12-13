@@ -24,6 +24,7 @@ namespace SP
         public bool shouldRefillHealthBg = false;
         public bool shouldRefillStaminaBg = false;
         public bool shouldAddJumpForce = false;
+        public bool isRestingAtBonfire = false;
 
         [Header("Player Flags")]
         public bool isSprinting;
@@ -137,6 +138,7 @@ namespace SP
                                 if (inputHandler.a_Input)
                                 {
                                     interactableObject.Interact(this);
+                                    interactableUIGameObject.SetActive(false);
                                 }
                             }
                         }
@@ -146,12 +148,15 @@ namespace SP
 
                             if (interactableObject != null)
                             {
-                                interactableUI.interactableText.text = interactableObject.interactableText;
-                                interactableUIGameObject.SetActive(true);
-
-                                if (inputHandler.a_Input)
+                                if (interactableObject.GetComponent<BonfireManager>().showRestPopUp)
                                 {
-                                    interactableObject.Interact(this);
+                                    interactableUI.interactableText.text = interactableObject.interactableText;
+                                    interactableUIGameObject.SetActive(true);
+
+                                    if (inputHandler.a_Input)
+                                    {
+                                        interactableObject.Interact(this);
+                                    }
                                 }
                             }
                         }

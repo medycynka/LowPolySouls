@@ -33,20 +33,22 @@ namespace SP
             if (collision.tag == "Player")
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+                EnemyStats enemyStats = GetComponentInParent<EnemyStats>();
 
-                if (playerStats != null)
+                if (playerStats != null && enemyStats != null)
                 {
-                    playerStats.TakeDamage(currentWeaponDamage);
+                    enemyStats.DealDamage(playerStats, currentWeaponDamage);
                 }
             }
 
             if (collision.tag == "Enemy")
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+                PlayerStats playerStats = GetComponentInParent<PlayerStats>();
 
-                if (enemyStats != null)
+                if (enemyStats != null && playerStats != null)
                 {
-                    enemyStats.TakeDamage(currentWeaponDamage);
+                    playerStats.DealDamage(enemyStats, currentWeaponDamage);
                 }
             }
         }

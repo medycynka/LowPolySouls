@@ -11,6 +11,8 @@ namespace SP
         public HealthBar healthBar;
         public StaminaBar staminaBar;
         public GameObject youDiedLogo;
+
+        public int playerLevel = 12;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
 
@@ -110,6 +112,16 @@ namespace SP
             }
 
             staminaBar.staminaBarSlider.value += staminaRefillAmount * Time.deltaTime;
+        }
+
+        public void DealDamage(EnemyStats enemyStats, float weaponDamage)
+        {
+            enemyStats.TakeDamage(weaponDamage + Strength);
+        }
+
+        public int CalculateSoulsCost(int level)
+        {
+            return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
         }
     }
 

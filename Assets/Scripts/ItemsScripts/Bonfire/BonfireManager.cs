@@ -9,6 +9,7 @@ namespace SP
         [Header("Activation properties")]
         public float bonfireLitScreenTime = 2.0f;
         public bool isActivated = false;
+        public bool showRestPopUp = false;
         public Light bonfireLight;
         public ParticleSystem bonfireParticleSystem;
         public GameObject bonfireLitScreen;
@@ -18,8 +19,9 @@ namespace SP
         public GameObject uiWindow;
         public GameObject restUI;
 
-        [Header("Player Stats")]
+        [Header("Player Scripts")]
         public PlayerStats playerStats;
+        public PlayerManager playerManager;
 
         private void Awake()
         {

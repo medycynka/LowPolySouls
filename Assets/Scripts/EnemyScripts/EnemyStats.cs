@@ -36,6 +36,11 @@ namespace SP
 
             animator.Play("Damage_01");
         }
+
+        public void DealDamage(PlayerStats playerStats, float weaponDamage)
+        {
+            playerStats.TakeDamage(weaponDamage + Strength);
+        }
     }
 
 }

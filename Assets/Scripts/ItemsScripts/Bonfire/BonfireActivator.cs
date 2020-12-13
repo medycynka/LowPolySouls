@@ -28,9 +28,9 @@ namespace SP
 
             bonfireManager.bonfireParticleSystem.Play();
             bonfireManager.bonfireLight.enabled = true;
+            bonfireManager.isActivated = true;
 
             StartCoroutine(DisplayScreen());
-            bonfireManager.isActivated = true;
         }
 
         private IEnumerator DisplayScreen()
@@ -40,6 +40,7 @@ namespace SP
             yield return new WaitForSeconds(bonfireManager.bonfireLitScreenTime);
 
             bonfireManager.bonfireLitScreen.SetActive(false);
+            bonfireManager.showRestPopUp = true;
         }
     }
 

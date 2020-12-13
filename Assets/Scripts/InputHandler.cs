@@ -91,7 +91,7 @@ namespace SP
 
         public void TickInput(float delta)
         {
-            if (playerStats.isPlayerAlive)
+            if (playerStats.isPlayerAlive && !playerManager.isRestingAtBonfire)
             {
                 if (!inventoryFlag)
                 {

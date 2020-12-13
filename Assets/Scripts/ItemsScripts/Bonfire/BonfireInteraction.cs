@@ -30,6 +30,7 @@ namespace SP
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Sit Down", true); //Plays the animation of looting the item
+            bonfireManager.playerManager.isRestingAtBonfire = true;
 
             playerStats.RefillHealth();
             bonfireManager.ActivateRestUI();
@@ -40,6 +41,7 @@ namespace SP
         {
             bonfireManager.CloseRestUI();
             animatorHandler.PlayTargetAnimation("Stand Up", true);
+            bonfireManager.playerManager.isRestingAtBonfire = false;
         }
     }
 }
