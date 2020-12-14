@@ -83,7 +83,7 @@ namespace SP
 
         public void UpdateArmorValue()
         {
-            playerStats.currentArmorValue = playerStats.baseArmor + CalculateArmorOfCurrentEquipment();
+            playerStats.currentArmorValue = playerStats.baseArmor + CalculateArmorOfCurrentEquipment() + 2.5f * playerStats.Defence + 0.5f * playerStats.Agility;
         }
 
         private float CalculateArmorOfCurrentEquipment()

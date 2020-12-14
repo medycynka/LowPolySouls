@@ -39,6 +39,7 @@ namespace SP
 
         public void GetUp()
         {
+            bonfireManager.uiManager.UpdateSouls();
             bonfireManager.CloseRestUI();
             animatorHandler.PlayTargetAnimation("Stand Up", true);
             bonfireManager.playerManager.isRestingAtBonfire = false;

@@ -15,6 +15,7 @@ namespace SP
         public GameObject bonfireLitScreen;
 
         [Header("UI objects")]
+        public UIManager uiManager;
         public GameObject playerUI;
         public GameObject uiWindow;
         public GameObject restUI;

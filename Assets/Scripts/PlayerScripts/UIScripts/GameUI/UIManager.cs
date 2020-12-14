@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
@@ -9,6 +9,7 @@ namespace SP
     public class UIManager : MonoBehaviour
     {
         public PlayerInventory playerInventory;
+        public PlayerStats playerStats;
         public EquipmentWindowUI equipmentWindowUI;
 
         [Header("UI Windows")]
@@ -17,6 +18,9 @@ namespace SP
         public GameObject selectWindow;
         public GameObject equipmentScreenWindow;
         public GameObject weaponInventoryWindow;
+
+        [Header("Souls box")]
+        public TextMeshProUGUI currentSoulsAmount;
 
         [Header("Equipment Window Slot Selected")]
         public bool rightHandSlot01Selected;
@@ -59,14 +63,21 @@ namespace SP
 
         private void Start()
         {
+            currentSoulsAmount.text = playerStats.soulsAmount.ToString();
             GetAllInventorySlots();
             equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI()
         {
+            equipmentWindowUI.UpdateStatsWindow(playerStats);
             GetAllInventorySlots();
             UpdateAllInventoryTabs();
+        }
+
+        public void UpdateSouls()
+        {
+            currentSoulsAmount.text = playerStats.soulsAmount.ToString();
         }
 
         public void OpenSelectWindow()

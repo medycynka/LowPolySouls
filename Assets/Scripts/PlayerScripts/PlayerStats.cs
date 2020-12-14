@@ -7,6 +7,7 @@ namespace SP
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
+        public UIManager uiManager;
 
         public HealthBar healthBar;
         public StaminaBar staminaBar;
@@ -33,31 +34,40 @@ namespace SP
 
         private void Start()
         {
-            maxHealth = SetMaxHealthFromHealthLevel();
-            currentHealth = maxHealth;
-            healthBar.SetMaxHealth(maxHealth);
-            healthBar.SetCurrentHealth(currentHealth);
-
-            maxStamina = SetMaxStaminaFromStaminaLevel();
-            currentStamina = maxStamina;
-            staminaBar.SetMaxStamina(maxStamina);
-            staminaBar.SetCurrentStamina(currentStamina);
+            UpdateHealthBar(SetMaxHealthFromHealthLevel());
+            UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
 
             youDiedLogo.SetActive(false);
         }
 
         private float SetMaxHealthFromHealthLevel()
         {
-            maxHealth = healthLevel * 10;
+            maxHealth = healthLevel * 10 + bonusHealth;
 
             return maxHealth;
         }
 
+        public void UpdateHealthBar(float newHealth)
+        {
+            maxHealth = newHealth;
+            currentHealth = maxHealth;
+            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetCurrentHealth(currentHealth);
+        }
+
         private float SetMaxStaminaFromStaminaLevel()
         {
-            maxStamina = staminaLevel * 10;
+            maxStamina = staminaLevel * 10 + bonusStamina;
 
             return maxStamina;
+        }
+
+        public void UpdateStaminaBar(float newStamina)
+        {
+            maxStamina = newStamina;
+            currentStamina = maxStamina;
+            staminaBar.SetMaxStamina(maxStamina);
+            staminaBar.SetCurrentStamina(currentStamina);
         }
 
         public void TakeDamage(float damage)

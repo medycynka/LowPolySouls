@@ -3446,9 +3446,10 @@ MonoBehaviour:
   sprintSpeed: 7
   rotationSpeed: 10
   fallingSpeed: 150
-  jumpSpeed: 5
-  jumpMult: 5
+  jumpMult: 50
   nextJump: 0
+  rollStaminaCost: 10
+  sprintStaminaCost: 5
 --- !u!114 &4966070491420200269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3467,7 +3468,12 @@ MonoBehaviour:
   interactableUIGameObject: {fileID: 0}
   itemInteractableGameObject: {fileID: 0}
   isInteracting: 0
+  shouldRefillHealth: 0
   shouldRefillStamina: 0
+  shouldRefillHealthBg: 0
+  shouldRefillStaminaBg: 0
+  shouldAddJumpForce: 0
+  isRestingAtBonfire: 0
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
@@ -3536,11 +3542,23 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  baseArmor: 5
+  Strength: 4
+  Agility: 1
+  Defence: 3
+  bonusHealth: 2
+  bonusStamina: 2
+  uiManager: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
-  soulsAmount: 0
+  youDiedLogo: {fileID: 0}
+  playerLevel: 12
+  soulsAmount: 5000
   currentArmorValue: 0
+  healthRefillAmount: 20
+  healthBgRefillAmount: 20
   staminaRefillAmount: 20
+  isPlayerAlive: 1
 --- !u!114 &540771581
 MonoBehaviour:
   m_ObjectHideFlags: 0

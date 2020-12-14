@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace SP
 {
 
     public class EquipmentWindowUI : MonoBehaviour
     {
+        [Header("Weapon Quick Slots")]
         public bool rightHandSlot01Selected;
         public bool rightHandSlot02Selected;
         public bool leftHandSlot01Selected;
         public bool leftHandSlot02Selected;
-
         public HandEquipmentSlotUI[] handEquipmentSlotUI;
+
+        [Header("Stats Values")]
+        public TextMeshProUGUI strenghtValue;
+        public TextMeshProUGUI agilityValue;
+        public TextMeshProUGUI defenceValue;
+        public TextMeshProUGUI allDefenceValue;
+        public TextMeshProUGUI healthValue;
+        public TextMeshProUGUI maxHealthValue;
+        public TextMeshProUGUI staminaValue;
+        public TextMeshProUGUI maxStaminaValue;
 
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
         {
@@ -55,6 +66,18 @@ namespace SP
         public void SelectLeftHandSlot02()
         {
             leftHandSlot02Selected = true;
+        }
+
+        public void UpdateStatsWindow(PlayerStats playerStats)
+        {
+            strenghtValue.text = playerStats.Strength.ToString();
+            agilityValue.text = playerStats.Agility.ToString();
+            defenceValue.text = playerStats.Defence.ToString();
+            allDefenceValue.text = playerStats.currentArmorValue.ToString();
+            healthValue.text = playerStats.bonusHealth.ToString();
+            maxHealthValue.text = playerStats.maxHealth.ToString();
+            staminaValue.text = playerStats.bonusStamina.ToString();
+            maxStaminaValue.text = playerStats.maxStamina.ToString();
         }
     }
 

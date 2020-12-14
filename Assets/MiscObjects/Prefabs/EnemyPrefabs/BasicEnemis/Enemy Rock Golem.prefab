@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e81bdbc590d27c43ad7f8f5bcab049a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleState: {fileID: 1662307563}
   combatStanceState: {fileID: 2036713964}
   deathState: {fileID: 1845418901}
 --- !u!1 &2036713962
@@ -380,6 +381,12 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  baseArmor: 5
+  Strength: 4
+  Agility: 1
+  Defence: 3
+  bonusHealth: 2
+  bonusStamina: 2
   animator: {fileID: 0}
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
@@ -397,8 +404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 3060950883069289617}
+  enemyLocomotionManager: {fileID: 0}
   isPreformingAction: 0
   shouldDrop: 1
+  isAlive: 1
+  shouldFollowTarget: 0
   enemyAttacks:
   - {fileID: 11400000, guid: 51054885fe3068e4ab536b39ce49dac6, type: 2}
   - {fileID: 11400000, guid: 09e2089e92cab9342a83cbbce8b66553, type: 2}

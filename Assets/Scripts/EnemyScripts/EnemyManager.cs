@@ -180,6 +180,7 @@ namespace SP
             enemyStats.currentHealth = 0;
             enemyStats.animator.Play("Dead_01");
             enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
+            enemyStats.playerStats.uiManager.UpdateSouls();
             Destroy(enemyStats.enemyObject, 5.0f);
 
             if (shouldDrop)

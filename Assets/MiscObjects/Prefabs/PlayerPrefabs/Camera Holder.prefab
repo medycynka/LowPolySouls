@@ -98,6 +98,7 @@ MonoBehaviour:
   lockedPivotPosition: 2.25
   unlockedPivotPosition: 1.65
   currentLockOnTarget: {fileID: 0}
+  availableTargets: []
   nearestLockOnTarget: {fileID: 0}
   leftLockTarget: {fileID: 0}
   rightLockTarget: {fileID: 0}
