@@ -7096,6 +7096,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3093994951313907348}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 3093994949545120074}
+    - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 3228666686954091899}
@@ -7115,15 +7119,6 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 3883487034852017534}
-    - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
-      propertyPath: uiManager
-      value: 
-      objectReference: {fileID: 3093994949545120074}
-    - target: {fileID: 2454158943806804480, guid: d4ff9b079f2f0f740a55e05754d59487,
-        type: 3}
-      propertyPath: m_BoundingSphereOverride.y
-      value: 2.4506e-41
-      objectReference: {fileID: 0}
     - target: {fileID: 4035152931953455844, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
       propertyPath: m_Name

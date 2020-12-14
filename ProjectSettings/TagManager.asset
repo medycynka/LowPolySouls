@@ -13,6 +13,7 @@ TagManager:
   - BasicEnemy
   - UI
   - Enemy
+  - Bonfire
   layers:
   - Default
   - TransparentFX

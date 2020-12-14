@@ -118,13 +118,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonfireLitScreenTime: 2
   isActivated: 0
+  showRestPopUp: 0
   bonfireLight: {fileID: 2454158943806804480}
   bonfireParticleSystem: {fileID: 448311542154533181}
   bonfireLitScreen: {fileID: 0}
+  uiManager: {fileID: 0}
   playerUI: {fileID: 0}
   uiWindow: {fileID: 0}
   restUI: {fileID: 0}
   playerStats: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!114 &6532777734007141858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +182,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8965765195346296377}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -229,7 +232,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.4506e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
