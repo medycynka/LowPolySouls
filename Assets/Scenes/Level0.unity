@@ -4032,6 +4032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2094540011, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
+      propertyPath: playerManagerForTeleport
+      value: 
+      objectReference: {fileID: 3883487034852017534}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: bonfireLitScreen
       value: 
@@ -7514,6 +7518,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2094540011, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
+      propertyPath: playerManagerForTeleport
+      value: 
+      objectReference: {fileID: 3883487034852017534}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: bonfireLitScreen
       value: 

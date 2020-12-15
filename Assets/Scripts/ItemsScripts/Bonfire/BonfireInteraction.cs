@@ -5,8 +5,11 @@ using TMPro;
 
 namespace SP
 {
+    [RequireComponent(typeof(PlayerManager))]
     public class BonfireInteraction : Interactable
     {
+        public PlayerManager playerManagerForTeleport;
+
         BonfireManager bonfireManager;
         PlayerStats playerStats;
 
@@ -19,20 +22,21 @@ namespace SP
         {
             base.Interact(playerManager);
 
-            RestAtBonfire(playerManager);
+            RestAtBonfire();
         }
 
-        private void RestAtBonfire(PlayerManager playerManager)
+        private void RestAtBonfire()
         {
-            playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
-            playerStats = playerManager.GetComponent<PlayerStats>();
+            playerLocomotion = playerManagerForTeleport.GetComponent<PlayerLocomotion>();
+            animatorHandler = playerManagerForTeleport.GetComponentInChildren<AnimatorHandler>();
+            playerStats = playerManagerForTeleport.GetComponent<PlayerStats>();
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Sit Down", true); //Plays the animation of looting the item
             bonfireManager.playerManager.isRestingAtBonfire = true;
 
             playerStats.RefillHealth();
+            playerStats.RefillStamina();
             bonfireManager.ActivateRestUI();
             //bonfireManager.RespawnEnemis();
         }
@@ -47,6 +51,11 @@ namespace SP
 
         public void QuickMove()
         {
+            if(animatorHandler == null)
+            {
+                animatorHandler = playerManagerForTeleport.GetComponentInChildren<AnimatorHandler>();
+            }
+
             StartCoroutine(TeleportToNextBonfire());
         }
 

@@ -16,7 +16,6 @@ namespace SP
         public LayerMask detectionLayer;
 
         [Header("A.I Movement Stats")]
-        public float distanceFromTarget;
         public float stoppingDistance = 1.25f;
         public float rotationSpeed = 100;
 
@@ -34,39 +33,16 @@ namespace SP
             enemyRigidBody.isKinematic = false;
         }
 
-        public void HandleDetection()
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
-
-                if (characterStats != null)
-                {
-                    //CHECK FOR TEAM ID
-
-                    Vector3 targetDirection = characterStats.transform.position - transform.position;
-                    float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
-                    {
-                        enemyManager.currentTarget = characterStats;
-                    }
-                }
-            }
-        }
-
         public void HandleMoveToTarget()
         {
             if (enemyManager.isPreformingAction)
                 return;
 
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-            distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+            enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
             float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-            //If we are preforming an action, stop our movement!
+            //If we are preforming an action, stop moving
             if (enemyManager.isPreformingAction)
             {
                 enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
@@ -75,11 +51,11 @@ namespace SP
             }
             else
             {
-                if (distanceFromTarget > stoppingDistance)
+                if (enemyManager.distanceFromTarget > stoppingDistance)
                 {
                     enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
                 }
-                else if (distanceFromTarget <= stoppingDistance)
+                else if (enemyManager.distanceFromTarget <= stoppingDistance)
                 {
                     enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                 }
@@ -92,22 +68,12 @@ namespace SP
 
         public void StopMoving()
         {
-            distanceFromTarget = 0;
+            enemyManager.distanceFromTarget = 0;
             enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-        }
-
-        public void OutOfRangeTargetStop()
-        {
-            distanceFromTarget = enemyManager.detectionRadius * 2;
-            navmeshAgent.enabled = true;
-            navmeshAgent.isStopped = true;
-            navmeshAgent.transform.localPosition = Vector3.zero;
-            navmeshAgent.enabled = false;
         }
 
         private void HandleRotateTowardsTarget()
         {
-            //Rotate manually
             if (enemyManager.isPreformingAction)
             {
                 Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
@@ -122,7 +88,7 @@ namespace SP
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed / Time.deltaTime);
             }
-            //Rotate with pathfinding (navmesh)
+            //Rotate with pathfinding on navmesh -> make A*?
             else
             {
                 Vector3 relativeDirection = transform.InverseTransformDirection(navmeshAgent.desiredVelocity);

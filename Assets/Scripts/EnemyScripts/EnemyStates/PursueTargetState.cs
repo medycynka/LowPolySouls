@@ -19,11 +19,11 @@ namespace SP {
                 //if target is out of range, return this state and continue to chase target
                 if(enemyManager.shouldFollowTarget)
                 {
-                    enemyManager.enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+                    enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
-                    if (enemyManager.enemyLocomotionManager.distanceFromTarget <= enemyManager.detectionRadius)
+                    if (enemyManager.distanceFromTarget <= enemyManager.detectionRadius)
                     {
-                        if (enemyManager.enemyLocomotionManager.distanceFromTarget <= enemyManager.enemyLocomotionManager.stoppingDistance)
+                        if (enemyManager.distanceFromTarget <= enemyManager.enemyLocomotionManager.stoppingDistance)
                         {
                             enemyManager.enemyLocomotionManager.StopMoving();
 
@@ -36,7 +36,6 @@ namespace SP {
                     }
                     else
                     {
-                        //enemyManager.enemyLocomotionManager.OutOfRangeTargetStop();
                         enemyManager.currentTarget = null;
                         enemyManager.shouldFollowTarget = false;
 

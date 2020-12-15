@@ -171,6 +171,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 2036713964}
   deathState: {fileID: 1845418901}
+  enemyAttacks:
+  - {fileID: 11400000, guid: 51054885fe3068e4ab536b39ce49dac6, type: 2}
+  - {fileID: 11400000, guid: 09e2089e92cab9342a83cbbce8b66553, type: 2}
+  - {fileID: 11400000, guid: 57721a566302c2a419e0ae940e2419f2, type: 2}
+  currentAttack: {fileID: 0}
 --- !u!1 &2035520600
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +420,10 @@ MonoBehaviour:
   currentAttack: {fileID: 0}
   currentTarget: {fileID: 0}
   currentState: {fileID: 1662307563}
+  distanceFromTarget: 0
+  viewableAngle: 0
   detectionRadius: 15
+  maximumAttackRange: 1.5
   maximumDetectionAngle: 75
   minimumDetectionAngle: -75
   currentRecoveryTime: 0
@@ -436,7 +444,6 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 512
-  distanceFromTarget: 0
   stoppingDistance: 1.25
   rotationSpeed: 100
 --- !u!114 &1499623916
