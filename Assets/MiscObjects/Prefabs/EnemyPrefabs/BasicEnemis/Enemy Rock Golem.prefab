@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd87c59c019d63f4386ca249b5c43788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleState: {fileID: 1662307563}
   combatStanceState: {fileID: 2036713964}
   deathState: {fileID: 1845418901}
   enemyAttacks:
@@ -2748,6 +2749,7 @@ GameObject:
   - component: {fileID: 3060950883607553127}
   - component: {fileID: 3060950883615234083}
   - component: {fileID: 7672786373714467436}
+  - component: {fileID: 1108355008689167410}
   m_Layer: 17
   m_Name: Character_Rock_Golem
   m_TagString: Enemy
@@ -2818,6 +2820,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &1108355008689167410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060950883607884267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1bdfd74ba89bb47a6bf276103914a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
 --- !u!1 &3060950883607885213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5124,32 +5139,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.005718231, y: 85.2316, z: -2.7237644}
     m_Extent: {x: 102.4617, y: 96.2941, z: 25.996536}
   m_DirtyAABB: 0
---- !u!65 &3098842574022088314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757073286028440277}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.62148446, y: 0.9221634, z: 0.7348159}
-  m_Center: {x: 0.000000007537741, y: 0.9362867, z: -0.00000010795954}
---- !u!114 &3098842574022088315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757073286028440277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94d6f3468f10e04a94980655e9bd542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeaponDamage: 25
 --- !u!1 &7672786374156750445
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,49 +5254,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3211013060749273268, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211013060749273268, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211013060749273268, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6540590560998487334, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6626741269895299837, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     - target: {fileID: 8233686739739551639, guid: d1060e5f996536741b3b34bef9602f86,
         type: 3}
       propertyPath: m_Name
       value: SM_Wep_Hammer_Large_Stone_01_BE
       objectReference: {fileID: 0}
-    - target: {fileID: 8233686739739551639, guid: d1060e5f996536741b3b34bef9602f86,
-        type: 3}
-      propertyPath: m_Layer
-      value: 17
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1060e5f996536741b3b34bef9602f86, type: 3}
---- !u!1 &4757073286028440277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6626741269895299837, guid: d1060e5f996536741b3b34bef9602f86,
-    type: 3}
-  m_PrefabInstance: {fileID: 1869678704381030440}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3854414691864926364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3211013060749273268, guid: d1060e5f996536741b3b34bef9602f86,

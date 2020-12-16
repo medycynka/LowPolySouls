@@ -8,8 +8,6 @@ namespace SP
     [RequireComponent(typeof(PlayerManager))]
     public class BonfireInteraction : Interactable
     {
-        public PlayerManager playerManagerForTeleport;
-
         BonfireManager bonfireManager;
         PlayerStats playerStats;
 
@@ -22,14 +20,14 @@ namespace SP
         {
             base.Interact(playerManager);
 
-            RestAtBonfire();
+            RestAtBonfire(playerManager);
         }
 
-        private void RestAtBonfire()
+        private void RestAtBonfire(PlayerManager playerManager)
         {
-            playerLocomotion = playerManagerForTeleport.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManagerForTeleport.GetComponentInChildren<AnimatorHandler>();
-            playerStats = playerManagerForTeleport.GetComponent<PlayerStats>();
+            playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
+            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            playerStats = playerManager.GetComponent<PlayerStats>();
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Sit Down", true); //Plays the animation of looting the item
@@ -38,11 +36,17 @@ namespace SP
             playerStats.RefillHealth();
             playerStats.RefillStamina();
             bonfireManager.ActivateRestUI();
+            playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
             //bonfireManager.RespawnEnemis();
         }
 
         public void GetUp()
         {
+            if (animatorHandler == null)
+            {
+                animatorHandler = bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
+            }
+
             bonfireManager.uiManager.UpdateSouls();
             bonfireManager.CloseRestUI();
             animatorHandler.PlayTargetAnimation("Stand Up", true);
@@ -53,7 +57,7 @@ namespace SP
         {
             if(animatorHandler == null)
             {
-                animatorHandler = playerManagerForTeleport.GetComponentInChildren<AnimatorHandler>();
+                animatorHandler = bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
             }
 
             StartCoroutine(TeleportToNextBonfire());
@@ -77,6 +81,7 @@ namespace SP
 
             bonfireManager.locationScreen.SetActive(false);
             bonfireManager.playerManager.isRestingAtBonfire = false;
+            bonfireManager.playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
         }
     }
 }

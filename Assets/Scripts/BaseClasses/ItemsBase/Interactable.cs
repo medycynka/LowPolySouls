@@ -12,7 +12,7 @@ namespace SP
 
         [HideInInspector] public PlayerInventory playerInventory;
         [HideInInspector] public PlayerLocomotion playerLocomotion;
-        [HideInInspector] public AnimatorHandler animatorHandler;
+        public AnimatorHandler animatorHandler;
         [HideInInspector] public UIManager uIManager;
 
         private void OnDrawGizmosSelected()

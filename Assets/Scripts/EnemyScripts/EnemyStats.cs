@@ -34,7 +34,10 @@ namespace SP
         {
             currentHealth -= damage;
 
-            animator.Play("Damage_01");
+            if (currentHealth > 0)
+            {
+                animator.Play("Damage_01");
+            }
         }
 
         public void DealDamage(PlayerStats playerStats, float weaponDamage)

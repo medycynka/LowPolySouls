@@ -8,6 +8,7 @@ namespace SP
 
     public class AttackState : State
     {
+        public IdleState idleState;
         public CombatStanceState combatStanceState;
         public DeathState deathState;
 
@@ -18,6 +19,10 @@ namespace SP
         {
             if (enemyStats.currentHealth > 0)
             {
+                if(enemyManager.currentTarget.currentHealth <= 0)
+                {
+                    return idleState;
+                }
                 //Select one of our many attacks based on attack scores
                 //if the selected attack is not able to be used because of bad angle or distance, select a new attack
                 //if the attack is viable, stop our movement and attack our target

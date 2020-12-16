@@ -80,10 +80,7 @@ namespace SP
 
             if (currentHealth <= 0)
             {
-                currentHealth = 0;
-                animatorHandler.PlayTargetAnimation("Dead_01", true);
-                isPlayerAlive = false;
-                youDiedLogo.SetActive(true);
+                HandleDeathAndRespawn();
             }
         }
 
@@ -132,6 +129,36 @@ namespace SP
         public int CalculateSoulsCost(int level)
         {
             return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
+        }
+
+        public void HandleDeathAndRespawn()
+        {
+            currentHealth = 0;
+            animatorHandler.PlayTargetAnimation("Dead_01", true);
+            isPlayerAlive = false;
+
+            StartCoroutine(Respawn());
+        }
+
+        public IEnumerator Respawn()
+        {
+            youDiedLogo.SetActive(true);
+            
+            yield return new WaitForSeconds(5f);
+
+            youDiedLogo.SetActive(false);
+            playerManager.quickMoveScreen.SetActive(true);
+            animatorHandler.PlayTargetAnimation("Empty", false);
+            UpdateHealthBar(maxHealth);
+            UpdateStaminaBar(maxStamina);
+            transform.position = playerManager.currentSpawnPoint.transform.position;
+            transform.rotation = playerManager.currentSpawnPoint.transform.rotation;
+            // Respawn enemis and refresh boss health if alive
+
+            yield return new WaitForSeconds(3f);
+
+            isPlayerAlive = true;
+            playerManager.quickMoveScreen.SetActive(false);
         }
     }
 

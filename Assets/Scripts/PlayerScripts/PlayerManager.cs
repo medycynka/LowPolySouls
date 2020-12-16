@@ -32,6 +32,10 @@ namespace SP
         public bool isGrounded;
         public bool canDoCombo;
 
+        [Header("Respawn")]
+        public GameObject quickMoveScreen;
+        public GameObject currentSpawnPoint;
+
         float healhBgRefillTimer = 0.0f;
         float staminaRefillTimer = 0.0f;
         float addJumpForceTimer = 1.25f;
