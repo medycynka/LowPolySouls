@@ -3438,7 +3438,7 @@ MonoBehaviour:
   animatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
-  minimumDistanceNeededToBeginFall: 1
+  minimumDistanceNeededToBeginFall: 0.5
   groundDirectionRayDistance: 0.2
   inAirTimer: 0
   movementSpeed: 5
@@ -3478,6 +3478,8 @@ MonoBehaviour:
   isInAir: 0
   isGrounded: 0
   canDoCombo: 0
+  quickMoveScreen: {fileID: 0}
+  currentSpawnPoint: {fileID: 0}
 --- !u!114 &4966070491420200268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3548,12 +3550,15 @@ MonoBehaviour:
   Defence: 3
   bonusHealth: 2
   bonusStamina: 2
-  uiManager: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+  uiManager: {fileID: 0}
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   youDiedLogo: {fileID: 0}
+  deathDropIcon: {fileID: 21300000, guid: 4a8b11548ae1ade4ba8602f9191f1807, type: 3}
+  soulDeathDrop: {fileID: 2407895679905884246, guid: 13c655fcff4024c4aa656393d80e6831,
+    type: 3}
   playerLevel: 12
-  soulsAmount: 5000
+  soulsAmount: 0
   currentArmorValue: 0
   healthRefillAmount: 20
   healthBgRefillAmount: 20

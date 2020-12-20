@@ -7321,11 +7321,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3060950883499712634, guid: ec3e58eeb41dc224c9d3d00795f15b66,
-        type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 3883487034852017530}
     - target: {fileID: 3060950883499712635, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
       propertyPath: m_Name
@@ -7431,6 +7426,11 @@ PrefabInstance:
       objectReference: {fileID: 89043005991763702}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 89043004299950493}
+    - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 3374147129851814983}
@@ -7444,11 +7444,6 @@ PrefabInstance:
       propertyPath: youDiedLogo
       value: 
       objectReference: {fileID: 89043004796333457}
-    - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: uiManager
-      value: 
-      objectReference: {fileID: 89043004299950493}
     - target: {fileID: 4966070491420200266, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: m_Name
@@ -7531,14 +7526,14 @@ PrefabInstance:
       objectReference: {fileID: 89043005124012171}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
-      propertyPath: currentSpawnPoint
-      value: 
-      objectReference: {fileID: 1011968173}
-    - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
       propertyPath: quickMoveScreen
       value: 
       objectReference: {fileID: 89043005124445095}
+    - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: currentSpawnPoint
+      value: 
+      objectReference: {fileID: 1011968173}
     - target: {fileID: 4966070491420200275, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: cameraHandler

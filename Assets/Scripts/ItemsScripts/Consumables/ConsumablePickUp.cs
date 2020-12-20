@@ -7,7 +7,6 @@ namespace SP
 {
 
     public class ConsumablePickUp : Interactable
-
     {
         public ConsumableItem[] consumableItems;
 

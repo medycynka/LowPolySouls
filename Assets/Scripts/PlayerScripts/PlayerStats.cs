@@ -13,6 +13,9 @@ namespace SP
         public StaminaBar staminaBar;
         public GameObject youDiedLogo;
 
+        public Sprite deathDropIcon;
+        public ConsumablePickUp soulDeathDrop;
+
         public int playerLevel = 12;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
@@ -143,6 +146,7 @@ namespace SP
         public IEnumerator Respawn()
         {
             youDiedLogo.SetActive(true);
+            DropSouls();
             
             yield return new WaitForSeconds(5f);
 
@@ -159,6 +163,22 @@ namespace SP
 
             isPlayerAlive = true;
             playerManager.quickMoveScreen.SetActive(false);
+        }
+
+        private void DropSouls()
+        {
+            if (soulsAmount > 0)
+            {
+                ConsumableItem deathDrop = new ConsumableItem();
+                deathDrop.soulAmount = soulsAmount;
+                deathDrop.itemName = "Souls";
+                deathDrop.itemIcon = deathDropIcon;
+                soulsAmount = 0;
+                uiManager.UpdateSouls();
+                soulDeathDrop.consumableItems = new ConsumableItem[1] { deathDrop };
+                soulDeathDrop.interactableText = "Recover souls";
+                Instantiate(soulDeathDrop, transform.position, Quaternion.identity);
+            }
         }
     }
 

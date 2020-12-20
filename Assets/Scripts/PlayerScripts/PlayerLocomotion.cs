@@ -223,7 +223,7 @@ namespace SP
 
             if (playerManager.isInAir)
             {
-                rigidbody.velocity = Vector3.down * fallingSpeed * 0.05f + moveDirection * (fallingSpeed * 0.005f);
+                rigidbody.velocity = Vector3.down * fallingSpeed * 0.05f + moveDirection * (fallingSpeed * 0.01f);
             }
 
             Vector3 dir = moveDirection;
@@ -232,8 +232,8 @@ namespace SP
 
             targetPosition = myTransform.position;
 
-            Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+            Debug.DrawRay(origin, Vector3.down * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
+            if (Physics.Raycast(origin, Vector3.down, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
@@ -300,13 +300,27 @@ namespace SP
             {
                 if (inputHandler.moveAmount > 0)
                 {
-                    playerManager.shouldAddJumpForce = true;
+                    //playerManager.shouldAddJumpForce = true;
+                    StartCoroutine(ResizeCollider());
                     animatorHandler.PlayTargetAnimation("Jump", true);
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
                     nextJump = Time.time + 2;
                 }
             }
+        }
+
+        public IEnumerator ResizeCollider()
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            playerCollider.center = Vector3.up * 1.25f;
+            playerCollider.height = 1f;
+
+            yield return new WaitForSeconds(0.5f);
+
+            playerCollider.center = Vector3.up;
+            playerCollider.height = 1.5f;
         }
 
         public void AddJumpForce(float delta, bool reverse)
