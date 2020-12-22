@@ -8,7 +8,6 @@ namespace SP
 
     public class MiscPickUp : Interactable
     {
-        //public Item[] items_;
         public List<Item> items_;
 
         public override void Interact(PlayerManager playerManager)
@@ -97,6 +96,7 @@ namespace SP
 
                 playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = items_[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = items_[0].itemIcon.texture;
+                uIManager.UpdateEstusAmount();
             }
 
             playerManager.itemInteractableGameObject.SetActive(true);

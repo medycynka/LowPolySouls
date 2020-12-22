@@ -215,6 +215,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "EstusQuickSlotUse",
+                    "type": "Button",
+                    "id": "a5864797-70ef-44bd-8335-5b6f3aa2d81f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -314,6 +322,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfdcad84-74ba-4536-9b30-4aee3713a1de",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EstusQuickSlotUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

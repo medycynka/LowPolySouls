@@ -22,6 +22,7 @@ namespace SP
         public bool lockOnInput;
         public bool right_Stick_Right_Input;
         public bool right_Stick_Left_Input;
+        public bool estusQuickSlotUse;
 
         public bool d_Pad_Up;
         public bool d_Pad_Down;
@@ -44,6 +45,7 @@ namespace SP
         PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
         WeaponSlotManager weaponSlotManager;
+        AnimatorHandler animatorHandler;
 
         public CameraHandler cameraHandler;
         public UIManager uiManager;
@@ -59,6 +61,7 @@ namespace SP
             playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
         public void OnEnable()
@@ -79,6 +82,7 @@ namespace SP
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerActions.Y.performed += i => y_Input = true;
+                inputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
             }
 
             inputActions.Enable();
@@ -101,6 +105,7 @@ namespace SP
                     HandleQuickSlotsInput();
                     HandleLockOnInput();
                     HandleTwoHandInput();
+                    HandleQuickHealInput();
                 }
 
                 HandleInventoryInput();
@@ -299,6 +304,19 @@ namespace SP
                     weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
                     weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
                 }
+            }
+        }
+
+        private void HandleQuickHealInput()
+        {
+            if (estusQuickSlotUse && uiManager.GetEstusCountInInventory() > 0)
+            {
+                ConsumableItem cI = playerInventory.consumablesInventory.Find(e => e.consumableType == ConsumableType.HealItem);
+                playerStats.healthRefillAmount = cI.healAmount;
+                playerInventory.consumablesInventory.Remove(cI);
+                playerManager.shouldRefillHealth = true;
+                animatorHandler.PlayTargetAnimation("Use Estus", true);
+                uiManager.UpdateEstusAmount();
             }
         }
     }

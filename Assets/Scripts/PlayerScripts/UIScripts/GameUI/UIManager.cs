@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -18,6 +19,9 @@ namespace SP
         public GameObject selectWindow;
         public GameObject equipmentScreenWindow;
         public GameObject weaponInventoryWindow;
+
+        [Header("Consumables Quick Slots")]
+        public TextMeshProUGUI estusSlotAmount;
 
         [Header("Souls box")]
         public TextMeshProUGUI currentSoulsAmount;
@@ -66,6 +70,7 @@ namespace SP
             currentSoulsAmount.text = playerStats.soulsAmount.ToString();
             GetAllInventorySlots();
             equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+            UpdateEstusAmount();
         }
 
         public void UpdateUI()
@@ -105,6 +110,23 @@ namespace SP
             rightHandSlot02Selected = false;
             leftHandSlot01Selected = false;
             leftHandSlot02Selected = false;
+        }
+
+        public void UpdateEstusAmount()
+        {
+            int estusCount = GetEstusCountInInventory();
+
+            if(estusCount > 99)
+            {
+                estusCount = 99;
+            }
+
+            estusSlotAmount.text = estusCount.ToString();
+        }
+
+        public int GetEstusCountInInventory()
+        {
+            return playerInventory.consumablesInventory.Count(checker => checker.consumableType == ConsumableType.HealItem);
         }
 
         #region Manage Inventory Tabs

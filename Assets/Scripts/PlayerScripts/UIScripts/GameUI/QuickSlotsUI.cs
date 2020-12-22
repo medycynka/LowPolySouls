@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
-
     public class QuickSlotsUI : MonoBehaviour
     {
         public Image leftWeaponIcon;
@@ -40,7 +40,6 @@ namespace SP
                 }
             }
         }
-
     }
 
 }

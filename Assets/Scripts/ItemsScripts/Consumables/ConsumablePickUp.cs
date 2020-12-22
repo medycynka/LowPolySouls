@@ -28,13 +28,15 @@ namespace SP
                     if (consumableItem != null)
                     {
                         playerInventory.consumablesInventory.Add(consumableItem);
-                        uIManager.GetConsumableInventorySlot();
-                        uIManager.UpdateConsumableInventory();
                     }
                 }
 
+                uIManager.GetConsumableInventorySlot();
+                uIManager.UpdateConsumableInventory();
+
                 playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = consumableItems[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItems[0].itemIcon.texture;
+                uIManager.UpdateEstusAmount();
             }
 
             playerManager.itemInteractableGameObject.SetActive(true);

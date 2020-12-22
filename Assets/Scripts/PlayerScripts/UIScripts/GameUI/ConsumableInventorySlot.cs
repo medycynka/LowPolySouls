@@ -53,6 +53,7 @@ namespace SP
                 playerInventory.consumablesInventory.Remove(item);
                 uiManager.GetConsumableInventorySlot();
                 uiManager.UpdateConsumableInventory();
+                uiManager.UpdateEstusAmount();
             }
         }
     }

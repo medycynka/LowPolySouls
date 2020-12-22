@@ -86,6 +86,7 @@ namespace SP
             inputHandler.a_Input = false;
             inputHandler.jump_Input = false;
             inputHandler.inventory_Input = false;
+            inputHandler.estusQuickSlotUse = false;
 
             float delta = Time.fixedDeltaTime;
 
