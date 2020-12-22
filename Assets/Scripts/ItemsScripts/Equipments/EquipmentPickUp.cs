@@ -8,6 +8,8 @@ namespace SP
 
     public class EquipmentPickUp : Interactable
     {
+        [Header("Equipment Item Pick Up", order = 1)]
+        [Header("Equipment Items List", order = 2)]
         public EquipmentItem[] equipments;
 
         public override void Interact(PlayerManager playerManager)

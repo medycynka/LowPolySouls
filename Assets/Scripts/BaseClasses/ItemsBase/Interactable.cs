@@ -7,6 +7,7 @@ namespace SP
 
     public class Interactable : MonoBehaviour
     {
+        [Header("Interactable Object Properties")]
         public float radius = 0.6f;
         public string interactableText = "Pick up";
 

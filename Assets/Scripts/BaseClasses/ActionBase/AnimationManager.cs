@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace SP
 {
-    public class AnimatorManager : MonoBehaviour
+    public class AnimationManager : MonoBehaviour
     {
+        [Header("Animation Manager", order = 0)]
+        [Header("Animator", order = 1)]
         public Animator anim;
 
         public void PlayTargetAnimation(string targetAnim, bool isInteracting)

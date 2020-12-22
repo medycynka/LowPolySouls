@@ -5,12 +5,18 @@ using UnityEngine;
 namespace SP
 {
 
-    public class IdleState : State
+    public class AmbushState : State
     {
         [Header("Persue Target State", order = 0)]
         [Header("Possible After States", order = 1)]
         public PursueTargetState pursueTargetState;
         public DeathState deathState;
+
+        [Header("Ambush Settings", order = 1)]
+        public bool isSleeping;
+        public float detectionRadius = 2.5f;
+        public string sleepAnimation;
+        public string wakeAnimation;
 
         [Header("Player Detection Layer", order = 1)]
         public LayerMask detectionLayer;
@@ -19,43 +25,46 @@ namespace SP
         {
             if (enemyStats.currentHealth > 0)
             {
-                if (!enemyManager.shouldFollowTarget)
+                if (isSleeping && enemyManager.isInteracting == false)
                 {
-                    enemyManager.enemyLocomotionManager.StopMoving();
+                    enemyAnimationManager.PlayTargetAnimation(sleepAnimation, true);
                 }
 
-                #region Handle Enemy Target Detection
-                Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+                #region Handle Target Detection
+
+                Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, detectionRadius, detectionLayer);
+
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
 
                     if (characterStats != null)
                     {
-                        //CHECK FOR TEAM ID
+                        Vector3 targetsDirection = characterStats.transform.position - enemyManager.transform.position;
+                        enemyManager.viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
 
-                        Vector3 targetDirection = characterStats.transform.position - transform.position;
-                        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-                        if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+                        if (enemyManager.viewableAngle > enemyManager.minimumDetectionAngle && enemyManager.viewableAngle < enemyManager.maximumDetectionAngle)
                         {
                             enemyManager.currentTarget = characterStats;
+                            isSleeping = false;
+                            enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
                         }
                     }
                 }
+
                 #endregion
 
-                #region Handle Switching To Next State
+                #region Handle State Change
+
                 if (enemyManager.currentTarget != null)
                 {
-                    enemyManager.shouldFollowTarget = true;
-
                     return pursueTargetState;
                 }
                 else
                 {
                     return this;
                 }
+
                 #endregion
             }
             else
@@ -64,5 +73,4 @@ namespace SP
             }
         }
     }
-
 }

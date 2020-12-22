@@ -8,6 +8,8 @@ namespace SP
 
     public class ConsumablePickUp : Interactable
     {
+        [Header("Consumable Item Pick Up", order = 1)]
+        [Header("Consumable Items List", order = 2)]
         public ConsumableItem[] consumableItems;
 
         public override void Interact(PlayerManager playerManager)

@@ -9,20 +9,21 @@ namespace SP
     public class EnemyLocomotionManager : MonoBehaviour
     {
         EnemyManager enemyManager;
-        EnemyAnimatorManager enemyAnimatorManager;
+        EnemyAnimationManager enemyAnimationManager;
+
+        [Header("Locomotion Manager", order = 0)]
+        [Header("Componetns", order = 1)]
         public NavMeshAgent navmeshAgent;
         public Rigidbody enemyRigidBody;
 
-        public LayerMask detectionLayer;
-
-        [Header("A.I Movement Stats")]
+        [Header("A.I Movement Stats", order = 1)]
         public float stoppingDistance = 1.25f;
         public float rotationSpeed = 100;
 
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
-            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyRigidBody = GetComponent<Rigidbody>();
         }
@@ -40,25 +41,15 @@ namespace SP
 
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
             enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+            enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-            //If we are preforming an action, stop moving
-            if (enemyManager.isPreformingAction)
+            if (enemyManager.distanceFromTarget > stoppingDistance)
             {
-                enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                navmeshAgent.isStopped = true;
-                navmeshAgent.enabled = false;
+                enemyAnimationManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
             }
-            else
+            else if (enemyManager.distanceFromTarget <= stoppingDistance)
             {
-                if (enemyManager.distanceFromTarget > stoppingDistance)
-                {
-                    enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
-                }
-                else if (enemyManager.distanceFromTarget <= stoppingDistance)
-                {
-                    enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                }
+                StopMoving();
             }
 
             HandleRotateTowardsTarget();
@@ -69,7 +60,7 @@ namespace SP
         public void StopMoving()
         {
             enemyManager.distanceFromTarget = 0;
-            enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         }
 
         private void HandleRotateTowardsTarget()
@@ -95,10 +86,8 @@ namespace SP
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navmeshAgent.enabled = true;
-                navmeshAgent.isStopped = false;
                 navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyRigidBody.velocity = targetVelocity;
-
                 transform.rotation = Quaternion.Slerp(transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
             }
         }

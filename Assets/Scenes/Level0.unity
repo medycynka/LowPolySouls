@@ -2889,6 +2889,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897000471}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &908160964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6167483350924626745, guid: ec3e58eeb41dc224c9d3d00795f15b66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2013038994167621932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1024d2144adcd56418c78688fb103af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &911257927
 GameObject:
   m_ObjectHideFlags: 0
@@ -7345,7 +7357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232a27674cfddf24eb2a686836f64e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1869678704800945576
+--- !u!1001 &2013038994167621932
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -7357,6 +7369,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Rock Golem
       objectReference: {fileID: 0}
+    - target: {fileID: 3060950883499712638, guid: ec3e58eeb41dc224c9d3d00795f15b66,
+        type: 3}
+      propertyPath: currentState
+      value: 
+      objectReference: {fileID: 908160964}
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
       propertyPath: m_LocalPosition.x

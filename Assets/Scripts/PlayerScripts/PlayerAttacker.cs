@@ -9,6 +9,8 @@ namespace SP
         AnimatorHandler animatorHandler;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
+
+        [Header("Last Attack Name")]
         public string lastAttack;
 
         private void Awake()

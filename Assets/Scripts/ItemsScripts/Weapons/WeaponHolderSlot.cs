@@ -6,13 +6,16 @@ namespace SP
 {
     public class WeaponHolderSlot : MonoBehaviour
     {
+        [Header("Weapon Holder", order = 0)]
+        [Header("Properties", order = 1)]
         public Transform parentOverride;
         public WeaponItem currentWeapon;
+        public GameObject currentWeaponModel;
+
+        [Header("Bools", order = 1)]
         public bool isLeftHandSlot;
         public bool isRightHandSlot;
         public bool isBackSlot;
-
-        public GameObject currentWeaponModel;
 
         public void UnloadWeapon()
         {

@@ -9,14 +9,16 @@ namespace SP
 {
     public class EnemyStats : CharacterStats
     {
+        [Header("Enemy Properties", order = 1)]
+        [Header("Animator", order = 2)]
         public Animator animator;
 
-        [Header("Health Bar")]
+        [Header("Health Bar", order = 2)]
         public GameObject healthBar;
         public Image healtBarFill;
         public TextMeshProUGUI damageValue;
 
-        [Header("Souls & souls target")]
+        [Header("Souls & souls target", order = 2)]
         public float soulsGiveAmount;
         public PlayerStats playerStats;
         public GameObject enemyObject;

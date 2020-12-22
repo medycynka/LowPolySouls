@@ -6,12 +6,15 @@ namespace SP
 {
     public class InputHandler : MonoBehaviour
     {
+        [Header("Input Handler",order = 0)]
+        [Header("Movement",order = 1)]
         public float horizontal;
         public float vertical;
         public float moveAmount;
         public float mouseX;
         public float mouseY;
 
+        [Header("Inputs", order = 1)]
         public bool b_Input;
         public bool a_Input;
         public bool y_Input;
@@ -29,6 +32,7 @@ namespace SP
         public bool d_Pad_Left;
         public bool d_Pad_Right;
 
+        [Header("Flags", order = 1)]
         public bool rollFlag;
         public bool twoHandFlag;
         public bool sprintFlag;
@@ -36,6 +40,7 @@ namespace SP
         public bool lockOnFlag;
         public bool inventoryFlag;
 
+        [Header("Roll Timer", order = 1)]
         public float rollInputTimer;
 
         PlayerControls inputActions;
@@ -47,6 +52,7 @@ namespace SP
         WeaponSlotManager weaponSlotManager;
         AnimatorHandler animatorHandler;
 
+        [Header("Camera & UI", order = 1)]
         public CameraHandler cameraHandler;
         public UIManager uiManager;
 

@@ -8,17 +8,23 @@ namespace SP
     {
         InputHandler inputHandler;
         Animator anim;
+        [Header("Player Components", order = 1)]
+        [Header("Camera Component", order = 2)]
         public CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
 
+        [Header("UI", order = 2)]
         public InteractableUI interactableUI;
+
+        [Header("Intecatable Objects UI", order = 2)]
         public GameObject interactableUIGameObject;
         public GameObject itemInteractableGameObject;
 
+        [Header("Animator Inteaction Bool", order = 2)]
         public bool isInteracting;
 
-        [Header("Heleper bools")]
+        [Header("Heleper bools", order = 2)]
         public bool shouldRefillHealth = false;
         public bool shouldRefillStamina = false;
         public bool shouldRefillHealthBg = false;
@@ -26,13 +32,13 @@ namespace SP
         public bool shouldAddJumpForce = false;
         public bool isRestingAtBonfire = false;
 
-        [Header("Player Flags")]
+        [Header("Player Flags", order = 2)]
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
         public bool canDoCombo;
 
-        [Header("Respawn")]
+        [Header("Respawn Places", order = 2)]
         public GameObject quickMoveScreen;
         public GameObject currentSpawnPoint;
 

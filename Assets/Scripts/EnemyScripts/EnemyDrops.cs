@@ -7,12 +7,13 @@ namespace SP
 
     public class EnemyDrops : MonoBehaviour
     {
-        [Header("Drop chances")]
+        [Header("Death Drop", order = 0)]
+        [Header("Drop chances", order = 1)]
         public float consumableChanse = 0.45f;
         public float weaponChanse = 0.25f;
         public float equipmentChanse = 0.2f;
 
-        [Header("Drops pool")]
+        [Header("Drops pool", order = 1)]
         public ConsumableItem[] consumableDropPool;
         public WeaponItem[] weaponDropPool;
         public EquipmentItem[] equipmentDropPool;

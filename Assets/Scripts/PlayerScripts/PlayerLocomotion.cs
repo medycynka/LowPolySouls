@@ -6,6 +6,8 @@ namespace SP
 {
     public class PlayerLocomotion : MonoBehaviour
     {
+        [Header("Locomotion Manager", order = 0)]
+        [Header("Camera", order = 1)]
         public CameraHandler cameraHandler;
 
         PlayerManager playerManager;
@@ -13,6 +15,8 @@ namespace SP
         InputHandler inputHandler;
         PlayerStats playerStats;
         CapsuleCollider playerCollider;
+
+        [Header("Move Direction", order = 1)]
         public Vector3 moveDirection;
 
         [HideInInspector]
@@ -20,10 +24,10 @@ namespace SP
         [HideInInspector]
         public AnimatorHandler animatorHandler;
 
+        [Header("Player Rigidbody", order = 1)]
         public new Rigidbody rigidbody;
-        //public GameObject normalCamera;
 
-        [Header("Ground & Air Detection Stats")]
+        [Header("Ground & Air Detection Stats", order = 1)]
         [SerializeField]
         float groundDetectionRayStartPoint = 0.5f;
         [SerializeField]
@@ -33,7 +37,7 @@ namespace SP
         LayerMask ignoreForGroundCheck;
         public float inAirTimer;
 
-        [Header("Movement Stats")]
+        [Header("Movement Stats", order = 1)]
         public float movementSpeed = 5;
         public float walkingSpeed = 1;
         public float sprintSpeed = 7;
@@ -41,9 +45,10 @@ namespace SP
         public float fallingSpeed = 80;
         public float jumpMult = 10;
 
-        public float nextJump = 0;
+        [Header("Next Jump Cooldown", order = 1)]
+        public float nextJump = 2.0f;
 
-        [Header("Stamina Costs")]
+        [Header("Stamina Costs", order = 1)]
         public float rollStaminaCost = 10;
         public float sprintStaminaCost = 5;
 
@@ -300,12 +305,16 @@ namespace SP
             {
                 if (inputHandler.moveAmount > 0)
                 {
-                    //playerManager.shouldAddJumpForce = true;
-                    StartCoroutine(ResizeCollider());
-                    animatorHandler.PlayTargetAnimation("Jump", true);
-                    Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
-                    myTransform.rotation = jumpRotation;
-                    nextJump = Time.time + 2;
+                    nextJump -= delta;
+
+                    if (nextJump <= 0)
+                    {
+                        //playerManager.shouldAddJumpForce = true;
+                        StartCoroutine(ResizeCollider());
+                        animatorHandler.PlayTargetAnimation("Jump", true);
+                        Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                        myTransform.rotation = jumpRotation;
+                    }
                 }
             }
         }

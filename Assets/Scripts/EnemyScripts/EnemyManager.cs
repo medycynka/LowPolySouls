@@ -6,23 +6,26 @@ namespace SP
 {
     public class EnemyManager : CharacterManager
     {
-        public EnemyLocomotionManager enemyLocomotionManager;
-        EnemyAnimatorManager enemyAnimatorManager;
+        [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
+        EnemyAnimationManager enemyAnimationManager;
         EnemyStats enemyStats;
         EnemyDrops enemyDrops;
 
+        [Header("Manager Properties", order = 1)]
+        [Header("Bools", order = 2)]
         public bool isPreformingAction;
+        public bool isInteracting;
         public bool shouldDrop = true;
         public bool isAlive = true;
         public bool shouldFollowTarget = false;
 
-        public EnemyAttackAction[] enemyAttacks;
-        public EnemyAttackAction currentAttack;
-
+        [Header("Current Target", order = 2)]
         public CharacterStats currentTarget;
+
+        [Header("Current State from FSM", order = 2)]
         public State currentState;
 
-        [Header("A.I Settings")]
+        [Header("A.I Settings", order = 2)]
         public float distanceFromTarget;
         public float viewableAngle;
         public float detectionRadius = 15;
@@ -30,12 +33,13 @@ namespace SP
         public float maximumDetectionAngle = 75;
         public float minimumDetectionAngle = -75;
 
+        [Header("Recovery Timer", order = 2)]
         public float currentRecoveryTime = 0;
 
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyStats = GetComponent<EnemyStats>();
             enemyDrops = GetComponent<EnemyDrops>();
         }
@@ -43,6 +47,8 @@ namespace SP
         private void Update()
         {
             HandleRecoveryTimer();
+
+            isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
         }
 
         private void FixedUpdate()
@@ -54,7 +60,7 @@ namespace SP
         {
             if (currentState != null)
             {
-                State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+                State nextState = currentState.Tick(this, enemyStats, enemyAnimationManager);
 
                 if (nextState != null)
                 {

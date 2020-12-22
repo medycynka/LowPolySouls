@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SP
 {
-    public class EnemyAnimatorManager : AnimatorManager
+    public class EnemyAnimationManager : AnimationManager
     {
         EnemyLocomotionManager enemyLocomotionManager;
 

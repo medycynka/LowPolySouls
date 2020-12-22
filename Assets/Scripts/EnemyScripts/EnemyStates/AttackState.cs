@@ -8,14 +8,17 @@ namespace SP
 
     public class AttackState : State
     {
+        [Header("Attack State", order = 0)]
+        [Header("Possible After States", order = 1)]
         public IdleState idleState;
         public CombatStanceState combatStanceState;
         public DeathState deathState;
 
+        [Header("Enemy Attacks", order = 1)]
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
 
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)
             {
@@ -23,13 +26,9 @@ namespace SP
                 {
                     return idleState;
                 }
-                //Select one of our many attacks based on attack scores
-                //if the selected attack is not able to be used because of bad angle or distance, select a new attack
-                //if the attack is viable, stop our movement and attack our target
-                //set our recovery timer to the attacks recovery time
-                //return the combat stance state
+
                 Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+                enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
                 if (enemyManager.isPreformingAction)
                     return combatStanceState;
@@ -46,12 +45,13 @@ namespace SP
                         {
                             if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                             {
-                                enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                                enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
-                                enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
                                 enemyManager.isPreformingAction = true;
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
                                 currentAttack = null;
+
                                 return combatStanceState;
                             }
                         }
@@ -115,8 +115,6 @@ namespace SP
                     }
                 }
             }
-
         }
     }
-
 }

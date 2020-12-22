@@ -8,16 +8,21 @@ namespace SP
     {
         WeaponSlotManager weaponSlotManager;
 
+        [Header("Inventory", order = 0)]
+        [Header("Weapon On Load", order = 1)]
         public WeaponItem rightWeapon;
         public WeaponItem leftWeapon;
         public WeaponItem unarmedWeapon;
 
+        [Header("Weapons In Slots", order = 1)]
         public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
         public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];
 
+        [Header("Current Weapon Index", order = 1)]
         public int currentRightWeaponIndex = 0;
         public int currentLeftWeaponIndex = 0;
 
+        [Header("Items Lists", order = 1)]
         public List<WeaponItem> weaponsInventory;
         public List<WeaponItem> shieldsInventory;
         public List<EquipmentItem> helmetsInventory;

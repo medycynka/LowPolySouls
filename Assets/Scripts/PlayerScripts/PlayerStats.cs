@@ -7,24 +7,30 @@ namespace SP
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
-        public UIManager uiManager;
 
+        [Header("Player Properties", order = 1)]
+
+        [Header("UI Compontents", order = 2)]
+        public UIManager uiManager;
         public HealthBar healthBar;
         public StaminaBar staminaBar;
         public GameObject youDiedLogo;
 
+        [Header("Death Drop", order = 2)]
         public Sprite deathDropIcon;
         public ConsumablePickUp soulDeathDrop;
 
+        [Header("Unique Player Stats", order = 2)]
         public int playerLevel = 12;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
 
-        [Header("Health & Stamina refill values")]
+        [Header("Health & Stamina refill values", order = 2)]
         public float healthRefillAmount = 20f;
         public float healthBgRefillAmount = 20f;
         public float staminaRefillAmount = 20f;
 
+        [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
 
         AnimatorHandler animatorHandler;

@@ -6,15 +6,18 @@ namespace SP
 {
     public class AnimationSoundManager : MonoBehaviour
     {
-        [Header("Audio Clips")]
+        [Header("Audio Clips", order = 0)]
+        [Header("Multpiple Clips For Random Pick", order = 1)]
         public AudioClip[] movingClips;
-        public AudioClip rollClips;
         public AudioClip[] attackingClips;
         public AudioClip[] getDamageClips;
+
+        [Header("Unique Clips", order = 1)]
+        public AudioClip rollClip;
         public AudioClip estusUse;
         public AudioClip soulUse;
 
-        [Header("Current Background Music Clip")]
+        [Header("Current & Previouse Background Music Clip", order = 1)]
         public AudioClip currentBackgroundMusic;
         public AudioClip previouseBackgroundMusic;
 
@@ -41,32 +44,50 @@ namespace SP
         #region Play For Animation
         public void PlayOnStep()
         {
-            audioSource.PlayOneShot(GetRandomClip(movingClips), 2.0f);
+            if (movingClips.Length > 0)
+            {
+                audioSource.PlayOneShot(GetRandomClip(movingClips), 2.0f);
+            }
         }
 
         public void PlayOnRoll()
         {
-            audioSource.PlayOneShot(rollClips);
+            if (rollClip != null)
+            {
+                audioSource.PlayOneShot(rollClip);
+            }
         }
 
         public void PlayOnAttack()
         {
-            audioSource.PlayOneShot(GetRandomClip(movingClips));
+            if (movingClips.Length > 0)
+            {
+                audioSource.PlayOneShot(GetRandomClip(attackingClips));
+            }
         }
 
         public void PlayOnDamage()
         {
-            audioSource.PlayOneShot(GetRandomClip(movingClips));
+            if (getDamageClips.Length > 0)
+            {
+                audioSource.PlayOneShot(GetRandomClip(getDamageClips));
+            }
         }
 
         public void PlayOnEstusUse()
         {
-            audioSource.PlayOneShot(estusUse);
+            if (estusUse != null)
+            {
+                audioSource.PlayOneShot(estusUse);
+            }
         }
 
         public void PlayOnSoulUse()
         {
-            audioSource.PlayOneShot(soulUse);
+            if (soulUse != null)
+            {
+                audioSource.PlayOneShot(soulUse);
+            }
         }
         #endregion
 

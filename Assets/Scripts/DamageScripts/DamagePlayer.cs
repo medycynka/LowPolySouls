@@ -6,6 +6,7 @@ namespace SP
 {
     public class DamagePlayer : MonoBehaviour
     {
+        [Header("Damage Value")]
         public float damage = 25;
 
         private void OnTriggerEnter(Collider other)

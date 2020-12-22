@@ -6,6 +6,8 @@ namespace SP
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        [Header("Weapon Slot Manager", order = 0)]
+        [Header("Current Weapon", order = 1)]
         public WeaponItem attackingWeapon;
 
         WeaponHolderSlot leftHandSlot;
@@ -17,6 +19,7 @@ namespace SP
 
         Animator animator;
 
+        [Header("Quick Slots", order = 1)]
         public QuickSlotsUI quickSlotsUI;
 
         PlayerStats playerStats;

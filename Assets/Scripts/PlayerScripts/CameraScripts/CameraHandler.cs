@@ -6,22 +6,27 @@ namespace SP
 {
     public class CameraHandler : MonoBehaviour
     {
+        [Header("Camera Handler", order = 0)]
+        [Header("Player Components", order = 1)]
         public InputHandler inputHandler;
         public PlayerManager playerManager;
 
+        [Header("Look At Targets", order = 1)]
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
         private Transform myTransform;
         private Vector3 cameraTransformPosition;
+
+        [Header("Masks", order = 1)]
         public LayerMask ignoreLayers;
         public LayerMask enviromentLayer;
-        public Vector3 cameraFollowVelocity = Vector3.zero;
 
+        [Header("Camera Basic Properties", order = 1)]
+        public Vector3 cameraFollowVelocity = Vector3.zero;
         public float lookSpeed = 0.01f;
         public float followSpeed = 0.1f;
         public float pivotSpeed = 0.03f;
-
         private float targetPosition;
         private float defaultPosition;
         private float lookAngle;
@@ -29,14 +34,15 @@ namespace SP
         public float minimumPivot = -35;
         public float maximumPivot = 35;
 
+        [Header("Camera Detection Properties", order = 1)]
         public float cameraSphereRadius = 0.2f;
         public float cameraCollisionOffSet = 0.2f;
         public float minimumCollisionOffset = 0.2f;
         public float lockedPivotPosition = 2.25f;
         public float unlockedPivotPosition = 1.65f;
 
+        [Header("Camera Lock-on Properties", order = 1)]
         public Transform currentLockOnTarget;
-
         [SerializeField] List<CharacterManager> availableTargets = new List<CharacterManager>();
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;

@@ -7,17 +7,18 @@ namespace SP
 
     public class CharacterStats : MonoBehaviour
     {
-        [Header("Health")]
+        [Header("Stats", order = 0)]
+        [Header("Health", order = 1)]
         public float healthLevel = 10f;
         public float maxHealth;
         public float currentHealth;
 
-        [Header("Stamina")]
+        [Header("Stamina", order = 1)]
         public float staminaLevel = 10f;
         public float maxStamina;
         public float currentStamina;
 
-        [Header("Atributes")]
+        [Header("Atributes", order = 1)]
         public float baseArmor = 5f;
         public float Strength = 4f;      // 1 Strenght = +1 attack damage and +2.5 max health
         public float Agility = 1f;       // 1 agility = +2.5 stamina and +0.5 armor

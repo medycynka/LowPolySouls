@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ResetAnimatorBool : StateMachineBehaviour
 {
+    [Header("Animator's Bool Reset", order = 0)]
+    [Header("Properties", order = 1)]
     public string targetBool;
     public bool status;
 

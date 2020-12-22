@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SP
 {
-    public class AnimatorHandler : AnimatorManager
+    public class AnimatorHandler : AnimationManager
     {
         PlayerManager playerManager;
         InputHandler inputHandler;

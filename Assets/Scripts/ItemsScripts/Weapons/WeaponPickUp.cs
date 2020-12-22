@@ -8,6 +8,8 @@ namespace SP
 
     public class WeaponPickUp : Interactable
     {
+        [Header("Consumable Item Pick Up", order = 1)]
+        [Header("Consumable Items List", order = 2)]
         public WeaponItem[] weapons;
 
         public override void Interact(PlayerManager playerManager)

@@ -6,17 +6,16 @@ namespace SP {
 
     public class PursueTargetState : State
     {
+        [Header("Persue Target State", order = 0)]
+        [Header("Possible After States", order = 1)]
         public IdleState idleState;
         public CombatStanceState combatStanceState;
         public DeathState deathState;
 
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)
             {
-                //Chase the target
-                //If within attack range, return combat stance state
-                //if target is out of range, return this state and continue to chase target
                 if(enemyManager.shouldFollowTarget)
                 {
                     enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);

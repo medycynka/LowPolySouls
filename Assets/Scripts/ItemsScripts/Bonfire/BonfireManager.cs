@@ -6,7 +6,8 @@ namespace SP
 {
     public class BonfireManager : MonoBehaviour
     {
-        [Header("Activation properties")]
+        [Header("Bonfire Manager", order = 0)]
+        [Header("Activation properties", order = 1)]
         public float bonfireLitScreenTime = 2.0f;
         public bool isActivated = false;
         public bool showRestPopUp = false;
@@ -14,18 +15,18 @@ namespace SP
         public ParticleSystem bonfireParticleSystem;
         public GameObject bonfireLitScreen;
 
-        [Header("UI objects")]
+        [Header("UI objects", order = 1)]
         public UIManager uiManager;
         public GameObject playerUI;
         public GameObject uiWindow;
         public GameObject restUI;
         public GameObject quickMoveScreen;
 
-        [Header("Player Scripts")]
+        [Header("Player Scripts", order = 1)]
         public PlayerStats playerStats;
         public PlayerManager playerManager;
 
-        [Header("Quick Move")]
+        [Header("Quick Move", order = 1)]
         public string locationName = "Test Field";
         public GameObject locationListScreen;
         public GameObject locationScreen;
