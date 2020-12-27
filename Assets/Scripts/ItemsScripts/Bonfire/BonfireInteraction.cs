@@ -5,7 +5,6 @@ using TMPro;
 
 namespace SP
 {
-    [RequireComponent(typeof(PlayerManager))]
     public class BonfireInteraction : Interactable
     {
         BonfireManager bonfireManager;
