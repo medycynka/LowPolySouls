@@ -36,7 +36,7 @@ namespace SP
             playerStats.RefillStamina();
             bonfireManager.ActivateRestUI();
             playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
-            //bonfireManager.RespawnEnemis();
+            bonfireManager.RespawnEnemis();
         }
 
         public void GetUp()

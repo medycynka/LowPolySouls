@@ -96,6 +96,7 @@ namespace SP
             enemyStats.animator.Play("Dead_01");
             enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
             enemyStats.playerStats.uiManager.currentSoulsAmount.text = enemyStats.playerStats.soulsAmount.ToString();
+
             Destroy(enemyStats.enemyObject, 5.0f);
 
             if (shouldDrop)

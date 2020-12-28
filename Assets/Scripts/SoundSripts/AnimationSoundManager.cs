@@ -46,7 +46,7 @@ namespace SP
         {
             if (movingClips.Length > 0)
             {
-                audioSource.PlayOneShot(GetRandomClip(movingClips), 2.0f);
+                audioSource.PlayOneShot(GetRandomClip(movingClips));
             }
         }
 

@@ -31,10 +31,7 @@ namespace SP
 
         void Start()
         {
-            maxHealth = SetMaxHealthFromHealthLevel();
-            currentHealth = maxHealth;
-            healtBarFill.fillAmount = 1f;
-            healthBar.SetActive(false);
+            InitializeHealth();
         }
 
         private void LateUpdate()
@@ -47,6 +44,14 @@ namespace SP
         {
             maxHealth = healthLevel * 10;
             return maxHealth;
+        }
+
+        public void InitializeHealth()
+        {
+            maxHealth = SetMaxHealthFromHealthLevel();
+            currentHealth = maxHealth;
+            healtBarFill.fillAmount = 1f;
+            healthBar.SetActive(false);
         }
 
         public void TakeDamage(float damage)
@@ -69,7 +74,6 @@ namespace SP
             if (currentHealth > 0)
             {
                 animator.Play("Damage_01");
-                healthBar.SetActive(false);
             }
 
             yield return new WaitForSeconds(4f);

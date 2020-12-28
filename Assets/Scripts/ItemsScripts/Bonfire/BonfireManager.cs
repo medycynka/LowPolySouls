@@ -34,6 +34,9 @@ namespace SP
         public GameObject spawnPoint;
         public float quickMoveScreenTime = 5.0f;
 
+        [Header("Enemy Spawner", order = 1)]
+        public EnemySpawner enemySpawner;
+
         private void Awake()
         {
             bonfireLight.enabled = false;
@@ -71,7 +74,7 @@ namespace SP
 
         public void RespawnEnemis()
         {
-
+            GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>().SpawnEnemies();
         }
     }
 }

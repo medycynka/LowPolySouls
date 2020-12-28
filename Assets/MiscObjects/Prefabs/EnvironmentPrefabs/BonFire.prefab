@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fd2c41e3a1f6d4485f78e88b8934ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.6
+  radius: 0.9
   interactableText: Rest at the bonfire
   playerInventory: {fileID: 0}
   playerLocomotion: {fileID: 0}

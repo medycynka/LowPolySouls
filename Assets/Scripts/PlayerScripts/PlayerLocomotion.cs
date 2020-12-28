@@ -31,7 +31,7 @@ namespace SP
         [SerializeField]
         float groundDetectionRayStartPoint = 0.5f;
         [SerializeField]
-        float minimumDistanceNeededToBeginFall = 0.5f;
+        float minimumDistanceNeededToBeginFall = 1f;
         [SerializeField]
         float groundDirectionRayDistance = 0.2f;
         LayerMask ignoreForGroundCheck;
