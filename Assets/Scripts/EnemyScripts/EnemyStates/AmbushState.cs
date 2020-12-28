@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace SP
 {
@@ -47,6 +48,7 @@ namespace SP
                         {
                             enemyManager.currentTarget = characterStats;
                             isSleeping = false;
+                            enemyManager.GetComponent<NavMeshObstacle>().enabled = false;
                             enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
                         }
                     }
