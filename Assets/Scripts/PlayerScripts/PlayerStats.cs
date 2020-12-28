@@ -164,11 +164,36 @@ namespace SP
             transform.position = playerManager.currentSpawnPoint.transform.position;
             transform.rotation = playerManager.currentSpawnPoint.transform.rotation;
             // Respawn enemis and refresh boss health if alive
+            RespawnEnemiesOnDead();
 
             yield return new WaitForSeconds(3f);
 
             isPlayerAlive = true;
             playerManager.quickMoveScreen.SetActive(false);
+        }
+
+        private void RespawnEnemiesOnDead()
+        {
+            GameObject[] enemiesSpawners = GameObject.FindGameObjectsWithTag("Spawner");
+            GameObject closestSpawner = null;
+            float closetDist = Mathf.Infinity;
+            Vector3 playerPosition = transform.position;
+            Vector3 distToTarget;
+            float distSqrt;
+
+            foreach (var eS in enemiesSpawners)
+            {
+                distToTarget = eS.transform.position - playerPosition;
+                distSqrt = distToTarget.sqrMagnitude;
+
+                if(distSqrt < closetDist)
+                {
+                    closetDist = distSqrt;
+                    closestSpawner = eS;
+                }
+            }
+
+            closestSpawner.GetComponent<EnemySpawner>().SpawnEnemies();
         }
 
         private void DropSouls()

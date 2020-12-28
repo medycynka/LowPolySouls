@@ -27,13 +27,19 @@ namespace SP
 
         [Header("Bools", order = 1)]
         public bool isInside = false;
+        public bool isPlayerDead = false;
+
         bool insideReset = true;
+
+        [Header("Player Stats", order = 1)]
+        public PlayerStats playerStats;
 
         EnemySpawner enemySpawner;
 
         private void Awake()
         {
-            enemySpawner = GetComponent<EnemySpawner>();
+            //enemySpawner = GetComponent<EnemySpawner>();
+            enemySpawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
 
             foreach(var bonfire_ in bonfiresInArea)
             {
