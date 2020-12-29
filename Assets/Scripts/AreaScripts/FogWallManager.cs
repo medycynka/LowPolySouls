@@ -11,6 +11,10 @@ namespace SP
         public BoxCollider boxCollider;
         public ParticleSystem wallParticles;
 
+        [Header("Bools", order = 2)]
+        public bool canInteract = true;
+        public bool shouldDestroy = false;
+
         public override void Interact(PlayerManager playerManager)
         {
             base.Interact(playerManager);
@@ -25,17 +29,41 @@ namespace SP
 
             base.PickUpItem(playerManager);
 
-            StartCoroutine(RemoveFog(playerManager));
+            if (shouldDestroy)
+            {
+                StartCoroutine(DestroyFog(playerManager));
+            }
+            else
+            {
+                StartCoroutine(RemoveFog(playerManager));
+            }
         }
 
-        private IEnumerator RemoveFog(PlayerManager playerManager)
+        private IEnumerator DestroyFog(PlayerManager playerManager)
         {
             playerManager.isRemovigFog = true;
 
             yield return new WaitForSeconds(2f);
 
             playerManager.isRemovigFog = false;
-            Destroy(this.gameObject);
+
+            Destroy(gameObject);
+        }
+
+        private IEnumerator RemoveFog(PlayerManager playerManager)
+        {
+            canInteract = false;
+            playerManager.isRemovigFog = true;
+
+            yield return new WaitForSeconds(2f);
+
+            playerManager.isRemovigFog = false;
+
+            yield return new WaitForSeconds(5f);
+
+            boxCollider.enabled = true;
+            wallParticles.Play(true);
+            canInteract = true;
         }
     }
 }

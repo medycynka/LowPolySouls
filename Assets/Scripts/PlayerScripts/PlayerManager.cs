@@ -171,7 +171,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.tag == "Interactable" || hit.collider.tag == "Fog Wall")
+                else if(hit.collider.tag == "Interactable")
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
@@ -183,6 +183,24 @@ namespace SP
                         if (inputHandler.a_Input)
                         {
                             interactableObject.Interact(this);
+                        }
+                    }
+                }
+                else if(hit.collider.tag == "Fog Wall")
+                {
+                    FogWallManager interactableObject = hit.collider.GetComponent<FogWallManager>();
+
+                    if (interactableObject != null)
+                    {
+                        if (interactableObject.canInteract)
+                        {
+                            interactableUI.interactableText.text = interactableObject.interactableText;
+                            interactableUIGameObject.SetActive(true);
+
+                            if (inputHandler.a_Input)
+                            {
+                                interactableObject.Interact(this);
+                            }
                         }
                     }
                 }
