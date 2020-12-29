@@ -53,13 +53,13 @@ namespace SP
         {
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 10 | 1 << 20 | 1 << 21);
             targetTransform = playerManager.transform;
         }
 
         private void Start()
         {
-            enviromentLayer = LayerMask.NameToLayer("Environment");
+            enviromentLayer = 1 << 16;
         }
 
         public void FollowTarget(float delta)

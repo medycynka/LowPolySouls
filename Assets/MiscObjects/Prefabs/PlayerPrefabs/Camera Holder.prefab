@@ -82,7 +82,7 @@ MonoBehaviour:
   cameraPivotTransform: {fileID: 1212298295777962275}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 66080
+    m_Bits: 3146528
   enviromentLayer:
     serializedVersion: 2
     m_Bits: 65536

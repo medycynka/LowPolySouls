@@ -22,8 +22,10 @@ namespace SP
         [Header("Bonfires in Area", order = 1)]
         public AnimationSoundManager playerSoundManager;
 
-        [Header("Area Music", order = 1)]
+        [Header("Area Sounds", order = 1)]
         public AudioClip areaBgMusic;
+        public AudioClip[] footSteps;
+        private AudioClip[] footStepsOnExit;
 
         [Header("Bools", order = 1)]
         public bool isInside = false;
@@ -38,13 +40,17 @@ namespace SP
 
         private void Awake()
         {
-            //enemySpawner = GetComponent<EnemySpawner>();
-            enemySpawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
+            enemySpawner = GetComponentInChildren<EnemySpawner>();
 
             foreach(var bonfire_ in bonfiresInArea)
             {
                 bonfire_.enemySpawner = enemySpawner;
             }
+        }
+
+        public void SetExitFootSteps(AudioClip[] footSteps)
+        {
+            footStepsOnExit = footSteps;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -59,6 +65,7 @@ namespace SP
                 }
 
                 playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
+                playerSoundManager.ChangeFootstepsSound(footSteps, this);
 
                 StartCoroutine(ShowAreaName());
             }
@@ -77,6 +84,7 @@ namespace SP
             isInside = false;
             insideReset = true;
             playerSoundManager.ChangeBackGroundMusic(null);
+            playerSoundManager.movingClips = footStepsOnExit;
         }
 
         private IEnumerator ShowAreaName()

@@ -3550,7 +3550,7 @@ MonoBehaviour:
   animatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
-  minimumDistanceNeededToBeginFall: 0.5
+  minimumDistanceNeededToBeginFall: 1
   groundDirectionRayDistance: 0.2
   inAirTimer: 0
   movementSpeed: 5
@@ -3670,7 +3670,7 @@ MonoBehaviour:
   soulDeathDrop: {fileID: 2407895679905884246, guid: 13c655fcff4024c4aa656393d80e6831,
     type: 3}
   playerLevel: 12
-  soulsAmount: 0
+  soulsAmount: 500000
   currentArmorValue: 0
   healthRefillAmount: 20
   healthBgRefillAmount: 20
@@ -3701,21 +3701,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingClips:
-  - {fileID: 8300000, guid: 17311baf74cec3443a752870c68c03e7, type: 3}
-  - {fileID: 8300000, guid: 17311baf74cec3443a752870c68c03e7, type: 3}
-  - {fileID: 8300000, guid: 17311baf74cec3443a752870c68c03e7, type: 3}
-  - {fileID: 8300000, guid: e856972a721f7a84f9ef1ecc8e7eed88, type: 3}
-  - {fileID: 8300000, guid: e856972a721f7a84f9ef1ecc8e7eed88, type: 3}
-  - {fileID: 8300000, guid: e856972a721f7a84f9ef1ecc8e7eed88, type: 3}
-  - {fileID: 8300000, guid: 6b0687709785d00459f66b7760817697, type: 3}
-  - {fileID: 8300000, guid: 6b0687709785d00459f66b7760817697, type: 3}
-  - {fileID: 8300000, guid: 6b0687709785d00459f66b7760817697, type: 3}
+  - {fileID: 8300000, guid: 3b41f9afcfa1ee24599e0cf25740235a, type: 3}
+  - {fileID: 8300000, guid: 96fd0b9bda3c972469361a6a5f01410a, type: 3}
+  - {fileID: 8300000, guid: 8abf400528d1d674399049b48effb36b, type: 3}
+  - {fileID: 8300000, guid: 9e412962dfadfca4da517f0f26539dc2, type: 3}
+  - {fileID: 8300000, guid: ef3e53be745ff584480a3a13787f059c, type: 3}
+  - {fileID: 8300000, guid: 81aee5006aebef342bd8fa533b2bc680, type: 3}
+  - {fileID: 8300000, guid: 96cd44049d0cd5a4b8408d7c05334c14, type: 3}
+  - {fileID: 8300000, guid: c303efe4814052d4097e8b4cc07b46a4, type: 3}
+  - {fileID: 8300000, guid: 26570b78fb3dfa3438f0b4ca9852fc22, type: 3}
+  - {fileID: 8300000, guid: 268715bac433b774597aed31891f1625, type: 3}
+  - {fileID: 8300000, guid: eafa30c6277397d4088c86b3148db16a, type: 3}
+  - {fileID: 8300000, guid: c83ca27ff37027e40a8dbbf28eca4443, type: 3}
+  - {fileID: 8300000, guid: eb540ccb4acc89b40bc2ac65015cf449, type: 3}
+  - {fileID: 8300000, guid: f658d29fcc74ed346944859e421fcee4, type: 3}
+  - {fileID: 8300000, guid: 14ded401276beb5428dc84b99af6d6fc, type: 3}
+  - {fileID: 8300000, guid: f7f9bc3b3ef88144e824b803fd3b19a3, type: 3}
+  - {fileID: 8300000, guid: 6579d8c23cfc39642a94e6710e4d5307, type: 3}
+  - {fileID: 8300000, guid: 854b635bd4e39c648beea3fca20c6e70, type: 3}
+  - {fileID: 8300000, guid: d57b7287c860b634da78c3771a487b0a, type: 3}
+  - {fileID: 8300000, guid: e06e42b395d5ccd44b437cc384594de7, type: 3}
   attackingClips: []
   getDamageClips: []
   rollClip: {fileID: 0}
-  estusUse: {fileID: 0}
-  soulUse: {fileID: 0}
-  currentBackgroundMusic: {fileID: 0}
+  estusUse: {fileID: 8300000, guid: 9657dd2357d68b94e9eec02a4ab65abc, type: 3}
+  soulUse: {fileID: 8300000, guid: 975fc88c34b13854688ac612795d8a33, type: 3}
+  currentBackgroundMusic: {fileID: 8300000, guid: 48b6e9306a539bc43b16444db62a0951,
+    type: 3}
   previouseBackgroundMusic: {fileID: 0}
 --- !u!1 &8145006259083721657
 GameObject:

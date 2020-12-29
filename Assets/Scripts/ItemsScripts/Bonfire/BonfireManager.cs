@@ -74,7 +74,7 @@ namespace SP
 
         public void RespawnEnemis()
         {
-            GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>().SpawnEnemies();
+            enemySpawner.SpawnEnemies();
         }
     }
 }

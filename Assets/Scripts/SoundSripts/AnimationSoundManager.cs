@@ -41,6 +41,12 @@ namespace SP
             audioSource.Play();
         }
 
+        public void ChangeFootstepsSound(AudioClip[] newFootSteps, AreaManager areaManager)
+        {
+            areaManager.SetExitFootSteps(movingClips);
+            movingClips = newFootSteps;
+        }
+
         #region Play For Animation
         public void PlayOnStep()
         {

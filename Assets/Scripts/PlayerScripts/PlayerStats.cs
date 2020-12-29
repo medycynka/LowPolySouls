@@ -60,6 +60,9 @@ namespace SP
         {
             maxHealth = newHealth;
             currentHealth = maxHealth;
+
+            healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 180f * (maxHealth / 100f));
+            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (180f * (maxHealth / 100f) - 180f) / 2f, -45f);
             healthBar.SetMaxHealth(maxHealth);
             healthBar.SetCurrentHealth(currentHealth);
         }
@@ -75,8 +78,17 @@ namespace SP
         {
             maxStamina = newStamina;
             currentStamina = maxStamina;
+
+            staminaBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 180f * (maxStamina / 100f));
+            staminaBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (180f * (maxStamina / 100f) - 180f) / 2f, -80f);
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
+        }
+
+        public void UpdateHealthAndStaminaAfterRest()
+        {
+            UpdateHealthBar(SetMaxHealthFromHealthLevel());
+            UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
         }
 
         public void TakeDamage(float damage)

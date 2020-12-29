@@ -31,6 +31,7 @@ namespace SP
         public bool shouldRefillStaminaBg = false;
         public bool shouldAddJumpForce = false;
         public bool isRestingAtBonfire = false;
+        public bool isRemovigFog = false;
 
         [Header("Player Flags", order = 2)]
         public bool isSprinting;
@@ -170,7 +171,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.tag == "Interactable")
+                else if(hit.collider.tag == "Interactable" || hit.collider.tag == "Fog Wall")
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
@@ -275,7 +276,10 @@ namespace SP
         {
             if (inputHandler.sprintFlag)
             {
-                playerStats.TakeStaminaDamage(playerLocomotion.sprintStaminaCost * delta);
+                if (inputHandler.moveAmount > 0)
+                {
+                    playerStats.TakeStaminaDamage(playerLocomotion.sprintStaminaCost * delta);
+                }
 
                 if(playerStats.currentStamina <= 0f)
                 {
