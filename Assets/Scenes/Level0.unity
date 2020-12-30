@@ -3629,7 +3629,7 @@ Transform:
   - {fileID: 783673823}
   - {fileID: 1679939339}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1042620336
 PrefabInstance:
@@ -4615,7 +4615,7 @@ PrefabInstance:
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
@@ -5446,6 +5446,42 @@ MonoBehaviour:
   animatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
   consumableItems:
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
+  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
@@ -6753,7 +6789,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1929751702
 GameObject:
@@ -7005,7 +7041,7 @@ PrefabInstance:
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
@@ -8025,7 +8061,7 @@ PrefabInstance:
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
@@ -8076,11 +8112,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3060950883607884267, guid: ec3e58eeb41dc224c9d3d00795f15b66,
-        type: 3}
-      propertyPath: m_TagString
-      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3e58eeb41dc224c9d3d00795f15b66, type: 3}
@@ -8358,7 +8389,7 @@ PrefabInstance:
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4035152931953455847, guid: d4ff9b079f2f0f740a55e05754d59487,
         type: 3}
@@ -8581,6 +8612,14 @@ PrefabInstance:
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 2058811430, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 2058811430, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
     - target: {fileID: 154555908919978870, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -8591,36 +8630,126 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 3883487034852017530}
-    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerManager
-      value: 
-      objectReference: {fileID: 3883487034852017534}
-    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: animatorHandler
-      value: 
-      objectReference: {fileID: 2049096067}
-    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 202236946806361017, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 202236946806361017, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 202236946806361017, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 202236946806361017, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 1096462644611837705, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 1096462644611837705, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 1096462644611837705, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 1096462644611837705, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
     - target: {fileID: 1458287619088245394, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 913042783}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 3883487034852017530}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 3883487034852017534}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: animatorHandler
+      value: 
+      objectReference: {fileID: 2049096067}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 2367721820032410339, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 2367721820032410339, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 2578684768496087657, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 2578684768496087657, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 2578684768496087657, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 2578684768496087657, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 3383844556691370236, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 3383844556691370236, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 3383844556691370236, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 3383844556691370236, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
     - target: {fileID: 3454041924395339369, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_Camera
@@ -8736,22 +8865,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player UI
       objectReference: {fileID: 0}
-    - target: {fileID: 3709724094830265218, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3507783032073745193, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3709724094830265218, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3507783032073745193, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: currentEquipments
       value: 
       objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3709724094830265218, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3507783032073745193, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3709724094830265218, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3507783032073745193, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: modularCharacterManager
       value: 
@@ -8766,16 +8895,46 @@ PrefabInstance:
       propertyPath: bonfireList.Array.data[1]
       value: 
       objectReference: {fileID: 558154699}
-    - target: {fileID: 4646141860278553372, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3938934091717622463, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 4646141860278553372, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 3938934091717622463, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 3938934091717622463, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 3938934091717622463, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 4819223539569219851, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 4819223539569219851, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 4819223539569219851, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 4819223539569219851, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
     - target: {fileID: 5661620404266356364, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerStats
@@ -8801,136 +8960,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 6534438416624313118, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438416624313118, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
 --- !u!114 &8146989929502444750 stripped

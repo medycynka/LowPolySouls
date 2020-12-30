@@ -34,24 +34,34 @@ namespace SP
         public bool leftHandSlot02Selected;
 
         [Header("Inventory")]
+        public GameObject weaponInventoryTab;
         public GameObject weaponInventorySlotPrefab;
         public GameObject weaponInventorySlotsParent;
+        public GameObject shieldInventoryTab;
         public GameObject shieldInventorySlotPrefab;
         public GameObject shieldInventorySlotsParent;
+        public GameObject helmetInventoryTab;
         public GameObject helmetInventorySlotsPrefab;
         public GameObject helmetInventorySlotsParent;
+        public GameObject chestInventoryTab;
         public GameObject chestInventorySlotsPrefab;
         public GameObject chestInventorySlotsParent;
+        public GameObject shoulderInventoryTab;
         public GameObject shoulderInventorySlotsPrefab;
         public GameObject shoulderInventorySlotsParent;
+        public GameObject handInventoryTab;
         public GameObject handInventorySlotsPrefab;
         public GameObject handInventorySlotsParent;
+        public GameObject legInventoryTab;
         public GameObject legInventorySlotsPrefab;
         public GameObject legInventorySlotsParent;
+        public GameObject footInventoryTab;
         public GameObject footInventorySlotsPrefab;
         public GameObject footInventorySlotsParent;
+        public GameObject ringInventoryTab;
         public GameObject ringInventorySlotsPrefab;
         public GameObject ringInventorySlotsParent;
+        public GameObject consumableInventoryTab;
         public GameObject consumableInventorySlotsPrefab;
         public GameObject consumableInventorySlotsParent;
 
@@ -138,16 +148,16 @@ namespace SP
 
         public void ResetTabsSelection()
         {
-            weaponInventorySlotsParent.SetActive(true);
-            shieldInventorySlotsParent.SetActive(false);
-            helmetInventorySlotsParent.SetActive(false);
-            chestInventorySlotsParent.SetActive(false);
-            shoulderInventorySlotsParent.SetActive(false);
-            handInventorySlotsParent.SetActive(false);
-            legInventorySlotsParent.SetActive(false);
-            footInventorySlotsParent.SetActive(false);
-            ringInventorySlotsParent.SetActive(false);
-            consumableInventorySlotsParent.SetActive(false);
+            weaponInventoryTab.SetActive(true);
+            shieldInventoryTab.SetActive(false);
+            helmetInventoryTab.SetActive(false);
+            chestInventoryTab.SetActive(false);
+            shoulderInventoryTab.SetActive(false);
+            handInventoryTab.SetActive(false);
+            legInventoryTab.SetActive(false);
+            footInventoryTab.SetActive(false);
+            ringInventoryTab.SetActive(false);
+            consumableInventoryTab.SetActive(false);
         }
 
         #region Get Current Items list
