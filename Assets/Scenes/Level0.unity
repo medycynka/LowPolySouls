@@ -1185,8 +1185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaName: Test Field 2
-  locationScreen: {fileID: 89043004336355502}
-  locationScreenText: {fileID: 827746780}
+  locationScreen: {fileID: 3914262456021293343}
+  locationScreenText: {fileID: 89043006363262432}
   bonfiresInArea:
   - {fileID: 558154701}
   playerSoundManager: {fileID: 0}
@@ -1388,8 +1388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaName: Test Field 3
-  locationScreen: {fileID: 89043004336355502}
-  locationScreenText: {fileID: 827746780}
+  locationScreen: {fileID: 3914262456021293343}
+  locationScreenText: {fileID: 89043006363262432}
   bonfiresInArea:
   - {fileID: 2006094776}
   playerSoundManager: {fileID: 0}
@@ -2146,8 +2146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaName: Test Field 1
-  locationScreen: {fileID: 89043004336355502}
-  locationScreenText: {fileID: 827746780}
+  locationScreen: {fileID: 3914262456021293343}
+  locationScreenText: {fileID: 89043006363262432}
   bonfiresInArea:
   - {fileID: 2116461320}
   playerSoundManager: {fileID: 0}
@@ -3039,18 +3039,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 534ff91b1a992ea4aa4e55387ff2b3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &827746780 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3994157214897603199, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &880814613
@@ -4578,19 +4566,19 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: restUI
       value: 
-      objectReference: {fileID: 89043004665517500}
+      objectReference: {fileID: 3914262455826379789}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerUI
       value: 
-      objectReference: {fileID: 505189417787088300}
+      objectReference: {fileID: 3489396677394299933}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiWindow
       value: 
-      objectReference: {fileID: 89043005862897663}
+      objectReference: {fileID: 3914262457044911694}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 89043004299950493}
+      objectReference: {fileID: 3914262456057698348}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerStats
       value: 
@@ -4606,15 +4594,15 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationScreen
       value: 
-      objectReference: {fileID: 89043004336355502}
+      objectReference: {fileID: 3914262456021293343}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: quickMoveScreen
       value: 
-      objectReference: {fileID: 89043005124445095}
+      objectReference: {fileID: 3914262456306934294}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: bonfireLitScreen
       value: 
-      objectReference: {fileID: 89043006037931587}
+      objectReference: {fileID: 3914262457809377266}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationListScreen
       value: 
@@ -5744,7 +5732,7 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3914262456501493867, guid: 84da8b3a542b35048a10f9ce890833ea,
     type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
+  m_PrefabInstance: {fileID: 6534438415947553892}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1678491892
 GameObject:
@@ -6968,19 +6956,19 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: restUI
       value: 
-      objectReference: {fileID: 89043004665517500}
+      objectReference: {fileID: 3914262455826379789}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerUI
       value: 
-      objectReference: {fileID: 505189417787088300}
+      objectReference: {fileID: 3489396677394299933}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiWindow
       value: 
-      objectReference: {fileID: 89043005862897663}
+      objectReference: {fileID: 3914262457044911694}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 89043004299950493}
+      objectReference: {fileID: 3914262456057698348}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerStats
       value: 
@@ -6996,15 +6984,15 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationScreen
       value: 
-      objectReference: {fileID: 89043004336355502}
+      objectReference: {fileID: 3914262456021293343}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: quickMoveScreen
       value: 
-      objectReference: {fileID: 89043005124445095}
+      objectReference: {fileID: 3914262456306934294}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: bonfireLitScreen
       value: 
-      objectReference: {fileID: 89043006037931587}
+      objectReference: {fileID: 3914262457809377266}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationListScreen
       value: 
@@ -7889,96 +7877,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127478256}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &89043004299950493 stripped
+--- !u!114 &89043006363262432 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea,
+  m_CorrespondingSourceObject: {fileID: 6598518073403867524, guid: 84da8b3a542b35048a10f9ce890833ea,
     type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
+  m_PrefabInstance: {fileID: 6534438415947553892}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188eb01c7deb3df48b79053b64bd6157, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &89043004336355502 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1606862464, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &89043004665517500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1244081042, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &89043004796333457 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1114313663, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &89043005124012171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1859327653, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &89043005124445095 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1859681673, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &89043005379805119 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 495976849, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ed5c4ba948e73343acc910154b15d4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &89043005441620561 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 434226303, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &89043005862897663 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 46504401, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &89043005991763702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 959070424, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a686d5ec1278d42ac6fa010c13958d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &89043006037931587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 879413357, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &505189417787088300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 449958903313671042, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1212298296339491853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8072,6 +7982,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232a27674cfddf24eb2a686836f64e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1854770713622676982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3454041923915733609, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51e550928587e34f986e98e4859a5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1854770714944706112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3454041923123759583, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3074d7497ec168b44821ab89dd8c8a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2013038994167621932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8087,11 +8021,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Rock Golem
-      objectReference: {fileID: 0}
-    - target: {fileID: 3060950883499712635, guid: ec3e58eeb41dc224c9d3d00795f15b66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
@@ -8147,6 +8076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3060950883607884267, guid: ec3e58eeb41dc224c9d3d00795f15b66,
+        type: 3}
+      propertyPath: m_TagString
+      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3e58eeb41dc224c9d3d00795f15b66, type: 3}
@@ -8224,30 +8158,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a5151e012372654db891ecea7cdf2f2, type: 3}
---- !u!114 &3374147129851814983 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3454041923915733609, guid: 84da8b3a542b35048a10f9ce890833ea,
+--- !u!1 &3489396677394299933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 449958903313671042, guid: 84da8b3a542b35048a10f9ce890833ea,
     type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
+  m_PrefabInstance: {fileID: 6534438415947553892}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51e550928587e34f986e98e4859a5c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3374147131751020529 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3454041923123759583, guid: 84da8b3a542b35048a10f9ce890833ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 3914262457065594783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3074d7497ec168b44821ab89dd8c8a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3517719973692865816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8264,27 +8180,27 @@ PrefabInstance:
         type: 3}
       propertyPath: quickSlotsUI
       value: 
-      objectReference: {fileID: 89043005991763702}
+      objectReference: {fileID: 3914262457721331527}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 3374147129851814983}
+      objectReference: {fileID: 1854770713622676982}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 89043004299950493}
+      objectReference: {fileID: 3914262456057698348}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: staminaBar
       value: 
-      objectReference: {fileID: 3374147131751020529}
+      objectReference: {fileID: 1854770714944706112}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: youDiedLogo
       value: 
-      objectReference: {fileID: 89043004796333457}
+      objectReference: {fileID: 3914262455963995168}
     - target: {fileID: 4966070491420200266, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: m_Name
@@ -8354,12 +8270,12 @@ PrefabInstance:
         type: 3}
       propertyPath: interactableUI
       value: 
-      objectReference: {fileID: 89043005379805119}
+      objectReference: {fileID: 3914262457125363214}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: quickMoveScreen
       value: 
-      objectReference: {fileID: 89043005124445095}
+      objectReference: {fileID: 3914262456306934294}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: currentSpawnPoint
@@ -8369,17 +8285,17 @@ PrefabInstance:
         type: 3}
       propertyPath: interactableUIGameObject
       value: 
-      objectReference: {fileID: 89043005441620561}
+      objectReference: {fileID: 3914262457197730784}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: itemInteractableGameObject
       value: 
-      objectReference: {fileID: 89043005124012171}
+      objectReference: {fileID: 3914262456307403066}
     - target: {fileID: 4966070491420200275, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 89043004299950493}
+      objectReference: {fileID: 3914262456057698348}
     - target: {fileID: 4966070491420200275, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: cameraHandler
@@ -8397,19 +8313,19 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: restUI
       value: 
-      objectReference: {fileID: 89043004665517500}
+      objectReference: {fileID: 3914262455826379789}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerUI
       value: 
-      objectReference: {fileID: 505189417787088300}
+      objectReference: {fileID: 3489396677394299933}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiWindow
       value: 
-      objectReference: {fileID: 89043005862897663}
+      objectReference: {fileID: 3914262457044911694}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 89043004299950493}
+      objectReference: {fileID: 3914262456057698348}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: playerStats
       value: 
@@ -8421,15 +8337,15 @@ PrefabInstance:
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationScreen
       value: 
-      objectReference: {fileID: 89043004336355502}
+      objectReference: {fileID: 3914262456021293343}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: quickMoveScreen
       value: 
-      objectReference: {fileID: 89043005124445095}
+      objectReference: {fileID: 3914262456306934294}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: bonfireLitScreen
       value: 
-      objectReference: {fileID: 89043006037931587}
+      objectReference: {fileID: 3914262457809377266}
     - target: {fileID: 2094540012, guid: d4ff9b079f2f0f740a55e05754d59487, type: 3}
       propertyPath: locationListScreen
       value: 
@@ -8562,7 +8478,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bce5fce2f721c48837370ec7eb7389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &3914262457065594783
+--- !u!1 &3914262455826379789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1244081042, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3914262455963995168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1114313663, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3914262456021293343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1606862464, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3914262456057698348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188eb01c7deb3df48b79053b64bd6157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3914262456306934294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1859681673, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3914262456307403066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1859327653, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3914262457044911694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 46504401, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3914262457125363214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 495976849, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed5c4ba948e73343acc910154b15d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3914262457197730784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 434226303, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3914262457721331527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 959070424, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a686d5ec1278d42ac6fa010c13958d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3914262457809377266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 879413357, guid: 84da8b3a542b35048a10f9ce890833ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6534438415947553892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6534438415947553892
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8573,6 +8573,10 @@ PrefabInstance:
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 3883487034852017530}
+    - target: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 3883487034852017504}
     - target: {fileID: 1576880051, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
       propertyPath: playerInventory
       value: 
@@ -8587,6 +8591,36 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 3883487034852017530}
+    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 3883487034852017534}
+    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: animatorHandler
+      value: 
+      objectReference: {fileID: 2049096067}
+    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 956018124984461998, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 1458287619088245394, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 913042783}
     - target: {fileID: 3454041924395339369, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_Camera
@@ -8722,36 +8756,6 @@ PrefabInstance:
       propertyPath: modularCharacterManager
       value: 
       objectReference: {fileID: 814959158}
-    - target: {fileID: 3840179689375353543, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3840179689375353543, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3914262456242302871, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262456242302871, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262456242302871, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262456242302871, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
     - target: {fileID: 3914262456501493865, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: bonfireList.Array.data[0]
@@ -8762,116 +8766,6 @@ PrefabInstance:
       propertyPath: bonfireList.Array.data[1]
       value: 
       objectReference: {fileID: 558154699}
-    - target: {fileID: 3914262456931561903, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262456931561903, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262456931561903, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262456931561903, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 3914262457013765326, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262457013765326, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262457013765326, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262457013765326, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 3914262457126635984, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262457126635984, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262457126635984, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262457126635984, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 3914262457265197766, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262457265197766, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262457265197766, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262457265197766, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
-    - target: {fileID: 3914262457748316389, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262457748316389, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262457797978739, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: playerInventory
-      value: 
-      objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 3914262457797978739, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: currentEquipments
-      value: 
-      objectReference: {fileID: 8146989929502444750}
-    - target: {fileID: 3914262457797978739, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: weaponSlotManager
-      value: 
-      objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 3914262457797978739, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: modularCharacterManager
-      value: 
-      objectReference: {fileID: 814959158}
     - target: {fileID: 4646141860278553372, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory
@@ -8897,36 +8791,146 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7041598479687887189, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 6464832593313515836, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 3883487034852017530}
-    - target: {fileID: 7041598479687887189, guid: 84da8b3a542b35048a10f9ce890833ea,
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464832593313515836, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
-      propertyPath: playerManager
-      value: 
-      objectReference: {fileID: 3883487034852017534}
-    - target: {fileID: 7041598479687887189, guid: 84da8b3a542b35048a10f9ce890833ea,
-        type: 3}
-      propertyPath: animatorHandler
-      value: 
-      objectReference: {fileID: 2049096067}
-    - target: {fileID: 7041598479687887189, guid: 84da8b3a542b35048a10f9ce890833ea,
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 3883487034852017535}
-    - target: {fileID: 7041598479687887189, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
-    - target: {fileID: 8701056966558507369, guid: 84da8b3a542b35048a10f9ce890833ea,
+    - target: {fileID: 6534438415185407084, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: modularCharacterManager
       value: 
-      objectReference: {fileID: 913042783}
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438415813784148, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438415889762101, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438416004467243, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438416141127997, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
+    - target: {fileID: 6534438416624313118, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438416624313118, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 3883487034852017535}
+    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: currentEquipments
+      value: 
+      objectReference: {fileID: 8146989929502444750}
+    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: weaponSlotManager
+      value: 
+      objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 6534438416673712520, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: modularCharacterManager
+      value: 
+      objectReference: {fileID: 814959158}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
 --- !u!114 &8146989929502444750 stripped

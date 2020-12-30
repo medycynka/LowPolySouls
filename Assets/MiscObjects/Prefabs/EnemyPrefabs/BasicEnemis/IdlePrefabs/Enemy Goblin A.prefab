@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 3088459209955524813}
   m_Layer: 17
   m_Name: Character_Rock_Golem
-  m_TagString: Enemy
+  m_TagString: Model
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

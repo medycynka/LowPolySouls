@@ -12,6 +12,7 @@ namespace SP
         public PlayerInventory playerInventory;
         public PlayerStats playerStats;
         public EquipmentWindowUI equipmentWindowUI;
+        public InputHandler inputHandler;
 
         [Header("UI Windows")]
         public GameObject hudWindow;
@@ -111,7 +112,6 @@ namespace SP
             leftHandSlot01Selected = false;
             leftHandSlot02Selected = false;
         }
-
         public void UpdateEstusAmount()
         {
             int estusCount = GetEstusCountInInventory();
@@ -127,6 +127,11 @@ namespace SP
         public int GetEstusCountInInventory()
         {
             return playerInventory.consumablesInventory.Count(checker => checker.consumableType == ConsumableType.HealItem);
+        }
+
+        public void ResetInventoryflag()
+        {
+            inputHandler.inventoryFlag = false;
         }
 
         #region Manage Inventory Tabs

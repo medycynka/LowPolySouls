@@ -37,11 +37,15 @@ namespace SP
         public void HandleMoveToTarget()
         {
             if (enemyManager.isPreformingAction)
-                return;
+            {
+                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
 
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+                return;
+            }
+
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-            enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+            enemyManager.viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
             if (enemyManager.distanceFromTarget > stoppingDistance)
             {
@@ -88,7 +92,7 @@ namespace SP
                 navmeshAgent.enabled = true;
                 navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyRigidBody.velocity = targetVelocity;
-                transform.rotation = Quaternion.Slerp(transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
             }
         }
     }

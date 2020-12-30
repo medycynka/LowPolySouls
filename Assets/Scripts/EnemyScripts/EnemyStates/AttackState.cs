@@ -104,7 +104,9 @@ namespace SP
                     if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                     {
                         if (currentAttack != null)
+                        {
                             return;
+                        }
 
                         temporaryScore += enemyAttackAction.attackScore;
 

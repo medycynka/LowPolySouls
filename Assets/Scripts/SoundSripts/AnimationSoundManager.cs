@@ -28,9 +28,9 @@ namespace SP
             audioSource = GetComponent<AudioSource>();
             audioSource.loop = true;
             audioSource.clip = currentBackgroundMusic;
+            audioSource.volume = SettingsHolder.soundVolume;
             previouseBackgroundMusic = currentBackgroundMusic;
             audioSource.Play();
-
         }
 
         public void ChangeBackGroundMusic(AudioClip newBgMusic)

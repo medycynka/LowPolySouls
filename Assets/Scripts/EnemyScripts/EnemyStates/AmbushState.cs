@@ -32,7 +32,6 @@ namespace SP
                 }
 
                 #region Handle Target Detection
-
                 Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, detectionRadius, detectionLayer);
 
                 for (int i = 0; i < colliders.Length; i++)
@@ -53,7 +52,6 @@ namespace SP
                         }
                     }
                 }
-
                 #endregion
 
                 #region Handle State Change

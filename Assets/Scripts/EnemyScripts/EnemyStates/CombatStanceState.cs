@@ -17,6 +17,11 @@ namespace SP
         {
             if (enemyStats.currentHealth > 0)
             {
+                if (enemyManager.isPreformingAction)
+                {
+                    enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                }
+
                 enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
                 if (enemyManager.currentRecoveryTime <= 0 && enemyManager.distanceFromTarget <= enemyManager.maximumAttackRange)

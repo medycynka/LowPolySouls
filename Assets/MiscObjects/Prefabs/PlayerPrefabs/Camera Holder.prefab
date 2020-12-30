@@ -88,7 +88,7 @@ MonoBehaviour:
     m_Bits: 65536
   cameraFollowVelocity: {x: 0, y: 0, z: 0}
   lookSpeed: 0.025
-  followSpeed: 0.1
+  followSpeed: 0.5
   pivotSpeed: 0.03
   minimumPivot: -35
   maximumPivot: 35
