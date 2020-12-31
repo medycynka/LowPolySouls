@@ -6,7 +6,6 @@ using BattleDrakeStudios.ModularCharacters;
 
 namespace SP
 {
-
     public class CurrentEquipments : MonoBehaviour
     {
         PlayerStats playerStats;
@@ -33,6 +32,15 @@ namespace SP
             playerStats = GetComponent<PlayerStats>();
             modularCharacterManager = GetComponentInChildren<ModularCharacterManager>();
 
+            if (SettingsHolder.isMale)
+            {
+                modularCharacterManager.SwapGender(Gender.Male);
+            }
+            else
+            {
+                modularCharacterManager.SwapGender(Gender.Female);
+            }
+
             InitializeCurrentEquipment();
             EquipPlayerWithCurrentItems();
             UpdateArmorValue();
@@ -43,13 +51,13 @@ namespace SP
             currentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
                 { ModularBodyPart.Helmet, new EquipmentPart(ModularBodyPart.Helmet, -1, 0) },
                 { ModularBodyPart.HeadAttachment, new EquipmentPart(ModularBodyPart.HeadAttachment, -1, 0) },
-                { ModularBodyPart.Head, new EquipmentPart(ModularBodyPart.Head, 0, 0) },
+                { ModularBodyPart.Head, new EquipmentPart(ModularBodyPart.Head, SettingsHolder.headID, 0) },
                 { ModularBodyPart.Hat, new EquipmentPart(ModularBodyPart.Hat, -1, 0) },
                 { ModularBodyPart.HeadCovering, new EquipmentPart(ModularBodyPart.HeadCovering, -1, 0) },
-                { ModularBodyPart.Hair, new EquipmentPart(ModularBodyPart.Hair, 0, 0) },
-                { ModularBodyPart.Eyebrow, new EquipmentPart(ModularBodyPart.Eyebrow, 7, 0) },
-                { ModularBodyPart.Ear, new EquipmentPart(ModularBodyPart.Ear, 1, 0) },
-                { ModularBodyPart.FacialHair, new EquipmentPart(ModularBodyPart.FacialHair, 0, 0) },
+                { ModularBodyPart.Hair, new EquipmentPart(ModularBodyPart.Hair, SettingsHolder.hairID, 0) },
+                { ModularBodyPart.Eyebrow, new EquipmentPart(ModularBodyPart.Eyebrow, SettingsHolder.eyebrowID, 0) },
+                { ModularBodyPart.Ear, new EquipmentPart(ModularBodyPart.Ear, SettingsHolder.earID, 0) },
+                { ModularBodyPart.FacialHair, new EquipmentPart(ModularBodyPart.FacialHair, SettingsHolder.facialHairID, 0) },
                 { ModularBodyPart.BackAttachment, new EquipmentPart(ModularBodyPart.BackAttachment, -1, 0) },
                 { ModularBodyPart.Torso, new EquipmentPart(ModularBodyPart.Torso, 0, 0) },
                 { ModularBodyPart.ShoulderAttachmentRight, new EquipmentPart(ModularBodyPart.ShoulderAttachmentRight, -1, 0) },

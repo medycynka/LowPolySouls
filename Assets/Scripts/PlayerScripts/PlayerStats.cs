@@ -21,6 +21,7 @@ namespace SP
         public ConsumablePickUp soulDeathDrop;
 
         [Header("Unique Player Stats", order = 2)]
+        public string playerName = SettingsHolder.playerName;
         public int playerLevel = 12;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
