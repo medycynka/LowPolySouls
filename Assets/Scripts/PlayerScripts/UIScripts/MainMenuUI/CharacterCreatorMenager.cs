@@ -30,8 +30,13 @@ namespace SP
             {
                 SettingsHolder.isMale = true;
                 modularCharacterManager.SwapGender(Gender.Male);
+
+                headSlider.value = 0;
+                hairSlider.value = 0;
                 eyebrowSlider.maxValue = 9;
                 eyebrowSlider.value = -1;
+                earSlider.value = -1;
+                facialHairSlider.value = -1;
             }
         }
 
@@ -41,8 +46,13 @@ namespace SP
             {
                 SettingsHolder.isMale = false;
                 modularCharacterManager.SwapGender(Gender.Female);
+
+                headSlider.value = 0;
+                hairSlider.value = 0;
                 eyebrowSlider.maxValue = 6;
                 eyebrowSlider.value = -1;
+                earSlider.value = -1;
+                facialHairSlider.value = -1;
             }
         }
 
@@ -59,26 +69,58 @@ namespace SP
 
         public void SetHair(float partID)
         {
-            SettingsHolder.headID = (int)partID;
-            modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
+            SettingsHolder.hairID = (int)partID;
+
+            if (partID > -1)
+            {
+                modularCharacterManager.ActivatePart(ModularBodyPart.Hair, (int)partID);
+            }
+            else
+            {
+                modularCharacterManager.DeactivatePart(ModularBodyPart.Hair);
+            }
         }
 
         public void SetEyebrow(float partID)
         {
-            SettingsHolder.headID = (int)partID;
-            modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
+            SettingsHolder.eyebrowID = (int)partID;
+
+            if (partID > -1)
+            {
+                modularCharacterManager.ActivatePart(ModularBodyPart.Eyebrow, (int)partID);
+            }
+            else
+            {
+                modularCharacterManager.DeactivatePart(ModularBodyPart.Eyebrow);
+            }
         }
 
         public void SetEar(float partID)
         {
-            SettingsHolder.headID = (int)partID;
-            modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
+            SettingsHolder.earID = (int)partID;
+
+            if (partID > -1)
+            {
+                modularCharacterManager.ActivatePart(ModularBodyPart.Ear, (int)partID);
+            }
+            else
+            {
+                modularCharacterManager.DeactivatePart(ModularBodyPart.Ear);
+            }
         }
 
         public void SetFacialHair(float partID)
         {
-            SettingsHolder.headID = (int)partID;
-            modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
+            SettingsHolder.facialHairID = (int)partID;
+
+            if (partID > -1)
+            {
+                modularCharacterManager.ActivatePart(ModularBodyPart.FacialHair, (int)partID);
+            }
+            else
+            {
+                modularCharacterManager.DeactivatePart(ModularBodyPart.FacialHair);
+            }
         }
     }
 }
