@@ -37,6 +37,8 @@ namespace SP
             bonfireManager.ActivateRestUI();
             playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
             bonfireManager.RespawnEnemis();
+
+            SaveManager.SaveGame(playerManager, playerStats, playerManager.GetComponent<PlayerInventory>(), playerManager.GetComponent<CurrentEquipments>());
         }
 
         public void GetUp()
@@ -50,6 +52,8 @@ namespace SP
             bonfireManager.CloseRestUI();
             animatorHandler.PlayTargetAnimation("Stand Up", true);
             bonfireManager.playerManager.isRestingAtBonfire = false;
+
+            SaveManager.SaveGame(playerStats.GetComponent<PlayerManager>(), playerStats, playerStats.GetComponent<PlayerInventory>(), playerStats.GetComponent<CurrentEquipments>());
         }
 
         public void QuickMove()

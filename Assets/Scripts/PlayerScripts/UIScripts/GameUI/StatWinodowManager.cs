@@ -228,7 +228,7 @@ namespace SP
                 playerStats.bonusHealth += healthToAdd;
                 playerStats.bonusStamina += staminaToAdd;
 
-                playerStats.UpdateHealthAndStaminaAfterRest();
+                playerStats.UpdatePlayerStats();
 
                 ResetAddedStatsValues();
                 UpdateVisibleValues();

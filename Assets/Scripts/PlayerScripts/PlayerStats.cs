@@ -39,11 +39,33 @@ namespace SP
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
         {
+            playerManager = GetComponent<PlayerManager>();
+
+            DataManager dataManager = SaveManager.LoadGame();
+
+            if(dataManager != null)
+            {
+                currentHealth = dataManager.currentHealth;
+                currentStamina = dataManager.currentStamina;
+                baseArmor = dataManager.baseArmor;
+                Strength = dataManager.Strength;
+                Agility = dataManager.Agility;
+                Defence = dataManager.Defence;
+                bonusHealth = dataManager.bonusHealth;
+                bonusStamina = dataManager.bonusStamina;
+                playerLevel = dataManager.playerLevel;
+                soulsAmount = dataManager.soulsAmount;
+
+                gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
+                gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
+                playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+            }
+
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
 
@@ -52,7 +74,7 @@ namespace SP
 
         private float SetMaxHealthFromHealthLevel()
         {
-            maxHealth = healthLevel * 10 + bonusHealth;
+            maxHealth = healthLevel * 10 + bonusHealth * 10 + Strength * 2.5f;
 
             return maxHealth;
         }
@@ -70,7 +92,7 @@ namespace SP
 
         private float SetMaxStaminaFromStaminaLevel()
         {
-            maxStamina = staminaLevel * 10 + bonusStamina;
+            maxStamina = staminaLevel * 10 + bonusStamina * 10 + Agility * 2.5f;
 
             return maxStamina;
         }
@@ -86,7 +108,7 @@ namespace SP
             staminaBar.SetCurrentStamina(currentStamina);
         }
 
-        public void UpdateHealthAndStaminaAfterRest()
+        public void UpdatePlayerStats()
         {
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());

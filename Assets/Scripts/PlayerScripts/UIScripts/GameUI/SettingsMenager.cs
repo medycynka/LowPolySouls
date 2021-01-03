@@ -8,6 +8,7 @@ namespace SP
 {
     public class SettingsMenager : MonoBehaviour
     {
+        PlayerManager playerManager;
         CameraHandler cameraHandler;
         List<AudioSource> audioSources = new List<AudioSource>();
         Resolution[] resolutionsOpts;
@@ -22,8 +23,9 @@ namespace SP
 
         private void Start()
         {
+            playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
             cameraHandler = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraHandler>();
-            audioSources.Add(GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>());
+            audioSources.Add(playerManager.GetComponent<AudioSource>());
 
             foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
@@ -99,6 +101,12 @@ namespace SP
         public void SetVolume(float volume)
         {
             SetAllSounds(volume);
+        }
+
+        public void SaveAndExit()
+        {
+            SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>(), playerManager.GetComponent<CurrentEquipments>());
+            Application.Quit();
         }
 
         private void SetAllSounds(float volume)

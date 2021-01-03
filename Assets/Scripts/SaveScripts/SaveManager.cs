@@ -17,12 +17,12 @@ namespace SP
             stream.Close();
         }
 
-        public static void SaveGame()
+        public static void SaveGame(PlayerManager playerManager, PlayerStats playerStats, PlayerInventory playerInventory, CurrentEquipments currentEquipments)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             string path = Application.dataPath + "/Saves/GameSave.lps";
             FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-            DataManager dataManager = new DataManager();
+            DataManager dataManager = new DataManager(playerManager, playerStats, playerInventory, currentEquipments);
 
             binaryFormatter.Serialize(stream, dataManager);
             stream.Close();
@@ -40,6 +40,7 @@ namespace SP
 
                 stream.Close();
 
+                Debug.Log(dataManager.tI.name_ + dataManager.tI.value_);
                 return dataManager;
             }
             else
