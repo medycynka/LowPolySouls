@@ -17,6 +17,8 @@ namespace SP
         {
             if (enemyStats.currentHealth > 0)
             {
+                enemyManager.enemyLocomotionManager.HandleRotateTowardsTarget();
+
                 if (enemyManager.isPreformingAction)
                 {
                     enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);

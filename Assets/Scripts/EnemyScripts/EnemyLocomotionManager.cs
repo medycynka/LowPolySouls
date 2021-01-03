@@ -67,7 +67,7 @@ namespace SP
             enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         }
 
-        private void HandleRotateTowardsTarget()
+        public void HandleRotateTowardsTarget()
         {
             if (enemyManager.isPreformingAction)
             {

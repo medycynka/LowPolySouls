@@ -173,6 +173,7 @@ namespace SP
                             return;
                         }
 
+                        animatorHandler.anim.SetBool("isUsingRightHand", true);
                         playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
                     }
                 }
@@ -199,6 +200,7 @@ namespace SP
                             return;
                         }
 
+                        animatorHandler.anim.SetBool("isUsingRightHand", true);
                         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
                     }
                 }

@@ -6,6 +6,8 @@ namespace SP
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        PlayerManager playerManager;
+
         [Header("Weapon Slot Manager", order = 0)]
         [Header("Current Weapon", order = 1)]
         public WeaponItem attackingWeapon;
@@ -27,6 +29,7 @@ namespace SP
 
         private void Awake()
         {
+            playerManager = GetComponentInParent<PlayerManager>();
             animator = GetComponent<Animator>();
             playerStats = GetComponentInParent<PlayerStats>();
             inputHandler = GetComponentInParent<InputHandler>();
@@ -123,23 +126,21 @@ namespace SP
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
-        public void OpenRightDamageCollider()
+        public void OpenDamageCollider()
         {
-            rightHandDamageCollider.EnableDamageCollider();
+            if (playerManager.isUsingRightHand)
+            {
+                rightHandDamageCollider.EnableDamageCollider();
+            }
+            else if (playerManager.isUsingLeftHand)
+            {
+                leftHandDamageCollider.EnableDamageCollider();
+            }
         }
 
-        public void OpenLeftDamageCollider()
-        {
-            leftHandDamageCollider.EnableDamageCollider();
-        }
-
-        public void CloseRightHandDamageCollider()
+        public void CloseDamageCollider()
         {
             rightHandDamageCollider.DisaleDamageCollider();
-        }
-
-        public void CloseLeftHandDamageCollider()
-        {
             leftHandDamageCollider.DisaleDamageCollider();
         }
 

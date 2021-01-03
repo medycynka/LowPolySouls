@@ -21,6 +21,7 @@ namespace SP
         public void PlayGame()
         {
             SettingsHolder.isCharacterCreated = true;
+            SaveManager.SaveMainMenu();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 

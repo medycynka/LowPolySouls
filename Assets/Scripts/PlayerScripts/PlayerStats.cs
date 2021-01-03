@@ -94,15 +94,18 @@ namespace SP
 
         public void TakeDamage(float damage)
         {
-            playerManager.shouldRefillHealth = false;
-            currentHealth -= damage;
-            healthBar.SetCurrentHealth(currentHealth);
-
-            animatorHandler.PlayTargetAnimation("Damage_01", true);
-
-            if (currentHealth <= 0)
+            if (isPlayerAlive)
             {
-                HandleDeathAndRespawn();
+                playerManager.shouldRefillHealth = false;
+                currentHealth -= damage;
+                healthBar.SetCurrentHealth(currentHealth);
+
+                animatorHandler.PlayTargetAnimation("Damage_01", true);
+
+                if (currentHealth <= 0)
+                {
+                    HandleDeathAndRespawn();
+                }
             }
         }
 

@@ -40,13 +40,33 @@ namespace SP {
             }
 
             resolutionDropdown.AddOptions(resList);
-            resolutionDropdown.value = SettingsHolder.resolutionID;
-            resolutionDropdown.RefreshShownValue();
 
+            DataManager dataManager = SaveManager.LoadGame();
+
+            if (dataManager != null)
+            {
+                SettingsHolder.resolutionID = dataManager.resolutionID;
+                SettingsHolder.isFullscreen = dataManager.isFullscreen;
+                SettingsHolder.qualityID = dataManager.qualityID;
+                SettingsHolder.mouseSensibility = dataManager.mouseSensibility;
+                SettingsHolder.soundVolume = dataManager.soundVolume;
+                SettingsHolder.isCharacterCreated = dataManager.isCharacterCreated;
+                SettingsHolder.playerName = dataManager.playerName;
+                SettingsHolder.isMale = dataManager.isMale;
+                SettingsHolder.headID = dataManager.headID;
+                SettingsHolder.hairID = dataManager.hairID;
+                SettingsHolder.eyebrowID = dataManager.eyebrowID;
+                SettingsHolder.earID = dataManager.earID;
+                SettingsHolder.facialHairID = dataManager.facialHairID;
+            }
+
+            resolutionDropdown.value = SettingsHolder.resolutionID;
             fullScreenToogle.isOn = SettingsHolder.isFullscreen;
             qualityDropdown.value = SettingsHolder.qualityID;
             mouseSlider.value = SettingsHolder.mouseSensibility;
             volumeSlider.value = SettingsHolder.soundVolume;
+
+            resolutionDropdown.RefreshShownValue();
         }
 
         public void SaveSettings()

@@ -9,6 +9,8 @@ namespace SP
 {
     public class EnemyStats : CharacterStats
     {
+        EnemyManager enemyManager;
+
         [Header("Enemy Properties", order = 1)]
         [Header("Animator", order = 2)]
         public Animator animator;
@@ -25,6 +27,7 @@ namespace SP
 
         private void Awake()
         {
+            enemyManager = GetComponent<EnemyManager>();
             animator = GetComponentInChildren<Animator>();
             playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         }
@@ -56,7 +59,10 @@ namespace SP
 
         public void TakeDamage(float damage)
         {
-            StartCoroutine(UpdateEnemyHealthBar(damage));
+            if (enemyManager.isAlive)
+            {
+                StartCoroutine(UpdateEnemyHealthBar(damage));
+            }
         }
 
         public void DealDamage(PlayerStats playerStats, float weaponDamage)

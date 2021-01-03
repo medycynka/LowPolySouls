@@ -27,11 +27,16 @@ namespace SP
                     return idleState;
                 }
 
+                enemyManager.enemyLocomotionManager.HandleRotateTowardsTarget();
+
                 Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+                enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
                 enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
                 if (enemyManager.isPreformingAction)
+                {
                     return combatStanceState;
+                }
 
                 if (currentAttack != null)
                 {

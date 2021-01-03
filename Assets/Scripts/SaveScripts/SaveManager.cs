@@ -1,0 +1,51 @@
+﻿using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace SP
+{
+    public static class SaveManager
+    {
+        public static void SaveMainMenu()
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            string path = Application.dataPath + "/Saves/GameSave.lps";
+            FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            DataManager dataManager = new DataManager();
+
+            binaryFormatter.Serialize(stream, dataManager);
+            stream.Close();
+        }
+
+        public static void SaveGame()
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            string path = Application.dataPath + "/Saves/GameSave.lps";
+            FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            DataManager dataManager = new DataManager();
+
+            binaryFormatter.Serialize(stream, dataManager);
+            stream.Close();
+        }
+
+        public static DataManager LoadGame()
+        {
+            string path = Application.dataPath + "/Saves/GameSave.lps";
+
+            if (File.Exists(path))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                DataManager dataManager = binaryFormatter.Deserialize(stream) as DataManager;
+
+                stream.Close();
+
+                return dataManager;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}

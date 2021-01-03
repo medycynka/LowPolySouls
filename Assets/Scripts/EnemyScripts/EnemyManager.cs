@@ -92,6 +92,7 @@ namespace SP
 
         public void HandleDeath()
         {
+            isAlive = false;
             enemyStats.currentHealth = 0;
             enemyStats.animator.Play("Dead_01");
             enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
