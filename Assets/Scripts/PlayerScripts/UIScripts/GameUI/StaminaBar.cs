@@ -10,11 +10,6 @@ namespace SP
     {
         public Slider staminaBarSlider;
 
-        private void Start()
-        {
-            staminaBarSlider = GetComponent<Slider>();
-        }
-
         public void SetMaxStamina(float maxStamina)
         {
             staminaBarSlider.maxValue = maxStamina;

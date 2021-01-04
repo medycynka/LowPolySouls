@@ -10,11 +10,6 @@ namespace SP
         public Slider healthBarSlider;
         public Slider backgroundSlider;
 
-        private void Start()
-        {
-            healthBarSlider = GetComponent<Slider>();
-        }
-
         public void SetMaxHealth(float maxHealth)
         {
             healthBarSlider.maxValue = maxHealth;

@@ -7,6 +7,8 @@ namespace SP {
     {
         AnimationSoundManager animationSoundManager;
 
+        public bool canPlayStep = true;
+
         private void Awake()
         {
             animationSoundManager = GetComponentInParent<AnimationSoundManager>();
@@ -14,7 +16,10 @@ namespace SP {
 
         public void StepSound()
         {
-            animationSoundManager.PlayOnStep();
+            if (canPlayStep)
+            {
+                animationSoundManager.PlayOnStep();
+            }
         }
 
         public void RollSound()

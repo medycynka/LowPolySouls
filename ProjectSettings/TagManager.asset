@@ -15,6 +15,13 @@ TagManager:
   - Enemy
   - Bonfire
   - Spawner
+  - Location
+  - Fog Wall
+  - FSM
+  - Model
+  - Combat Collider
+  - Collision Blocker
+  - UI Settings
   layers:
   - Default
   - TransparentFX
@@ -37,6 +44,8 @@ TagManager:
   - Boss
   - Character
   - Spawner
+  - Area Manager
+  - Boss Area Manager
   - 
   - 
   - 
@@ -44,9 +53,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Collider Blocker
   - 
   m_SortingLayers:
   - name: Default
