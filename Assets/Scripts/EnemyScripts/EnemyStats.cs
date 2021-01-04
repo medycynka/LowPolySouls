@@ -25,6 +25,11 @@ namespace SP
         public PlayerStats playerStats;
         public GameObject enemyObject;
 
+        [Header("Is it Boss", order = 2)]
+        public bool isBoss;
+        public BossAreaManager bossAreaManager;
+        Slider bossHpSlider;
+
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
@@ -39,8 +44,11 @@ namespace SP
 
         private void LateUpdate()
         {
-            healthBar.transform.LookAt(Camera.main.transform);
-            healthBar.transform.Rotate(0, 180, 0);
+            if (!isBoss)
+            {
+                healthBar.transform.LookAt(Camera.main.transform);
+                healthBar.transform.Rotate(0, 180, 0);
+            }
         }
 
         private float SetMaxHealthFromHealthLevel()
@@ -51,17 +59,51 @@ namespace SP
 
         public void InitializeHealth()
         {
-            maxHealth = SetMaxHealthFromHealthLevel();
-            currentHealth = maxHealth;
-            healtBarFill.fillAmount = 1f;
-            healthBar.SetActive(false);
+            if (isBoss)
+            {
+                maxHealth = SetMaxHealthFromHealthLevel();
+                currentHealth = maxHealth;
+
+                if (bossHpSlider == null)
+                {
+                    bossHpSlider = bossAreaManager.bossHpBar.GetComponentInChildren<Slider>();
+                }
+
+                bossHpSlider.maxValue = maxHealth;
+                bossHpSlider.value = currentHealth;
+            }
+            else
+            {
+                maxHealth = SetMaxHealthFromHealthLevel();
+                currentHealth = maxHealth;
+                healtBarFill.fillAmount = 1f;
+                healthBar.SetActive(false);
+            }
         }
 
         public void TakeDamage(float damage)
         {
             if (enemyManager.isAlive)
             {
-                StartCoroutine(UpdateEnemyHealthBar(damage));
+                if (isBoss)
+                {
+                    currentHealth -= damage;
+                    bossHpSlider.value = currentHealth;
+
+                    if (currentHealth > 0)
+                    {
+                        animator.Play("Damage_01");
+                    }
+
+                    if(currentHealth <= 0)
+                    {
+                        bossAreaManager.bossHpBar.SetActive(false);
+                    }
+                }
+                else
+                {
+                    StartCoroutine(UpdateEnemyHealthBar(damage));
+                }
             }
         }
 

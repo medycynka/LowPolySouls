@@ -55,6 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4035152931953455847}
+  - component: {fileID: 4778120482597776824}
   - component: {fileID: 3335765835667132145}
   - component: {fileID: 3591348863707460989}
   - component: {fileID: 2094540011}
@@ -86,6 +87,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4778120482597776824
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035152931953455844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!135 &3335765835667132145
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -166,6 +181,7 @@ MonoBehaviour:
   qucikMoveID: 0
   spawnPoint: {fileID: 1204769307}
   quickMoveScreenTime: 5
+  isBossBonfire: 0
   enemySpawner: {fileID: 0}
 --- !u!114 &6532777734007141858
 MonoBehaviour:

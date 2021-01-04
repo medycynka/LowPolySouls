@@ -53,6 +53,11 @@ namespace SP
             animatorHandler.PlayTargetAnimation("Stand Up", true);
             bonfireManager.playerManager.isRestingAtBonfire = false;
 
+            if(playerStats == null)
+            {
+                playerStats = bonfireManager.playerManager.GetComponent<PlayerStats>();
+            }
+
             SaveManager.SaveGame(playerStats.GetComponent<PlayerManager>(), playerStats, playerStats.GetComponent<PlayerInventory>(), playerStats.GetComponent<CurrentEquipments>());
         }
 

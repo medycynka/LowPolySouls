@@ -35,12 +35,21 @@ namespace SP
         public float quickMoveScreenTime = 5.0f;
 
         [Header("Enemy Spawner", order = 1)]
+        public bool isBossBonfire = false;
         public EnemySpawner enemySpawner;
 
         private void Awake()
         {
-            bonfireLight.enabled = false;
-            bonfireParticleSystem.Stop();
+            if (isActivated)
+            {
+                bonfireParticleSystem.Play();
+                bonfireLight.enabled = true;
+            }
+            else
+            {
+                bonfireLight.enabled = false;
+                bonfireParticleSystem.Stop();
+            }
         }
 
         public void ActivateRestUI()
@@ -74,7 +83,10 @@ namespace SP
 
         public void RespawnEnemis()
         {
-            enemySpawner.SpawnEnemies();
+            if (!isBossBonfire)
+            {
+                enemySpawner.SpawnEnemies();
+            }
         }
     }
 }

@@ -6,37 +6,12 @@ using TMPro;
 
 namespace SP
 {
-    public class AreaManager : MonoBehaviour
+    public class AreaManager : LocationManager
     {
         [Header("Area Manager", order = 0)]
-        [Header("Area Name", order = 1)]
-        public string areaName = "";
-
-        [Header("Location Screen Properties", order = 1)]
-        public GameObject locationScreen;
-        public TextMeshProUGUI locationScreenText;
-
-        [Header("Bonfires in Area", order = 1)]
-        public BonfireManager[] bonfiresInArea;
-
-        [Header("Bonfires in Area", order = 1)]
-        public AnimationSoundManager playerSoundManager;
-
-        [Header("Area Sounds", order = 1)]
-        public AudioClip areaBgMusic;
-        public AudioClip[] footSteps;
-        private AudioClip[] footStepsOnExit;
-
-        [Header("Bools", order = 1)]
-        public bool isInside = false;
-        public bool isPlayerDead = false;
-
-        bool insideReset = true;
-
-        [Header("Player Stats", order = 1)]
-        public PlayerStats playerStats;
-
         EnemySpawner enemySpawner;
+        bool insideReset = true;
+        AudioClip[] footStepsOnExit;
 
         private void Awake()
         {
@@ -59,6 +34,11 @@ namespace SP
 
             if (insideReset)
             {
+                if (playerStats == null)
+                {
+                    playerStats = other.GetComponent<PlayerStats>();
+                }
+
                 if (playerSoundManager == null)
                 {
                     playerSoundManager = other.GetComponent<AnimationSoundManager>();
@@ -81,6 +61,7 @@ namespace SP
 
         private void OnTriggerExit(Collider other)
         {
+            playerStats = null;
             isInside = false;
             insideReset = true;
             playerSoundManager.ChangeBackGroundMusic(null);

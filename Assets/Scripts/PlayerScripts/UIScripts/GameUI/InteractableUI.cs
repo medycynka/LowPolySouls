@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
 
     public class InteractableUI : MonoBehaviour
     {
-        public Text interactableText;
+        public TextMeshProUGUI interactableText;
 
-        public Text itemText;
+        public TextMeshProUGUI itemText;
         public RawImage itemImage;
     }
 

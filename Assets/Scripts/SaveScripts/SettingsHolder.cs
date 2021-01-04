@@ -23,6 +23,10 @@ namespace SP
         public static int earID = 1;
         public static int facialHairID = -1;
 
-        // Main menu
+        // Bosses
+        public static bool[] bossAreaAlive = { true };
+
+        // Bonfires
+        public static bool[] bonfiresAcrivation = { false, false, false };
     }
 }

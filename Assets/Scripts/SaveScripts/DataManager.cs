@@ -38,6 +38,10 @@ namespace SP
         public float[] spawnPointPosition;
         public float[] spawnPointRotation;
 
+        // Area Menagers
+        public bool[] areaBossesAlive;
+        public bool[] bonfireActivators;
+
         [System.Serializable]
         public struct TestItem
         {
@@ -99,6 +103,18 @@ namespace SP
             spawnPointRotation[0] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.x;
             spawnPointRotation[1] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.y;
             spawnPointRotation[2] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.z;
+
+            areaBossesAlive = new bool[1];
+            for(int i = 0; i < areaBossesAlive.Length; i++)
+            {
+                areaBossesAlive[i] = SettingsHolder.bossAreaAlive[i];
+            }
+
+            bonfireActivators = new bool[3];
+            for(int i = 0; i < bonfireActivators.Length; i++)
+            {
+                bonfireActivators[i] = SettingsHolder.bonfiresAcrivation[i];
+            }
         }
     }
 }

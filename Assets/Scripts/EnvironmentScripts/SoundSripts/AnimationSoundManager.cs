@@ -47,6 +47,12 @@ namespace SP
             movingClips = newFootSteps;
         }
 
+        public void ChangeFootstepsSound(AudioClip[] newFootSteps, BossAreaManager areaManager)
+        {
+            areaManager.SetExitFootSteps(movingClips);
+            movingClips = newFootSteps;
+        }
+
         #region Play For Animation
         public void PlayOnStep()
         {
