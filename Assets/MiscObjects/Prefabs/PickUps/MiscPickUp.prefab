@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7946515326710444526}
   - component: {fileID: 7946515326730370418}
   - component: {fileID: 7946515326730370419}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MiscPickUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}

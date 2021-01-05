@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3246414813715160946}
   - component: {fileID: 1885721409664299414}
   - component: {fileID: 2407895679905884246}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ConsumablePickUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}

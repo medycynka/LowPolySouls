@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace SP
 {
@@ -10,6 +11,7 @@ namespace SP
         EnemyAnimationManager enemyAnimationManager;
         EnemyStats enemyStats;
         EnemyDrops enemyDrops;
+        //CapsuleCollider blockingCollider;
 
         [Header("Manager Properties", order = 1)]
         [Header("Bools", order = 2)]
@@ -42,6 +44,7 @@ namespace SP
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyStats = GetComponent<EnemyStats>();
             enemyDrops = GetComponent<EnemyDrops>();
+            //blockingCollider = GetComponentsInChildren<CapsuleCollider>().Where(x => x.gameObject.transform.parent != transform.parent).ToArray()[0];
         }
 
         private void Update()

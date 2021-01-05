@@ -82,10 +82,10 @@ MonoBehaviour:
   cameraPivotTransform: {fileID: 1212298295777962275}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 3146528
+    m_Bits: 0
   enviromentLayer:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 0
   cameraFollowVelocity: {x: 0, y: 0, z: 0}
   lookSpeed: 0.025
   followSpeed: 0.5
@@ -102,7 +102,7 @@ MonoBehaviour:
   nearestLockOnTarget: {fileID: 0}
   leftLockTarget: {fileID: 0}
   rightLockTarget: {fileID: 0}
-  maximumLockOnDistance: 30
+  maximumLockOnDistance: 20
 --- !u!1 &1212298296191172988
 GameObject:
   m_ObjectHideFlags: 0

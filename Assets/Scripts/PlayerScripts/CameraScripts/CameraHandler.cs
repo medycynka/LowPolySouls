@@ -20,12 +20,12 @@ namespace SP
 
         [Header("Masks", order = 1)]
         public LayerMask ignoreLayers;
-        public LayerMask enviromentLayer;
+        public LayerMask environmentLayer;
 
         [Header("Camera Basic Properties", order = 1)]
         public Vector3 cameraFollowVelocity = Vector3.zero;
-        public float lookSpeed = 0.01f;
-        public float followSpeed = 0.1f;
+        public float lookSpeed = 0.025f;
+        public float followSpeed = 0.5f;
         public float pivotSpeed = 0.03f;
         private float targetPosition;
         private float defaultPosition;
@@ -47,19 +47,15 @@ namespace SP
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;
         public Transform rightLockTarget;
-        public float maximumLockOnDistance = 30;
+        public float maximumLockOnDistance = 20;
 
         private void Awake()
         {
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 10 | 1 << 20 | 1 << 21);
+            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 20 | 1 << 21);
             targetTransform = playerManager.transform;
-        }
-
-        private void Start()
-        {
-            enviromentLayer = 1 << 16;
+            environmentLayer = LayerMask.NameToLayer("Environment");
         }
 
         public void FollowTarget(float delta)
@@ -151,15 +147,13 @@ namespace SP
                     float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
                     RaycastHit hit;
 
-                    if (character.transform.root != targetTransform.transform.root
-                        && viewableAngle > -50 && viewableAngle < 50
-                        && distanceFromTarget <= maximumLockOnDistance)
+                    if (character.transform.root != targetTransform.transform.root && viewableAngle > -50 && viewableAngle < 50 && distanceFromTarget <= maximumLockOnDistance)
                     {
                         if (Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out hit))
                         {
-                            Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position);
+                            Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.green, 10f);
 
-                            if (hit.transform.gameObject.layer == enviromentLayer)
+                            if (hit.transform.gameObject.tag == "Environment" || hit.transform.gameObject.layer == environmentLayer)
                             {
                                 //Cannot lock onto target, object in the way
                             }

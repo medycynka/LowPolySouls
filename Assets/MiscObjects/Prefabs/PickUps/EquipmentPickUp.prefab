@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7499049790872593751}
   - component: {fileID: 7013394891053945261}
   - component: {fileID: 7008002646701870445}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: EquipmentPickUp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
