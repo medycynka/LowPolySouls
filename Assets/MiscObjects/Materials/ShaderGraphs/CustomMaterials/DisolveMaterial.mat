@@ -37,7 +37,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: b24b57e0cfed05643be34b0256df875e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Bordertexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -61,6 +69,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalsTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -81,6 +101,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Specular:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_7F2D3E21: 0
     - Vector1_ABC9EDFE: 0.01
@@ -88,6 +116,7 @@ Material:
     - Vector1_D275BC16: -1
     - _AlphaClip: 0
     - _Blend: 0
+    - _Borderwidth: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -95,14 +124,17 @@ Material:
     - _DstBlend: 0
     - _EdgeWidth: 0.01
     - _EnvironmentReflections: 1
+    - _Fill: 1
     - _FresnelPower: 20
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Invertmask: 0
     - _IsAlive: 1
     - _LODValue: 0
     - _Metallic: 0
     - _NoiceScale: 30
+    - _Noisescale: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -113,16 +145,29 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UseTime: 0
+    - _ValueFill: 1
+    - _Wave1amplitude: 0
+    - _Wave1frequency: 0
+    - _Wave2Frequency: 0
+    - _Wave2amplitude: 0
     - _WorkflowMode: 1
+    - _Worldcoordinates: 0
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
     - Color_D51FBE92: {r: 23.96863, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     - _BasicColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Bordercolor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DeathColor: {r: 32, g: 0, b: 0, a: 1}
     - _EdgeColor: {r: 23.96863, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Fillcolor: {r: 1, g: 0.5514706, b: 0.5514706, a: 1}
+    - _InRemapVec: {r: -1, g: 1, b: 0, a: 0}
+    - _Maintiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noisespeed: {r: 0, g: 0, b: 0, a: 0}
+    - _OutRemapVec_1: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
     - _TextureTiling: {r: 1, g: 1, b: 0, a: 0}
