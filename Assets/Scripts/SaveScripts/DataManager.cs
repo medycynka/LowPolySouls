@@ -16,6 +16,7 @@ namespace SP
 
         // Main Menu
         public bool isCharacterCreated;
+        public bool isFirstStart;
         public string playerName;
         public bool isMale;
         public int headID;
@@ -60,6 +61,7 @@ namespace SP
             mouseSensibility = SettingsHolder.mouseSensibility;
             soundVolume = SettingsHolder.soundVolume;
             isCharacterCreated = SettingsHolder.isCharacterCreated;
+            isFirstStart = SettingsHolder.firstStart;
             playerName = SettingsHolder.playerName;
             isMale = SettingsHolder.isMale;
             headID = SettingsHolder.headID;
@@ -77,6 +79,7 @@ namespace SP
             mouseSensibility = SettingsHolder.mouseSensibility;
             soundVolume = SettingsHolder.soundVolume;
             isCharacterCreated = SettingsHolder.isCharacterCreated;
+            isFirstStart = SettingsHolder.firstStart;
             playerName = SettingsHolder.playerName;
             isMale = SettingsHolder.isMale;
             headID = SettingsHolder.headID;

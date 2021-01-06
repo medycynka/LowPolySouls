@@ -4,15 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using BattleDrakeStudios.ModularCharacters;
 
-public class ColorButtonPicker : MonoBehaviour
+namespace SP
 {
-    public ModularCharacterManager characterManager;
-    public string colorProperty;
-    public Image buttonImage;
-
-    private void Awake()
+    public class ColorButtonPicker : MonoBehaviour
     {
-        Color tempColor = characterManager.CharacterMaterial.GetColor(colorProperty);
-        buttonImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 1.0f);
+        public ModularCharacterManager characterManager;
+        public ColorPickerManager colorPicker;
+        public string colorProperty;
+        public Image buttonImage;
+
+        private void Awake()
+        {
+            Color tempColor = characterManager.CharacterMaterial.GetColor(colorProperty);
+            buttonImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 1.0f);
+        }
+
+        public void InitializeColorPickerWindow()
+        {
+            colorPicker.InitializeContent(colorProperty, this);
+        }
     }
 }

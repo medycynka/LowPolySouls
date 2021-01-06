@@ -13,30 +13,29 @@ namespace SP
         {
             DataManager dataManager = SaveManager.LoadGame();
 
-            #region Boss Initializetion
             bossAreaManagers = GetComponentsInChildren<BossAreaManager>();
+            bonfireManagers = GetComponentsInChildren<BonfireManager>();
 
             if (dataManager != null)
             {
-                for (int i = 0; i < bossAreaManagers.Length; i++)
+                if (!dataManager.isFirstStart)
                 {
-                    bossAreaManagers[i].isBossAlive = dataManager.areaBossesAlive[i];
+                    #region Boss Initializetion
+                    for (int i = 0; i < bossAreaManagers.Length; i++)
+                    {
+                        bossAreaManagers[i].isBossAlive = dataManager.areaBossesAlive[i];
+                    }
+                    #endregion
+
+                    #region Bonfire Initialization
+                    for (int i = 0; i < bonfireManagers.Length; i++)
+                    {
+                        bonfireManagers[i].isActivated = dataManager.bonfireActivators[i];
+                        bonfireManagers[i].showRestPopUp = dataManager.bonfireActivators[i];
+                    }
+                    #endregion
                 }
             }
-            #endregion
-
-            #region Bonfire Initialization
-            bonfireManagers = GetComponentsInChildren<BonfireManager>();
-
-            if(dataManager != null)
-            {
-                for(int i = 0; i < bonfireManagers.Length; i++)
-                {
-                    bonfireManagers[i].isActivated = dataManager.bonfireActivators[i];
-                    bonfireManagers[i].showRestPopUp = dataManager.bonfireActivators[i];
-                }
-            }
-            #endregion
         }
 
         private void FixedUpdate()

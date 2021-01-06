@@ -49,21 +49,24 @@ namespace SP
 
             if(dataManager != null)
             {
-                currentHealth = dataManager.currentHealth;
-                currentStamina = dataManager.currentStamina;
-                baseArmor = dataManager.baseArmor;
-                Strength = dataManager.Strength;
-                Agility = dataManager.Agility;
-                Defence = dataManager.Defence;
-                bonusHealth = dataManager.bonusHealth;
-                bonusStamina = dataManager.bonusStamina;
-                playerLevel = dataManager.playerLevel;
-                soulsAmount = dataManager.soulsAmount;
-
-                gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
-                gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
-                playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
-                playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                if (!dataManager.isFirstStart)
+                {
+                    currentHealth = dataManager.currentHealth;
+                    currentStamina = dataManager.currentStamina;
+                    baseArmor = dataManager.baseArmor;
+                    Strength = dataManager.Strength;
+                    Agility = dataManager.Agility;
+                    Defence = dataManager.Defence;
+                    bonusHealth = dataManager.bonusHealth;
+                    bonusStamina = dataManager.bonusStamina;
+                    playerLevel = dataManager.playerLevel;
+                    soulsAmount = dataManager.soulsAmount;
+                
+                    gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
+                    gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                    playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
+                    playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                }
             }
 
             UpdateHealthBar(SetMaxHealthFromHealthLevel());

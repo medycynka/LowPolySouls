@@ -15,6 +15,7 @@ namespace SP
 
         // Main Menu
         public static bool isCharacterCreated = false;
+        public static bool firstStart = true;
         public static string playerName = "";
         public static bool isMale = true;
         public static int headID = 0;

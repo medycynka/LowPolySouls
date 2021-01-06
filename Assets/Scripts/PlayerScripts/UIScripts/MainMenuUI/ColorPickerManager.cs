@@ -17,7 +17,7 @@ namespace SP
         [Header("Color Properties", order = 1)]
         public Color partColor;
         public Image shownColor;
-        public Image buttonColor;
+        public ColorButtonPicker colorButtonPicker;
         public float colorR = 1.0f;
         public float colorG = 1.0f;
         public float colorB = 1.0f;
@@ -30,13 +30,16 @@ namespace SP
         public Slider bSlider;
         public Slider aSlider;
 
-        private void Awake()
-        {
-            InitializeContent();
-        }
+        [Header("Values Placeholders", order = 1)]
+        public TextMeshProUGUI rPlaceholder;
+        public TextMeshProUGUI gPlaceholder;
+        public TextMeshProUGUI bPlaceholder;
+        public TextMeshProUGUI aPlaceholder;
 
-        public void InitializeContent()
+        public void InitializeContent(string s_, ColorButtonPicker cBP_)
         {
+            colorPropery = s_;
+            colorButtonPicker = cBP_;
             partColor = modularCharacterManager.CharacterMaterial.GetColor(colorPropery);
             shownColor.color = partColor;
             colorR = partColor.r;
@@ -48,12 +51,15 @@ namespace SP
             bSlider.value = colorB;
             aSlider.value = colorA;
             baseColor = partColor;
-            buttonColor.color = partColor;
+            colorButtonPicker.buttonImage.color = partColor;
         }
 
         public void SetColorR(float r_)
         {
             colorR = r_;
+
+            int i_ = (int)(255 * r_);
+            rPlaceholder.text = i_.ToString();
 
             SetColor();
         }
@@ -145,13 +151,13 @@ namespace SP
 
         public void SaveColor()
         {
-            buttonColor.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
+            colorButtonPicker.buttonImage.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
         }
 
         public void ResetColor()
         {
             partColor = baseColor;
-            buttonColor.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
+            colorButtonPicker.buttonImage.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
 
             Material mat_ = modularCharacterManager.CharacterMaterial;
             mat_.SetColor(colorPropery, partColor);

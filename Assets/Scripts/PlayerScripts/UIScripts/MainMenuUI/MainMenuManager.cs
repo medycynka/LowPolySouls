@@ -82,10 +82,12 @@ namespace SP {
         {
             if (SettingsHolder.isCharacterCreated)
             {
+                SettingsHolder.firstStart = false;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
+                SettingsHolder.firstStart = true;
                 characterCreatorScreen.SetActive(true);
             }
         }
