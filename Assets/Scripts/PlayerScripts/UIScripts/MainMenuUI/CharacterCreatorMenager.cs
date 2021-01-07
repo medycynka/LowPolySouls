@@ -64,13 +64,13 @@ namespace SP
 
         public void SetHead(float partID)
         {
-            SettingsHolder.headID = (int)partID;
+            SettingsHolder.partsID[2] = (int)partID;
             modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
         }
 
         public void SetHair(float partID)
         {
-            SettingsHolder.hairID = (int)partID;
+            SettingsHolder.partsID[5] = (int)partID;
 
             if (partID > -1)
             {
@@ -84,7 +84,7 @@ namespace SP
 
         public void SetEyebrow(float partID)
         {
-            SettingsHolder.eyebrowID = (int)partID;
+            SettingsHolder.partsID[6] = (int)partID;
 
             if (partID > -1)
             {
@@ -98,7 +98,7 @@ namespace SP
 
         public void SetEar(float partID)
         {
-            SettingsHolder.earID = (int)partID;
+            SettingsHolder.partsID[7] = (int)partID;
 
             if (partID > -1)
             {
@@ -112,7 +112,7 @@ namespace SP
 
         public void SetFacialHair(float partID)
         {
-            SettingsHolder.facialHairID = (int)partID;
+            SettingsHolder.partsID[8] = (int)partID;
 
             if (partID > -1)
             {

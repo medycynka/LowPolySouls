@@ -187,6 +187,7 @@ namespace SP
                 }
             }
 
+            currentEquipments.SaveCurrentEqIds();
             currentEquipments.UpdateArmorValue();
         }
 
@@ -252,6 +253,7 @@ namespace SP
                 }
             }
 
+            currentEquipments.SaveCurrentEqIds();
             currentEquipments.UpdateArmorValue();
         }
     }

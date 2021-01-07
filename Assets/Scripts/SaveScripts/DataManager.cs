@@ -19,13 +19,10 @@ namespace SP
         public bool isFirstStart;
         public string playerName;
         public bool isMale;
-        public int headID;
-        public int hairID;
-        public int eyebrowID;
-        public int earID;
-        public int facialHairID;
 
         // Player
+        public int[] partsID;
+        public float[] partsArmor;
         public float currentHealth;
         public float currentStamina;
         public float baseArmor;
@@ -64,11 +61,15 @@ namespace SP
             isFirstStart = SettingsHolder.firstStart;
             playerName = SettingsHolder.playerName;
             isMale = SettingsHolder.isMale;
-            headID = SettingsHolder.headID;
-            hairID = SettingsHolder.hairID;
-            eyebrowID = SettingsHolder.eyebrowID;
-            earID = SettingsHolder.earID;
-            facialHairID = SettingsHolder.facialHairID;
+
+            partsID = new int[SettingsHolder.partsID.Length];
+            partsArmor = new float[SettingsHolder.partsID.Length];
+
+            for(int i = 0; i < SettingsHolder.partsID.Length; i++)
+            {
+                partsID[i] = SettingsHolder.partsID[i];
+                partsArmor[i] = SettingsHolder.partsArmor[i];
+            }
         }
 
         public DataManager(PlayerManager playerManager, PlayerStats playerStats, PlayerInventory playerInventory, CurrentEquipments currentEquipments)
@@ -82,11 +83,15 @@ namespace SP
             isFirstStart = SettingsHolder.firstStart;
             playerName = SettingsHolder.playerName;
             isMale = SettingsHolder.isMale;
-            headID = SettingsHolder.headID;
-            hairID = SettingsHolder.hairID;
-            eyebrowID = SettingsHolder.eyebrowID;
-            earID = SettingsHolder.earID;
-            facialHairID = SettingsHolder.facialHairID;
+
+            partsID = new int[SettingsHolder.partsID.Length];
+            partsArmor = new float[SettingsHolder.partsID.Length];
+
+            for (int i = 0; i < SettingsHolder.partsID.Length; i++)
+            {
+                partsID[i] = SettingsHolder.partsID[i];
+                partsArmor[i] = SettingsHolder.partsArmor[i];
+            }
 
             baseArmor = playerStats.baseArmor;
             Strength = playerStats.Strength;

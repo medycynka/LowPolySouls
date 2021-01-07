@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
@@ -94,7 +95,7 @@ namespace SP
                     }
                 }
 
-                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = items_[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = items_[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = items_[0].itemIcon.texture;
                 uIManager.UpdateEstusAmount();
             }

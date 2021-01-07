@@ -53,11 +53,11 @@ namespace SP {
                 SettingsHolder.isCharacterCreated = dataManager.isCharacterCreated;
                 SettingsHolder.playerName = dataManager.playerName;
                 SettingsHolder.isMale = dataManager.isMale;
-                SettingsHolder.headID = dataManager.headID;
-                SettingsHolder.hairID = dataManager.hairID;
-                SettingsHolder.eyebrowID = dataManager.eyebrowID;
-                SettingsHolder.earID = dataManager.earID;
-                SettingsHolder.facialHairID = dataManager.facialHairID;
+                SettingsHolder.partsID[2] = dataManager.partsID[2];
+                SettingsHolder.partsID[5] = dataManager.partsID[5];
+                SettingsHolder.partsID[6] = dataManager.partsID[6];
+                SettingsHolder.partsID[7] = dataManager.partsID[7];
+                SettingsHolder.partsID[8] = dataManager.partsID[8];
             }
 
             resolutionDropdown.value = SettingsHolder.resolutionID;

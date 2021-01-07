@@ -18,11 +18,8 @@ namespace SP
         public static bool firstStart = true;
         public static string playerName = "";
         public static bool isMale = true;
-        public static int headID = 0;
-        public static int hairID = -1;
-        public static int eyebrowID = -1;
-        public static int earID = 1;
-        public static int facialHairID = -1;
+        public static int[] partsID = { -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, 0, 0, -1, -1, 0, 0, 0, 0, 0, -1, -1, 0, 0 };
+        public static float[] partsArmor = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 
         // Bosses
         public static bool[] bossAreaAlive = { true };

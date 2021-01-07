@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
@@ -36,7 +37,7 @@ namespace SP
                 uIManager.GetConsumableInventorySlot();
                 uIManager.UpdateConsumableInventory();
 
-                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = consumableItems[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = consumableItems[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItems[0].itemIcon.texture;
                 uIManager.UpdateEstusAmount();
             }

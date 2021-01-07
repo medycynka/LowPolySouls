@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SP
 {
@@ -44,7 +45,7 @@ namespace SP
                     }
                 }
 
-                playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapons[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapons[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapons[0].itemIcon.texture;
             }
             
