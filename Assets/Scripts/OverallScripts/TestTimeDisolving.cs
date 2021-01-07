@@ -27,7 +27,7 @@ public class TestTimeDisolving : MonoBehaviour
             currentTime_ += Time.deltaTime;
             foreach (var characterMaterial in characterMaterials)
             {
-                characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(0.0f, 1.0f, currentTime_ / endTime_));
+                characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentTime_ / endTime_));
             }
 
             if(currentTime_ >= endTime_)
@@ -41,7 +41,7 @@ public class TestTimeDisolving : MonoBehaviour
             currentTime_ = 0.0f;
             foreach (var characterMaterial in characterMaterials)
             {
-                characterMaterial.SetFloat("_DisolveValue", 0.0f);
+                characterMaterial.SetFloat("_DisolveValue", -0.1f);
             }
         }
     }

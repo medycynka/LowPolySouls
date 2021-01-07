@@ -153,7 +153,7 @@ namespace SP
             {
                 foreach (var cM_ in characterMaterials)
                 {
-                    cM_.SetFloat("_DisolveValue", Mathf.Lerp(0.0f, 1.0f, currentDisolveTime / disolveDurationTime));
+                    cM_.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
                     currentDisolveTime += 0.25f * Time.deltaTime;
                 }
 

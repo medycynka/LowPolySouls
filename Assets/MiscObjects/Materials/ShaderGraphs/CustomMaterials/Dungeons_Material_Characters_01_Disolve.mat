@@ -201,7 +201,7 @@ Material:
     - _DiffuseScatter: 1
     - _DiffuseScatteringExponent: 8
     - _DiffuseScatteringOffset: 0
-    - _DisolveValue: 0
+    - _DisolveValue: -0.1
     - _DistSteps: 64
     - _DistStepsShadows: 64
     - _DropletsAnimSpeed: 10

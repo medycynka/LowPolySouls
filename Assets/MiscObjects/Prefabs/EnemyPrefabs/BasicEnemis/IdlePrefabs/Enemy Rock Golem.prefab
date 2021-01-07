@@ -170,7 +170,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -682,6 +682,8 @@ MonoBehaviour:
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
   enemyObject: {fileID: 3060950883499712635}
+  isBoss: 0
+  bossAreaManager: {fileID: 0}
 --- !u!114 &3060950883499712638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 3060950883069289617}
   enemyLocomotionManager: {fileID: 0}
+  characterMaterials: []
   isPreformingAction: 0
   isInteracting: 0
   shouldDrop: 1
@@ -710,6 +713,13 @@ MonoBehaviour:
   maximumDetectionAngle: 75
   minimumDetectionAngle: -75
   currentRecoveryTime: 0
+  disolveEdgeWidth: 0.015
+  disolveNoiseScale: 30
+  disolveFresnelPower: 15
+  currentDisolveTime: 0
+  disolveDurationTime: 4
+  shouldGlow: 0
+  objectDestructionDuration: 5
 --- !u!114 &3060950883499712625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +780,7 @@ MonoBehaviour:
   attackingClips: []
   getDamageClips: []
   rollClip: {fileID: 0}
+  backStepClip: {fileID: 0}
   estusUse: {fileID: 0}
   soulUse: {fileID: 0}
   currentBackgroundMusic: {fileID: 0}
@@ -3145,6 +3156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7ccf7fe74fd83439159aa03bc48cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlayStep: 1
 --- !u!1 &3060950883607885213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5369,7 +5381,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a64cf0a23f83924f9debcb452685f6f, type: 2}
+  - {fileID: 2100000, guid: f4fe7562e61ad254face555120906068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
