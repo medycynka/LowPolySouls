@@ -6770,6 +6770,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d0d830e35c5b646a8179ccbd534e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponsInventory: []
+  weaponAmount: 
+  shieldsInventory: []
+  helmetsInventory: []
+  chestsInventory: []
+  shouldersInventory: []
+  handsInventory: []
+  legsInventory: []
+  feetInventory: []
+  ringsInventory: []
+  consumablesInventory: []
 --- !u!4 &1716262203
 Transform:
   m_ObjectHideFlags: 0
@@ -8615,7 +8626,7 @@ PrefabInstance:
     - target: {fileID: 3454041924395339370, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3454041924395339370, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
@@ -8997,7 +9008,7 @@ PrefabInstance:
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3060950883499712639, guid: ec3e58eeb41dc224c9d3d00795f15b66,
         type: 3}
@@ -9280,11 +9291,6 @@ PrefabInstance:
       propertyPath: cameraHandler
       value: 
       objectReference: {fileID: 1212298296339491854}
-    - target: {fileID: 8146989929759851013, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: characterMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: c624a3d16e2ba1a43b8f5ff296ae5434, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af9c25b9d53bc6144b03db375a32366f, type: 3}
 --- !u!1001 &3591348865524726872

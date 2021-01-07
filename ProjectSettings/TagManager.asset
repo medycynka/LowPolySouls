@@ -22,6 +22,7 @@ TagManager:
   - Combat Collider
   - Collision Blocker
   - UI Settings
+  - Inventory Holder
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Pick Up
   - LightCover
   - Environment
   - Enemy

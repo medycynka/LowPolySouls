@@ -14,6 +14,7 @@ namespace SP
 
         [Header("Unique Clips", order = 1)]
         public AudioClip rollClip;
+        public AudioClip backStepClip;
         public AudioClip estusUse;
         public AudioClip soulUse;
 
@@ -22,6 +23,7 @@ namespace SP
         public AudioClip previouseBackgroundMusic;
 
         AudioSource audioSource;
+        bool playFottsteps = true;
 
         private void Awake()
         {
@@ -56,7 +58,7 @@ namespace SP
         #region Play For Animation
         public void PlayOnStep()
         {
-            if (movingClips.Length > 0)
+            if (movingClips.Length > 0 && playFottsteps)
             {
                 audioSource.PlayOneShot(GetRandomClip(movingClips));
             }
@@ -66,7 +68,17 @@ namespace SP
         {
             if (rollClip != null)
             {
+                StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(rollClip);
+            }
+        }
+
+        public void PlayOnBackStep()
+        {
+            if (backStepClip != null)
+            {
+                StartCoroutine(StopStepSounds());
+                audioSource.PlayOneShot(backStepClip);
             }
         }
 
@@ -74,6 +86,7 @@ namespace SP
         {
             if (movingClips.Length > 0)
             {
+                StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(GetRandomClip(attackingClips));
             }
         }
@@ -82,6 +95,7 @@ namespace SP
         {
             if (getDamageClips.Length > 0)
             {
+                StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(GetRandomClip(getDamageClips));
             }
         }
@@ -90,6 +104,7 @@ namespace SP
         {
             if (estusUse != null)
             {
+                StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(estusUse);
             }
         }
@@ -98,6 +113,7 @@ namespace SP
         {
             if (soulUse != null)
             {
+                StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(soulUse);
             }
         }
@@ -105,7 +121,16 @@ namespace SP
 
         private AudioClip GetRandomClip(AudioClip[] clips)
         {
-            return clips[UnityEngine.Random.Range(0, clips.Length)];
+            return clips[Random.Range(0, clips.Length)];
+        }
+
+        private IEnumerator StopStepSounds()
+        {
+            playFottsteps = false;
+
+            yield return new WaitForSeconds(1.0f);
+
+            playFottsteps = true;
         }
     }
 }

@@ -71,7 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Ignore scenes data (becouse of large file like occlusion)
-# /[Aa]ssets/Scenes/*
+/[Aa]ssets/Scenes/*
 
 # Or ignore only specific files types
-/[Aa]ssets/Scenes/**/OcclusionCullingData.asset
+/[Aa]ssets/Scenes/**/OcclusionCullingData.*

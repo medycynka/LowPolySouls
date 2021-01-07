@@ -984,7 +984,7 @@ MonoBehaviour:
     partID: 0
   - bodyType: 27
     partID: 0
-  characterMaterial: {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
+  characterMaterial: {fileID: 2100000, guid: c624a3d16e2ba1a43b8f5ff296ae5434, type: 2}
   maleHelmetParts:
   - {fileID: 8145585615303932039}
   - {fileID: 8145725198783222659}
@@ -2546,6 +2546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7ccf7fe74fd83439159aa03bc48cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlayStep: 1
 --- !u!1 &4966070490633813573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,6 +3701,8 @@ MonoBehaviour:
   isInAir: 0
   isGrounded: 0
   canDoCombo: 0
+  isUsingRightHand: 0
+  isUsingLeftHand: 0
   quickMoveScreen: {fileID: 0}
   currentSpawnPoint: {fileID: 0}
 --- !u!114 &4966070491420200268
@@ -3779,6 +3782,7 @@ MonoBehaviour:
   deathDropIcon: {fileID: 21300000, guid: 4a8b11548ae1ade4ba8602f9191f1807, type: 3}
   soulDeathDrop: {fileID: 2407895679905884246, guid: 13c655fcff4024c4aa656393d80e6831,
     type: 3}
+  playerName: 
   playerLevel: 12
   soulsAmount: 500000
   currentArmorValue: 0
@@ -3831,9 +3835,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 854b635bd4e39c648beea3fca20c6e70, type: 3}
   - {fileID: 8300000, guid: d57b7287c860b634da78c3771a487b0a, type: 3}
   - {fileID: 8300000, guid: e06e42b395d5ccd44b437cc384594de7, type: 3}
-  attackingClips: []
+  attackingClips:
+  - {fileID: 8300000, guid: cfd2d72e418513b4bba799c6b4031418, type: 3}
+  - {fileID: 8300000, guid: ebd253b88f274c84ba4a3efdeb04c72f, type: 3}
+  - {fileID: 8300000, guid: c0b4269b0a2f9d74b8d1d1684a1f25e5, type: 3}
+  - {fileID: 8300000, guid: d10f3c0e1cb419546bfc5bca2442160a, type: 3}
+  - {fileID: 8300000, guid: e4a8d46729e97d344b1382acd93bb87a, type: 3}
   getDamageClips: []
-  rollClip: {fileID: 0}
+  rollClip: {fileID: 8300000, guid: 5b61a9ef84236b8479a7316138e4b8ca, type: 3}
+  backStepClip: {fileID: 8300000, guid: 3f62b6c096b8b554db4da8fa718de52f, type: 3}
   estusUse: {fileID: 8300000, guid: 9657dd2357d68b94e9eec02a4ab65abc, type: 3}
   soulUse: {fileID: 8300000, guid: 975fc88c34b13854688ac612795d8a33, type: 3}
   currentBackgroundMusic: {fileID: 8300000, guid: 48b6e9306a539bc43b16444db62a0951,
