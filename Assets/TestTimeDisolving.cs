@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestTimeDisolving : MonoBehaviour
 {
-    public Material characterMaterial;
+    public List<Material> characterMaterials;
     public bool shouldDisolve = false;
     public float currentTime_ = 0.0f;
     public float endTime_ = 2.0f;
@@ -12,7 +12,12 @@ public class TestTimeDisolving : MonoBehaviour
 
     void Start()
     {
-        characterMaterial = GetComponentInChildren<Renderer>().material;
+        Renderer[] renders_ = GetComponentsInChildren<Renderer>();
+
+        foreach(var r_ in renders_)
+        {
+            characterMaterials.Add(r_.material);
+        }
     }
 
     void Update()
@@ -21,7 +26,10 @@ public class TestTimeDisolving : MonoBehaviour
         {
             reset = true;
             currentTime_ += Time.deltaTime;
-            characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(0.0f, 1.0f, currentTime_ / endTime_));
+            foreach (var characterMaterial in characterMaterials)
+            {
+                characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(0.0f, 1.0f, currentTime_ / endTime_));
+            }
 
             if(currentTime_ >= endTime_)
             {
@@ -32,7 +40,10 @@ public class TestTimeDisolving : MonoBehaviour
         {
             reset = false;
             currentTime_ = 0.0f;
-            characterMaterial.SetFloat("_DisolveValue", 0.0f);
+            foreach (var characterMaterial in characterMaterials)
+            {
+                characterMaterial.SetFloat("_DisolveValue", 0.0f);
+            }
         }
     }
 }

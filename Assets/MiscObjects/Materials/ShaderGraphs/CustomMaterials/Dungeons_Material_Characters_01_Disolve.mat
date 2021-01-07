@@ -21,14 +21,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dungeons_Material_Characters_01_Disolve
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
-  m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULARHIGHLIGHTS_OFF _SPECULAR_COLOR
+  m_Shader: {fileID: -6465566751694194690, guid: e7a73877341861146b207d406508f9f1,
+    type: 3}
+  m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -110,6 +110,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -197,7 +201,7 @@ Material:
     - _DiffuseScatter: 1
     - _DiffuseScatteringExponent: 8
     - _DiffuseScatteringOffset: 0
-    - _DisolveValue: -1
+    - _DisolveValue: 0
     - _DistSteps: 64
     - _DistStepsShadows: 64
     - _DropletsAnimSpeed: 10
@@ -208,6 +212,7 @@ Material:
     - _EmissionScaleUI: 0
     - _EnvironmentReflections: 1
     - _FlowCycleScale: 2
+    - _FresnelPower: 10
     - _Frost: 0
     - _FrostFromGlobal: 0
     - _Glitter: 0
@@ -273,6 +278,7 @@ Material:
     - _ShadowMIPbias: 0
     - _ShadowStrength: 1
     - _Shininess: 0.078125
+    - _ShouldBlink: 0
     - _Smoothness: 0.078125
     - _SmoothnessSource: 1
     - _SmoothnessTextureChannel: 0

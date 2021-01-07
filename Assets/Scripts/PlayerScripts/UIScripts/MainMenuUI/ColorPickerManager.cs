@@ -84,6 +84,9 @@ namespace SP
         {
             colorG = g_;
 
+            int i_ = (int)(255 * g_);
+            gPlaceholder.text = i_.ToString();
+
             SetColor();
         }
 
@@ -107,6 +110,9 @@ namespace SP
         {
             colorB = b_;
 
+            int i_ = (int)(255 * b_);
+            bPlaceholder.text = i_.ToString();
+
             SetColor();
         }
 
@@ -129,6 +135,9 @@ namespace SP
         public void SetColorA(float a_)
         {
             colorA = a_;
+
+            int i_ = (int)(255 * a_);
+            aPlaceholder.text = i_.ToString();
 
             SetColor();
         }
@@ -158,20 +167,15 @@ namespace SP
         {
             partColor = baseColor;
             colorButtonPicker.buttonImage.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
-
-            Material mat_ = modularCharacterManager.CharacterMaterial;
-            mat_.SetColor(colorPropery, partColor);
-            modularCharacterManager.SetAllPartsMaterial(mat_);
+            modularCharacterManager.CharacterMaterial.SetColor(colorPropery, partColor);
         }
 
         private void SetColor()
         {
             partColor = new Color(colorR, colorG, colorB, colorA);
             shownColor.color = partColor;
-
-            Material mat_ = modularCharacterManager.CharacterMaterial;
-            mat_.SetColor(colorPropery, partColor);
-            modularCharacterManager.SetAllPartsMaterial(mat_);
+            colorButtonPicker.buttonImage.color = partColor;
+            modularCharacterManager.CharacterMaterial.SetColor(colorPropery, partColor);
         }
     }
 }

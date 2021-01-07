@@ -11,7 +11,7 @@ namespace SP
         EnemyAnimationManager enemyAnimationManager;
         EnemyStats enemyStats;
         EnemyDrops enemyDrops;
-        //CapsuleCollider blockingCollider;
+        [SerializeField] List<Material> characterMaterials;
 
         [Header("Manager Properties", order = 1)]
         [Header("Bools", order = 2)]
@@ -38,13 +38,32 @@ namespace SP
         [Header("Recovery Timer", order = 2)]
         public float currentRecoveryTime = 0;
 
+        [Header("Death Disolve Effect", order = 2)]
+        public float disolveEdgeWidth = 0.015f;
+        public float disolveNoiseScale = 30.0f;
+        public float disolveFresnelPower = 15.0f;
+        public float currentDisolveTime = 0.0f;
+        public float disolveDurationTime = 4.0f;
+        public bool shouldGlow = false;
+        public float objectDestructionDuration = 5.0f;
+
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyStats = GetComponent<EnemyStats>();
             enemyDrops = GetComponent<EnemyDrops>();
-            //blockingCollider = GetComponentsInChildren<CapsuleCollider>().Where(x => x.gameObject.transform.parent != transform.parent).ToArray()[0];
+
+            characterMaterials = new List<Material>();
+            Renderer[] renders_ = GetComponentsInChildren<Renderer>();
+
+            foreach (var r_ in renders_)
+            {
+                r_.material.SetFloat("_EdgeWidth", disolveEdgeWidth);
+                r_.material.SetFloat("_NoiceScale", disolveNoiseScale);
+                r_.material.SetFloat("_FresnelPower", disolveFresnelPower);
+                characterMaterials.Add(r_.material);
+            }
         }
 
         private void Update()
@@ -98,15 +117,47 @@ namespace SP
             isAlive = false;
             enemyStats.currentHealth = 0;
             enemyStats.animator.Play("Dead_01");
+
+            #region Disolve Effect
+            foreach (var cM_ in characterMaterials)
+            {
+                cM_.SetInt("_IsAlive", 0);
+            }
+
+            if (shouldGlow)
+            {
+                foreach (var cM_ in characterMaterials)
+                {
+                    cM_.SetInt("_ShouldBlink", 1);
+                }
+            }
+
+            StartCoroutine(DisolveAfterDeath());
+            #endregion
+
             enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
             enemyStats.playerStats.uiManager.currentSoulsAmount.text = enemyStats.playerStats.soulsAmount.ToString();
-
-            Destroy(enemyStats.enemyObject, 5.0f);
 
             if (shouldDrop)
             {
                 enemyDrops.DropPickUp();
                 shouldDrop = false;
+            }
+
+            Destroy(enemyStats.enemyObject, objectDestructionDuration);
+        }
+
+        private IEnumerator DisolveAfterDeath()
+        {
+            while(currentDisolveTime < disolveDurationTime)
+            {
+                foreach (var cM_ in characterMaterials)
+                {
+                    cM_.SetFloat("_DisolveValue", Mathf.Lerp(0.0f, 1.0f, currentDisolveTime / disolveDurationTime));
+                    currentDisolveTime += 0.25f * Time.deltaTime;
+                }
+
+                yield return null;
             }
         }
 
