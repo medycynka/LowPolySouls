@@ -15,8 +15,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
@@ -25,7 +27,7 @@ Material:
     - _DistortionLerpTime: 0.6
     - _DistortionScale: 10
     - _DistortionSpeed: 0.5
-    - _DistortionStrenght: 0.03
+    - _DistortionStrenght: 0.035
     - _FoamAmount: 1
     - _FoamCutOff: 4
     - _FoamScale: 100

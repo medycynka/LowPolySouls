@@ -87,8 +87,13 @@ namespace SP
             maxHealth = newHealth;
             currentHealth = maxHealth;
 
-            healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 180f * (maxHealth / 100f));
-            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (180f * (maxHealth / 100f) - 180f) / 2f, -45f);
+            float currentPixelWidth = 180f * (maxHealth / 100f);
+            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+
+            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
+            healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            
             healthBar.SetMaxHealth(maxHealth);
             healthBar.SetCurrentHealth(currentHealth);
         }
@@ -105,8 +110,13 @@ namespace SP
             maxStamina = newStamina;
             currentStamina = maxStamina;
 
-            staminaBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 180f * (maxStamina / 100f));
-            staminaBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (180f * (maxStamina / 100f) - 180f) / 2f, -80f);
+            float currentPixelWidth = 180f * (maxStamina / 100f);
+            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+
+            staminaBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
+            staminaBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
         }
