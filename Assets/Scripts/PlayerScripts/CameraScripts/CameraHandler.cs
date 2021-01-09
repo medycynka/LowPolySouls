@@ -60,8 +60,8 @@ namespace SP
 
         public void FollowTarget(float delta)
         {
-            Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
-            myTransform.position = targetPosition;
+            Vector3 newTargetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
+            myTransform.position = newTargetPosition;
 
             HandleCameraCollisions(delta);
         }
@@ -133,7 +133,7 @@ namespace SP
             float shortestDistance = Mathf.Infinity;
             float shortestDistanceOfLeftTarget = Mathf.Infinity;
             float shortestDistanceOfRightTarget = Mathf.Infinity;
-
+            
             Collider[] colliders = Physics.OverlapSphere(targetTransform.position, 26);
 
             for (int i = 0; i < colliders.Length; i++)
@@ -153,7 +153,7 @@ namespace SP
                         {
                             Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.green, 10f);
 
-                            if (hit.transform.gameObject.tag == "Environment" || hit.transform.gameObject.layer == environmentLayer)
+                            if (hit.transform.gameObject.CompareTag("Environment") || hit.transform.gameObject.layer == environmentLayer)
                             {
                                 //Cannot lock onto target, object in the way
                             }

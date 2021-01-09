@@ -129,7 +129,7 @@ namespace SP
 
         public void TakeDamage(float damage)
         {
-            if (isPlayerAlive)
+            if (isPlayerAlive && !playerManager.isInvulnerable)
             {
                 playerManager.shouldRefillHealth = false;
                 currentHealth -= damage;

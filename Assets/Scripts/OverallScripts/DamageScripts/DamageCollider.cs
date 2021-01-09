@@ -33,7 +33,7 @@ namespace SP
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.tag == "Player")
+            if (collision.CompareTag("Player"))
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 EnemyStats enemyStats = GetComponentInParent<EnemyStats>();
@@ -44,7 +44,7 @@ namespace SP
                 }
             }
 
-            if (collision.tag == "Enemy")
+            if (collision.CompareTag("Enemy"))
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
                 PlayerStats playerStats = GetComponentInParent<PlayerStats>();

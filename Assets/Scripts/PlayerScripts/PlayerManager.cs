@@ -14,7 +14,7 @@ namespace SP
         public CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
-
+        
         [Header("UI", order = 2)]
         public InteractableUI interactableUI;
 
@@ -41,12 +41,13 @@ namespace SP
         public bool canDoCombo;
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
+        public bool isInvulnerable;
 
         [Header("Respawn Places", order = 2)]
         public GameObject quickMoveScreen;
         public GameObject currentSpawnPoint;
 
-        float healhBgRefillTimer = 0.0f;
+        float healthBgRefillTimer = 0.0f;
         float staminaRefillTimer = 0.0f;
         float addJumpForceTimer = 1.25f;
 
@@ -66,6 +67,7 @@ namespace SP
             canDoCombo = anim.GetBool("canDoCombo");
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+            isInvulnerable = anim.GetBool("isInvulnerable");
             anim.SetBool("isInAir", isInAir);
 
             inputHandler.TickInput(delta);
@@ -140,7 +142,7 @@ namespace SP
 
             if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
             {
-                if (hit.collider.tag == "Bonfire")
+                if (hit.collider.CompareTag("Bonfire"))
                 {
                     if (!hit.collider.GetComponent<BonfireManager>().isActivated)
                     {
@@ -177,7 +179,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.tag == "Interactable")
+                else if(hit.collider.CompareTag("Interactable"))
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
@@ -192,7 +194,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.tag == "Fog Wall")
+                else if(hit.collider.CompareTag("Fog Wall"))
                 {
                     FogWallManager interactableObject = hit.collider.GetComponent<FogWallManager>();
 
@@ -231,7 +233,7 @@ namespace SP
 
             if (shouldRefillHealthBg)
             {
-                if(healhBgRefillTimer > 1.5f)
+                if(healthBgRefillTimer > 1.5f)
                 {
                     playerStats.healthBar.backgroundSlider.value -= playerStats.healthBgRefillAmount * delta;
 
@@ -242,7 +244,7 @@ namespace SP
                 }
                 else
                 {
-                    healhBgRefillTimer += delta;
+                    healthBgRefillTimer += delta;
                 }
             }
         }

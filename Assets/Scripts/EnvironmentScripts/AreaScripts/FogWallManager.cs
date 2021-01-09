@@ -25,7 +25,7 @@ namespace SP
         public override void PickUpItem(PlayerManager playerManager)
         {
             boxCollider.enabled = false;
-            wallParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            wallParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
             base.PickUpItem(playerManager);
 
@@ -62,7 +62,7 @@ namespace SP
             yield return new WaitForSeconds(5f);
 
             boxCollider.enabled = true;
-            wallParticles.Play(true);
+            wallParticles.Play();
             canInteract = true;
         }
     }
