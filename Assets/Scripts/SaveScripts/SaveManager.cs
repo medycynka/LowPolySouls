@@ -39,14 +39,12 @@ namespace SP
                 DataManager dataManager = binaryFormatter.Deserialize(stream) as DataManager;
 
                 stream.Close();
-
-                Debug.Log(dataManager.tI.name_ + dataManager.tI.value_);
+                
                 return dataManager;
             }
-            else
-            {
-                return null;
-            }
+            
+            
+            return null;
         }
     }
 }

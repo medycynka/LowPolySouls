@@ -21,12 +21,12 @@ namespace SP
             gameObject.SetActive(true);
         }
 
-        public void ClearInventorySlot(bool last_slot)
+        public void ClearInventorySlot(bool lastSlot)
         {
             item = null;
             icon.sprite = null;
             icon.enabled = false;
-            gameObject.SetActive(last_slot);
+            gameObject.SetActive(lastSlot);
         }
 
         public void UseThisItem()
@@ -54,6 +54,7 @@ namespace SP
                 uiManager.GetConsumableInventorySlot();
                 uiManager.UpdateConsumableInventory();
                 uiManager.UpdateEstusAmount();
+                uiManager.UpdateSouls();
             }
         }
     }

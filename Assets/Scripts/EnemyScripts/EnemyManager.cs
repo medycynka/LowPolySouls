@@ -55,14 +55,14 @@ namespace SP
             enemyDrops = GetComponent<EnemyDrops>();
 
             characterMaterials = new List<Material>();
-            Renderer[] renders_ = GetComponentsInChildren<Renderer>();
+            Renderer[] renders = GetComponentsInChildren<Renderer>();
 
-            foreach (var r_ in renders_)
+            foreach (var r in renders)
             {
-                r_.material.SetFloat("_EdgeWidth", disolveEdgeWidth);
-                r_.material.SetFloat("_NoiceScale", disolveNoiseScale);
-                r_.material.SetFloat("_FresnelPower", disolveFresnelPower);
-                characterMaterials.Add(r_.material);
+                r.material.SetFloat("_EdgeWidth", disolveEdgeWidth);
+                r.material.SetFloat("_NoiceScale", disolveNoiseScale);
+                r.material.SetFloat("_FresnelPower", disolveFresnelPower);
+                characterMaterials.Add(r.material);
             }
         }
 
@@ -119,16 +119,16 @@ namespace SP
             enemyStats.animator.Play("Dead_01");
 
             #region Disolve Effect
-            foreach (var cM_ in characterMaterials)
+            foreach (var cM in characterMaterials)
             {
-                cM_.SetInt("_IsAlive", 0);
+                cM.SetInt("_IsAlive", 0);
             }
 
             if (shouldGlow)
             {
-                foreach (var cM_ in characterMaterials)
+                foreach (var cM in characterMaterials)
                 {
-                    cM_.SetInt("_ShouldBlink", 1);
+                    cM.SetInt("_ShouldBlink", 1);
                 }
             }
 
@@ -151,9 +151,9 @@ namespace SP
         {
             while(currentDisolveTime < disolveDurationTime)
             {
-                foreach (var cM_ in characterMaterials)
+                foreach (var cM in characterMaterials)
                 {
-                    cM_.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
+                    cM.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
                     currentDisolveTime += 0.25f * Time.deltaTime;
                 }
 

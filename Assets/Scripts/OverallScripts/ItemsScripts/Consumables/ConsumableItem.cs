@@ -15,6 +15,9 @@ namespace SP
         public float healAmount;
         public float soulAmount;
         public float manaAmount;
+
+        [Header("Is Item Death Drop?", order = 2)]
+        public bool isDeathDrop = false;
     }
 
 }

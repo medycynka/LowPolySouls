@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SP
@@ -200,7 +201,7 @@ namespace SP
             StartCoroutine(Respawn());
         }
 
-        public IEnumerator Respawn()
+        private IEnumerator Respawn()
         {
             youDiedLogo.SetActive(true);
             DropSouls();
@@ -225,39 +226,27 @@ namespace SP
 
         private void RespawnEnemiesOnDead()
         {
-            GameObject[] enemiesSpawners = GameObject.FindGameObjectsWithTag("Spawner");
-            GameObject closestSpawner = null;
-            float closetDist = Mathf.Infinity;
-            Vector3 playerPosition = transform.position;
-            Vector3 distToTarget;
-            float distSqrt;
+            EnemySpawner[] enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
 
             foreach (var eS in enemiesSpawners)
             {
-                distToTarget = eS.transform.position - playerPosition;
-                distSqrt = distToTarget.sqrMagnitude;
-
-                if(distSqrt < closetDist)
-                {
-                    closetDist = distSqrt;
-                    closestSpawner = eS;
-                }
+                eS.SpawnEnemies();
             }
-
-            closestSpawner.GetComponent<EnemySpawner>().SpawnEnemies();
         }
 
         private void DropSouls()
         {
             if (soulsAmount > 0)
             {
-                ConsumableItem deathDrop = new ConsumableItem();
+                ConsumableItem deathDrop = ScriptableObject.CreateInstance<ConsumableItem>();
                 deathDrop.soulAmount = soulsAmount;
-                deathDrop.itemName = "Souls";
+                deathDrop.itemName = "Souls recovered";
                 deathDrop.itemIcon = deathDropIcon;
+                deathDrop.consumableType = ConsumableType.SoulItem;
+                deathDrop.isDeathDrop = true;
                 soulsAmount = 0;
                 uiManager.UpdateSouls();
-                soulDeathDrop.consumableItems = new ConsumableItem[1] { deathDrop };
+                soulDeathDrop.consumableItems = new []{ deathDrop };
                 soulDeathDrop.interactableText = "Recover souls";
                 Instantiate(soulDeathDrop, transform.position, Quaternion.identity);
             }

@@ -40,15 +40,6 @@ namespace SP
         public bool[] areaBossesAlive;
         public bool[] bonfireActivators;
 
-        [System.Serializable]
-        public struct TestItem
-        {
-            public int value_;
-            public string name_;
-        }
-
-        public TestItem tI;
-
         // Constructor
         public DataManager()
         {
@@ -125,4 +116,16 @@ namespace SP
             }
         }
     }
+
+    // Works
+    /*
+    [System.Serializable]
+    public class WeaponItemToSave
+    {
+        public int iconID;
+        public string itemName;
+        public ItemType itemType;
+        
+    }
+    */
 }

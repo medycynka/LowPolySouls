@@ -26,20 +26,28 @@ namespace SP
 
             if(consumableItems.Length > 0)
             {
-                foreach (var consumableItem in consumableItems)
+                if (consumableItems[0].isDeathDrop)
                 {
-                    if (consumableItem != null)
-                    {
-                        playerInventory.consumablesInventory.Add(consumableItem);
-                    }
+                    playerManager.GetComponent<PlayerStats>().soulsAmount += consumableItems[0].soulAmount;
+                    uIManager.UpdateSouls();
                 }
+                else
+                {
+                    foreach (var consumableItem in consumableItems)
+                    {
+                        if (consumableItem != null)
+                        {
+                            playerInventory.consumablesInventory.Add(consumableItem);
+                        }
+                    }
 
-                uIManager.GetConsumableInventorySlot();
-                uIManager.UpdateConsumableInventory();
+                    uIManager.GetConsumableInventorySlot();
+                    uIManager.UpdateConsumableInventory();
+                    uIManager.UpdateEstusAmount();
+                }
 
                 playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = consumableItems[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = consumableItems[0].itemIcon.texture;
-                uIManager.UpdateEstusAmount();
             }
 
             playerManager.itemInteractableGameObject.SetActive(true);

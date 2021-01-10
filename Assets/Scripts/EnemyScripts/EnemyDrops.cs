@@ -31,43 +31,43 @@ namespace SP
             if (dropChance <= consumableChanse)
             {
                 // Drop consumable
-                foreach (var drop_ in consumableDropPool)
+                foreach (var drop in consumableDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
             }
             else if (dropChance - consumableChanse <= equipmentChanse)
             {
                 // Drop weapon
-                foreach (var drop_ in weaponDropPool)
+                foreach (var drop in weaponDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
             }
             else if (dropChance - consumableChanse - equipmentChanse <= weaponChanse)
             {
                 // Drop equipment
-                foreach (var drop_ in equipmentDropPool)
+                foreach (var drop in equipmentDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
             }
             else
             {
                 // Drop all
-                foreach (var drop_ in consumableDropPool)
+                foreach (var drop in consumableDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
 
-                foreach (var drop_ in weaponDropPool)
+                foreach (var drop in weaponDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
 
-                foreach (var drop_ in equipmentDropPool)
+                foreach (var drop in equipmentDropPool)
                 {
-                    dropList.Add(drop_);
+                    dropList.Add(drop);
                 }
             }
         }

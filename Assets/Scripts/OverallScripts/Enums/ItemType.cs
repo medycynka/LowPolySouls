@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SP
 {
+    [System.Serializable]
     public enum ItemType
     {
         Weapon,

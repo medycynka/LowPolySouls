@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SP
 {
-
+    [System.Serializable]
     public enum ConsumableType
     {
         HealItem,
