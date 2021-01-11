@@ -33,7 +33,7 @@ namespace SP
                 modularCharacterManager.SwapGender(Gender.Male);
 
                 headSlider.value = 0;
-                hairSlider.value = 0;
+                hairSlider.value = -1;
                 eyebrowSlider.maxValue = 9;
                 eyebrowSlider.value = -1;
                 earSlider.value = -1;
@@ -49,7 +49,7 @@ namespace SP
                 modularCharacterManager.SwapGender(Gender.Female);
 
                 headSlider.value = 0;
-                hairSlider.value = 0;
+                hairSlider.value = -1;
                 eyebrowSlider.maxValue = 6;
                 eyebrowSlider.value = -1;
                 earSlider.value = -1;
