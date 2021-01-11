@@ -15,12 +15,15 @@ namespace SP
         [Header("Transformations for Left Hand", order = 2)]
         public Vector3 pivotPositionTransform;
         public Vector3 pivotRotationTransform;
+        
+        [Header("Transformations for Back Slot", order = 2)]
         public Vector3 backSlotPosition;
         public Vector3 backSlotRotation;
+        public float backSlotScale = 1.0f;
 
         [Header("Weapon Stats", order = 2)]
-        public int Light_Attack_Damage;
-        public int Heavy_Attack_Damage;
+        public float Light_Attack_Damage_Mult = 1.0f;
+        public float Heavy_Attack_Damage_Mult = 1.5f;
         public int Weight;
         public int Durability;
 

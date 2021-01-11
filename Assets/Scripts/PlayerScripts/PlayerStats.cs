@@ -8,6 +8,7 @@ namespace SP
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
+        WeaponSlotManager weaponSlotManager;
 
         [Header("Player Properties", order = 1)]
 
@@ -45,6 +46,7 @@ namespace SP
         private void Start()
         {
             playerManager = GetComponent<PlayerManager>();
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
 
             DataManager dataManager = SaveManager.LoadGame();
 
@@ -67,6 +69,10 @@ namespace SP
                     gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
                     playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
                     playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                }
+                else
+                {
+                    SettingsHolder.firstStart = false;
                 }
             }
 
@@ -184,7 +190,7 @@ namespace SP
 
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(weaponDamage + Strength);
+            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength);
         }
 
         public int CalculateSoulsCost(int level)

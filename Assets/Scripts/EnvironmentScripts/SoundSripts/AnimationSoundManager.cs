@@ -119,6 +119,18 @@ namespace SP
         }
         #endregion
 
+        public void EnableFootStepsSound()
+        {
+            playFottsteps = true;
+            
+        }
+        
+        public void DisableFootStepsSound()
+        {
+            playFottsteps = false;
+            
+        }
+        
         private AudioClip GetRandomClip(AudioClip[] clips)
         {
             return clips[Random.Range(0, clips.Length)];
@@ -126,11 +138,11 @@ namespace SP
 
         private IEnumerator StopStepSounds()
         {
-            playFottsteps = false;
+            DisableFootStepsSound();
 
             yield return new WaitForSeconds(1.0f);
 
-            playFottsteps = true;
+            EnableFootStepsSound();
         }
     }
 }

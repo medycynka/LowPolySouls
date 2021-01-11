@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,5 +47,26 @@ namespace SP {
         {
             animationSoundManager.PlayOnSoulUse();
         }
+
+        public void EnableSteps()
+        {
+            animationSoundManager.EnableFootStepsSound();
+        }
+
+	    public void EnableStepsAfterTime()
+        {
+            StartCoroutine(EnableStepsAfterSecond());
+        }
+        
+        public void DisableSteps()
+        {
+            animationSoundManager.DisableFootStepsSound();
+        }
+
+	    private IEnumerator EnableStepsAfterSecond(){
+	    	yield return new WaitForSeconds(1.0f);
+
+		    animationSoundManager.EnableFootStepsSound();
+	    }
     }
 }

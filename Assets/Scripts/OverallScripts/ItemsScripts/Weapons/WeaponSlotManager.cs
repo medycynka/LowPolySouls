@@ -77,7 +77,6 @@ namespace SP
                 {
                     backSlot.currentWeapon = weaponItem;
                     backSlot.LoadWeaponModel(weaponItem);
-                    LoadLeftWeaponDamageCollider();
                     quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
                 }
             }

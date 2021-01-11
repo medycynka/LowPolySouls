@@ -65,15 +65,14 @@ namespace SP
                 {
                     model.transform.localPosition = weaponItem.backSlotPosition;
                     model.transform.localEulerAngles = weaponItem.backSlotRotation;
+                    model.transform.localScale = Vector3.one * weaponItem.backSlotScale;
                 }
                 else
                 {
                     model.transform.localPosition = Vector3.zero;
                     model.transform.localRotation = Quaternion.identity;
+                    model.transform.localScale = Vector3.one;
                 }
-                
-                //model.transform.localRotation = Quaternion.identity;
-                model.transform.localScale = Vector3.one;
             }
 
             currentWeaponModel = model;

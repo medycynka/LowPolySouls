@@ -8,7 +8,7 @@ namespace SP
     public class DamageCollider : MonoBehaviour
     {
         [Header("Damage Collider", order = 0)]
-        Collider damageCollider;
+        [SerializeField] Collider damageCollider;
 
         [Header("Weapon Damage", order = 1)]
         public float currentWeaponDamage = 25;
@@ -28,7 +28,10 @@ namespace SP
 
         public void DisaleDamageCollider()
         {
-            damageCollider.enabled = false;
+            if (damageCollider != null)
+            {
+                damageCollider.enabled = false;
+            }
         }
 
         private void OnTriggerEnter(Collider collision)
