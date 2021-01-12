@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ namespace SP
 {
     public class CharacterCreatorMenager : MonoBehaviour
     {
+        MainMenuManager mainMenuManager;
+        
         [Header("Character Creator Manager", order = 0)]
         [Header("Character Creator Components", order = 1)]
         public ModularCharacterManager modularCharacterManager;
@@ -18,11 +21,17 @@ namespace SP
         public Slider earSlider;
         public Slider facialHairSlider;
 
+        private void Start()
+        {
+            mainMenuManager = GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<MainMenuManager>();
+        }
+
         public void PlayGame()
         {
             SettingsHolder.isCharacterCreated = true;
             SaveManager.SaveMainMenu();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
+            mainMenuManager.FadeOutMusic();
         }
 
         public void SetMaleGender()

@@ -154,8 +154,9 @@ namespace SP
                 foreach (var cM in characterMaterials)
                 {
                     cM.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
-                    currentDisolveTime += 0.25f * Time.deltaTime;
                 }
+                
+                currentDisolveTime += 0.25f * Time.deltaTime;
 
                 yield return null;
             }

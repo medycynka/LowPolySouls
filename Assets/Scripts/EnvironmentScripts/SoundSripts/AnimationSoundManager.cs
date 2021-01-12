@@ -7,7 +7,7 @@ namespace SP
     public class AnimationSoundManager : MonoBehaviour
     {
         [Header("Audio Clips", order = 0)]
-        [Header("Multpiple Clips For Random Pick", order = 1)]
+        [Header("Multiple Clips For Random Pick", order = 1)]
         public AudioClip[] movingClips;
         public AudioClip[] attackingClips;
         public AudioClip[] getDamageClips;
@@ -18,12 +18,18 @@ namespace SP
         public AudioClip estusUse;
         public AudioClip soulUse;
 
-        [Header("Current & Previouse Background Music Clip", order = 1)]
+        [Header("Current Background Music Clip", order = 1)]
         public AudioClip currentBackgroundMusic;
-        public AudioClip previouseBackgroundMusic;
+        //public AudioClip previouseBackgroundMusic;
 
+        [Header("Music Fade In/Out")]
+        public float musicFadeIn = 2f;
+        public float musicFadeOut = 2f;
+        public bool fadingMusic = false;
+        
         AudioSource audioSource;
-        bool playFottsteps = true;
+        bool playFootsteps = true;
+        private float currTime = 0.0f;
 
         private void Awake()
         {
@@ -31,16 +37,20 @@ namespace SP
             audioSource.loop = true;
             audioSource.clip = currentBackgroundMusic;
             audioSource.volume = SettingsHolder.soundVolume;
-            previouseBackgroundMusic = currentBackgroundMusic;
+            //previouseBackgroundMusic = currentBackgroundMusic;
             audioSource.Play();
         }
 
         public void ChangeBackGroundMusic(AudioClip newBgMusic)
         {
-            previouseBackgroundMusic = currentBackgroundMusic;
-            currentBackgroundMusic = newBgMusic;
-            audioSource.clip = currentBackgroundMusic;
-            audioSource.Play();
+            if (newBgMusic != null)
+            {
+                StartCoroutine(FadeInBgMusic(newBgMusic));
+            }
+            else
+            {
+                StartCoroutine(FadeInBgMusic(newBgMusic));
+            }
         }
 
         public void ChangeFootstepsSound(AudioClip[] newFootSteps, AreaManager areaManager)
@@ -58,7 +68,7 @@ namespace SP
         #region Play For Animation
         public void PlayOnStep()
         {
-            if (movingClips.Length > 0 && playFottsteps)
+            if (movingClips.Length > 0 && playFootsteps)
             {
                 audioSource.PlayOneShot(GetRandomClip(movingClips));
             }
@@ -121,13 +131,13 @@ namespace SP
 
         public void EnableFootStepsSound()
         {
-            playFottsteps = true;
+            playFootsteps = true;
             
         }
         
         public void DisableFootStepsSound()
         {
-            playFottsteps = false;
+            playFootsteps = false;
             
         }
         
@@ -143,6 +153,50 @@ namespace SP
             yield return new WaitForSeconds(1.0f);
 
             EnableFootStepsSound();
+        }
+
+        private IEnumerator FadeOutBgMusic(AudioClip newBgMusic)
+        {
+            do
+            {
+                audioSource.volume = Mathf.Lerp(SettingsHolder.soundVolume, 0.0f, currTime / musicFadeOut);
+                currTime += Time.deltaTime;
+                
+                yield return null;
+            }
+            while (currTime <= musicFadeOut && fadingMusic);
+            
+            currTime = 0.0f;
+            //previouseBackgroundMusic = currentBackgroundMusic;
+            currentBackgroundMusic = newBgMusic;
+            audioSource.clip = currentBackgroundMusic;
+            audioSource.volume = SettingsHolder.soundVolume;
+            audioSource.Play();
+            fadingMusic = false;
+        }
+        
+        private IEnumerator FadeInBgMusic(AudioClip newBgMusic)
+        {
+            do
+            {
+                audioSource.volume = Mathf.Lerp(0.0f, SettingsHolder.soundVolume, currTime / musicFadeOut);
+                currTime += Time.deltaTime;
+
+                yield return null;
+            } 
+            while (currTime <= musicFadeIn && fadingMusic);
+
+            if (!fadingMusic)
+            {
+                audioSource.volume = SettingsHolder.soundVolume;
+            }
+            
+            currTime = 0.0f;
+            //previouseBackgroundMusic = currentBackgroundMusic;
+            currentBackgroundMusic = newBgMusic;
+            audioSource.clip = currentBackgroundMusic;
+            audioSource.Play();
+            fadingMusic = false;
         }
     }
 }

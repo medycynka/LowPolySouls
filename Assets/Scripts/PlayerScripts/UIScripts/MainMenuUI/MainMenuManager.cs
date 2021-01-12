@@ -15,6 +15,8 @@ namespace SP {
         [Header("Character Creator Components", order = 1)]
         public GameObject characterCreatorScreen;
 
+        public float fadeOutTime = 2.5f;
+
         [Header("Settings Options", order = 1)]
         public TMP_Dropdown resolutionDropdown;
         public Toggle fullScreenToogle;
@@ -22,9 +24,12 @@ namespace SP {
         public Slider mouseSlider;
         public Slider volumeSlider;
 
+        float startMusicVolume;
+        float currentTime = 0.0f;
+
         private void Start()
         {
-            audioSource = GetComponentInParent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
             resolutionsOpts = Screen.resolutions;
             SettingsHolder.qualityID = QualitySettings.GetQualityLevel();
 
@@ -65,6 +70,8 @@ namespace SP {
             qualityDropdown.value = SettingsHolder.qualityID;
             mouseSlider.value = SettingsHolder.mouseSensibility;
             volumeSlider.value = SettingsHolder.soundVolume;
+            audioSource.volume = SettingsHolder.soundVolume;
+            startMusicVolume = SettingsHolder.soundVolume;
 
             resolutionDropdown.RefreshShownValue();
         }
@@ -83,7 +90,7 @@ namespace SP {
             if (SettingsHolder.isCharacterCreated)
             {
                 SettingsHolder.firstStart = false;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                FadeOutMusic();
             }
             else
             {
@@ -92,6 +99,11 @@ namespace SP {
             }
         }
 
+        public void FadeOutMusic()
+        {
+            StartCoroutine(SwitchToNextScene());
+        }
+        
         public void QuitGame()
         {
             Debug.Log("Quitting the game...");
@@ -124,7 +136,21 @@ namespace SP {
         public void SetVolume(float volume)
         {
             audioSource.volume = volume;
+            startMusicVolume = volume;
             SettingsHolder.soundVolume = volume;
+        }
+
+        private IEnumerator SwitchToNextScene()
+        {
+            while (currentTime <= fadeOutTime)
+            {
+                audioSource.volume = Mathf.Lerp(startMusicVolume, 0.0f, currentTime / fadeOutTime);
+                currentTime += Time.deltaTime;
+
+                yield return null;
+            }
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
