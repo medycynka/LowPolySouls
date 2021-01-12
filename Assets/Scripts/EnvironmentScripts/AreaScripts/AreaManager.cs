@@ -44,13 +44,6 @@ namespace SP
                     playerSoundManager = other.GetComponent<AnimationSoundManager>();
                 }
 
-                if (playerSoundManager.fadingMusic)
-                {
-                    // Reset fading
-                    playerSoundManager.fadingMusic = false;
-                }
-                
-                playerSoundManager.fadingMusic = true;
                 playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
                 playerSoundManager.ChangeFootstepsSound(footSteps, this);
 
@@ -71,14 +64,6 @@ namespace SP
             playerStats = null;
             isInside = false;
             insideReset = true;
-            
-            if (playerSoundManager.fadingMusic)
-            {
-                // Reset fading
-                playerSoundManager.fadingMusic = false;
-            }
-            
-            playerSoundManager.fadingMusic = true;
             playerSoundManager.ChangeBackGroundMusic(null);
             playerSoundManager.movingClips = footStepsOnExit;
         }

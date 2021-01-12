@@ -31,7 +31,7 @@ namespace SP
         public static DataManager LoadGame()
         {
             string path = Application.dataPath + "/Saves/GameSave.lps";
-
+            
             if (File.Exists(path))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();

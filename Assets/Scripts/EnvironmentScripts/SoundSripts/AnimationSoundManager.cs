@@ -43,14 +43,10 @@ namespace SP
 
         public void ChangeBackGroundMusic(AudioClip newBgMusic)
         {
-            if (newBgMusic != null)
-            {
-                StartCoroutine(FadeInBgMusic(newBgMusic));
-            }
-            else
-            {
-                StartCoroutine(FadeInBgMusic(newBgMusic));
-            }
+            currentBackgroundMusic = newBgMusic;
+            audioSource.clip = currentBackgroundMusic;
+            audioSource.volume = SettingsHolder.soundVolume;
+            audioSource.Play();
         }
 
         public void ChangeFootstepsSound(AudioClip[] newFootSteps, AreaManager areaManager)
