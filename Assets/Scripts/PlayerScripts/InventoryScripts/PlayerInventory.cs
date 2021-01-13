@@ -14,6 +14,9 @@ namespace SP
         public WeaponItem leftWeapon;
         public WeaponItem unarmedWeapon;
 
+        [Header("Current Spell", order = 1)] 
+        public SpellItem currentSpell;
+
         [Header("Weapons In Slots", order = 1)]
         public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
         public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];

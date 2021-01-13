@@ -50,6 +50,12 @@ namespace SP
         public float oh_heavyAttackMultiplier;
         public float th_lightAttackMultiplier;
         public float th_heavyAttackMultiplier;
+
+        [Header("Weapon Specifier", order = 2)]
+        public WeaponType weaponType;
+        public MeleeType meleeType = MeleeType.NotMelee;
+        public CastingType castingType = CastingType.NotCasting;
+        public ShootingType shootingType = ShootingType.NotShooting;
     }
 
 }

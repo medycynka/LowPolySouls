@@ -21,8 +21,9 @@ MonoBehaviour:
   pivotRotationTransform: {x: 90, y: 0, z: 0}
   backSlotPosition: {x: 4.2, y: -8, z: -2}
   backSlotRotation: {x: 15, y: 0, z: 0}
-  Light_Attack_Damage: 0
-  Heavy_Attack_Damage: 0
+  backSlotScale: 1
+  Light_Attack_Damage_Mult: 1
+  Heavy_Attack_Damage_Mult: 1.5
   Weight: 0
   Durability: 0
   Right_Hand_Idle: Right_Arm_Idle_01
@@ -43,3 +44,7 @@ MonoBehaviour:
   oh_heavyAttackMultiplier: 0
   th_lightAttackMultiplier: 0
   th_heavyAttackMultiplier: 0
+  weaponType: 0
+  meleeType: 3
+  castingType: 3
+  shootingType: 3

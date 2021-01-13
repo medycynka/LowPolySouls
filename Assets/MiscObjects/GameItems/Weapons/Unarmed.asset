@@ -14,9 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Unarmed
+  itemType: 0
   modelPrefab: {fileID: 8638161128593808972, guid: b16e888c6532fe14b9801f061750562b,
     type: 3}
   isUnarmed: 1
+  pivotPositionTransform: {x: 0, y: 0, z: 0}
+  pivotRotationTransform: {x: 0, y: 0, z: 0}
+  backSlotPosition: {x: 0, y: 0, z: 0}
+  backSlotRotation: {x: 0, y: 0, z: 0}
+  backSlotScale: 1
+  Light_Attack_Damage_Mult: 1
+  Heavy_Attack_Damage_Mult: 1.5
+  Weight: 0
+  Durability: 0
   Right_Hand_Idle: Right Arm Empty
   Left_Hand_Idle: Left Arm Empty
   TH_Idle: TH_Idle_01
@@ -25,6 +35,17 @@ MonoBehaviour:
   OH_Light_Attack_3: Light_Punch_01
   OH_Heavy_Attack_1: Heavy_Punch_01
   OH_Heavy_Attack_2: Heavy_Punch_01
+  TH_Light_Attack_1: TH_Light_Attack_01
+  TH_Light_Attack_2: TH_Light_Attack_02
+  TH_Light_Attack_3: TH_Light_Attack_03
+  TH_Heavy_Attack_1: TH_Heavy_Attack_01
+  TH_Heavy_Attack_2: TH_Heavy_Attack_02
   baseStamina: 5
-  lightAttackMultiplier: 1
-  heavyAttackMultiplier: 1.5
+  oh_lightAttackMultiplier: 0
+  oh_heavyAttackMultiplier: 0
+  th_lightAttackMultiplier: 0
+  th_heavyAttackMultiplier: 0
+  weaponType: 0
+  meleeType: 8
+  castingType: 3
+  shootingType: 3

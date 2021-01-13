@@ -45,3 +45,7 @@ MonoBehaviour:
   oh_heavyAttackMultiplier: 2
   th_lightAttackMultiplier: 1.75
   th_heavyAttackMultiplier: 2.25
+  weaponType: 0
+  meleeType: 3
+  castingType: 3
+  shootingType: 3
