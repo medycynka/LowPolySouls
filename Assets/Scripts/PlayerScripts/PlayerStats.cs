@@ -190,7 +190,7 @@ namespace SP
 
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength);
+            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength * 0.5f);
         }
 
         public int CalculateSoulsCost(int level)

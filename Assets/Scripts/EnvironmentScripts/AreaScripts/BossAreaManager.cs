@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace SP
 {
@@ -22,6 +23,7 @@ namespace SP
         public bool isBossAlive = true;
 
         EnemyStats bossStats;
+        Slider bossHpSlider;
 
         private void Start()
         {
@@ -29,7 +31,8 @@ namespace SP
             {
                 bonfiresInArea[0].gameObject.SetActive(false);
                 bossStats = bossPrefab.GetComponent<EnemyStats>();
-                bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = bossName;
+                bossHpBar.SetActive(false);
+                bossHpSlider = bossHpBar.GetComponentInChildren<Slider>();
             }
             else
             {
@@ -67,6 +70,10 @@ namespace SP
 
                 if (isBossAlive)
                 {
+                    bossHpSlider.minValue = 0;
+                    bossHpSlider.maxValue = bossStats.maxHealth;
+                    bossHpSlider.value = bossStats.maxHealth;
+                    
                     foreach (var fogWall in fogWalls)
                     {
                         fogWall.canInteract = false;
@@ -135,6 +142,7 @@ namespace SP
 
             if (isBossAlive)
             {
+                bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = bossName;
                 bossHpBar.SetActive(true);
             }
 

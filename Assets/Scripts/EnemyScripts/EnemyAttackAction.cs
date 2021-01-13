@@ -19,7 +19,7 @@ namespace SP
         public float minimumAttackAngle = -35;
 
         [Header("Attack Distance", order = 2)]
-        public float minimumDistanceNeededToAttack = 0;
+        public float minimumDistanceNeededToAttack = 0.5f;
         public float maximumDistanceNeededToAttack = 3;
     }
 }

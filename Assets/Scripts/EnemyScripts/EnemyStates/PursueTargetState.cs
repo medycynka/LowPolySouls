@@ -33,23 +33,17 @@ namespace SP {
 
                         return this;
                     }
-                    else
-                    {
-                        enemyManager.currentTarget = null;
-                        enemyManager.shouldFollowTarget = false;
+                    
+                    enemyManager.currentTarget = null;
+                    enemyManager.shouldFollowTarget = false;
 
-                        return idleState;
-                    }
-                }
-                else
-                {
                     return idleState;
                 }
+                
+                return idleState;
             }
-            else
-            {
-                return deathState;
-            }
+            
+            return deathState;
         }
     }
 

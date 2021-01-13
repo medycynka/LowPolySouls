@@ -55,22 +55,16 @@ namespace SP
                 #endregion
 
                 #region Handle State Change
-
                 if (enemyManager.currentTarget != null)
                 {
                     return pursueTargetState;
                 }
-                else
-                {
-                    return this;
-                }
-
+                
+                return this;
                 #endregion
             }
-            else
-            {
-                return deathState;
-            }
+            
+            return deathState;
         }
     }
 }

@@ -52,13 +52,21 @@ namespace SP
         public void ChangeFootstepsSound(AudioClip[] newFootSteps, AreaManager areaManager)
         {
             areaManager.SetExitFootSteps(movingClips);
-            movingClips = newFootSteps;
+            
+            if (newFootSteps.Length > 0)
+            {
+                movingClips = newFootSteps;
+            }
         }
 
         public void ChangeFootstepsSound(AudioClip[] newFootSteps, BossAreaManager areaManager)
         {
             areaManager.SetExitFootSteps(movingClips);
-            movingClips = newFootSteps;
+            
+            if (newFootSteps.Length > 0)
+            {
+                movingClips = newFootSteps;
+            }
         }
 
         #region Play For Animation

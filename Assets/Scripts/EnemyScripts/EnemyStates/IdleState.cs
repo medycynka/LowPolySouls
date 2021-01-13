@@ -52,16 +52,12 @@ namespace SP
 
                     return pursueTargetState;
                 }
-                else
-                {
-                    return this;
-                }
+                
+                return this;
                 #endregion
             }
-            else
-            {
-                return deathState;
-            }
+            
+            return deathState;
         }
     }
 

@@ -44,7 +44,8 @@ namespace SP
                     {
                         return this;
                     }
-                    else if (enemyManager.distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
+                    
+                    if (enemyManager.distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
                     {
                         if (enemyManager.viewableAngle <= currentAttack.maximumAttackAngle && enemyManager.viewableAngle >= currentAttack.minimumAttackAngle)
                         {
@@ -69,10 +70,8 @@ namespace SP
 
                 return combatStanceState;
             }
-            else
-            {
-                return deathState;
-            }
+            
+            return deathState;
         }
 
         private void GetNewAttack(EnemyManager enemyManager)

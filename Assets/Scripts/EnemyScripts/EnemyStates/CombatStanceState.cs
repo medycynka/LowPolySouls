@@ -30,21 +30,18 @@ namespace SP
                 {
                     return attackState;
                 }
-                else if (enemyManager.distanceFromTarget > enemyManager.enemyLocomotionManager.stoppingDistance)
+                
+                if (enemyManager.distanceFromTarget > enemyManager.enemyLocomotionManager.stoppingDistance)
                 {
                     return pursueTargetState;
                 }
-                else
-                {
-                    enemyManager.enemyLocomotionManager.StopMoving();
+                
+                enemyManager.enemyLocomotionManager.StopMoving();
 
-                    return this;
-                }
+                return this;
             }
-            else
-            {
-                return deathState;
-            }
+            
+            return deathState;
         }
     }
 

@@ -13,7 +13,7 @@ namespace SP
 
         [Header("Enemy Properties", order = 1)]
         [Header("Animator", order = 2)]
-        public Animator animator;
+        public EnemyAnimationManager animator;
 
         [Header("Health Bar", order = 2)]
         public GameObject healthBar;
@@ -33,7 +33,7 @@ namespace SP
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
-            animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<EnemyAnimationManager>();
             playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         }
 
@@ -68,9 +68,6 @@ namespace SP
                 {
                     bossHpSlider = bossAreaManager.bossHpBar.GetComponentInChildren<Slider>();
                 }
-
-                bossHpSlider.maxValue = maxHealth;
-                bossHpSlider.value = currentHealth;
             }
             else
             {
@@ -92,7 +89,7 @@ namespace SP
 
                     if (currentHealth > 0)
                     {
-                        animator.Play("Damage_01");
+                        animator.PlayTargetAnimation("Damage_01", true);
                     }
 
                     if(currentHealth <= 0)
@@ -121,7 +118,7 @@ namespace SP
 
             if (currentHealth > 0)
             {
-                animator.Play("Damage_01");
+                animator.PlayTargetAnimation("Damage_01", true);
             }
 
             yield return new WaitForSeconds(4f);

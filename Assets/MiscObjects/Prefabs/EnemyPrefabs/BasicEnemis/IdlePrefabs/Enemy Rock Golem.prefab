@@ -717,7 +717,7 @@ MonoBehaviour:
   disolveNoiseScale: 30
   disolveFresnelPower: 15
   currentDisolveTime: 0
-  disolveDurationTime: 3
+  disolveDurationTime: 4
   shouldGlow: 0
   objectDestructionDuration: 5
 --- !u!114 &3060950883499712625
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navmeshAgent: {fileID: 0}
   enemyRigidBody: {fileID: 0}
-  stoppingDistance: 1.25
+  stoppingDistance: 1.5
   rotationSpeed: 100
 --- !u!114 &1499623916
 MonoBehaviour:

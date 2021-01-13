@@ -47,7 +47,7 @@ namespace SP
                 }
             }
 
-            if (collision.CompareTag("Enemy"))
+            if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
                 PlayerStats playerStats = GetComponentInParent<PlayerStats>();

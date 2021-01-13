@@ -116,7 +116,7 @@ namespace SP
         {
             isAlive = false;
             enemyStats.currentHealth = 0;
-            enemyStats.animator.Play("Dead_01");
+            enemyStats.animator.PlayTargetAnimation("Dead_01", true);
 
             #region Disolve Effect
             foreach (var cM in characterMaterials)
@@ -156,7 +156,7 @@ namespace SP
                     cM.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
                 }
                 
-                currentDisolveTime += 0.25f * Time.deltaTime;
+                currentDisolveTime += Time.deltaTime;
 
                 yield return null;
             }
