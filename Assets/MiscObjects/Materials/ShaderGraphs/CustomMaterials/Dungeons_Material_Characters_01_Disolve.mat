@@ -71,6 +71,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 471631afc291fae4087fd072b5dbe4f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmisionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -167,6 +171,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TexturePickerShader_7774C123_Texture2D61EA9A5D_3298637071:
+        m_Texture: {fileID: 2800000, guid: 43a17cdabcb2b374fbcc12e4d4977760, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -235,6 +243,7 @@ Material:
     - _IsAlive: 1
     - _LODValue: 0
     - _MainShown: 1
+    - _MetalicValue: 0
     - _Metallic: 0
     - _Metallic2: 1
     - _MinPulseBrightness: 0
@@ -281,6 +290,7 @@ Material:
     - _ShadowStrength: 1
     - _Shininess: 0.078125
     - _ShouldBlink: 0
+    - _SmoothnesValue: 0.075
     - _Smoothness: 0.078125
     - _SmoothnessSource: 1
     - _SmoothnessTextureChannel: 0
@@ -334,6 +344,7 @@ Material:
     - _UVSecOcclusion: 0
     - _UVSecOcclusionLightmapPacked: 0
     - _UV_Clip: 0
+    - _UseEmission: 0
     - _UseTime: 0
     - _WetDroplets: 1
     - _WetRipples: 1
@@ -372,6 +383,7 @@ Material:
     - _DiffuseScatteringColor: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseScatteringColor2: {r: 0, g: 0, b: 0, a: 0}
     - _EdgeColor: {r: 23.96863, g: 0, b: 0, a: 1}
+    - _EmisionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}

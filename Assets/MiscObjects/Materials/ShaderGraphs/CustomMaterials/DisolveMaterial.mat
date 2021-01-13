@@ -55,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmisionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -107,6 +111,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TexturePickerShader_7774C123_Texture2D61EA9A5D_3298637071:
+        m_Texture: {fileID: 2800000, guid: 43a17cdabcb2b374fbcc12e4d4977760, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -134,6 +142,7 @@ Material:
     - _Invertmask: 0
     - _IsAlive: 1
     - _LODValue: 0
+    - _MetalicValue: 0
     - _Metallic: 0
     - _NoiceScale: 30
     - _Noisescale: 0
@@ -141,11 +150,13 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShouldBlink: 0
+    - _SmoothnesValue: 0.075
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _UseEmission: 0
     - _UseTime: 0
     - _ValueFill: 1
     - _Wave1amplitude: 0
@@ -164,6 +175,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DeathColor: {r: 32, g: 0, b: 0, a: 1}
     - _EdgeColor: {r: 23.96863, g: 0, b: 0, a: 0}
+    - _EmisionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fillcolor: {r: 1, g: 0.5514706, b: 0.5514706, a: 1}
     - _InRemapVec: {r: -1, g: 1, b: 0, a: 0}
