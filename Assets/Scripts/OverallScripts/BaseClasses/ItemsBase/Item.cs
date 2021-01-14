@@ -10,6 +10,7 @@ namespace SP
         [Header("Item Properties",order = 1)]
         public Sprite itemIcon;
         public string itemName;
+        public int itemId;
         public ItemType itemType;
     }
 

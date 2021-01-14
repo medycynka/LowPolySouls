@@ -14,6 +14,7 @@ namespace SP
         
         [Header("Character Creator Manager", order = 0)]
         [Header("Character Creator Components", order = 1)]
+        public GameObject creatorScreen;
         public ModularCharacterManager modularCharacterManager;
         public Slider headSlider;
         public Slider hairSlider;
@@ -23,13 +24,14 @@ namespace SP
 
         private void Start()
         {
-            mainMenuManager = GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<MainMenuManager>();
+            mainMenuManager = GameObject.FindObjectOfType<MainMenuManager>();
         }
 
         public void PlayGame()
         {
             SettingsHolder.isCharacterCreated = true;
             SaveManager.SaveMainMenu();
+            creatorScreen.SetActive(false);
             
             mainMenuManager.FadeOutMusic();
         }

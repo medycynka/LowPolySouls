@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Unarmed
+  itemId: 0
   itemType: 0
   modelPrefab: {fileID: 8638161128593808972, guid: b16e888c6532fe14b9801f061750562b,
     type: 3}
@@ -46,6 +47,6 @@ MonoBehaviour:
   th_lightAttackMultiplier: 0
   th_heavyAttackMultiplier: 0
   weaponType: 0
-  meleeType: 8
+  meleeType: 9
   castingType: 3
   shootingType: 3

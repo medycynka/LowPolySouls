@@ -9,10 +9,15 @@ namespace SP
         public BossAreaManager[] bossAreaManagers;
         public BonfireManager[] bonfireManagers;
 
-        public WeaponItem[] leftHandSlots = new WeaponItem[2];
-        public WeaponItem[] rightHandSlots = new WeaponItem[2];
         public WeaponItem[] weaponsHolder;
-        public EquipmentItem[] equipmentHolder;
+        public WeaponItem[] shieldsHolder;
+        public EquipmentItem[] helmetsHolder;
+        public EquipmentItem[] chestsHolder;
+        public EquipmentItem[] shouldersHolder;
+        public EquipmentItem[] handsHolder;
+        public EquipmentItem[] legsHolder;
+        public EquipmentItem[] feetHolder;
+        public EquipmentItem[] ringsHolder;
         public ConsumableItem[] consumableHolder;
         private void Awake()
         {

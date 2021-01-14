@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 009d4fc67f3ecc341a5229c548eea9a0, type: 3}
   itemName: 2H_Sword_004
+  itemId: 8
   itemType: 0
   modelPrefab: {fileID: 4763626469804173689, guid: ba81278084ebf344bb9c6ffe6b417eed,
     type: 3}

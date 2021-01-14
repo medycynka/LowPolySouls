@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SP
@@ -50,7 +51,130 @@ namespace SP
             
             if (dataManager != null)
             {
-                
+                if (!dataManager.isFirstStart)
+                {
+                    #region Quick Slots Initialization
+                    weaponsInRightHandSlots = new WeaponItem[2];
+                    weaponsInRightHandSlots[0] = dataManager.rightHandSlots[0, 0] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[0, 1]] : worldManager.shieldsHolder[dataManager.rightHandSlots[0, 1]];
+                    weaponsInRightHandSlots[1] = dataManager.rightHandSlots[1, 0] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[1, 1]] : worldManager.shieldsHolder[dataManager.rightHandSlots[1, 1]];
+                    
+                    weaponsInLeftHandSlots = new WeaponItem[2];
+                    weaponsInLeftHandSlots[0] = dataManager.leftHandSlots[0, 0] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[0, 1]] : worldManager.shieldsHolder[dataManager.leftHandSlots[0, 1]];
+                    weaponsInLeftHandSlots[1] = dataManager.leftHandSlots[1, 0] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[1, 1]] : worldManager.shieldsHolder[dataManager.leftHandSlots[1, 1]];
+                    #endregion
+                    
+                    #region Inventory Initialization
+                    #region Weapons
+                    weaponsInventory = new List<WeaponItem>();
+                    for (int i = 0; i < dataManager.weaponIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.weaponIds[i, 1]; j++)
+                        {
+                            weaponsInventory.Add(worldManager.weaponsHolder[dataManager.weaponIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Shields
+                    shieldsInventory = new List<WeaponItem>();
+                    for (int i = 0; i < dataManager.shieldIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.shieldIds[i, 1]; j++)
+                        {
+                            shieldsInventory.Add(worldManager.shieldsHolder[dataManager.shieldIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Helmets
+                    helmetsInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.helmetIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.helmetIds[i, 1]; j++)
+                        {
+                            helmetsInventory.Add(worldManager.helmetsHolder[dataManager.helmetIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Chest Armor
+                    chestsInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.chestIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.chestIds[i, 1]; j++)
+                        {
+                            chestsInventory.Add(worldManager.chestsHolder[dataManager.chestIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Shoulders
+                    shouldersInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.shoulderIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.shoulderIds[i, 1]; j++)
+                        {
+                            shouldersInventory.Add(worldManager.shouldersHolder[dataManager.shoulderIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Hands
+                    handsInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.handIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.handIds[i, 1]; j++)
+                        {
+                            handsInventory.Add(worldManager.handsHolder[dataManager.handIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Legs
+                    legsInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.legIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.legIds[i, 1]; j++)
+                        {
+                            legsInventory.Add(worldManager.legsHolder[dataManager.legIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Feet
+                    feetInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.footIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.footIds[i, 1]; j++)
+                        {
+                            feetInventory.Add(worldManager.feetHolder[dataManager.footIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Ring
+                    ringsInventory = new List<EquipmentItem>();
+                    for (int i = 0; i < dataManager.ringIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.ringIds[i, 1]; j++)
+                        {
+                            ringsInventory.Add(worldManager.ringsHolder[dataManager.ringIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    
+                    #region Consumable
+                    consumablesInventory = new List<ConsumableItem>();
+                    for (int i = 0; i < dataManager.consumableIds.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dataManager.consumableIds[i, 1]; j++)
+                        {
+                            consumablesInventory.Add(worldManager.consumableHolder[dataManager.consumableIds[i, 0]]);
+                        }
+                    }
+                    #endregion
+                    #endregion
+                }
             }
             #endregion
             

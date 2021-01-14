@@ -105,7 +105,7 @@ namespace SP
 
         public void SaveAndExit()
         {
-            SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>(), playerManager.GetComponent<CurrentEquipments>());
+            SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>());
             Application.Quit();
         }
 

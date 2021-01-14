@@ -911,6 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d24e25805d6904489f395b0c5876de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creatorScreen: {fileID: 1938930449}
   modularCharacterManager: {fileID: 1758143715}
   headSlider: {fileID: 1230527032556306819}
   hairSlider: {fileID: 1230527032987633155}
@@ -4271,7 +4272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.000004, y: 0}
+  m_AnchoredPosition: {x: 15, y: 0}
   m_SizeDelta: {x: -30, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &615448662603446485

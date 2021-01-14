@@ -38,7 +38,7 @@ namespace SP
             playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
             bonfireManager.RespawnEnemis();
 
-            SaveManager.SaveGame(playerManager, playerStats, playerManager.GetComponent<PlayerInventory>(), playerManager.GetComponent<CurrentEquipments>());
+            SaveManager.SaveGame(playerManager, playerStats, playerManager.GetComponent<PlayerInventory>());
         }
 
         public void GetUp()
@@ -58,7 +58,7 @@ namespace SP
                 playerStats = bonfireManager.playerManager.GetComponent<PlayerStats>();
             }
 
-            SaveManager.SaveGame(playerStats.GetComponent<PlayerManager>(), playerStats, playerStats.GetComponent<PlayerInventory>(), playerStats.GetComponent<CurrentEquipments>());
+            SaveManager.SaveGame(playerStats.GetComponent<PlayerManager>(), playerStats, playerStats.GetComponent<PlayerInventory>());
         }
 
         public void QuickMove()
