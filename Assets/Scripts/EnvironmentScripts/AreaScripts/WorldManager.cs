@@ -9,6 +9,11 @@ namespace SP
         public BossAreaManager[] bossAreaManagers;
         public BonfireManager[] bonfireManagers;
 
+        public WeaponItem[] leftHandSlots = new WeaponItem[2];
+        public WeaponItem[] rightHandSlots = new WeaponItem[2];
+        public WeaponItem[] weaponsHolder;
+        public EquipmentItem[] equipmentHolder;
+        public ConsumableItem[] consumableHolder;
         private void Awake()
         {
             DataManager dataManager = SaveManager.LoadGame();

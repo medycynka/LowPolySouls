@@ -41,11 +41,11 @@ namespace SP
 
         private IEnumerator DestroyFog(PlayerManager playerManager)
         {
-            playerManager.isRemovigFog = true;
+            playerManager.isRemovingFog = true;
 
             yield return new WaitForSeconds(2f);
 
-            playerManager.isRemovigFog = false;
+            playerManager.isRemovingFog = false;
 
             Destroy(gameObject);
         }
@@ -53,11 +53,11 @@ namespace SP
         private IEnumerator RemoveFog(PlayerManager playerManager)
         {
             canInteract = false;
-            playerManager.isRemovigFog = true;
+            playerManager.isRemovingFog = true;
 
             yield return new WaitForSeconds(2f);
 
-            playerManager.isRemovigFog = false;
+            playerManager.isRemovingFog = false;
 
             yield return new WaitForSeconds(5f);
 

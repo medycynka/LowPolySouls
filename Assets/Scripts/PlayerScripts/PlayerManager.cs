@@ -2,37 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 namespace SP
 {
     public class PlayerManager : CharacterManager
     {
-        InputHandler inputHandler;
-        Animator anim;
+        private InputHandler inputHandler;
+        private AnimatorHandler animatorHandler;
         [Header("Player Components", order = 1)]
         [Header("Camera Component", order = 2)]
         public CameraHandler cameraHandler;
-        PlayerLocomotion playerLocomotion;
-        PlayerStats playerStats;
+        private PlayerLocomotion playerLocomotion;
+        private PlayerStats playerStats;
         
         [Header("UI", order = 2)]
         public InteractableUI interactableUI;
 
-        [Header("Intecatable Objects UI", order = 2)]
+        [Header("Interactable Objects UI", order = 2)]
         public GameObject interactableUIGameObject;
         public GameObject itemInteractableGameObject;
 
-        [Header("Animator Inteaction Bool", order = 2)]
+        [Header("Animator Interaction Bool", order = 2)]
         public bool isInteracting;
 
-        [Header("Heleper bools", order = 2)]
+        [Header("Helper bools", order = 2)]
         public bool shouldRefillHealth = false;
         public bool shouldRefillStamina = false;
         public bool shouldRefillHealthBg = false;
         public bool shouldRefillStaminaBg = false;
         public bool shouldAddJumpForce = false;
         public bool isRestingAtBonfire = false;
-        public bool isRemovigFog = false;
+        public bool isRemovingFog = false;
 
         [Header("Player Flags", order = 2)]
         public bool isSprinting;
@@ -47,14 +48,14 @@ namespace SP
         public GameObject quickMoveScreen;
         public GameObject currentSpawnPoint;
 
-        float healthBgRefillTimer = 0.0f;
-        float staminaRefillTimer = 0.0f;
-        float addJumpForceTimer = 1.25f;
+        private float healthBgRefillTimer = 0.0f;
+        private float staminaRefillTimer = 0.0f;
+        private float addJumpForceTimer = 1.25f;
 
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
-            anim = GetComponentInChildren<Animator>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
         }
@@ -62,13 +63,13 @@ namespace SP
         void Update()
         {
             float delta = Time.deltaTime;
-
-            isInteracting = anim.GetBool("isInteracting");
-            canDoCombo = anim.GetBool("canDoCombo");
-            isUsingRightHand = anim.GetBool("isUsingRightHand");
-            isUsingLeftHand = anim.GetBool("isUsingLeftHand");
-            isInvulnerable = anim.GetBool("isInvulnerable");
-            anim.SetBool("isInAir", isInAir);
+            
+            isInteracting = animatorHandler.anim.GetBool(animatorHandler.isInteractingId);
+            canDoCombo = animatorHandler.anim.GetBool(animatorHandler.canDoComboId);
+            isUsingRightHand = animatorHandler.anim.GetBool(animatorHandler.usingRightId);
+            isUsingLeftHand = animatorHandler.anim.GetBool(animatorHandler.usingLeftId);
+            isInvulnerable = animatorHandler.anim.GetBool(animatorHandler.isInteractingId);
+            animatorHandler.anim.SetBool(animatorHandler.isInAirId, isInAir);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);

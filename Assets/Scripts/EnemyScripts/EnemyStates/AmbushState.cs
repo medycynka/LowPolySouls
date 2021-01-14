@@ -8,7 +8,7 @@ namespace SP
 
     public class AmbushState : State
     {
-        [Header("Persue Target State", order = 0)]
+        [Header("Pursue Target State", order = 0)]
         [Header("Possible After States", order = 1)]
         public PursueTargetState pursueTargetState;
         public DeathState deathState;

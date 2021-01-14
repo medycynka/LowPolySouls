@@ -28,7 +28,7 @@ namespace SP
         {
             if (inputHandler.comboFlag)
             {
-                animatorHandler.anim.SetBool("canDoCombo", false);
+                animatorHandler.anim.SetBool(animatorHandler.canDoComboId, false);
 
                 if (lastAttack == weapon.OH_Light_Attack_1)
                 {
@@ -130,7 +130,7 @@ namespace SP
                     return;
                 }
 
-                animatorHandler.anim.SetBool("isUsingRightHand", true);
+                animatorHandler.anim.SetBool(animatorHandler.usingRightId, true);
                 HandleLightAttack(playerInventory.rightWeapon);
             }
         }

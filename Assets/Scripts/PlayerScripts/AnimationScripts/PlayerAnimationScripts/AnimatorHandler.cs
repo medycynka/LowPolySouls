@@ -11,6 +11,11 @@ namespace SP
         PlayerLocomotion playerLocomotion;
         int vertical;
         int horizontal;
+        public int canDoComboId;
+        public int vulnerabilityId;
+        public int isInAirId;
+        public int usingLeftId;
+        public int usingRightId;
         public bool canRotate;
 
         public void Initialize()
@@ -21,6 +26,12 @@ namespace SP
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
+            isInteractingId = Animator.StringToHash("isInteracting");
+            canDoComboId = Animator.StringToHash("canDoCombo");
+            vulnerabilityId = Animator.StringToHash("isInvulnerable");
+            isInAirId = Animator.StringToHash("isInAir");
+            usingLeftId = Animator.StringToHash("isUsingLeftHand");
+            usingRightId = Animator.StringToHash("isUsingRightHand");
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
@@ -97,22 +108,22 @@ namespace SP
 
         public void EnableCombo()
         {
-            anim.SetBool("canDoCombo", true);
+            anim.SetBool(canDoComboId, true);
         }
 
         public void DisableCombo()
         {
-            anim.SetBool("canDoCombo", false);
+            anim.SetBool(canDoComboId, false);
         }
 
         public void EnableIsInvulnerable()
         {
-            anim.SetBool("isInvulnerable", true);
+            anim.SetBool(vulnerabilityId, true);
         }
         
         public void DisableIsInvulnerable()
         {
-            anim.SetBool("isInvulnerable", false);
+            anim.SetBool(vulnerabilityId, false);
         }
 
         private void OnAnimatorMove()

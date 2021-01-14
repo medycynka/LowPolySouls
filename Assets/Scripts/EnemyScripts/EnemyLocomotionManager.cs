@@ -8,11 +8,11 @@ namespace SP
 
     public class EnemyLocomotionManager : MonoBehaviour
     {
-        EnemyManager enemyManager;
-        EnemyAnimationManager enemyAnimationManager;
+        private EnemyManager enemyManager;
+        private EnemyAnimationManager enemyAnimationManager;
 
         [Header("Locomotion Manager", order = 0)]
-        [Header("Componetns", order = 1)]
+        [Header("Components", order = 1)]
         public NavMeshAgent navmeshAgent;
         public Rigidbody enemyRigidBody;
 
@@ -20,12 +20,17 @@ namespace SP
         public float stoppingDistance = 1.25f;
         public float rotationSpeed = 100;
 
+        private int verticalID;
+        private int horizontalID;
+
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyRigidBody = GetComponent<Rigidbody>();
+            verticalID = Animator.StringToHash("Vertical");
+            horizontalID = Animator.StringToHash("Horizontal");
         }
 
         private void Start()
@@ -38,7 +43,7 @@ namespace SP
         {
             if (enemyManager.isPreformingAction)
             {
-                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(verticalID, 0, 0.1f, Time.deltaTime);
 
                 return;
             }
@@ -49,7 +54,7 @@ namespace SP
 
             if (enemyManager.distanceFromTarget > stoppingDistance)
             {
-                enemyAnimationManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(verticalID, 1, 0.1f, Time.deltaTime);
             }
             else if (enemyManager.distanceFromTarget <= stoppingDistance)
             {
@@ -64,7 +69,7 @@ namespace SP
         public void StopMoving()
         {
             enemyManager.distanceFromTarget = 0;
-            enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            enemyAnimationManager.anim.SetFloat(verticalID, 0, 0.1f, Time.deltaTime);
         }
 
         public void HandleRotateTowardsTarget()

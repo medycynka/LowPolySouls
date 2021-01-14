@@ -10,8 +10,14 @@ namespace SP
         [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
         EnemyAnimationManager enemyAnimationManager;
         EnemyStats enemyStats;
-        EnemyDrops enemyDrops;
-        [SerializeField] List<Material> characterMaterials;
+        EnemyDrops enemyDrops; 
+        List<Material> characterMaterials;
+        int edgeWidthId;
+        int noiceScaleId;
+        int fresnelPowerId;
+        int glowId;
+        int aliveId;
+        int disolveId;
 
         [Header("Manager Properties", order = 1)]
         [Header("Bools", order = 2)]
@@ -57,11 +63,18 @@ namespace SP
             characterMaterials = new List<Material>();
             Renderer[] renders = GetComponentsInChildren<Renderer>();
 
+            edgeWidthId = Shader.PropertyToID("_EdgeWidth");
+            noiceScaleId = Shader.PropertyToID("_NoiceScale");
+            fresnelPowerId = Shader.PropertyToID("_FresnelPower");
+            glowId = Shader.PropertyToID("_ShouldBlink");
+            aliveId = Shader.PropertyToID("_IsAlive");
+            disolveId = Shader.PropertyToID("_DisolveValue");
+
             foreach (var r in renders)
             {
-                r.material.SetFloat("_EdgeWidth", disolveEdgeWidth);
-                r.material.SetFloat("_NoiceScale", disolveNoiseScale);
-                r.material.SetFloat("_FresnelPower", disolveFresnelPower);
+                r.material.SetFloat(edgeWidthId, disolveEdgeWidth);
+                r.material.SetFloat(noiceScaleId, disolveNoiseScale);
+                r.material.SetFloat(fresnelPowerId, disolveFresnelPower);
                 characterMaterials.Add(r.material);
             }
         }
@@ -70,7 +83,7 @@ namespace SP
         {
             HandleRecoveryTimer();
 
-            isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+            isInteracting = enemyAnimationManager.anim.GetBool(enemyAnimationManager.isInteractingId);
         }
 
         private void FixedUpdate()
@@ -121,14 +134,14 @@ namespace SP
             #region Disolve Effect
             foreach (var cM in characterMaterials)
             {
-                cM.SetInt("_IsAlive", 0);
+                cM.SetInt(aliveId, 0);
             }
 
             if (shouldGlow)
             {
                 foreach (var cM in characterMaterials)
                 {
-                    cM.SetInt("_ShouldBlink", 1);
+                    cM.SetInt(glowId, 1);
                 }
             }
 
@@ -153,7 +166,7 @@ namespace SP
             {
                 foreach (var cM in characterMaterials)
                 {
-                    cM.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
+                    cM.SetFloat(disolveId, Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
                 }
                 
                 currentDisolveTime += Time.deltaTime;

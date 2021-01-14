@@ -12,6 +12,7 @@ namespace SP
         {
             anim = GetComponent<Animator>();
             enemyLocomotionManager = GetComponentInParent<EnemyLocomotionManager>();
+            isInteractingId = Animator.StringToHash("isInteracting");
         }
 
         private void OnAnimatorMove()

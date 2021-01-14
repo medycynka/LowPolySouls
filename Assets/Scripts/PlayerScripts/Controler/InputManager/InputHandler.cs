@@ -43,7 +43,7 @@ namespace SP
         [Header("Roll Timer", order = 1)]
         public float rollInputTimer;
 
-        PlayerControls inputActions;
+        PlayerControls playerInputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
@@ -72,36 +72,36 @@ namespace SP
 
         public void OnEnable()
         {
-            if (inputActions == null)
+            if (playerInputActions == null)
             {
-                inputActions = new PlayerControls();
-                inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
-                inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
-                inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-                inputActions.PlayerActions.RT.performed += i => rt_Input = true;
-                inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-                inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-                inputActions.PlayerActions.E.performed += i => a_Input = true;
-                inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
-                inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
-                inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
-                inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
-                inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
-                inputActions.PlayerActions.Y.performed += i => y_Input = true;
-                inputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
+                playerInputActions = new PlayerControls();
+                playerInputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+                playerInputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerInputActions.PlayerActions.RB.performed += i => rb_Input = true;
+                playerInputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                playerInputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+                playerInputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+                playerInputActions.PlayerActions.E.performed += i => a_Input = true;
+                playerInputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+                playerInputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+                playerInputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                playerInputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+                playerInputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
+                playerInputActions.PlayerActions.Y.performed += i => y_Input = true;
+                playerInputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
             }
 
-            inputActions.Enable();
+            playerInputActions.Enable();
         }
 
         private void OnDisable()
         {
-            inputActions.Disable();
+            playerInputActions.Disable();
         }
 
         public void TickInput(float delta)
         {
-            if (playerStats.isPlayerAlive && !playerManager.isRestingAtBonfire && !playerManager.isRemovigFog)
+            if (playerStats.isPlayerAlive && !playerManager.isRestingAtBonfire && !playerManager.isRemovingFog)
             {
                 if (!inventoryFlag)
                 {
@@ -129,7 +129,7 @@ namespace SP
 
         private void HandleRollInput(float delta)
         {
-            b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            b_Input = playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
             sprintFlag = b_Input;
 
             if (b_Input)
@@ -180,7 +180,7 @@ namespace SP
                             return;
                         }
 
-                        animatorHandler.anim.SetBool("isUsingRightHand", true);
+                        animatorHandler.anim.SetBool(animatorHandler.usingRightId, true);
                         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
                     }
                 }

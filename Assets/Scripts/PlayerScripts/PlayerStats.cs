@@ -12,7 +12,7 @@ namespace SP
 
         [Header("Player Properties", order = 1)]
 
-        [Header("UI Compontents", order = 2)]
+        [Header("UI Components", order = 2)]
         public UIManager uiManager;
         public HealthBar healthBar;
         public StaminaBar staminaBar;

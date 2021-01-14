@@ -44,6 +44,16 @@ namespace SP
 
         private void Start()
         {
+            #region Inventory Initialization
+            DataManager dataManager = SaveManager.LoadGame();
+            WorldManager worldManager = GameObject.FindObjectOfType<WorldManager>();
+            
+            if (dataManager != null)
+            {
+                
+            }
+            #endregion
+            
             rightWeapon = weaponsInRightHandSlots[0];
             leftWeapon = weaponsInLeftHandSlots[0];
             weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);

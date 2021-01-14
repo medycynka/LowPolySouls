@@ -185,7 +185,7 @@ namespace SP
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool("isInteracting"))
+            if (animatorHandler.anim.GetBool(animatorHandler.isInteractingId))
             {
                 return;
             }
@@ -228,7 +228,7 @@ namespace SP
 
             if (playerManager.isInAir)
             {
-                rigidbody.velocity = Vector3.down * fallingSpeed * 0.05f + moveDirection * (fallingSpeed * 0.01f);
+                rigidbody.velocity = Vector3.down * (fallingSpeed * 0.05f) + moveDirection * (fallingSpeed * 0.01f);
             }
 
             Vector3 dir = moveDirection;
@@ -338,11 +338,11 @@ namespace SP
             {
                 if (inputHandler.sprintFlag)
                 {
-                    rigidbody.AddForce(moveDirection * jumpMult * sprintSpeed * 0.1f * delta, ForceMode.Impulse);
+                    rigidbody.AddForce(moveDirection * (jumpMult * sprintSpeed * 0.1f * delta), ForceMode.Impulse);
                 }
                 else
                 {
-                    rigidbody.AddForce(moveDirection * jumpMult * movementSpeed * 0.2f * delta, ForceMode.Impulse);
+                    rigidbody.AddForce(moveDirection * (jumpMult * movementSpeed * 0.2f * delta), ForceMode.Impulse);
                 }
             }
             else
