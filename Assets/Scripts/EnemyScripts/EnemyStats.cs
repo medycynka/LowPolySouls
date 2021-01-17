@@ -121,7 +121,7 @@ namespace SP
                 animator.PlayTargetAnimation("Damage_01", true);
             }
 
-            yield return new WaitForSeconds(4f);
+            yield return CoroutineYielder.enemyHpUpdateWaiter;
 
             healthBar.SetActive(false);
         }

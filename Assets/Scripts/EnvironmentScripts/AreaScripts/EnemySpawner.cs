@@ -53,7 +53,7 @@ namespace SP
         {
             ClearAliveEnemies();
 
-            yield return new WaitForSeconds(1f);
+            yield return CoroutineYielder.spawnRefreshWaiter;
 
             foreach (var enemyClone in spawnList)
             {

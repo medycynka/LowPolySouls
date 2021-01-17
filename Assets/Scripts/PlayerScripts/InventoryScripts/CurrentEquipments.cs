@@ -1,33 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using BattleDrakeStudios;
 using BattleDrakeStudios.ModularCharacters;
+using UnityEngine.Rendering;
 
 namespace SP
 {
     public class CurrentEquipments : MonoBehaviour
     {
-        PlayerStats playerStats;
-        ModularCharacterManager modularCharacterManager;
+        private PlayerStats playerStats;
+        private ModularCharacterManager modularCharacterManager;
 
+        [Serializable]
         public class EquipmentPart
         {
-            public int dictID;
-            public ModularBodyPart eqPart;
-            public int partID;
-            public float armorValue;
+            public int dictID { get; set; }
+            public ModularBodyPart eqPart { get; set; }
+            public int partID { get; set; }
+            public float armorValue { get; set; }
 
-            public EquipmentPart(int did_, ModularBodyPart mbp_, int id_, float armor_)
+            public EquipmentPart(int did, ModularBodyPart mbp, int id, float armor)
             {
-                dictID = did_;
-                eqPart = mbp_;
-                partID = id_;
-                armorValue = armor_;
+                dictID = did;
+                eqPart = mbp;
+                partID = id;
+                armorValue = armor;
             }
         }
 
-        public Dictionary<ModularBodyPart, EquipmentPart> currentEq;
+        public Dictionary<ModularBodyPart, EquipmentPart> CurrentEq;
 
         private void Awake()
         {
@@ -37,14 +41,7 @@ namespace SP
 
         private void Start()
         {
-            if (SettingsHolder.isMale)
-            {
-                modularCharacterManager.SwapGender(Gender.Male);
-            }
-            else
-            {
-                modularCharacterManager.SwapGender(Gender.Female);
-            }
+            modularCharacterManager.SwapGender(SettingsHolder.isMale ? Gender.Male : Gender.Female);
 
             InitializeCurrentEquipment();
             EquipPlayerWithCurrentItems();
@@ -53,7 +50,7 @@ namespace SP
 
         public void InitializeCurrentEquipment()
         {
-            currentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
+            CurrentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
                 { ModularBodyPart.Helmet, new EquipmentPart(0, ModularBodyPart.Helmet, SettingsHolder.partsID[0], SettingsHolder.partsArmor[0]) },
                 { ModularBodyPart.HeadAttachment, new EquipmentPart(1, ModularBodyPart.HeadAttachment, SettingsHolder.partsID[1], SettingsHolder.partsArmor[1]) },
                 { ModularBodyPart.Head, new EquipmentPart(2, ModularBodyPart.Head, SettingsHolder.partsID[2], SettingsHolder.partsArmor[2]) },
@@ -85,21 +82,21 @@ namespace SP
 
         public void EquipPlayerWithCurrentItems()
         {
-            foreach(var kvp_ in currentEq)
+            foreach(var kvp in CurrentEq)
             {
-                if(kvp_.Value.partID > -1)
+                if(kvp.Value.partID > -1)
                 {
-                    modularCharacterManager.ActivatePart(kvp_.Value.eqPart, kvp_.Value.partID);
+                    modularCharacterManager.ActivatePart(kvp.Value.eqPart, kvp.Value.partID);
                 }
             }
         }
 
         public void SaveCurrentEqIds()
         {
-            foreach (var kvp_ in currentEq)
+            foreach (var kvp in CurrentEq)
             {
-                SettingsHolder.partsID[kvp_.Value.dictID] = kvp_.Value.partID;
-                SettingsHolder.partsArmor[kvp_.Value.dictID] = kvp_.Value.armorValue;
+                SettingsHolder.partsID[kvp.Value.dictID] = kvp.Value.partID;
+                SettingsHolder.partsArmor[kvp.Value.dictID] = kvp.Value.armorValue;
             }
         }
 
@@ -110,14 +107,7 @@ namespace SP
 
         private float CalculateArmorOfCurrentEquipment()
         {
-            float sum_ = 0.0f;
-
-            foreach(var kvp_ in currentEq)
-            {
-                sum_ += kvp_.Value.armorValue;
-            }
-
-            return sum_;
+            return CurrentEq.Sum(kvp => kvp.Value.armorValue);
         }
     }
 

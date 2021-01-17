@@ -78,14 +78,14 @@ namespace SP
             bonfireManager.playerManager.transform.position = bonfireManager.spawnPoint.transform.position;
             bonfireManager.playerManager.transform.rotation = bonfireManager.spawnPoint.transform.rotation;
 
-            yield return new WaitForSeconds(bonfireManager.quickMoveScreenTime);
+            yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
             bonfireManager.CloseQuickMoveScreen();
             animatorHandler.PlayTargetAnimation("Stand Up", true);
             bonfireManager.locationScreen.SetActive(true);
             bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>().text = bonfireManager.locationName;
 
-            yield return new WaitForSeconds(1.5f);
+            yield return CoroutineYielder.bonfireTeleportSecondWaiter;
 
             bonfireManager.locationScreen.SetActive(false);
             bonfireManager.playerManager.isRestingAtBonfire = false;

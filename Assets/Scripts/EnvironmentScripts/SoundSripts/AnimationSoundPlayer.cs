@@ -63,8 +63,9 @@ namespace SP {
             animationSoundManager.DisableFootStepsSound();
         }
 
-	    private IEnumerator EnableStepsAfterSecond(){
-	    	yield return new WaitForSeconds(1.0f);
+	    private IEnumerator EnableStepsAfterSecond()
+        {
+            yield return CoroutineYielder.stepSoundEnablerWaiter;
 
 		    animationSoundManager.EnableFootStepsSound();
 	    }

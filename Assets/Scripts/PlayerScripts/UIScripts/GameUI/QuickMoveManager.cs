@@ -9,31 +9,31 @@ namespace SP
     {
         public GameObject backgroundScreen;
         public GameObject buttonPrefab;
-        public GameObject[] bonfireList;
-        List<QuickMoveSlot> quickMoveSlots;
+        public BonfireManager[] bonfireList;
+        private QuickMoveSlot[] quickMoveSlots;
 
 
-        public void UpdateActivBonfireList()
+        public void UpdateActiveBonfireList()
         {
-            int id_ = 0;
-            quickMoveSlots = new List<QuickMoveSlot>(backgroundScreen.GetComponentsInChildren<QuickMoveSlot>());
-            
-            foreach(var e_ in quickMoveSlots)
+            int id = 0;
+            quickMoveSlots = backgroundScreen.GetComponentsInChildren<QuickMoveSlot>();
+
+            for (var i = 0; i < quickMoveSlots.Length; i++)
             {
-                e_.ClearSlot();
+                quickMoveSlots[i].ClearSlot();
             }
 
-            foreach(var bonfire_ in bonfireList)
+            for (var i = 0; i < bonfireList.Length; i++)
             {
-                if (bonfire_.GetComponent<BonfireManager>().isActivated)
+                if (bonfireList[i].isActivated)
                 {
-                    bonfire_.GetComponent<BonfireManager>().qucikMoveID = id_;
+                    bonfireList[i].qucikMoveID = id;
                     Instantiate(buttonPrefab, backgroundScreen.transform);
 
-                    buttonPrefab.GetComponent<QuickMoveSlot>().AddSlot(bonfire_);
+                    buttonPrefab.GetComponent<QuickMoveSlot>().AddSlot(bonfireList[i].gameObject);
                 }
 
-                id_++;
+                id++;
             }
         }
     }

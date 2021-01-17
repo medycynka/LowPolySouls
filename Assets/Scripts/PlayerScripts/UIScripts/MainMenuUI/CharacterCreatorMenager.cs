@@ -68,9 +68,9 @@ namespace SP
             }
         }
 
-        public void SetPlayerName(string name)
+        public void SetPlayerName(string newName)
         {
-            SettingsHolder.playerName = name;
+            SettingsHolder.playerName = newName;
         }
 
         public void SetHead(float partID)

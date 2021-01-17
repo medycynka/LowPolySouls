@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using TMPro;
 
@@ -16,7 +17,7 @@ namespace SP
         public HandEquipmentSlotUI[] handEquipmentSlotUI;
 
         [Header("Stats Values")]
-        public TextMeshProUGUI strenghtValue;
+        public TextMeshProUGUI strengthValue;
         public TextMeshProUGUI agilityValue;
         public TextMeshProUGUI defenceValue;
         public TextMeshProUGUI allDefenceValue;
@@ -70,7 +71,7 @@ namespace SP
 
         public void UpdateStatsWindow(PlayerStats playerStats)
         {
-            strenghtValue.text = playerStats.Strength.ToString();
+            strengthValue.text = playerStats.Strength.ToString();
             agilityValue.text = playerStats.Agility.ToString();
             defenceValue.text = playerStats.Defence.ToString();
             allDefenceValue.text = playerStats.currentArmorValue.ToString();

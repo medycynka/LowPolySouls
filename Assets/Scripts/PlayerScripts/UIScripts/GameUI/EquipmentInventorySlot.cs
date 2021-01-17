@@ -13,15 +13,10 @@ namespace SP
         public CurrentEquipments currentEquipments;
         public ModularCharacterManager modularCharacterManager;
 
-        EquipmentItem item;
         public bool equipUnEquip = false;
-
-        bool shouldDeactivate = false;
-
-        private void Awake()
-        {
-
-        }
+        
+        private EquipmentItem item;
+        private bool shouldDeactivate = false;
 
         public void AddItem(EquipmentItem newItem)
         {
@@ -31,12 +26,12 @@ namespace SP
             gameObject.SetActive(true);
         }
 
-        public void ClearInventorySlot(bool last_slot)
+        public void ClearInventorySlot(bool lastSlot)
         {
             item = null;
             icon.sprite = null;
             icon.enabled = false;
-            gameObject.SetActive(last_slot);
+            gameObject.SetActive(lastSlot);
         }
 
         public void HandleEquiping()
@@ -91,7 +86,7 @@ namespace SP
                 }
             }
         }
-        public void EquipThisItem()
+        private void EquipThisItem()
         {
             if (item.itemType == ItemType.Ring)
             {
@@ -102,11 +97,11 @@ namespace SP
                 #region Deactivate Head if necessary
                 if (item.removeHead)
                 {
-                    modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Head].eqPart);
+                    modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Head].eqPart);
                 }
                 #endregion
 
-                int counter_ = 0;
+                int counter = 0;
                 foreach (var bodyPart in item.bodyParts)
                 {
                     #region Deactivate Unnecesary Head Parts
@@ -114,76 +109,76 @@ namespace SP
                     {
                         if (bodyPart == ModularBodyPart.Helmet)
                         {
-                            if (currentEquipments.currentEq[ModularBodyPart.Hat].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.Hat].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Hat].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.Hat].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.Hat].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hat].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.Hat].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.Hat].armorValue = 0;
                             }
-                            if (currentEquipments.currentEq[ModularBodyPart.HeadCovering].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.HeadCovering].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.HeadCovering].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.HeadCovering].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].armorValue = 0;
                             }
 
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Ear].eqPart);
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart);
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Eyebrow].eqPart);
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.FacialHair].eqPart);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Ear].eqPart);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].eqPart);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.FacialHair].eqPart);
                         }
                         else if (bodyPart == ModularBodyPart.HeadCovering)
                         {
-                            if (currentEquipments.currentEq[ModularBodyPart.Hat].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.Hat].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Hat].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.Hat].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.Hat].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hat].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.Hat].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.Hat].armorValue = 0;
                             }
-                            if (currentEquipments.currentEq[ModularBodyPart.Helmet].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.Helmet].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Helmet].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.Helmet].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.Helmet].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Helmet].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.Helmet].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.Helmet].armorValue = 0;
                             }
 
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Ear].eqPart);
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Head].eqPart, currentEquipments.currentEq[ModularBodyPart.Head].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.currentEq[ModularBodyPart.Eyebrow].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.currentEq[ModularBodyPart.FacialHair].partID);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Ear].eqPart);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Head].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Head].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.FacialHair].partID);
                         }
                         else if (bodyPart == ModularBodyPart.Hat)
                         {
-                            if (currentEquipments.currentEq[ModularBodyPart.Helmet].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.Helmet].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Helmet].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.Helmet].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.Helmet].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Helmet].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.Helmet].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.Helmet].armorValue = 0;
                             }
-                            if (currentEquipments.currentEq[ModularBodyPart.HeadCovering].partID > -1)
+                            if (currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].partID > -1)
                             {
-                                modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.HeadCovering].eqPart);
-                                currentEquipments.currentEq[ModularBodyPart.HeadCovering].partID = -1;
-                                currentEquipments.currentEq[ModularBodyPart.HeadCovering].armorValue = 0;
+                                modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].eqPart);
+                                currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].partID = -1;
+                                currentEquipments.CurrentEq[ModularBodyPart.HeadCovering].armorValue = 0;
                             }
 
-                            modularCharacterManager.DeactivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Head].eqPart, currentEquipments.currentEq[ModularBodyPart.Head].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Ear].eqPart, currentEquipments.currentEq[ModularBodyPart.Ear].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.currentEq[ModularBodyPart.Eyebrow].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.currentEq[ModularBodyPart.FacialHair].partID);
+                            modularCharacterManager.DeactivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Head].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Head].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Ear].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Ear].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.FacialHair].partID);
                         }
                     }
                     #endregion
 
                     #region Equip Item
-                    modularCharacterManager.ActivatePart(bodyPart, item.partsIDS[counter_]);
-                    currentEquipments.currentEq[bodyPart].partID = item.partsIDS[counter_];
-                    currentEquipments.currentEq[bodyPart].armorValue = item.Armor;
+                    modularCharacterManager.ActivatePart(bodyPart, item.partsIDS[counter]);
+                    currentEquipments.CurrentEq[bodyPart].partID = item.partsIDS[counter];
+                    currentEquipments.CurrentEq[bodyPart].armorValue = item.Armor;
                     #endregion
 
-                    counter_++;
+                    counter++;
                 }
             }
 
@@ -191,7 +186,7 @@ namespace SP
             currentEquipments.UpdateArmorValue();
         }
 
-        public void UnequipThisItem()
+        private void UnequipThisItem()
         {
             if (item.itemType == ItemType.Ring)
             {
@@ -202,7 +197,7 @@ namespace SP
                 #region Activate Head if necessary
                 if (item.removeHead)
                 {
-                    modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Head].eqPart, currentEquipments.currentEq[ModularBodyPart.Head].partID);
+                    modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Head].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Head].partID);
                 }
                 #endregion
 
@@ -213,19 +208,19 @@ namespace SP
                     {
                         if (bodyPart == ModularBodyPart.Helmet)
                         {
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Ear].eqPart, currentEquipments.currentEq[ModularBodyPart.Ear].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart, currentEquipments.currentEq[ModularBodyPart.Hair].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.currentEq[ModularBodyPart.Eyebrow].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.currentEq[ModularBodyPart.FacialHair].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Ear].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Ear].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Hair].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Eyebrow].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.FacialHair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.FacialHair].partID);
                         }
                         else if (bodyPart == ModularBodyPart.HeadCovering)
                         {
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Ear].eqPart, currentEquipments.currentEq[ModularBodyPart.Ear].partID);
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart, currentEquipments.currentEq[ModularBodyPart.Hair].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Ear].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Ear].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Hair].partID);
                         }
                         else if (bodyPart == ModularBodyPart.Hat)
                         {
-                            modularCharacterManager.ActivatePart(currentEquipments.currentEq[ModularBodyPart.Hair].eqPart, currentEquipments.currentEq[ModularBodyPart.Hair].partID);
+                            modularCharacterManager.ActivatePart(currentEquipments.CurrentEq[ModularBodyPart.Hair].eqPart, currentEquipments.CurrentEq[ModularBodyPart.Hair].partID);
                         }
                     }
                     #endregion
@@ -240,15 +235,15 @@ namespace SP
                     if (shouldDeactivate)
                     {
                         modularCharacterManager.DeactivatePart(bodyPart);
-                        currentEquipments.currentEq[bodyPart].partID = -1;
+                        currentEquipments.CurrentEq[bodyPart].partID = -1;
                     }
                     else
                     {
                         modularCharacterManager.ActivatePart(bodyPart, 0);
-                        currentEquipments.currentEq[bodyPart].partID = 0;
+                        currentEquipments.CurrentEq[bodyPart].partID = 0;
                     }
 
-                    currentEquipments.currentEq[bodyPart].armorValue = 0;
+                    currentEquipments.CurrentEq[bodyPart].armorValue = 0;
                     #endregion
                 }
             }

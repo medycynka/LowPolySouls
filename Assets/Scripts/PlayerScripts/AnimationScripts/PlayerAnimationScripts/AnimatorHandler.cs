@@ -6,11 +6,11 @@ namespace SP
 {
     public class AnimatorHandler : AnimationManager
     {
-        PlayerManager playerManager;
-        InputHandler inputHandler;
-        PlayerLocomotion playerLocomotion;
-        int vertical;
-        int horizontal;
+        private PlayerManager playerManager;
+        private InputHandler inputHandler;
+        private PlayerLocomotion playerLocomotion;
+        private int vertical;
+        private int horizontal;
         public int canDoComboId;
         public int vulnerabilityId;
         public int isInAirId;
@@ -129,15 +129,16 @@ namespace SP
         private void OnAnimatorMove()
         {
             if (playerManager.isInteracting == false)
+            {
                 return;
+            }
 
-            float delta = Time.deltaTime;
+            var delta = Time.deltaTime;
             playerLocomotion.rigidbody.drag = 0;
-            Vector3 deltaPosition = anim.deltaPosition;
+            var deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
-            Vector3 velocity = deltaPosition / delta;
+            var velocity = deltaPosition / delta;
             playerLocomotion.rigidbody.velocity = velocity;
         }
-
     }
 }

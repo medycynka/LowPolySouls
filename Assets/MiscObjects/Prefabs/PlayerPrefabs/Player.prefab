@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: 4966070490633684521}
   - component: {fileID: 4966070490633684526}
   - component: {fileID: 3517719973692865818}
+  - component: {fileID: 1775283085576989764}
   m_Layer: 9
   m_Name: Player
   m_TagString: Model
@@ -2519,6 +2520,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  isInteractingId: 0
+  canDoComboId: 0
+  vulnerabilityId: 0
+  isInAirId: 0
+  usingLeftId: 0
+  usingRightId: 0
   canRotate: 1
 --- !u!114 &4966070490633684526
 MonoBehaviour:
@@ -2547,6 +2554,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPlayStep: 1
+--- !u!114 &1775283085576989764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966070490633812491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea960408f235894999b7cf72c5614a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!1 &4966070490633813573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,7 +3467,6 @@ GameObject:
   - component: {fileID: 4281836137122507302}
   - component: {fileID: 4966070491420200269}
   - component: {fileID: 4966070491420200268}
-  - component: {fileID: 4966070491420200270}
   - component: {fileID: 4966070491420200265}
   - component: {fileID: 540771581}
   - component: {fileID: 6676873441362283216}
@@ -3696,7 +3715,7 @@ MonoBehaviour:
   shouldRefillStaminaBg: 0
   shouldAddJumpForce: 0
   isRestingAtBonfire: 0
-  isRemovigFog: 0
+  isRemovingFog: 0
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
@@ -3721,6 +3740,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   leftWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 179a4f0368fb0c64c8a791d4150536d1, type: 2}
+  currentSpell: {fileID: 0}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   - {fileID: 11400000, guid: bd035952e8bccc546a2bd9275c1e7aa5, type: 2}
@@ -3739,19 +3759,6 @@ MonoBehaviour:
   feetInventory: []
   ringsInventory: []
   consumablesInventory: []
---- !u!114 &4966070491420200270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4966070491420200266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea960408f235894999b7cf72c5614a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastAttack: 
 --- !u!114 &4966070491420200265
 MonoBehaviour:
   m_ObjectHideFlags: 0

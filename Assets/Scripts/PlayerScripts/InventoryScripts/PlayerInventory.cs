@@ -7,7 +7,7 @@ namespace SP
 {
     public class PlayerInventory : MonoBehaviour
     {
-        WeaponSlotManager weaponSlotManager;
+        private WeaponSlotManager weaponSlotManager;
 
         [Header("Inventory", order = 0)]
         [Header("Weapon On Load", order = 1)]
@@ -46,8 +46,8 @@ namespace SP
         private void Start()
         {
             #region Inventory Initialization
-            DataManager dataManager = SaveManager.LoadGame();
-            WorldManager worldManager = GameObject.FindObjectOfType<WorldManager>();
+            var dataManager = SaveManager.LoadGame();
+            var worldManager = FindObjectOfType<WorldManager>();
             
             if (dataManager != null)
             {
@@ -66,9 +66,9 @@ namespace SP
                     #region Inventory Initialization
                     #region Weapons
                     weaponsInventory = new List<WeaponItem>();
-                    for (int i = 0; i < dataManager.weaponIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.weaponIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.weaponIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.weaponIds[i, 1]; j++)
                         {
                             weaponsInventory.Add(worldManager.weaponsHolder[dataManager.weaponIds[i, 0]]);
                         }
@@ -77,9 +77,9 @@ namespace SP
                     
                     #region Shields
                     shieldsInventory = new List<WeaponItem>();
-                    for (int i = 0; i < dataManager.shieldIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.shieldIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.shieldIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.shieldIds[i, 1]; j++)
                         {
                             shieldsInventory.Add(worldManager.shieldsHolder[dataManager.shieldIds[i, 0]]);
                         }
@@ -88,9 +88,9 @@ namespace SP
                     
                     #region Helmets
                     helmetsInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.helmetIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.helmetIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.helmetIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.helmetIds[i, 1]; j++)
                         {
                             helmetsInventory.Add(worldManager.helmetsHolder[dataManager.helmetIds[i, 0]]);
                         }
@@ -99,9 +99,9 @@ namespace SP
                     
                     #region Chest Armor
                     chestsInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.chestIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.chestIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.chestIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.chestIds[i, 1]; j++)
                         {
                             chestsInventory.Add(worldManager.chestsHolder[dataManager.chestIds[i, 0]]);
                         }
@@ -110,9 +110,9 @@ namespace SP
                     
                     #region Shoulders
                     shouldersInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.shoulderIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.shoulderIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.shoulderIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.shoulderIds[i, 1]; j++)
                         {
                             shouldersInventory.Add(worldManager.shouldersHolder[dataManager.shoulderIds[i, 0]]);
                         }
@@ -121,9 +121,9 @@ namespace SP
                     
                     #region Hands
                     handsInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.handIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.handIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.handIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.handIds[i, 1]; j++)
                         {
                             handsInventory.Add(worldManager.handsHolder[dataManager.handIds[i, 0]]);
                         }
@@ -132,9 +132,9 @@ namespace SP
                     
                     #region Legs
                     legsInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.legIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.legIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.legIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.legIds[i, 1]; j++)
                         {
                             legsInventory.Add(worldManager.legsHolder[dataManager.legIds[i, 0]]);
                         }
@@ -143,9 +143,9 @@ namespace SP
                     
                     #region Feet
                     feetInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.footIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.footIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.footIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.footIds[i, 1]; j++)
                         {
                             feetInventory.Add(worldManager.feetHolder[dataManager.footIds[i, 0]]);
                         }
@@ -154,9 +154,9 @@ namespace SP
                     
                     #region Ring
                     ringsInventory = new List<EquipmentItem>();
-                    for (int i = 0; i < dataManager.ringIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.ringIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.ringIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.ringIds[i, 1]; j++)
                         {
                             ringsInventory.Add(worldManager.ringsHolder[dataManager.ringIds[i, 0]]);
                         }
@@ -165,9 +165,9 @@ namespace SP
                     
                     #region Consumable
                     consumablesInventory = new List<ConsumableItem>();
-                    for (int i = 0; i < dataManager.consumableIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.consumableIds.GetLength(0); i++)
                     {
-                        for (int j = 0; j < dataManager.consumableIds[i, 1]; j++)
+                        for (var j = 0; j < dataManager.consumableIds[i, 1]; j++)
                         {
                             consumablesInventory.Add(worldManager.consumableHolder[dataManager.consumableIds[i, 0]]);
                         }
@@ -186,7 +186,7 @@ namespace SP
 
         public void ChangeRightWeapon()
         {
-            currentRightWeaponIndex = currentRightWeaponIndex + 1;
+            currentRightWeaponIndex++;
 
             if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] != null)
             {
@@ -195,7 +195,7 @@ namespace SP
             }
             else if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] == null)
             {
-                currentRightWeaponIndex = currentRightWeaponIndex + 1;
+                currentRightWeaponIndex++;
             }
 
             else if (currentRightWeaponIndex == 1 && weaponsInRightHandSlots[1] != null)
@@ -205,7 +205,7 @@ namespace SP
             }
             else if (currentRightWeaponIndex == 1 && weaponsInRightHandSlots[1] == null)
             {
-                currentRightWeaponIndex = currentRightWeaponIndex + 1;
+                currentRightWeaponIndex++;
             }
 
             if (currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
@@ -218,7 +218,7 @@ namespace SP
 
         public void ChangeLeftWeapon()
         {
-            currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+            currentLeftWeaponIndex++;
 
             if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] != null)
             {
@@ -227,7 +227,7 @@ namespace SP
             }
             else if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] == null)
             {
-                currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+                currentLeftWeaponIndex++;
             }
             else if (currentLeftWeaponIndex == 1 && weaponsInLeftHandSlots[1] != null)
             {
@@ -236,7 +236,7 @@ namespace SP
             }
             else if (currentLeftWeaponIndex == 1 && weaponsInLeftHandSlots[1] == null)
             {
-                currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+                currentLeftWeaponIndex++;
             }
 
             if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)

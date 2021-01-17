@@ -73,7 +73,7 @@ namespace SP
             locationScreenText.text = areaName;
             locationScreen.SetActive(true);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return CoroutineYielder.areaNameWaiter;
 
             locationScreenText.text = "";
             locationScreen.SetActive(false);

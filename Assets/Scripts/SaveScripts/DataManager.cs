@@ -95,7 +95,7 @@ namespace SP
             partsID = new int[SettingsHolder.partsID.Length];
             partsArmor = new float[SettingsHolder.partsID.Length];
 
-            for (int i = 0; i < SettingsHolder.partsID.Length; i++)
+            for (var i = 0; i < SettingsHolder.partsID.Length; i++)
             {
                 partsID[i] = SettingsHolder.partsID[i];
                 partsArmor[i] = SettingsHolder.partsArmor[i];
@@ -112,14 +112,16 @@ namespace SP
             soulsAmount = playerStats.soulsAmount;
 
             spawnPointPosition = new float[3];
-            spawnPointPosition[0] = playerManager.currentSpawnPoint.transform.position.x;
-            spawnPointPosition[1] = playerManager.currentSpawnPoint.transform.position.y;
-            spawnPointPosition[2] = playerManager.currentSpawnPoint.transform.position.z;
+            var position = playerManager.currentSpawnPoint.transform.position;
+            spawnPointPosition[0] = position.x;
+            spawnPointPosition[1] = position.y;
+            spawnPointPosition[2] = position.z;
 
             spawnPointRotation = new float[3];
-            spawnPointRotation[0] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.x;
-            spawnPointRotation[1] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.y;
-            spawnPointRotation[2] = playerManager.currentSpawnPoint.transform.rotation.eulerAngles.z;
+            var rotation = playerManager.currentSpawnPoint.transform.rotation;
+            spawnPointRotation[0] = rotation.eulerAngles.x;
+            spawnPointRotation[1] = rotation.eulerAngles.y;
+            spawnPointRotation[2] = rotation.eulerAngles.z;
             #endregion
 
             #region Area

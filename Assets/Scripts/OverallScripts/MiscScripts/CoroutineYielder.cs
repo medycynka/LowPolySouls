@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace SP
+{
+    public static class CoroutineYielder
+    {
+        public static WaitForFixedUpdate fixedUpdateWait { get; } = new WaitForFixedUpdate();
+        public static WaitForEndOfFrame endOffFrameWaiter { get; } = new WaitForEndOfFrame();
+
+        public static WaitForSeconds stepSoundStopWaiter { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds stepSoundEnablerWaiter { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds bonfireLitWaiter { get; } = new WaitForSeconds(2f);
+        public static WaitForSeconds bonfireTeleportFirstWaiter { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds bonfireTeleportSecondWaiter { get; } = new WaitForSeconds(1.5f);
+        public static WaitForSeconds areaNameWaiter { get; } = new WaitForSeconds(1.5f);
+        public static WaitForSeconds bossHealWaiter { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds bossPositionResetWaiter { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds spawnRefreshWaiter { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds fogWallDestroyWaiter { get; } = new WaitForSeconds(2f);
+        public static WaitForSeconds fogWallRemoveFirstWaiter { get; } = new WaitForSeconds(2f);
+        public static WaitForSeconds fogWallRemoveSecondWaiter { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds playerRespawnWaiter { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds enemyHpUpdateWaiter { get; } = new WaitForSeconds(3.5f);
+    }
+}

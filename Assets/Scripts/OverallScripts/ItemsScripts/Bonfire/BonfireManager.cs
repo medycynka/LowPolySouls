@@ -8,7 +8,6 @@ namespace SP
     {
         [Header("Bonfire Manager", order = 0)]
         [Header("Activation properties", order = 1)]
-        public float bonfireLitScreenTime = 2.0f;
         public bool isActivated = false;
         public bool showRestPopUp = false;
         public Light bonfireLight;
@@ -32,7 +31,6 @@ namespace SP
         public GameObject locationScreen;
         public int qucikMoveID = 0;
         public GameObject spawnPoint;
-        public float quickMoveScreenTime = 5.0f;
 
         [Header("Enemy Spawner", order = 1)]
         public bool isBossBonfire = false;

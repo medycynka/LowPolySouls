@@ -43,28 +43,26 @@ namespace SP
         [Header("Roll Timer", order = 1)]
         public float rollInputTimer;
 
-        PlayerControls playerInputActions;
-        PlayerAttacker playerAttacker;
-        PlayerInventory playerInventory;
-        PlayerManager playerManager;
-        PlayerLocomotion playerLocomotion;
-        PlayerStats playerStats;
-        WeaponSlotManager weaponSlotManager;
-        AnimatorHandler animatorHandler;
+        private PlayerControls playerInputActions;
+        private PlayerAttacker playerAttacker;
+        private PlayerInventory playerInventory;
+        private PlayerManager playerManager;
+        private PlayerStats playerStats;
+        private WeaponSlotManager weaponSlotManager;
+        private AnimatorHandler animatorHandler;
 
         [Header("Camera & UI", order = 1)]
         public CameraHandler cameraHandler;
         public UIManager uiManager;
 
-        Vector2 movementInput;
-        Vector2 cameraInput;
+        private Vector2 movementInput;
+        private Vector2 cameraInput;
 
         private void Awake()
         {
             playerAttacker = GetComponentInChildren<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
-            playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -232,22 +230,25 @@ namespace SP
 
         private void HandleLockOnInput()
         {
-            if (lockOnInput && lockOnFlag == false)
+            if (lockOnInput)
             {
-                lockOnInput = false;
-                cameraHandler.HandleLockOn();
-
-                if (cameraHandler.nearestLockOnTarget != null)
+                if (lockOnFlag)
                 {
-                    cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
-                    lockOnFlag = true;
+                    lockOnInput = false;
+                    lockOnFlag = false;
+                    cameraHandler.ClearLockOnTargets();
                 }
-            }
-            else if (lockOnInput && lockOnFlag)
-            {
-                lockOnInput = false;
-                lockOnFlag = false;
-                cameraHandler.ClearLockOnTargets();
+                else
+                {
+                    lockOnInput = false;
+                    cameraHandler.HandleLockOn();
+
+                    if (cameraHandler.nearestLockOnTarget != null)
+                    {
+                        cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+                        lockOnFlag = true;
+                    }
+                }
             }
 
             if (lockOnFlag && right_Stick_Left_Input)

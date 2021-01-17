@@ -7,8 +7,9 @@ namespace SP
 {
     public class PlayerStats : CharacterStats
     {
-        PlayerManager playerManager;
-        WeaponSlotManager weaponSlotManager;
+        private PlayerManager playerManager;
+        private WeaponSlotManager weaponSlotManager;
+        private AnimatorHandler animatorHandler;
 
         [Header("Player Properties", order = 1)]
 
@@ -35,8 +36,6 @@ namespace SP
 
         [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
-
-        AnimatorHandler animatorHandler;
 
         private void Awake()
         {
@@ -224,8 +223,8 @@ namespace SP
             // Respawn enemis and refresh boss health if alive
             RespawnEnemiesOnDead();
 
-            yield return new WaitForSeconds(3f);
-
+            yield return CoroutineYielder.playerRespawnWaiter;
+            
             isPlayerAlive = true;
             playerManager.quickMoveScreen.SetActive(false);
         }

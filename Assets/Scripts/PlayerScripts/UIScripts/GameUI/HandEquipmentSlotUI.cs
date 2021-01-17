@@ -8,7 +8,7 @@ namespace SP
 
     public class HandEquipmentSlotUI : InventorySlotBase
     {
-        WeaponItem weapon;
+        private WeaponItem weapon;
 
         public bool rightHandSlot01;
         public bool rightHandSlot02;

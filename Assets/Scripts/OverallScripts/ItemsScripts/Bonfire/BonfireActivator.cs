@@ -37,7 +37,7 @@ namespace SP
         {
             bonfireManager.bonfireLitScreen.SetActive(true);
 
-            yield return new WaitForSeconds(bonfireManager.bonfireLitScreenTime);
+            yield return CoroutineYielder.bonfireLitWaiter;
 
             bonfireManager.bonfireLitScreen.SetActive(false);
             bonfireManager.showRestPopUp = true;

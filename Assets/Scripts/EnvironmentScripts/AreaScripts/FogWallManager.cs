@@ -43,7 +43,7 @@ namespace SP
         {
             playerManager.isRemovingFog = true;
 
-            yield return new WaitForSeconds(2f);
+            yield return CoroutineYielder.fogWallDestroyWaiter;
 
             playerManager.isRemovingFog = false;
 
@@ -55,11 +55,11 @@ namespace SP
             canInteract = false;
             playerManager.isRemovingFog = true;
 
-            yield return new WaitForSeconds(2f);
+            yield return CoroutineYielder.fogWallRemoveFirstWaiter;
 
             playerManager.isRemovingFog = false;
 
-            yield return new WaitForSeconds(5f);
+            yield return CoroutineYielder.fogWallRemoveSecondWaiter;
 
             boxCollider.enabled = true;
             wallParticles.Play();

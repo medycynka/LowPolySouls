@@ -24,6 +24,7 @@ namespace SP
 
         EnemyStats bossStats;
         Slider bossHpSlider;
+        private TextMeshProUGUI bossNameText;
 
         private void Start()
         {
@@ -33,6 +34,7 @@ namespace SP
                 bossStats = bossPrefab.GetComponent<EnemyStats>();
                 bossHpBar.SetActive(false);
                 bossHpSlider = bossHpBar.GetComponentInChildren<Slider>();
+                bossNameText = GetComponentInChildren<TextMeshProUGUI>();
             }
             else
             {
@@ -142,11 +144,11 @@ namespace SP
 
             if (isBossAlive)
             {
-                bossHpBar.GetComponentInChildren<TextMeshProUGUI>().text = bossName;
+                bossNameText.text = bossName;
                 bossHpBar.SetActive(true);
             }
 
-            yield return new WaitForSeconds(1.5f);
+            yield return CoroutineYielder.areaNameWaiter;
 
             locationScreenText.text = "";
             locationScreen.SetActive(false);
@@ -156,11 +158,11 @@ namespace SP
         {
             bossHpBar.SetActive(false);
 
-            yield return new WaitForSeconds(1f);
+            yield return CoroutineYielder.bossHealWaiter;
 
             bossStats.InitializeHealth();
 
-            yield return new WaitForSeconds(5f);
+            yield return CoroutineYielder.bossPositionResetWaiter;
 
             bossPrefab.transform.position = startPosition;
         }

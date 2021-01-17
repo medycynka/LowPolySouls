@@ -145,7 +145,6 @@ namespace SP
         }
 
         #region Manage Inventory Tabs
-
         public void ResetTabsSelection()
         {
             weaponInventoryTab.SetActive(true);
@@ -468,7 +467,6 @@ namespace SP
             #endregion
         }
         #endregion
-
         #endregion
     }
 

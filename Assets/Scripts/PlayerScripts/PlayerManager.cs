@@ -52,6 +52,10 @@ namespace SP
         private float staminaRefillTimer = 0.0f;
         private float addJumpForceTimer = 1.25f;
 
+        private const string bonfireTag = "Bonfire";
+        private const string interactableTag = "Interactable";
+        private const string fogWallTag = "Fog Wall";
+        
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
@@ -60,7 +64,7 @@ namespace SP
             playerStats = GetComponent<PlayerStats>();
         }
 
-        void Update()
+        private void Update()
         {
             float delta = Time.deltaTime;
             
@@ -127,7 +131,7 @@ namespace SP
         }
 
         #region Checking Funkctions
-        public void CheckAllFunctions(float delta)
+        private void CheckAllFunctions(float delta)
         {
             CheckForJumpForce(delta);
             CheckForInteractableObject();
@@ -137,13 +141,13 @@ namespace SP
             CheckForSprintStaminaDrain(delta);
         }
 
-        public void CheckForInteractableObject()
+        private void CheckForInteractableObject()
         {
             RaycastHit hit;
 
             if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
             {
-                if (hit.collider.CompareTag("Bonfire"))
+                if (hit.collider.CompareTag(bonfireTag))
                 {
                     if (!hit.collider.GetComponent<BonfireManager>().isActivated)
                     {
@@ -180,7 +184,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.CompareTag("Interactable"))
+                else if(hit.collider.CompareTag(interactableTag))
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
@@ -195,7 +199,7 @@ namespace SP
                         }
                     }
                 }
-                else if(hit.collider.CompareTag("Fog Wall"))
+                else if(hit.collider.CompareTag(fogWallTag))
                 {
                     FogWallManager interactableObject = hit.collider.GetComponent<FogWallManager>();
 

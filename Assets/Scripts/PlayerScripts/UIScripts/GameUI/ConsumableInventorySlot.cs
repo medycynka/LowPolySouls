@@ -11,7 +11,7 @@ namespace SP
         public PlayerManager playerManager;
         public AnimatorHandler animatorHandler;
 
-        ConsumableItem item;
+        private ConsumableItem item;
 
         public void AddItem(ConsumableItem newItem)
         {

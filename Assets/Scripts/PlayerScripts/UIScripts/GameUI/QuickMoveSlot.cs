@@ -9,9 +9,9 @@ namespace SP {
         public GameObject bonfirePrefab;
         public TextMeshProUGUI locationName;
 
-        public void AddSlot(GameObject bonfire_)
+        public void AddSlot(GameObject bonfire)
         {
-            bonfirePrefab = bonfire_;
+            bonfirePrefab = bonfire;
             locationName.text = bonfirePrefab.GetComponent<BonfireManager>().locationName;
             gameObject.SetActive(true);
         }
