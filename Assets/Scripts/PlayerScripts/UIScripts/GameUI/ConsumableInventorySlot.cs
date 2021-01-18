@@ -38,11 +38,11 @@ namespace SP
                     case ConsumableType.HealItem:
                         playerStats.healthRefillAmount = item.healAmount;
                         playerManager.shouldRefillHealth = true;
-                        animatorHandler.PlayTargetAnimation("Use Estus", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EstusId, true);
                         break;
                     case ConsumableType.SoulItem:
                         playerStats.soulsAmount += item.soulAmount;
-                        animatorHandler.PlayTargetAnimation("Use Item", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.UseItemId, true);
                         break;
                     case ConsumableType.ManaItem:
                         break;

@@ -21,7 +21,7 @@ namespace SP
 
                 if (enemyManager.isPreformingAction)
                 {
-                    enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
                 }
 
                 enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);

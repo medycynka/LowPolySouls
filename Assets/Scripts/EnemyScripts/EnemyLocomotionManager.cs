@@ -20,17 +20,12 @@ namespace SP
         public float stoppingDistance = 1.25f;
         public float rotationSpeed = 100;
 
-        private int verticalID;
-        private int horizontalID;
-
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyRigidBody = GetComponent<Rigidbody>();
-            verticalID = Animator.StringToHash("Vertical");
-            horizontalID = Animator.StringToHash("Horizontal");
         }
 
         private void Start()
@@ -43,7 +38,7 @@ namespace SP
         {
             if (enemyManager.isPreformingAction)
             {
-                enemyAnimationManager.anim.SetFloat(verticalID, 0, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
 
                 return;
             }
@@ -54,7 +49,7 @@ namespace SP
 
             if (enemyManager.distanceFromTarget > stoppingDistance)
             {
-                enemyAnimationManager.anim.SetFloat(verticalID, 1, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 1, 0.1f, Time.deltaTime);
             }
             else if (enemyManager.distanceFromTarget <= stoppingDistance)
             {
@@ -69,7 +64,7 @@ namespace SP
         public void StopMoving()
         {
             enemyManager.distanceFromTarget = 0;
-            enemyAnimationManager.anim.SetFloat(verticalID, 0, 0.1f, Time.deltaTime);
+            enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
         }
 
         public void HandleRotateTowardsTarget()

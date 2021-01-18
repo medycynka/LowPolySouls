@@ -6,26 +6,27 @@ namespace SP
 {
     public class WeaponSlotManager : MonoBehaviour
     {
-        PlayerManager playerManager;
+        private PlayerManager playerManager;
 
         [Header("Weapon Slot Manager", order = 0)]
         [Header("Current Weapon", order = 1)]
         public WeaponItem attackingWeapon;
 
-        WeaponHolderSlot leftHandSlot;
-        WeaponHolderSlot rightHandSlot;
-        WeaponHolderSlot backSlot;
+        private WeaponHolderSlot leftHandSlot;
+        private WeaponHolderSlot rightHandSlot;
+        private WeaponHolderSlot backSlot;
 
-        DamageCollider leftHandDamageCollider;
-        DamageCollider rightHandDamageCollider;
+        private DamageCollider leftHandDamageCollider;
+        private DamageCollider rightHandDamageCollider;
 
-        Animator animator;
+        private Animator animator;
 
         [Header("Quick Slots", order = 1)]
         public QuickSlotsUI quickSlotsUI;
 
-        PlayerStats playerStats;
-        InputHandler inputHandler;
+        private PlayerStats playerStats;
+        private InputHandler inputHandler;
+        private WeaponHolderSlot[] weaponHolderSlots;
 
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace SP
             playerStats = GetComponentInParent<PlayerStats>();
             inputHandler = GetComponentInParent<InputHandler>();
 
-            WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+            weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
             {
                 if (weaponSlot.isLeftHandSlot)

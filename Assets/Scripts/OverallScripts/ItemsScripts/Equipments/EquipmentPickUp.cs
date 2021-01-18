@@ -15,8 +15,6 @@ namespace SP
 
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             PickUpItem(playerManager);
         }
 
@@ -72,7 +70,7 @@ namespace SP
                         }
                     }
                 }
-                
+
                 playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = equipments[0].itemName;
                 playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = equipments[0].itemIcon.texture;
             }

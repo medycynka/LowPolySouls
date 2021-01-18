@@ -23,5 +23,7 @@ namespace SP
         public static WaitForSeconds fogWallRemoveSecondWaiter { get; } = new WaitForSeconds(5f);
         public static WaitForSeconds playerRespawnWaiter { get; } = new WaitForSeconds(5f);
         public static WaitForSeconds enemyHpUpdateWaiter { get; } = new WaitForSeconds(3.5f);
+        public static WaitForSeconds jumpFirstWaiter { get; } = new WaitForSeconds(0.2f);
+        public static WaitForSeconds jumpSecondWaiter { get; } = new WaitForSeconds(0.5f);
     }
 }

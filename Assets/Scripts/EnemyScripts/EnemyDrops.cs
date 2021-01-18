@@ -26,7 +26,7 @@ namespace SP
         {
             dropList = new List<Item>();
             dropChance = Random.Range(0.0f, 1.0f);
-            deathDrop.items_.Clear();
+            deathDrop.items.Clear();
 
             if (dropChance <= consumableChanse)
             {
@@ -74,9 +74,9 @@ namespace SP
 
         public void DropPickUp()
         {
-            deathDrop.items_ = dropList;
+            deathDrop.items = dropList;
             Instantiate(deathDrop, transform.position, Quaternion.identity);
-            deathDrop.items_.Clear();
+            deathDrop.items.Clear();
         }
     }
 

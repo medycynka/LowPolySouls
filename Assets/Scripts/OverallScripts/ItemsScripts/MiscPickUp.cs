@@ -9,12 +9,10 @@ namespace SP
 
     public class MiscPickUp : Interactable
     {
-        public List<Item> items_;
+        public List<Item> items;
 
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             PickUpItem(playerManager);
         }
 
@@ -22,63 +20,64 @@ namespace SP
         {
             base.PickUpItem(playerManager);
 
-            if (items_.Count > 0)
+            if (items.Count > 0)
             {
-                foreach(var item_ in items_)
+                for (var i = 0; i < items.Count; i++)
                 {
-                    if(item_ != null)
+                    var item = items[i];
+                    if (item != null)
                     {
-                        if(item_ is WeaponItem)
+                        if (item is WeaponItem)
                         {
-                            if (item_.itemType == ItemType.Weapon)
+                            if (item.itemType == ItemType.Weapon)
                             {
-                                playerInventory.weaponsInventory.Add((WeaponItem)item_);
+                                playerInventory.weaponsInventory.Add((WeaponItem) item);
                                 uIManager.GetWeaponInventorySlot();
                                 uIManager.UpdateWeaponInventory();
                             }
-                            else if (item_.itemType == ItemType.Shield)
+                            else if (item.itemType == ItemType.Shield)
                             {
-                                playerInventory.shieldsInventory.Add((WeaponItem)item_);
+                                playerInventory.shieldsInventory.Add((WeaponItem) item);
                                 uIManager.GetShieldInventorySlot();
                                 uIManager.UpdateShieldInventory();
                             }
                         }
-                        else if(item_ is EquipmentItem)
+                        else if (item is EquipmentItem)
                         {
-                            switch (item_.itemType)
+                            switch (item.itemType)
                             {
                                 case ItemType.Helmet:
-                                    playerInventory.helmetsInventory.Add((EquipmentItem)item_);
+                                    playerInventory.helmetsInventory.Add((EquipmentItem) item);
                                     uIManager.GetHelmetInventorySlot();
                                     uIManager.UpdateHelmetInventory();
                                     break;
                                 case ItemType.ChestArmor:
-                                    playerInventory.chestsInventory.Add((EquipmentItem)item_);
+                                    playerInventory.chestsInventory.Add((EquipmentItem) item);
                                     uIManager.GetChestInventorySlot();
                                     uIManager.UpdateChestInventory();
                                     break;
                                 case ItemType.ShoulderArmor:
-                                    playerInventory.shouldersInventory.Add((EquipmentItem)item_);
+                                    playerInventory.shouldersInventory.Add((EquipmentItem) item);
                                     uIManager.GetShoulderInventorySlot();
                                     uIManager.UpdateShoulderInventory();
                                     break;
                                 case ItemType.HandArmor:
-                                    playerInventory.handsInventory.Add((EquipmentItem)item_);
+                                    playerInventory.handsInventory.Add((EquipmentItem) item);
                                     uIManager.GetHandInventorySlot();
                                     uIManager.UpdateHandInventory();
                                     break;
                                 case ItemType.LegArmor:
-                                    playerInventory.legsInventory.Add((EquipmentItem)item_);
+                                    playerInventory.legsInventory.Add((EquipmentItem) item);
                                     uIManager.GetLegInventorySlot();
                                     uIManager.UpdateLegInventory();
                                     break;
                                 case ItemType.FootArmor:
-                                    playerInventory.feetInventory.Add((EquipmentItem)item_);
+                                    playerInventory.feetInventory.Add((EquipmentItem) item);
                                     uIManager.GetFootInventorySlot();
                                     uIManager.UpdateFootInventory();
                                     break;
                                 case ItemType.Ring:
-                                    playerInventory.ringsInventory.Add((EquipmentItem)item_);
+                                    playerInventory.ringsInventory.Add((EquipmentItem) item);
                                     uIManager.GetRingInventorySlot();
                                     uIManager.UpdateRingInventory();
                                     break;
@@ -86,17 +85,17 @@ namespace SP
                                     break;
                             }
                         }
-                        else if(item_ is ConsumableItem)
+                        else if (item is ConsumableItem)
                         {
-                            playerInventory.consumablesInventory.Add((ConsumableItem)item_);
+                            playerInventory.consumablesInventory.Add((ConsumableItem) item);
                             uIManager.GetConsumableInventorySlot();
                             uIManager.UpdateConsumableInventory();
                         }
                     }
                 }
 
-                playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = items_[0].itemName;
-                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = items_[0].itemIcon.texture;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = items[0].itemName;
+                playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = items[0].itemIcon.texture;
                 uIManager.UpdateEstusAmount();
             }
 

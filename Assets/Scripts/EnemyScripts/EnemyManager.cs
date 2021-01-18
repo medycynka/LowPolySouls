@@ -83,7 +83,7 @@ namespace SP
         {
             HandleRecoveryTimer();
 
-            isInteracting = enemyAnimationManager.anim.GetBool(enemyAnimationManager.isInteractingId);
+            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.EnemyIsInteractingId);
         }
 
         private void FixedUpdate()
@@ -129,7 +129,7 @@ namespace SP
         {
             isAlive = false;
             enemyStats.currentHealth = 0;
-            enemyStats.animator.PlayTargetAnimation("Dead_01", true);
+            enemyStats.animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDeath01Id, true);
 
             #region Disolve Effect
             foreach (var cM in characterMaterials)

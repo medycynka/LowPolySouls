@@ -17,8 +17,6 @@ namespace SP
 
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             ActivateFireplace(playerManager);
         }
 

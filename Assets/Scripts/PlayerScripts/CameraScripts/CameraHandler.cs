@@ -141,44 +141,40 @@ namespace SP
             
             /* Collider[] */colliders = Physics.OverlapSphere(targetTransform.position, 26);
 
-            for (var i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                var t = colliders[i];
-                var character = t.GetComponent<CharacterManager>();
-
-                if (character == null)
+                if (colliders[i].TryGetComponent(out CharacterManager character))
                 {
-                    continue;
-                }
+                    var lockTargetDirection = character.transform.position - targetTransform.position;
+                    var distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
+                    var viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
+                    RaycastHit hit;
 
-                var lockTargetDirection = character.transform.position - targetTransform.position;
-                var distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
-                var viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
-                RaycastHit hit;
+                    if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -50) ||
+                        !(viewableAngle < 50) || !(distanceFromTarget <= maximumLockOnDistance))
+                    {
+                        continue;
+                    }
 
-                if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -50) ||
-                    !(viewableAngle < 50) || !(distanceFromTarget <= maximumLockOnDistance))
-                {
-                    continue;
-                }
+                    if (!Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position,
+                        out hit))
+                    {
+                        continue;
+                    }
 
-                if (!Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position,
-                    out hit))
-                {
-                    continue;
-                }
+                    Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position,
+                        Color.green,
+                        10f);
 
-                Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.green,
-                    10f);
-
-                if (hit.transform.gameObject.CompareTag(environmentTag) ||
-                    hit.transform.gameObject.layer == environmentLayer)
-                {
-                    //Cannot lock onto target, object in the way
-                }
-                else
-                {
-                    availableTargets.Add(character);
+                    if (hit.transform.gameObject.CompareTag(environmentTag) ||
+                        hit.transform.gameObject.layer == environmentLayer)
+                    {
+                        //Cannot lock onto target, object in the way
+                    }
+                    else
+                    {
+                        availableTargets.Add(character);
+                    }
                 }
             }
 
@@ -187,7 +183,7 @@ namespace SP
                 return;
             }
 
-            for (var i = 0; i < availableTargets.Count; i++)
+            for (int i = 0; i < availableTargets.Count; i++)
             {
                 var availableTarget = availableTargets[i];
                 var distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);

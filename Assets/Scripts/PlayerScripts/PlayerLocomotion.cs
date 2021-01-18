@@ -52,7 +52,7 @@ namespace SP
         public float rollStaminaCost = 10;
         public float sprintStaminaCost = 5;
 
-        void Start()
+        private void Start()
         {
             playerManager = GetComponent<PlayerManager>();
             rigidbody = GetComponent<Rigidbody>();
@@ -70,8 +70,8 @@ namespace SP
         }
 
         #region Movement
-        Vector3 normalVector;
-        Vector3 targetPosition;
+        private Vector3 normalVector;
+        private Vector3 targetPosition;
 
         private void HandleRotation(float delta)
         {
@@ -108,7 +108,6 @@ namespace SP
             else
             {
                 Vector3 targetDir = Vector3.zero;
-                float moveOverride = inputHandler.moveAmount;
 
                 targetDir = cameraObject.forward * inputHandler.vertical;
                 targetDir += cameraObject.right * inputHandler.horizontal;
@@ -185,7 +184,7 @@ namespace SP
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool(animatorHandler.isInteractingId))
+            if (animatorHandler.anim.GetBool(StaticAnimatorIds.IsInteractingId))
             {
                 return;
             }
@@ -199,14 +198,14 @@ namespace SP
 
                     if (inputHandler.moveAmount > 0)
                     {
-                        animatorHandler.PlayTargetAnimation("Rolling", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.RollId, true);
                         moveDirection.y = 0;
                         Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = rollRotation;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Backstep", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStepId, true);
                     }
 
                     playerStats.TakeStaminaDamage(rollStaminaCost);
@@ -249,13 +248,13 @@ namespace SP
                 {
                     if (inAirTimer > 0.5f)
                     {
-                        Debug.Log("You were in the air for " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation("Land", true);
+                        //Debug.Log("You were in the air for " + inAirTimer);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.LandId, true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Empty", false);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EmptyId, false);
                         inAirTimer = 0;
                     }
 
@@ -273,7 +272,7 @@ namespace SP
                 {
                     if (playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation("Falling", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.FallId, true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -311,7 +310,7 @@ namespace SP
                     {
                         //playerManager.shouldAddJumpForce = true;
                         StartCoroutine(ResizeCollider());
-                        animatorHandler.PlayTargetAnimation("Jump", true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.JumpId, true);
                         Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = jumpRotation;
                     }
@@ -319,14 +318,14 @@ namespace SP
             }
         }
 
-        public IEnumerator ResizeCollider()
+        private IEnumerator ResizeCollider()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return CoroutineYielder.jumpFirstWaiter;
 
             playerCollider.center = Vector3.up * 1.25f;
             playerCollider.height = 1f;
 
-            yield return new WaitForSeconds(0.5f);
+            yield return CoroutineYielder.jumpSecondWaiter;
 
             playerCollider.center = Vector3.up;
             playerCollider.height = 1.5f;

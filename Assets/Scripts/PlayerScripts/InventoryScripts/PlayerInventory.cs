@@ -55,110 +55,119 @@ namespace SP
                 {
                     #region Quick Slots Initialization
                     weaponsInRightHandSlots = new WeaponItem[2];
-                    weaponsInRightHandSlots[0] = dataManager.rightHandSlots[0, 0] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[0, 1]] : worldManager.shieldsHolder[dataManager.rightHandSlots[0, 1]];
-                    weaponsInRightHandSlots[1] = dataManager.rightHandSlots[1, 0] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[1, 1]] : worldManager.shieldsHolder[dataManager.rightHandSlots[1, 1]];
+                    weaponsInRightHandSlots[0] = dataManager.rightHandSlots[0] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[1]] : worldManager.shieldsHolder[dataManager.rightHandSlots[1]];
+                    weaponsInRightHandSlots[1] = dataManager.rightHandSlots[2] == 0 ? worldManager.weaponsHolder[dataManager.rightHandSlots[3]] : worldManager.shieldsHolder[dataManager.rightHandSlots[3]];
                     
                     weaponsInLeftHandSlots = new WeaponItem[2];
-                    weaponsInLeftHandSlots[0] = dataManager.leftHandSlots[0, 0] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[0, 1]] : worldManager.shieldsHolder[dataManager.leftHandSlots[0, 1]];
-                    weaponsInLeftHandSlots[1] = dataManager.leftHandSlots[1, 0] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[1, 1]] : worldManager.shieldsHolder[dataManager.leftHandSlots[1, 1]];
+                    weaponsInLeftHandSlots[0] = dataManager.leftHandSlots[0] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[1]] : worldManager.shieldsHolder[dataManager.leftHandSlots[1]];
+                    weaponsInLeftHandSlots[1] = dataManager.leftHandSlots[2] == 0 ? worldManager.weaponsHolder[dataManager.leftHandSlots[3]] : worldManager.shieldsHolder[dataManager.leftHandSlots[3]];
                     #endregion
                     
                     #region Inventory Initialization
                     #region Weapons
                     weaponsInventory = new List<WeaponItem>();
-                    for (var i = 0; i < dataManager.weaponIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.weaponIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.weaponIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.weaponIds[i]; j++)
                         {
-                            weaponsInventory.Add(worldManager.weaponsHolder[dataManager.weaponIds[i, 0]]);
+                            weaponsInventory.Add(worldManager.weaponsHolder[dataManager.weaponIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Shields
                     shieldsInventory = new List<WeaponItem>();
-                    for (var i = 0; i < dataManager.shieldIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.shieldIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.shieldIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.shieldIds[i]; j++)
                         {
-                            shieldsInventory.Add(worldManager.shieldsHolder[dataManager.shieldIds[i, 0]]);
+                            shieldsInventory.Add(worldManager.shieldsHolder[dataManager.shieldIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Helmets
                     helmetsInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.helmetIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.helmetIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.helmetIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.helmetIds[i]; j++)
                         {
-                            helmetsInventory.Add(worldManager.helmetsHolder[dataManager.helmetIds[i, 0]]);
+                            helmetsInventory.Add(worldManager.helmetsHolder[dataManager.helmetIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Chest Armor
                     chestsInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.chestIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.chestIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.chestIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.chestIds[i]; j++)
                         {
-                            chestsInventory.Add(worldManager.chestsHolder[dataManager.chestIds[i, 0]]);
+                            chestsInventory.Add(worldManager.chestsHolder[dataManager.chestIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Shoulders
                     shouldersInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.shoulderIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.shoulderIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.shoulderIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.shoulderIds[i]; j++)
                         {
-                            shouldersInventory.Add(worldManager.shouldersHolder[dataManager.shoulderIds[i, 0]]);
+                            shouldersInventory.Add(worldManager.shouldersHolder[dataManager.shoulderIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Hands
                     handsInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.handIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.handIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.handIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.handIds[i]; j++)
                         {
-                            handsInventory.Add(worldManager.handsHolder[dataManager.handIds[i, 0]]);
+                            handsInventory.Add(worldManager.handsHolder[dataManager.handIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Legs
                     legsInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.legIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.legIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.legIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.legIds[i]; j++)
                         {
-                            legsInventory.Add(worldManager.legsHolder[dataManager.legIds[i, 0]]);
+                            legsInventory.Add(worldManager.legsHolder[dataManager.legIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Feet
                     feetInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.footIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.footIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.footIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.footIds[i]; j++)
                         {
-                            feetInventory.Add(worldManager.feetHolder[dataManager.footIds[i, 0]]);
+                            feetInventory.Add(worldManager.feetHolder[dataManager.footIds[i-1]]);
                         }
                     }
                     #endregion
                     
                     #region Ring
                     ringsInventory = new List<EquipmentItem>();
-                    for (var i = 0; i < dataManager.ringIds.GetLength(0); i++)
+                    for (var i = 0; i < dataManager.ringIds.Length; i++)
                     {
-                        for (var j = 0; j < dataManager.ringIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.ringIds[i]; j++)
                         {
-                            ringsInventory.Add(worldManager.ringsHolder[dataManager.ringIds[i, 0]]);
+                            ringsInventory.Add(worldManager.ringsHolder[dataManager.ringIds[i-1]]);
                         }
                     }
                     #endregion
@@ -167,9 +176,10 @@ namespace SP
                     consumablesInventory = new List<ConsumableItem>();
                     for (var i = 0; i < dataManager.consumableIds.GetLength(0); i++)
                     {
-                        for (var j = 0; j < dataManager.consumableIds[i, 1]; j++)
+                        i++;
+                        for (var j = 0; j < dataManager.consumableIds[i]; j++)
                         {
-                            consumablesInventory.Add(worldManager.consumableHolder[dataManager.consumableIds[i, 0]]);
+                            consumablesInventory.Add(worldManager.consumableHolder[dataManager.consumableIds[i-1]]);
                         }
                     }
                     #endregion

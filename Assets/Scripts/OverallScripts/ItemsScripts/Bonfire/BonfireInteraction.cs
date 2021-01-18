@@ -9,16 +9,16 @@ namespace SP
     {
         BonfireManager bonfireManager;
         PlayerStats playerStats;
+        private TextMeshProUGUI locationNameScree;
 
         private void Awake()
         {
             bonfireManager = GetComponent<BonfireManager>();
+            locationNameScree = bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             RestAtBonfire(playerManager);
         }
 
@@ -28,8 +28,8 @@ namespace SP
             animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
             playerStats = playerManager.GetComponent<PlayerStats>();
 
-            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            animatorHandler.PlayTargetAnimation("Sit Down", true); //Plays the animation of looting the item
+            playerLocomotion.rigidbody.velocity = Vector3.zero;
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.SitId, true);
             bonfireManager.playerManager.isRestingAtBonfire = true;
 
             playerStats.RefillHealth();
@@ -50,7 +50,7 @@ namespace SP
 
             bonfireManager.uiManager.UpdateSouls();
             bonfireManager.CloseRestUI();
-            animatorHandler.PlayTargetAnimation("Stand Up", true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.StandUpId, true);
             bonfireManager.playerManager.isRestingAtBonfire = false;
 
             if(playerStats == null)
@@ -81,9 +81,9 @@ namespace SP
             yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
             bonfireManager.CloseQuickMoveScreen();
-            animatorHandler.PlayTargetAnimation("Stand Up", true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.StandUpId, true);
             bonfireManager.locationScreen.SetActive(true);
-            bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>().text = bonfireManager.locationName;
+            locationNameScree.text = bonfireManager.locationName;
 
             yield return CoroutineYielder.bonfireTeleportSecondWaiter;
 

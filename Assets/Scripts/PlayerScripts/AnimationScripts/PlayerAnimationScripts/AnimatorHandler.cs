@@ -9,29 +9,37 @@ namespace SP
         private PlayerManager playerManager;
         private InputHandler inputHandler;
         private PlayerLocomotion playerLocomotion;
-        private int vertical;
-        private int horizontal;
-        public int canDoComboId;
-        public int vulnerabilityId;
-        public int isInAirId;
-        public int usingLeftId;
-        public int usingRightId;
-        public bool canRotate;
 
+        public bool canRotate;
+        
         public void Initialize()
         {
             playerManager = GetComponentInParent<PlayerManager>();
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
-            vertical = Animator.StringToHash("Vertical");
-            horizontal = Animator.StringToHash("Horizontal");
-            isInteractingId = Animator.StringToHash("isInteracting");
-            canDoComboId = Animator.StringToHash("canDoCombo");
-            vulnerabilityId = Animator.StringToHash("isInvulnerable");
-            isInAirId = Animator.StringToHash("isInAir");
-            usingLeftId = Animator.StringToHash("isUsingLeftHand");
-            usingRightId = Animator.StringToHash("isUsingRightHand");
+            
+            StaticAnimatorIds.VerticalId = Animator.StringToHash(StaticAnimatorIds.VerticalName);
+            StaticAnimatorIds.HorizontalId = Animator.StringToHash(StaticAnimatorIds.HorizontalName);
+            StaticAnimatorIds.IsInteractingId = Animator.StringToHash(StaticAnimatorIds.IsInteractingName);
+            StaticAnimatorIds.CanDoComboId = Animator.StringToHash(StaticAnimatorIds.CanDoComboName);
+            StaticAnimatorIds.IsInvulnerableId = Animator.StringToHash(StaticAnimatorIds.IsInvulnerableName);
+            StaticAnimatorIds.IsInAirId = Animator.StringToHash(StaticAnimatorIds.IsInAirName);
+            StaticAnimatorIds.IsUsingLeftHandId = Animator.StringToHash(StaticAnimatorIds.IsUsingLeftHandName);
+            StaticAnimatorIds.IsUsingRightHandId = Animator.StringToHash(StaticAnimatorIds.IsUsingRightHandName);
+            StaticAnimatorIds.EmptyId = Animator.StringToHash(StaticAnimatorIds.EmptyName);
+            StaticAnimatorIds.StandUpId = Animator.StringToHash(StaticAnimatorIds.StandUpName);
+            StaticAnimatorIds.SitId = Animator.StringToHash(StaticAnimatorIds.SitName);
+            StaticAnimatorIds.PickUpId = Animator.StringToHash(StaticAnimatorIds.PickUpName);
+            StaticAnimatorIds.EstusId = Animator.StringToHash(StaticAnimatorIds.EstusName);
+            StaticAnimatorIds.UseItemId = Animator.StringToHash(StaticAnimatorIds.UseItemName);
+            StaticAnimatorIds.RollId = Animator.StringToHash(StaticAnimatorIds.RollName);
+            StaticAnimatorIds.BackStepId = Animator.StringToHash(StaticAnimatorIds.BackStepName);
+            StaticAnimatorIds.JumpId = Animator.StringToHash(StaticAnimatorIds.JumpName);
+            StaticAnimatorIds.FallId = Animator.StringToHash(StaticAnimatorIds.FallName);
+            StaticAnimatorIds.LandId = Animator.StringToHash(StaticAnimatorIds.LandName);
+            StaticAnimatorIds.Damage01Id = Animator.StringToHash(StaticAnimatorIds.Damage01Name);
+            StaticAnimatorIds.Death01Id = Animator.StringToHash(StaticAnimatorIds.Death01Name);
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
@@ -92,8 +100,8 @@ namespace SP
                 h = horizontalMovement;
             }
 
-            anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-            anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+            anim.SetFloat(StaticAnimatorIds.VerticalId, v, 0.1f, Time.deltaTime);
+            anim.SetFloat(StaticAnimatorIds.HorizontalId, h, 0.1f, Time.deltaTime);
         }
 
         public void CanRotate()
@@ -108,22 +116,22 @@ namespace SP
 
         public void EnableCombo()
         {
-            anim.SetBool(canDoComboId, true);
+            anim.SetBool(StaticAnimatorIds.CanDoComboId, true);
         }
 
         public void DisableCombo()
         {
-            anim.SetBool(canDoComboId, false);
+            anim.SetBool(StaticAnimatorIds.CanDoComboId, false);
         }
 
         public void EnableIsInvulnerable()
         {
-            anim.SetBool(vulnerabilityId, true);
+            anim.SetBool(StaticAnimatorIds.IsInvulnerableId, true);
         }
         
         public void DisableIsInvulnerable()
         {
-            anim.SetBool(vulnerabilityId, false);
+            anim.SetBool(StaticAnimatorIds.IsInvulnerableId, false);
         }
 
         private void OnAnimatorMove()

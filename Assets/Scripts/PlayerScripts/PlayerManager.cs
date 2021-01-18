@@ -68,12 +68,12 @@ namespace SP
         {
             float delta = Time.deltaTime;
             
-            isInteracting = animatorHandler.anim.GetBool(animatorHandler.isInteractingId);
-            canDoCombo = animatorHandler.anim.GetBool(animatorHandler.canDoComboId);
-            isUsingRightHand = animatorHandler.anim.GetBool(animatorHandler.usingRightId);
-            isUsingLeftHand = animatorHandler.anim.GetBool(animatorHandler.usingLeftId);
-            isInvulnerable = animatorHandler.anim.GetBool(animatorHandler.isInteractingId);
-            animatorHandler.anim.SetBool(animatorHandler.isInAirId, isInAir);
+            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.IsInteractingId);
+            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.CanDoComboId);
+            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.IsUsingRightHandId);
+            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.IsUsingLeftHandId);
+            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.IsInvulnerableId);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.IsInAirId, isInAir);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
@@ -149,9 +149,11 @@ namespace SP
             {
                 if (hit.collider.CompareTag(bonfireTag))
                 {
-                    if (!hit.collider.GetComponent<BonfireManager>().isActivated)
+                    BonfireManager bonManager = hit.collider.GetComponent<BonfireManager>();
+                    
+                    if (!bonManager.isActivated)
                     {
-                        BonfireActivator interactableObject = hit.collider.GetComponent<BonfireActivator>();
+                        BonfireActivator interactableObject = bonManager.GetComponent<BonfireActivator>();
 
                         if (interactableObject != null)
                         {
@@ -167,11 +169,11 @@ namespace SP
                     }
                     else
                     {
-                        BonfireInteraction interactableObject = hit.collider.GetComponent<BonfireInteraction>();
+                        BonfireInteraction interactableObject = bonManager.GetComponent<BonfireInteraction>();
 
                         if (interactableObject != null)
                         {
-                            if (interactableObject.GetComponent<BonfireManager>().showRestPopUp)
+                            if (bonManager.showRestPopUp)
                             {
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);

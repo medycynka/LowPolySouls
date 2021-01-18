@@ -24,7 +24,7 @@ namespace SP
 
         public virtual void Interact(PlayerManager playerManager)
         {
-            Debug.Log("You interacted with an object!");
+            
         }
 
         public virtual void PickUpItem(PlayerManager playerManager)
@@ -35,7 +35,7 @@ namespace SP
             uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            animatorHandler.PlayTargetAnimation("Pick_Up_Item", true); //Plays the animation of looting the item
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.PickUpId, true); //Plays the animation of looting the item
         }
     }
 

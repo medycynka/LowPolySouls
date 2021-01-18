@@ -9,12 +9,18 @@ namespace SP
         [Header("Animation Manager", order = 0)]
         [Header("Animator", order = 1)]
         public Animator anim;
-        public int isInteractingId;
 
         public void PlayTargetAnimation(string targetAnim, bool isInteracting)
         {
             anim.applyRootMotion = isInteracting;
-            anim.SetBool(isInteractingId, isInteracting);
+            anim.SetBool(StaticAnimatorIds.IsInteractingId, isInteracting);
+            anim.CrossFade(targetAnim, 0.2f);
+        }
+        
+        public void PlayTargetAnimation(int targetAnim, bool isInteracting)
+        {
+            anim.applyRootMotion = isInteracting;
+            anim.SetBool(StaticAnimatorIds.IsInteractingId, isInteracting);
             anim.CrossFade(targetAnim, 0.2f);
         }
     }

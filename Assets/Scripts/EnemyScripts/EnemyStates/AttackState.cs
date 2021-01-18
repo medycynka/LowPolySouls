@@ -51,8 +51,8 @@ namespace SP
                         {
                             if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                             {
-                                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                                enemyAnimationManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyHorizontalId, 0, 0.1f, Time.deltaTime);
                                 enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
                                 enemyManager.isPreformingAction = true;
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;

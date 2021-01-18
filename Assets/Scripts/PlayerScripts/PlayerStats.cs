@@ -37,6 +37,10 @@ namespace SP
         [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
 
+        private EnemySpawner[] enemiesSpawners;
+        private RectTransform hpBarTransform;
+        private RectTransform staminaBarTransform;
+
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -75,6 +79,10 @@ namespace SP
                 }
             }
 
+            enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
+            hpBarTransform = healthBar.GetComponent<RectTransform>();
+            staminaBarTransform = staminaBar.GetComponent<RectTransform>();
+            
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
 
@@ -97,8 +105,8 @@ namespace SP
             float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
             float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
 
-            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
-            healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            hpBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
+            hpBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
             
             healthBar.SetMaxHealth(maxHealth);
             healthBar.SetCurrentHealth(currentHealth);
@@ -120,8 +128,8 @@ namespace SP
             float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
             float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
 
-            staminaBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
-            staminaBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            staminaBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
+            staminaBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
             
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
@@ -141,7 +149,7 @@ namespace SP
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                animatorHandler.PlayTargetAnimation("Damage_01", true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Damage01Id, true);
 
                 if (currentHealth <= 0)
                 {
@@ -197,10 +205,10 @@ namespace SP
             return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
         }
 
-        public void HandleDeathAndRespawn()
+        private void HandleDeathAndRespawn()
         {
             currentHealth = 0;
-            animatorHandler.PlayTargetAnimation("Dead_01", true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Death01Id, true);
             isPlayerAlive = false;
 
             StartCoroutine(Respawn());
@@ -215,7 +223,7 @@ namespace SP
 
             youDiedLogo.SetActive(false);
             playerManager.quickMoveScreen.SetActive(true);
-            animatorHandler.PlayTargetAnimation("Empty", false);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EmptyId, false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
             transform.position = playerManager.currentSpawnPoint.transform.position;
@@ -231,8 +239,6 @@ namespace SP
 
         private void RespawnEnemiesOnDead()
         {
-            EnemySpawner[] enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
-
             foreach (var eS in enemiesSpawners)
             {
                 eS.SpawnEnemies();

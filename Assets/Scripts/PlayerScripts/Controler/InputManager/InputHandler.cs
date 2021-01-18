@@ -178,7 +178,7 @@ namespace SP
                             return;
                         }
 
-                        animatorHandler.anim.SetBool(animatorHandler.usingRightId, true);
+                        animatorHandler.anim.SetBool(StaticAnimatorIds.IsUsingRightHandId, true);
                         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
                     }
                 }
@@ -304,7 +304,7 @@ namespace SP
                 playerStats.healthRefillAmount = cI.healAmount;
                 playerInventory.consumablesInventory.Remove(cI);
                 playerManager.shouldRefillHealth = true;
-                animatorHandler.PlayTargetAnimation("Use Estus", true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EstusId, true);
                 uiManager.UpdateEstusAmount();
             }
         }
