@@ -17,9 +17,9 @@ namespace SP
         {
             enemySpawner = GetComponentInChildren<EnemySpawner>();
 
-            foreach(var bonfire_ in bonfiresInArea)
+            foreach(var bonfire in bonfiresInArea)
             {
-                bonfire_.enemySpawner = enemySpawner;
+                bonfire.enemySpawner = enemySpawner;
             }
         }
 

@@ -24,7 +24,7 @@ namespace SP
 
         private void Start()
         {
-            mainMenuManager = GameObject.FindObjectOfType<MainMenuManager>();
+            mainMenuManager = GetComponentInParent<MainMenuManager>();
         }
 
         public void PlayGame()

@@ -74,6 +74,8 @@ namespace SP {
             startMusicVolume = SettingsHolder.soundVolume;
 
             resolutionDropdown.RefreshShownValue();
+
+            SettingsHolder.dataManager = dataManager;
         }
 
         public void SaveSettings()

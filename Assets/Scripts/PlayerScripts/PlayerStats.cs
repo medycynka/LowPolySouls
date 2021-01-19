@@ -50,10 +50,12 @@ namespace SP
         {
             playerManager = GetComponent<PlayerManager>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
+            youDiedLogo.SetActive(false);
 
-            DataManager dataManager = SaveManager.LoadGame();
+            DataManager dataManager = SettingsHolder.dataManager;
 
-            if(dataManager != null)
+            if (dataManager != null)
             {
                 if (!dataManager.isFirstStart)
                 {
@@ -67,7 +69,7 @@ namespace SP
                     bonusStamina = dataManager.bonusStamina;
                     playerLevel = dataManager.playerLevel;
                     soulsAmount = dataManager.soulsAmount;
-                
+
                     gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
                     gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
                     playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
@@ -79,14 +81,11 @@ namespace SP
                 }
             }
 
-            enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
             hpBarTransform = healthBar.GetComponent<RectTransform>();
             staminaBarTransform = staminaBar.GetComponent<RectTransform>();
             
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
-
-            youDiedLogo.SetActive(false);
         }
 
         private float SetMaxHealthFromHealthLevel()

@@ -57,8 +57,6 @@ namespace SP
             {
                 playerStats = bonfireManager.playerManager.GetComponent<PlayerStats>();
             }
-
-            SaveManager.SaveGame(playerStats.GetComponent<PlayerManager>(), playerStats, playerStats.GetComponent<PlayerInventory>());
         }
 
         public void QuickMove()

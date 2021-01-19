@@ -6,7 +6,6 @@ namespace SP {
     public class InventoryHolder : MonoBehaviour
     {
         public List<WeaponItem> weaponsInventory;
-        public int[] weaponAmount;
         public List<WeaponItem> shieldsInventory;
         public List<EquipmentItem> helmetsInventory;
         public List<EquipmentItem> chestsInventory;
@@ -16,11 +15,8 @@ namespace SP {
         public List<EquipmentItem> feetInventory;
         public List<EquipmentItem> ringsInventory;
         public List<ConsumableItem> consumablesInventory;
-
-        private void Start()
+        public void InitInventoryHolder(DataManager dataManager)
         {
-            DataManager dataManager = SaveManager.LoadGame();
-
             if(dataManager != null)
             {
                 for (int i = 0; i < SettingsHolder.partsID.Length; i++)
@@ -35,13 +31,12 @@ namespace SP {
                 }
             }
 
-            GameObject player_ = GameObject.FindGameObjectWithTag("Player");
-
-            if (player_ != null)
+            CurrentEquipments player = GameObject.FindObjectOfType<CurrentEquipments>();
+            if (player != null)
             {
-                player_.GetComponent<CurrentEquipments>().InitializeCurrentEquipment();
-                player_.GetComponent<CurrentEquipments>().EquipPlayerWithCurrentItems();
-                player_.GetComponent<CurrentEquipments>().UpdateArmorValue();
+                player.InitializeCurrentEquipment();
+                player.EquipPlayerWithCurrentItems();
+                player.UpdateArmorValue();
             }
         }
     }

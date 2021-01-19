@@ -26,5 +26,11 @@ namespace SP
 
         // Bonfires
         public static bool[] bonfiresAcrivation = { false, false, false };
+        
+        // Data Manager
+        public static DataManager dataManager;
+        
+        // World Manager
+        public static WorldManager worldManager;
     }
 }
