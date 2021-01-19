@@ -14,6 +14,7 @@ namespace SP
         [Header("Locomotion Manager", order = 0)]
         [Header("Components", order = 1)]
         public NavMeshAgent navmeshAgent;
+        public NavMeshObstacle navMeshBlocker;
         public Rigidbody enemyRigidBody;
 
         [Header("A.I Movement Stats", order = 1)]
@@ -25,6 +26,7 @@ namespace SP
             enemyManager = GetComponent<EnemyManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
+            navMeshBlocker = GetComponent<NavMeshObstacle>();
             enemyRigidBody = GetComponent<Rigidbody>();
         }
 

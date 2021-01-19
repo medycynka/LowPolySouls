@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace SP
@@ -50,15 +52,17 @@ namespace SP
         public float maximumLockOnDistance = 20;
 
         private const string environmentTag = "Environment";
+        private LayerMask lockOnLayer;
         
         public Collider[] colliders;
         private void Awake()
         {
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 20 | 1 << 21);
+            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 14 | 1 << 20 | 1 << 21);
             targetTransform = playerManager.transform;
             environmentLayer = LayerMask.NameToLayer(environmentTag);
+            lockOnLayer = (1 << LayerMask.NameToLayer(environmentTag) | 1 << LayerMask.NameToLayer("Enemy"));
         }
 
         public void FollowTarget(float delta)
@@ -139,7 +143,8 @@ namespace SP
             var shortestDistanceOfLeftTarget = Mathf.Infinity;
             var shortestDistanceOfRightTarget = Mathf.Infinity;
             
-            /* Collider[] */colliders = Physics.OverlapSphere(targetTransform.position, 26);
+            colliders = Physics.OverlapSphere(targetTransform.position, 26, lockOnLayer);
+            //Debug.Log(colliders.Length);
 
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -150,24 +155,19 @@ namespace SP
                     var viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
                     RaycastHit hit;
 
-                    if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -50) ||
-                        !(viewableAngle < 50) || !(distanceFromTarget <= maximumLockOnDistance))
+                    if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -50) || !(viewableAngle < 50) || !(distanceFromTarget <= maximumLockOnDistance))
                     {
                         continue;
                     }
 
-                    if (!Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position,
-                        out hit))
+                    if (!Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out hit))
                     {
                         continue;
                     }
 
-                    Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position,
-                        Color.green,
-                        10f);
+                    //Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.green, 10f);
 
-                    if (hit.transform.gameObject.CompareTag(environmentTag) ||
-                        hit.transform.gameObject.layer == environmentLayer)
+                    if (hit.transform.gameObject.CompareTag(environmentTag) || hit.transform.gameObject.layer == environmentLayer)
                     {
                         //Cannot lock onto target, object in the way
                     }
@@ -243,6 +243,12 @@ namespace SP
             {
                 cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, maximumLockOnDistance);
         }
     }
 }

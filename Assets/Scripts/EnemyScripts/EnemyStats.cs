@@ -89,7 +89,7 @@ namespace SP
 
                     if (currentHealth > 0)
                     {
-                        animator.PlayTargetAnimation("Damage_01", true);
+                        animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDamage01Id, true);
                     }
 
                     if(currentHealth <= 0)
@@ -118,7 +118,7 @@ namespace SP
 
             if (currentHealth > 0)
             {
-                animator.PlayTargetAnimation("Damage_01", true);
+                animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDamage01Id, true);
             }
 
             yield return CoroutineYielder.enemyHpUpdateWaiter;

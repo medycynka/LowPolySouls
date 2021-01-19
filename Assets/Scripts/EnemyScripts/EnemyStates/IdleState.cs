@@ -15,6 +15,8 @@ namespace SP
         [Header("Player Detection Layer", order = 1)]
         public LayerMask detectionLayer;
 
+        private Collider[] detectPlayer = new Collider[2];
+
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)
@@ -25,11 +27,12 @@ namespace SP
                 }
 
                 #region Handle Enemy Target Detection
-                Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
-                for (int i = 0; i < colliders.Length; i++)
+                int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
+                
+                for (int i = 0; i < detectLength; i++)
                 {
-                    CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
-
+                    CharacterStats characterStats = detectPlayer[i].transform.GetComponent<CharacterStats>();
+                    
                     if (characterStats != null)
                     {
                         //CHECK FOR TEAM ID

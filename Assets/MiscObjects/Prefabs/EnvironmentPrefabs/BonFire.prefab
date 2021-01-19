@@ -55,13 +55,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4035152931953455847}
-  - component: {fileID: 4778120482597776824}
   - component: {fileID: 3335765835667132145}
   - component: {fileID: 3591348863707460989}
   - component: {fileID: 2094540011}
   - component: {fileID: 2094540012}
   - component: {fileID: 6532777734007141858}
-  m_Layer: 16
+  m_Layer: 14
   m_Name: BonFire
   m_TagString: Bonfire
   m_Icon: {fileID: 0}
@@ -84,23 +83,10 @@ Transform:
   - {fileID: 219333187504413480}
   - {fileID: 448311542173932669}
   - {fileID: 1204769308}
+  - {fileID: 2585558967315617205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4778120482597776824
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4035152931953455844}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!135 &3335765835667132145
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11447507ecf9f7b4ea0d2ce12ce825cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonfireLitScreenTime: 2
   isActivated: 0
   showRestPopUp: 0
   bonfireLight: {fileID: 2454158943806804480}
@@ -180,7 +165,6 @@ MonoBehaviour:
   locationScreen: {fileID: 0}
   qucikMoveID: 0
   spawnPoint: {fileID: 1204769307}
-  quickMoveScreenTime: 5
   isBossBonfire: 0
   enemySpawner: {fileID: 0}
 --- !u!114 &6532777734007141858
@@ -199,6 +183,51 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!1 &6275706257082980837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2585558967315617205}
+  - component: {fileID: 8763562075634871329}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2585558967315617205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275706257082980837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4035152931953455847}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8763562075634871329
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275706257082980837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &8965765195346296377
 GameObject:
   m_ObjectHideFlags: 0

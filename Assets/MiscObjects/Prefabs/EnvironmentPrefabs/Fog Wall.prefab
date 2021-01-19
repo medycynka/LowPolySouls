@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 2909211134057514559}
   - component: {fileID: 2909211134057514558}
   - component: {fileID: 2909211134057514557}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fog Wall
   m_TagString: Fog Wall
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2909211134057514544}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 19.38, y: 2.97, z: -46}
   m_LocalScale: {x: 1.5, y: 1, z: 0.5}
   m_Children:

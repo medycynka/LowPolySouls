@@ -55,6 +55,8 @@ namespace SP
         private const string bonfireTag = "Bonfire";
         private const string interactableTag = "Interactable";
         private const string fogWallTag = "Fog Wall";
+        private LayerMask pickUpLayer;
+        private Collider[] interactColliders;
         
         private void Start()
         {
@@ -62,6 +64,8 @@ namespace SP
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
+            pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
+            interactColliders = new Collider[8];
         }
 
         private void Update()
@@ -143,17 +147,54 @@ namespace SP
 
         private void CheckForInteractableObject()
         {
-            RaycastHit hit;
-
-            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
+            int collidersLength = Physics.OverlapSphereNonAlloc(transform.position, 1f, interactColliders, pickUpLayer);
+            
+            if (collidersLength > 0)
             {
-                if (hit.collider.CompareTag(bonfireTag))
+                for (int i = 0; i < collidersLength; i++)
                 {
-                    BonfireManager bonManager = hit.collider.GetComponent<BonfireManager>();
-                    
-                    if (!bonManager.isActivated)
+                    if (interactColliders[i].CompareTag(bonfireTag))
                     {
-                        BonfireActivator interactableObject = bonManager.GetComponent<BonfireActivator>();
+                        BonfireManager bonManager = interactColliders[i].GetComponent<BonfireManager>();
+
+                        if (!bonManager.isActivated)
+                        {
+                            BonfireActivator interactableObject = bonManager.GetComponent<BonfireActivator>();
+
+                            if (interactableObject != null)
+                            {
+                                interactableUI.interactableText.text = interactableObject.interactableText;
+                                interactableUIGameObject.SetActive(true);
+
+                                if (inputHandler.a_Input)
+                                {
+                                    interactableObject.Interact(this);
+                                    interactableUIGameObject.SetActive(false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            BonfireInteraction interactableObject = bonManager.GetComponent<BonfireInteraction>();
+
+                            if (interactableObject != null)
+                            {
+                                if (bonManager.showRestPopUp)
+                                {
+                                    interactableUI.interactableText.text = interactableObject.interactableText;
+                                    interactableUIGameObject.SetActive(true);
+
+                                    if (inputHandler.a_Input)
+                                    {
+                                        interactableObject.Interact(this);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (interactColliders[i].CompareTag(interactableTag))
+                    {
+                        Interactable interactableObject = interactColliders[i].GetComponent<Interactable>();
 
                         if (interactableObject != null)
                         {
@@ -163,17 +204,16 @@ namespace SP
                             if (inputHandler.a_Input)
                             {
                                 interactableObject.Interact(this);
-                                interactableUIGameObject.SetActive(false);
                             }
                         }
                     }
-                    else
+                    else if (interactColliders[i].CompareTag(fogWallTag))
                     {
-                        BonfireInteraction interactableObject = bonManager.GetComponent<BonfireInteraction>();
+                        FogWallManager interactableObject = interactColliders[i].GetComponent<FogWallManager>();
 
                         if (interactableObject != null)
                         {
-                            if (bonManager.showRestPopUp)
+                            if (interactableObject.canInteract)
                             {
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);
@@ -182,39 +222,6 @@ namespace SP
                                 {
                                     interactableObject.Interact(this);
                                 }
-                            }
-                        }
-                    }
-                }
-                else if(hit.collider.CompareTag(interactableTag))
-                {
-                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-
-                    if (interactableObject != null)
-                    {
-                        interactableUI.interactableText.text = interactableObject.interactableText;
-                        interactableUIGameObject.SetActive(true);
-
-                        if (inputHandler.a_Input)
-                        {
-                            interactableObject.Interact(this);
-                        }
-                    }
-                }
-                else if(hit.collider.CompareTag(fogWallTag))
-                {
-                    FogWallManager interactableObject = hit.collider.GetComponent<FogWallManager>();
-
-                    if (interactableObject != null)
-                    {
-                        if (interactableObject.canInteract)
-                        {
-                            interactableUI.interactableText.text = interactableObject.interactableText;
-                            interactableUIGameObject.SetActive(true);
-
-                            if (inputHandler.a_Input)
-                            {
-                                interactableObject.Interact(this);
                             }
                         }
                     }
