@@ -133,7 +133,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DeathColor: {r: 32, g: 0, b: 0, a: 1}
     - _EdgeColor: {r: 23.96863, g: 0, b: 0, a: 0}
-    - _EmisionColor: {r: 2, g: 2, b: 2, a: 1}
+    - _EmisionColor: {r: 0.3745098, g: 0.3745098, b: 0.3745098, a: 1}
     - _EmissionColor: {r: 1.016, g: 1.016, b: 1.016, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _TextureOffset: {r: 0, g: 0, b: 0, a: 0}
