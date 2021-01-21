@@ -10,6 +10,7 @@ namespace SP
     {
         [Header("Area Manager", order = 0)]
         AudioClip[] footStepsOnExit;
+        public AudioClip bgMusicBossDefeat;
         bool insideReset = true;
 
         [Header("Fog Walls")]
@@ -96,7 +97,7 @@ namespace SP
 
         private void OnTriggerStay(Collider other)
         {
-            if (isInside)
+            if (isInside && insideReset)
             {
                 insideReset = false;
             }
@@ -133,6 +134,8 @@ namespace SP
 
                     isBossAlive = false;
                     bonfiresInArea[0].gameObject.SetActive(true);
+                    playerSoundManager.ChangeBackGroundMusic(bgMusicBossDefeat);
+                    areaBgMusic = bgMusicBossDefeat;
                 }
             }
         }

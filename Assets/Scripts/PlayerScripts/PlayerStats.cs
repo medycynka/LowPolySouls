@@ -22,6 +22,7 @@ namespace SP
         [Header("Death Drop", order = 2)]
         public Sprite deathDropIcon;
         public ConsumablePickUp soulDeathDrop;
+        public Vector3 jumpDeathDropPosition;
 
         [Header("Unique Player Stats", order = 2)]
         public string playerName = SettingsHolder.playerName;
@@ -36,6 +37,7 @@ namespace SP
 
         [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
+        public bool isJumpDeath = false;
 
         private EnemySpawner[] enemiesSpawners;
         private RectTransform hpBarTransform;
@@ -216,8 +218,8 @@ namespace SP
         private IEnumerator Respawn()
         {
             youDiedLogo.SetActive(true);
-            DropSouls();
-            
+            DropSouls(isJumpDeath ? jumpDeathDropPosition : transform.position);
+
             yield return new WaitForSeconds(5f);
 
             youDiedLogo.SetActive(false);
@@ -234,6 +236,11 @@ namespace SP
             
             isPlayerAlive = true;
             playerManager.quickMoveScreen.SetActive(false);
+
+            if (isJumpDeath)
+            {
+                isJumpDeath = false;
+            }
         }
 
         private void RespawnEnemiesOnDead()
@@ -244,7 +251,7 @@ namespace SP
             }
         }
 
-        private void DropSouls()
+        private void DropSouls(Vector3 dropPosition)
         {
             if (soulsAmount > 0)
             {
@@ -258,7 +265,7 @@ namespace SP
                 uiManager.UpdateSouls();
                 soulDeathDrop.consumableItems = new []{ deathDrop };
                 soulDeathDrop.interactableText = "Recover souls";
-                Instantiate(soulDeathDrop, transform.position, Quaternion.identity);
+                Instantiate(soulDeathDrop, dropPosition, Quaternion.identity);
             }
         }
     }

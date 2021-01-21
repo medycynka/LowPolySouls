@@ -53,7 +53,7 @@ namespace SP
 
         private void OnTriggerStay(Collider other)
         {
-            if (isInside)
+            if (isInside && insideReset)
             {
                 insideReset = false;
             }
