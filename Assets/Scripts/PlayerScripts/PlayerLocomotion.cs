@@ -1,4 +1,5 @@
-﻿﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace SP
         InputHandler inputHandler;
         PlayerStats playerStats;
         CapsuleCollider playerCollider;
+        FootIkManager footIkManager;
 
         [Header("Move Direction", order = 1)]
         public Vector3 moveDirection;
@@ -60,13 +62,13 @@ namespace SP
             playerStats = GetComponent<PlayerStats>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             playerCollider = GetComponent<CapsuleCollider>();
+            footIkManager = GetComponentInChildren<FootIkManager>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 22);
-
         }
 
         #region Movement
@@ -259,6 +261,7 @@ namespace SP
                     }
 
                     playerManager.isInAir = false;
+                    footIkManager.enableFeetIk = true;
                 }
             }
             else
@@ -270,6 +273,8 @@ namespace SP
 
                 if (playerManager.isInAir == false)
                 {
+                    footIkManager.enableFeetIk = false;
+                    
                     if (playerManager.isInteracting == false)
                     {
                         animatorHandler.PlayTargetAnimation(StaticAnimatorIds.FallId, true);

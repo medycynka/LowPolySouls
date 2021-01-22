@@ -885,6 +885,7 @@ GameObject:
   - component: {fileID: 4966070490633684526}
   - component: {fileID: 3517719973692865818}
   - component: {fileID: 1775283085576989764}
+  - component: {fileID: 2101359628}
   m_Layer: 9
   m_Name: Player
   m_TagString: Model
@@ -2520,12 +2521,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  isInteractingId: 0
-  canDoComboId: 0
-  vulnerabilityId: 0
-  isInAirId: 0
-  usingLeftId: 0
-  usingRightId: 0
   canRotate: 1
 --- !u!114 &4966070490633684526
 MonoBehaviour:
@@ -2567,6 +2562,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastAttack: 
+--- !u!114 &2101359628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966070490633812491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25511ec101d812f4bb2adfc1c187bde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableFeetIk: 1
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  weightPositionRight: 1
+  weightRotationRight: 0.5
+  weightPositionLeft: 1
+  weightRotationLeft: 0.5
+  offsetFoot: {x: 0, y: 0.05, z: 0}
 --- !u!1 &4966070490633813573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,6 +3806,7 @@ MonoBehaviour:
   deathDropIcon: {fileID: 21300000, guid: 4a8b11548ae1ade4ba8602f9191f1807, type: 3}
   soulDeathDrop: {fileID: 2407895679905884246, guid: 13c655fcff4024c4aa656393d80e6831,
     type: 3}
+  jumpDeathDropPosition: {x: 0, y: 0, z: 0}
   playerName: 
   playerLevel: 12
   soulsAmount: 500000
@@ -3798,6 +3815,7 @@ MonoBehaviour:
   healthBgRefillAmount: 20
   staminaRefillAmount: 20
   isPlayerAlive: 1
+  isJumpDeath: 0
 --- !u!114 &540771581
 MonoBehaviour:
   m_ObjectHideFlags: 0
