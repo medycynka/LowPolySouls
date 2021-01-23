@@ -19,8 +19,8 @@ namespace SP
         public static WaitForSeconds bossPositionResetWaiter { get; } = new WaitForSeconds(5f);
         public static WaitForSeconds spawnRefreshWaiter { get; } = new WaitForSeconds(1f);
         public static WaitForSeconds fogWallDestroyWaiter { get; } = new WaitForSeconds(2f);
-        public static WaitForSeconds fogWallRemoveFirstWaiter { get; } = new WaitForSeconds(2f);
-        public static WaitForSeconds fogWallRemoveSecondWaiter { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds fogWallRemoveFirstWaiter { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds fogWallRemoveSecondWaiter { get; } = new WaitForSeconds(2.5f);
         public static WaitForSeconds playerRespawnWaiter { get; } = new WaitForSeconds(5f);
         public static WaitForSeconds enemyHpUpdateWaiter { get; } = new WaitForSeconds(3.5f);
         public static WaitForSeconds jumpFirstWaiter { get; } = new WaitForSeconds(0.2f);

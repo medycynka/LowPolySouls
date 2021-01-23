@@ -16,7 +16,8 @@ namespace SP
         LegArmor,
         FootArmor,
         Ring,
-        Consumable
+        Consumable,
+        Spell
     }
 
 }

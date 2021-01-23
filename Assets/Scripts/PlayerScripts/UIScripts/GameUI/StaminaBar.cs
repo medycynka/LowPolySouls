@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace SP
 {
-
     public class StaminaBar : MonoBehaviour
     {
         public Slider staminaBarSlider;
@@ -21,5 +20,4 @@ namespace SP
             staminaBarSlider.value = currentStamina;
         }
     }
-
 }

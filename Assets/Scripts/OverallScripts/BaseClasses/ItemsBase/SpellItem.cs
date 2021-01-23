@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace SP
 {
-    public class SpellItem : MonoBehaviour
+    public class SpellItem : Item
     {
         public GameObject spellWarmUpFX;
         public GameObject spellCastFX;
         public string spellAnimation;
 
+        [Header("Spell Cost")]
+        public float focusPointCost;
+        
         [Header("Spell Type")] 
         public CastingType spellType;
 
@@ -17,14 +20,14 @@ namespace SP
         [TextArea]
         public string spellDescription;
 
-        public virtual void AttemptToCastSpell()
+        public virtual void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)
         {
-            Debug.Log("You attempt to cast a spell!");
+            
         }
 
-        public virtual void SuccessfullyCastSpell()
+        public virtual void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)
         {
-            Debug.Log("You successfully cast a spell!");
+            playerStats.TakeFocusDamage(focusPointCost);
         }
     }
 }

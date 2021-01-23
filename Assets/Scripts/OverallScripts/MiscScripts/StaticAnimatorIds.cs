@@ -30,6 +30,7 @@ namespace SP
         public const string Death01Name = "Dead_01";
         public const string GetUpName = "Get Up";
         public const string SleepName = "Sleep";
+        public const string FogRemoveName = "Remove Fog Wall";
         #endregion
         
         #region Player Animation Ids
@@ -54,6 +55,7 @@ namespace SP
         public static int LandId;
         public static int Damage01Id;
         public static int Death01Id;
+        public static int FogRemoveId;
         #endregion
         
         #region Enemy Animation Ids

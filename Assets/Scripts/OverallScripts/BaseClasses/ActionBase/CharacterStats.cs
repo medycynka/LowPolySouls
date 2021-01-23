@@ -17,6 +17,11 @@ namespace SP
         public float staminaLevel = 10f;
         public float maxStamina;
         public float currentStamina;
+        
+        [Header("Focus", order = 1)]
+        public float focusLevel = 5f;
+        public float maxFocus;
+        public float currentFocus;
 
         [Header("Atributes", order = 1)]
         public float baseArmor = 5f;

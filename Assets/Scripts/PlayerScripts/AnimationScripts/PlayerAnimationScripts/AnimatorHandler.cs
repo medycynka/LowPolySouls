@@ -40,6 +40,7 @@ namespace SP
             StaticAnimatorIds.LandId = Animator.StringToHash(StaticAnimatorIds.LandName);
             StaticAnimatorIds.Damage01Id = Animator.StringToHash(StaticAnimatorIds.Damage01Name);
             StaticAnimatorIds.Death01Id = Animator.StringToHash(StaticAnimatorIds.Death01Name);
+            StaticAnimatorIds.FogRemoveId = Animator.StringToHash(StaticAnimatorIds.FogRemoveName);
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)

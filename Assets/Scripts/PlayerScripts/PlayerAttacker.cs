@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace SP
         WeaponSlotManager weaponSlotManager;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        PlayerStats playerStats;
 
         [Header("Last Attack Name")]
         public string lastAttack;
@@ -22,6 +24,7 @@ namespace SP
             inputHandler = GetComponentInParent<InputHandler>();
             playerInventory = GetComponentInParent<PlayerInventory>();
             playerManager = GetComponentInParent<PlayerManager>();
+            playerStats = GetComponentInParent<PlayerStats>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -92,15 +95,15 @@ namespace SP
             }
         }
 
-        public void HandleRBAction()
+        public void HandleRbAction()
         {
             switch (playerInventory.rightWeapon.weaponType)
             {
                 case WeaponType.Melee:
-                    PerformRBMeleeAction();
+                    PerformRbMeleeAction();
                     break;
                 case WeaponType.Casting:
-                    PerformRBMagicAction(playerInventory.rightWeapon);
+                    PerformRbMagicAction(playerInventory.rightWeapon);
                     break;
                 case WeaponType.Shooting:
                     break;
@@ -110,7 +113,7 @@ namespace SP
         }
         
         #region Attack Actions
-        private void PerformRBMeleeAction()
+        private void PerformRbMeleeAction()
         {
             if (playerManager.canDoCombo)
             {
@@ -135,16 +138,28 @@ namespace SP
             }
         }
 
-        private void PerformRBMagicAction(WeaponItem weapon)
+        private void PerformRbMagicAction(WeaponItem weapon)
         {
-            if (weapon.castingType == CastingType.Faith)
+            if (playerManager.isInteracting)
             {
-                if (playerInventory.currentSpell != null && playerInventory.currentSpell.spellType == CastingType.Faith)
+                return;
+            }
+            
+            if (playerInventory.currentSpell != null && playerStats.currentFocus > 0)
+            {
+                if (weapon.castingType == CastingType.Faith)
                 {
-                    //CHECK FOR FP
-                    //ATTEMPT TO CAST SPELL
+                    if (playerInventory.currentSpell.spellType == CastingType.Faith)
+                    {
+                        playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+                    }
                 }
             }
+        }
+        
+        private void SuccessfullyCastSpell()
+        {
+            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
         }
         #endregion
     }

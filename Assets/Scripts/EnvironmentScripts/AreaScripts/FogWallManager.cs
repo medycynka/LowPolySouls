@@ -25,7 +25,6 @@ namespace SP
         public override void PickUpItem(PlayerManager playerManager)
         {
             boxCollider.enabled = false;
-            wallParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
             base.PickUpItem(playerManager);
 
@@ -42,6 +41,7 @@ namespace SP
         private IEnumerator DestroyFog(PlayerManager playerManager)
         {
             playerManager.isRemovingFog = true;
+            wallParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
             yield return CoroutineYielder.fogWallDestroyWaiter;
 
@@ -54,16 +54,15 @@ namespace SP
         {
             canInteract = false;
             playerManager.isRemovingFog = true;
-
+            
             yield return CoroutineYielder.fogWallRemoveFirstWaiter;
-
-            playerManager.isRemovingFog = false;
+            
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.FogRemoveId, true);
 
             yield return CoroutineYielder.fogWallRemoveSecondWaiter;
 
+            playerManager.isRemovingFog = false;
             boxCollider.enabled = true;
-            wallParticles.Play();
-            canInteract = true;
         }
     }
 }

@@ -153,7 +153,7 @@ namespace SP
                 #region Handle Light Attack
                 if (rb_Input)
                 {
-                    playerAttacker.HandleRBAction();
+                    playerAttacker.HandleRbAction();
                 }
                 #endregion
 

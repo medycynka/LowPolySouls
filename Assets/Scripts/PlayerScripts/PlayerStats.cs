@@ -17,6 +17,7 @@ namespace SP
         public UIManager uiManager;
         public HealthBar healthBar;
         public StaminaBar staminaBar;
+        public FocusBar focusBar;
         public GameObject youDiedLogo;
 
         [Header("Death Drop", order = 2)]
@@ -34,6 +35,7 @@ namespace SP
         public float healthRefillAmount = 20f;
         public float healthBgRefillAmount = 20f;
         public float staminaRefillAmount = 20f;
+        public float focusRefillAmount = 20f;
 
         [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
@@ -42,6 +44,7 @@ namespace SP
         private EnemySpawner[] enemiesSpawners;
         private RectTransform hpBarTransform;
         private RectTransform staminaBarTransform;
+        private RectTransform focusBarTransform;
 
         private void Awake()
         {
@@ -85,9 +88,11 @@ namespace SP
 
             hpBarTransform = healthBar.GetComponent<RectTransform>();
             staminaBarTransform = staminaBar.GetComponent<RectTransform>();
+            focusBarTransform = focusBar.GetComponent<RectTransform>();
             
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
+            UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
         private float SetMaxHealthFromHealthLevel()
@@ -135,11 +140,35 @@ namespace SP
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
         }
+        
+        private float SetMaxFocusFromFocusLevel()
+        {
+            maxFocus = focusLevel * 10;
+
+            return maxFocus;
+        }
+
+        public void UpdateFocusBar(float newFocus)
+        {
+            maxFocus = newFocus;
+            currentFocus = maxFocus;
+
+            float currentPixelWidth = 180f * (maxFocus / 100f);
+            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+
+            focusBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -115f);
+            focusBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            
+            focusBar.SetMaxFocus(maxFocus);
+            focusBar.SetCurrentFocus(currentFocus);
+        }
 
         public void UpdatePlayerStats()
         {
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
+            //UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
         public void TakeDamage(float damage)
@@ -172,6 +201,19 @@ namespace SP
             healthBar.backgroundSlider.value += healthRefillAmount * Time.deltaTime;
         }
 
+        public void HealPlayer(float healAmount)
+        {
+            currentHealth += healAmount;
+
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+
+            healthBar.healthBarSlider.value += healAmount;
+            healthBar.backgroundSlider.value += healAmount;
+        }
+
         public void TakeStaminaDamage(float drain)
         {
             currentStamina = currentStamina - drain;
@@ -195,7 +237,31 @@ namespace SP
 
             staminaBar.staminaBarSlider.value += staminaRefillAmount * Time.deltaTime;
         }
+        
+        public void TakeFocusDamage(float drain)
+        {
+            currentFocus = currentFocus - drain;
 
+            if(currentFocus < 0)
+            {
+                currentFocus = 0;
+            }
+
+            focusBar.SetCurrentFocus(currentFocus);
+        }
+
+        public void RefillFocus()
+        {
+            currentFocus += focusRefillAmount * Time.deltaTime;
+
+            if (currentFocus > maxFocus)
+            {
+                currentFocus = maxFocus;
+            }
+
+            focusBar.focusBarSlider.value += focusRefillAmount * Time.deltaTime;
+        }
+        
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
             enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength * 0.5f);
@@ -220,7 +286,7 @@ namespace SP
             youDiedLogo.SetActive(true);
             DropSouls(isJumpDeath ? jumpDeathDropPosition : transform.position);
 
-            yield return new WaitForSeconds(5f);
+            yield return CoroutineYielder.playerRespawnWaiter;
 
             youDiedLogo.SetActive(false);
             playerManager.quickMoveScreen.SetActive(true);
@@ -242,6 +308,8 @@ namespace SP
                 isJumpDeath = false;
             }
         }
+        
+        
 
         private void RespawnEnemiesOnDead()
         {

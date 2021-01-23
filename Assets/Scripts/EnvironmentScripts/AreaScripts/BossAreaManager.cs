@@ -76,11 +76,6 @@ namespace SP
                     bossHpSlider.minValue = 0;
                     bossHpSlider.maxValue = bossStats.maxHealth;
                     bossHpSlider.value = bossStats.maxHealth;
-                    
-                    foreach (var fogWall in fogWalls)
-                    {
-                        fogWall.canInteract = false;
-                    }
                 }
 
                 if (playerSoundManager == null)
@@ -160,6 +155,7 @@ namespace SP
         private IEnumerator HealBoss()
         {
             bossHpBar.SetActive(false);
+            fogWalls[0].canInteract = true;
 
             yield return CoroutineYielder.bossHealWaiter;
 

@@ -28,9 +28,29 @@ namespace SP {
             animationSoundManager.PlayOnRoll();
         }
 
+        public void BackStep()
+        {
+            animationSoundManager.PlayOnBackStep();
+        }
+
         public void AttackSound()
         {
             animationSoundManager.PlayOnAttack();
+        }
+
+        public void FaithSound()
+        {
+            animationSoundManager.PlayOnFaith();
+        }
+        
+        public void CurseSound()
+        {
+            animationSoundManager.PlayOnCurse();
+        }
+        
+        public void DestructionSound()
+        {
+            animationSoundManager.PlayOnDestruction();
         }
 
         public void DamageSound()

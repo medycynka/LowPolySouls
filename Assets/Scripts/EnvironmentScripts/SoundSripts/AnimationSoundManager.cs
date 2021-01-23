@@ -11,6 +11,9 @@ namespace SP
         public AudioClip[] movingClips;
         public AudioClip[] attackingClips;
         public AudioClip[] getDamageClips;
+        public AudioClip[] faithSkillClips;
+        public AudioClip[] curseSkillClips;
+        public AudioClip[] destructionSkillClips;
 
         [Header("Unique Clips", order = 1)]
         public AudioClip rollClip;
@@ -102,6 +105,33 @@ namespace SP
             {
                 StartCoroutine(StopStepSounds());
                 audioSource.PlayOneShot(GetRandomClip(attackingClips));
+            }
+        }
+        
+        public void PlayOnFaith()
+        {
+            if (faithSkillClips.Length > 0)
+            {
+                StartCoroutine(StopStepSounds());
+                audioSource.PlayOneShot(GetRandomClip(faithSkillClips));
+            }
+        }
+        
+        public void PlayOnCurse()
+        {
+            if (curseSkillClips.Length > 0)
+            {
+                StartCoroutine(StopStepSounds());
+                audioSource.PlayOneShot(GetRandomClip(curseSkillClips));
+            }
+        }
+        
+        public void PlayOnDestruction()
+        {
+            if (destructionSkillClips.Length > 0)
+            {
+                StartCoroutine(StopStepSounds());
+                audioSource.PlayOneShot(GetRandomClip(destructionSkillClips));
             }
         }
 
