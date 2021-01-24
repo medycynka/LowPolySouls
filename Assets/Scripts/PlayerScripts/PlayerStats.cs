@@ -49,6 +49,10 @@ namespace SP
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            uiManager = FindObjectOfType<UIManager>();
+            healthBar = FindObjectOfType<HealthBar>();
+            staminaBar = FindObjectOfType<StaminaBar>();
+            focusBar = FindObjectOfType<FocusBar>();
         }
 
         private void Start()

@@ -22,7 +22,6 @@ namespace SP
         public GameObject quickMoveScreen;
 
         [Header("Player Scripts", order = 1)]
-        public PlayerStats playerStats;
         public PlayerManager playerManager;
 
         [Header("Quick Move", order = 1)]

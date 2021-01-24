@@ -29,8 +29,8 @@ namespace SP
         [Header("Helper bools", order = 2)]
         public bool shouldRefillHealth = false;
         public bool shouldRefillStamina = false;
+        public bool shouldRefillFocus = false;
         public bool shouldRefillHealthBg = false;
-        public bool shouldRefillStaminaBg = false;
         public bool shouldAddJumpForce = false;
         public bool isRestingAtBonfire = false;
         public bool isRemovingFog = false;
@@ -50,6 +50,7 @@ namespace SP
 
         private float healthBgRefillTimer = 0.0f;
         private float staminaRefillTimer = 0.0f;
+        private float focusRefillTimer = 0.0f;
         private float addJumpForceTimer = 1.25f;
 
         private const string bonfireTag = "Bonfire";
@@ -65,6 +66,8 @@ namespace SP
             playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
             pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
+            cameraHandler = FindObjectOfType<CameraHandler>();
+            interactableUI = FindObjectOfType<InteractableUI>();
             interactColliders = new Collider[8];
         }
 
@@ -142,6 +145,7 @@ namespace SP
             FillHealthBarBackGround(delta);
             CheckForHealthRefill();
             CheckForStaminaRefill(delta);
+            CheckForFocusRefill(delta);
             CheckForSprintStaminaDrain(delta);
         }
 
@@ -282,7 +286,7 @@ namespace SP
 
             if (shouldRefillStamina)
             {
-                if (staminaRefillTimer > 1.0f)
+                if (staminaRefillTimer > 2.0f)
                 {
                     playerStats.RefillStamina();
                 }
@@ -294,6 +298,27 @@ namespace SP
             else
             {
                 staminaRefillTimer = 0.0f;
+            }
+        }
+
+        private void CheckForFocusRefill(float delta)
+        {
+            shouldRefillFocus = !isInteracting && (playerStats.currentFocus < playerStats.maxFocus);
+
+            if (shouldRefillFocus)
+            {
+                if (focusRefillTimer > 1.0f)
+                {
+                    playerStats.RefillFocus();
+                }
+                else
+                {
+                    focusRefillTimer += delta;
+                }
+            }
+            else
+            {
+                focusRefillTimer = 0.0f;
             }
         }
 

@@ -64,6 +64,10 @@ namespace SP
             playerCollider = GetComponent<CapsuleCollider>();
             footIkManager = GetComponentInChildren<FootIkManager>();
             cameraObject = Camera.main.transform;
+            if (cameraHandler == null)
+            {
+                cameraHandler = cameraObject.GetComponent<CameraHandler>();
+            }
             myTransform = transform;
             animatorHandler.Initialize();
 

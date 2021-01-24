@@ -3727,8 +3727,8 @@ MonoBehaviour:
   isInteracting: 0
   shouldRefillHealth: 0
   shouldRefillStamina: 0
+  shouldRefillFocus: 0
   shouldRefillHealthBg: 0
-  shouldRefillStaminaBg: 0
   shouldAddJumpForce: 0
   isRestingAtBonfire: 0
   isRemovingFog: 0
@@ -3753,12 +3753,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bce5fce2f721c48837370ec7eb7389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
+  rightWeapon: {fileID: 11400000, guid: b4bfca7ae14a20d409431db3ec18aa0c, type: 2}
   leftWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 179a4f0368fb0c64c8a791d4150536d1, type: 2}
-  currentSpell: {fileID: 0}
+  currentSpell: {fileID: 11400000, guid: 1e5d5afa20e40e8409300e0b8b04f92c, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
+  - {fileID: 11400000, guid: b4bfca7ae14a20d409431db3ec18aa0c, type: 2}
   - {fileID: 11400000, guid: bd035952e8bccc546a2bd9275c1e7aa5, type: 2}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}

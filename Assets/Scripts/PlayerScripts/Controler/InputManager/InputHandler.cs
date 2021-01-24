@@ -66,6 +66,8 @@ namespace SP
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()

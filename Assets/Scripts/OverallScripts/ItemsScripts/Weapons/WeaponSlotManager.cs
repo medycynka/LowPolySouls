@@ -34,6 +34,7 @@ namespace SP
             animator = GetComponent<Animator>();
             playerStats = GetComponentInParent<PlayerStats>();
             inputHandler = GetComponentInParent<InputHandler>();
+            quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
             weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
