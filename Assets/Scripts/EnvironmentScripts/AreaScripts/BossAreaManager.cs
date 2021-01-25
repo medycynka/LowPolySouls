@@ -25,7 +25,7 @@ namespace SP
 
         EnemyStats bossStats;
         Slider bossHpSlider;
-        private TextMeshProUGUI bossNameText;
+        TextMeshProUGUI bossNameText;
 
         private void Start()
         {
@@ -33,9 +33,10 @@ namespace SP
             {
                 bonfiresInArea[0].gameObject.SetActive(false);
                 bossStats = bossPrefab.GetComponent<EnemyStats>();
+                bossStats.bossAreaManager = this;
                 bossHpBar.SetActive(false);
                 bossHpSlider = bossHpBar.GetComponentInChildren<Slider>();
-                bossNameText = GetComponentInChildren<TextMeshProUGUI>();
+                bossNameText = bossHpBar.GetComponentInChildren<TextMeshProUGUI>();
             }
             else
             {
@@ -129,7 +130,11 @@ namespace SP
 
                     isBossAlive = false;
                     bonfiresInArea[0].gameObject.SetActive(true);
-                    playerSoundManager.ChangeBackGroundMusic(bgMusicBossDefeat);
+                    if (playerSoundManager != null)
+                    {
+                        playerSoundManager.ChangeBackGroundMusic(bgMusicBossDefeat);
+                    }
+
                     areaBgMusic = bgMusicBossDefeat;
                 }
             }

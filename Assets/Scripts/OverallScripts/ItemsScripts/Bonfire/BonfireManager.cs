@@ -82,7 +82,10 @@ namespace SP
         {
             if (!isBossBonfire)
             {
-                enemySpawner.SpawnEnemies();
+                if (enemySpawner != null)
+                {
+                    enemySpawner.SpawnEnemies();
+                }
             }
         }
     }
