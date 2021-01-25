@@ -27,6 +27,7 @@ namespace SP
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
             animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
             playerStats = playerManager.GetComponent<PlayerStats>();
+            bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
             animatorHandler.PlayTargetAnimation(StaticAnimatorIds.SitId, true);
