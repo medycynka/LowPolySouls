@@ -78,6 +78,10 @@ namespace SP
 
         private void Start()
         {
+            playerInventory = FindObjectOfType<PlayerInventory>();
+            playerStats = playerInventory.GetComponent<PlayerStats>();
+            inputHandler = playerInventory.GetComponent<InputHandler>();
+            
             currentSoulsAmount.text = playerStats.soulsAmount.ToString();
             GetAllInventorySlots();
             equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);

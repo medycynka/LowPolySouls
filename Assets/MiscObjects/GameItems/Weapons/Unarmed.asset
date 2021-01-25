@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718909ac1136fb343be1390c1911791a, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   itemName: Unarmed
   itemId: 0
   itemType: 0

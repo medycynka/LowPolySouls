@@ -226,7 +226,9 @@ namespace SP
                     #endregion
 
                     #region Unequip Item
-                    shouldDeactivate = item.canDeactivate || (bodyPart == ModularBodyPart.ElbowAttachmentRight
+                    shouldDeactivate = item.canDeactivate || (bodyPart == ModularBodyPart.ShoulderAttachmentLeft
+                        || bodyPart == ModularBodyPart.ShoulderAttachmentRight
+                        || bodyPart == ModularBodyPart.ElbowAttachmentRight
                         || bodyPart == ModularBodyPart.ElbowAttachmentLeft
                         || bodyPart == ModularBodyPart.BackAttachment
                         || bodyPart == ModularBodyPart.KneeAttachmentRight
