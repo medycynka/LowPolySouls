@@ -28,7 +28,7 @@ namespace SP
         [Header("Is it Boss", order = 2)]
         public bool isBoss;
         public BossAreaManager bossAreaManager;
-        Slider bossHpSlider;
+        public Slider bossHpSlider;
 
         private void Awake()
         {
@@ -78,7 +78,7 @@ namespace SP
             }
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool isBackStabbed)
         {
             if (enemyManager.isAlive)
             {
@@ -89,28 +89,29 @@ namespace SP
 
                     if (currentHealth > 0)
                     {
-                        animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDamage01Id, true);
+                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDamage01Id, true);
                     }
-
-                    if(currentHealth <= 0)
+                    else
                     {
+                        enemyManager.deadFromBackStab = isBackStabbed;
                         bossAreaManager.bossHpBar.SetActive(false);
                     }
                 }
                 else
                 {
-                    StartCoroutine(UpdateEnemyHealthBar(damage));
+                    StartCoroutine(UpdateEnemyHealthBar(damage, isBackStabbed));
                 }
             }
         }
 
-        public void DealDamage(PlayerStats playerStats, float weaponDamage)
+        public void DealDamage(PlayerStats playerStat, float weaponDamage)
         {
-            playerStats.TakeDamage(weaponDamage + Strength);
+            playerStat.TakeDamage(weaponDamage + Strength, false);
         }
 
-        public IEnumerator UpdateEnemyHealthBar(float damage)
+        private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed)
         {
+            enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
             healthBar.SetActive(true);
             currentHealth -= damage;
             healtBarFill.fillAmount = currentHealth / maxHealth;
@@ -118,7 +119,7 @@ namespace SP
 
             if (currentHealth > 0)
             {
-                animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDamage01Id, true);
+                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDamage01Id, true);
             }
 
             yield return CoroutineYielder.enemyHpUpdateWaiter;

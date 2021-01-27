@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionBlocker : MonoBehaviour
+namespace SP
 {
-    public CapsuleCollider characterCollider;
-    public CapsuleCollider blockerCollider;
-
-    void Start()
+    public class CollisionBlocker : MonoBehaviour
     {
-        Physics.IgnoreCollision(characterCollider, blockerCollider, true);
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider blockerCollider;
+
+        void Start()
+        {
+            Physics.IgnoreCollision(characterCollider, blockerCollider, true);
+        }
     }
 }

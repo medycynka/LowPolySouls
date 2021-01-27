@@ -30,42 +30,51 @@ namespace SP
 
         private void OnTriggerEnter(Collider other)
         {
-            isInside = true;
-
-            if (insideReset)
+            if (other.CompareTag(playerTag))
             {
-                if (playerStats == null)
+                isInside = true;
+
+                if (insideReset)
                 {
-                    playerStats = other.GetComponent<PlayerStats>();
+                    if (playerStats == null)
+                    {
+                        playerStats = other.GetComponent<PlayerStats>();
+                    }
+
+                    if (playerSoundManager == null)
+                    {
+                        playerSoundManager = other.GetComponent<AnimationSoundManager>();
+                    }
+
+                    playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
+                    playerSoundManager.ChangeFootstepsSound(footSteps, this);
+
+                    StartCoroutine(ShowAreaName());
                 }
-
-                if (playerSoundManager == null)
-                {
-                    playerSoundManager = other.GetComponent<AnimationSoundManager>();
-                }
-
-                playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
-                playerSoundManager.ChangeFootstepsSound(footSteps, this);
-
-                StartCoroutine(ShowAreaName());
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isInside && insideReset)
+            if (other.CompareTag(playerTag))
             {
-                insideReset = false;
+                if (isInside && insideReset)
+                {
+                    insideReset = false;
+                }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            playerStats = null;
-            isInside = false;
-            insideReset = true;
-            playerSoundManager.ChangeBackGroundMusic(null);
-            playerSoundManager.movingClips = footStepsOnExit;
+            if (other.CompareTag(playerTag))
+            {
+                playerStats = null;
+                isInside = false;
+                insideReset = true;
+                playerSoundManager.ChangeBackGroundMusic(null);
+                playerSoundManager.movingClips = footStepsOnExit;
+            }
         }
 
         private IEnumerator ShowAreaName()

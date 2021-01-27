@@ -7,7 +7,6 @@ namespace SP
     public class AnimatorHandler : AnimationManager
     {
         private PlayerManager playerManager;
-        private InputHandler inputHandler;
         private PlayerLocomotion playerLocomotion;
 
         public bool canRotate;
@@ -16,7 +15,6 @@ namespace SP
         {
             playerManager = GetComponentInParent<PlayerManager>();
             anim = GetComponent<Animator>();
-            inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             
             StaticAnimatorIds.VerticalId = Animator.StringToHash(StaticAnimatorIds.VerticalName);
@@ -24,6 +22,7 @@ namespace SP
             StaticAnimatorIds.IsInteractingId = Animator.StringToHash(StaticAnimatorIds.IsInteractingName);
             StaticAnimatorIds.CanDoComboId = Animator.StringToHash(StaticAnimatorIds.CanDoComboName);
             StaticAnimatorIds.IsInvulnerableId = Animator.StringToHash(StaticAnimatorIds.IsInvulnerableName);
+            StaticAnimatorIds.IsDeadId = Animator.StringToHash(StaticAnimatorIds.IsDeadName);
             StaticAnimatorIds.IsInAirId = Animator.StringToHash(StaticAnimatorIds.IsInAirName);
             StaticAnimatorIds.IsUsingLeftHandId = Animator.StringToHash(StaticAnimatorIds.IsUsingLeftHandName);
             StaticAnimatorIds.IsUsingRightHandId = Animator.StringToHash(StaticAnimatorIds.IsUsingRightHandName);
@@ -41,6 +40,10 @@ namespace SP
             StaticAnimatorIds.Damage01Id = Animator.StringToHash(StaticAnimatorIds.Damage01Name);
             StaticAnimatorIds.Death01Id = Animator.StringToHash(StaticAnimatorIds.Death01Name);
             StaticAnimatorIds.FogRemoveId = Animator.StringToHash(StaticAnimatorIds.FogRemoveName);
+            StaticAnimatorIds.BackStabId = Animator.StringToHash(StaticAnimatorIds.BackStabName);
+            StaticAnimatorIds.BackStabbedId = Animator.StringToHash(StaticAnimatorIds.BackStabbedName);
+            StaticAnimatorIds.LayDownId = Animator.StringToHash(StaticAnimatorIds.LayDownName);
+            anim.SetBool(StaticAnimatorIds.IsDeadId, false);
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)

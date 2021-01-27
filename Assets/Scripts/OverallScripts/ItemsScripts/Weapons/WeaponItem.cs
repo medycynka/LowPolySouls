@@ -24,6 +24,7 @@ namespace SP
         [Header("Weapon Stats", order = 2)]
         public float Light_Attack_Damage_Mult = 1.0f;
         public float Heavy_Attack_Damage_Mult = 1.5f;
+        public float backStabDamage = 50f;
         public int Weight;
         public int Durability;
 

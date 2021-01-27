@@ -20,6 +20,7 @@ namespace SP
         public bool y_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool critical_Attack_Input;
         public bool jump_Input;
         public bool inventory_Input;
         public bool lockOnInput;
@@ -39,6 +40,9 @@ namespace SP
         public bool comboFlag;
         public bool lockOnFlag;
         public bool inventoryFlag;
+        
+        [Header("Back Stabs", order = 1)]
+        public Transform criticalAttackRayCastStartPoint;
 
         [Header("Roll Timer", order = 1)]
         public float rollInputTimer;
@@ -89,6 +93,7 @@ namespace SP
                 playerInputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 playerInputActions.PlayerActions.Y.performed += i => y_Input = true;
                 playerInputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
+                playerInputActions.PlayerActions.CriticalAttack.performed += i => critical_Attack_Input = true;
             }
 
             playerInputActions.Enable();
@@ -112,6 +117,7 @@ namespace SP
                     HandleLockOnInput();
                     HandleTwoHandInput();
                     HandleQuickHealInput();
+                    HandleCriticalAttackInput();
                 }
 
                 HandleInventoryInput();
@@ -308,6 +314,15 @@ namespace SP
                 playerManager.shouldRefillHealth = true;
                 animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EstusId, true);
                 uiManager.UpdateEstusAmount();
+            }
+        }
+        
+        private void HandleCriticalAttackInput()
+        {
+            if (critical_Attack_Input)
+            {
+                critical_Attack_Input = false;
+                playerAttacker.AttemptBackStabOrRiposte();
             }
         }
     }

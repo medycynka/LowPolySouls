@@ -177,6 +177,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Critical Attack",
+                    "type": "Button",
+                    "id": "6170f936-0772-4a96-872e-e920b3e73d3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "73f5c546-d9aa-4d60-806b-517ae92ce78d",
@@ -263,7 +271,7 @@
                     "name": "",
                     "id": "9cc1f691-741d-4ffc-97c2-ee0b39d6ab9c",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "E",
@@ -333,6 +341,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "EstusQuickSlotUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7855eb6-940a-478e-8f40-73cf9551abd5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold(duration=0.2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Critical Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

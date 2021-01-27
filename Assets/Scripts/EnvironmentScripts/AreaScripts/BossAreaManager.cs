@@ -63,50 +63,59 @@ namespace SP
 
         private void OnTriggerEnter(Collider other)
         {
-            isInside = true;
-
-            if (insideReset)
+            if (other.CompareTag(playerTag))
             {
-                if (playerStats == null)
-                {
-                    playerStats = other.GetComponent<PlayerStats>();
-                }
+                isInside = true;
 
-                if (isBossAlive)
+                if (insideReset)
                 {
-                    bossHpSlider.minValue = 0;
-                    bossHpSlider.maxValue = bossStats.maxHealth;
-                    bossHpSlider.value = bossStats.maxHealth;
-                }
+                    if (playerStats == null)
+                    {
+                        playerStats = other.GetComponent<PlayerStats>();
+                    }
 
-                if (playerSoundManager == null)
-                {
-                    playerSoundManager = other.GetComponent<AnimationSoundManager>();
-                }
-                
-                playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
-                playerSoundManager.ChangeFootstepsSound(footSteps, this);
+                    if (isBossAlive)
+                    {
+                        bossHpSlider.minValue = 0;
+                        bossHpSlider.maxValue = bossStats.maxHealth;
+                        bossHpSlider.value = bossStats.maxHealth;
+                    }
 
-                StartCoroutine(ShowAreaName());
+                    if (playerSoundManager == null)
+                    {
+                        playerSoundManager = other.GetComponent<AnimationSoundManager>();
+                    }
+
+                    playerSoundManager.ChangeBackGroundMusic(areaBgMusic);
+                    playerSoundManager.ChangeFootstepsSound(footSteps, this);
+
+                    StartCoroutine(ShowAreaName());
+                }
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isInside && insideReset)
+            if (other.CompareTag(playerTag))
             {
-                insideReset = false;
+                if (isInside && insideReset)
+                {
+                    insideReset = false;
+                }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            playerStats = null;
-            isInside = false;
-            insideReset = true;
-            playerSoundManager.ChangeBackGroundMusic(null);
-            playerSoundManager.movingClips = footStepsOnExit;
-            bossHpBar.SetActive(false);
+            if (other.CompareTag(playerTag))
+            {
+                playerStats = null;
+                isInside = false;
+                insideReset = true;
+                playerSoundManager.ChangeBackGroundMusic(null);
+                playerSoundManager.movingClips = footStepsOnExit;
+                bossHpBar.SetActive(false);
+            }
         }
 
         private void FixedUpdate()

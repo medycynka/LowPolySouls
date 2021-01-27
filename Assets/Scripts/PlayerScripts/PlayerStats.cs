@@ -175,7 +175,7 @@ namespace SP
             //UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool isBackStabbed)
         {
             if (isPlayerAlive && !playerManager.isInvulnerable)
             {
@@ -187,7 +187,7 @@ namespace SP
 
                 if (currentHealth <= 0)
                 {
-                    HandleDeathAndRespawn();
+                    HandleDeathAndRespawn(isBackStabbed);
                 }
             }
         }
@@ -268,7 +268,7 @@ namespace SP
         
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength * 0.5f);
+            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength * 0.5f, false);
         }
 
         public int CalculateSoulsCost(int level)
@@ -276,10 +276,24 @@ namespace SP
             return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
         }
 
-        private void HandleDeathAndRespawn()
+        private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Death01Id, true);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.IsDeadId, true);
+            
+            if (isJumpDeath)
+            {
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.LayDownId, true);
+            }
+            else if(isBackStabbed)
+            {
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStabId, true);
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Death01Id, true);
+            }
+
             isPlayerAlive = false;
 
             StartCoroutine(Respawn());
@@ -305,6 +319,7 @@ namespace SP
             yield return CoroutineYielder.playerRespawnWaiter;
             
             isPlayerAlive = true;
+            animatorHandler.anim.SetBool(StaticAnimatorIds.IsDeadId, false);
             playerManager.quickMoveScreen.SetActive(false);
 
             if (isJumpDeath)
@@ -313,8 +328,6 @@ namespace SP
             }
         }
         
-        
-
         private void RespawnEnemiesOnDead()
         {
             foreach (var eS in enemiesSpawners)

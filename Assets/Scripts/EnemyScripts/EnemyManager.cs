@@ -8,7 +8,7 @@ namespace SP
     public class EnemyManager : CharacterManager
     {
         [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
-        EnemyAnimationManager enemyAnimationManager;
+        [HideInInspector] public EnemyAnimationManager enemyAnimationManager;
         EnemyStats enemyStats;
         EnemyDrops enemyDrops; 
         List<Material> characterMaterials;
@@ -25,6 +25,7 @@ namespace SP
         public bool isInteracting;
         public bool shouldDrop = true;
         public bool isAlive = true;
+        public bool deadFromBackStab;
         public bool shouldFollowTarget = false;
 
         [Header("Current Target", order = 2)]
@@ -59,6 +60,7 @@ namespace SP
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyStats = GetComponent<EnemyStats>();
             enemyDrops = GetComponent<EnemyDrops>();
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
 
             characterMaterials = new List<Material>();
             Renderer[] renders = GetComponentsInChildren<Renderer>();
@@ -84,6 +86,7 @@ namespace SP
             HandleRecoveryTimer();
 
             isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.EnemyIsInteractingId);
+            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.EnemyIsDeadId, enemyStats.currentHealth <= 0.0f);
         }
 
         private void FixedUpdate()
@@ -125,11 +128,16 @@ namespace SP
             }
         }
 
+        public void HandleGettingBackStabbed(float damage)
+        {
+            enemyStats.TakeDamage(damage, true);
+        }
+
         public void HandleDeath()
         {
             isAlive = false;
             enemyStats.currentHealth = 0;
-            enemyStats.animator.PlayTargetAnimation(StaticAnimatorIds.EnemyDeath01Id, true);
+            enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDeath01Id, true);
 
             #region Disolve Effect
             foreach (var cM in characterMaterials)
@@ -157,11 +165,16 @@ namespace SP
                 shouldDrop = false;
             }
 
-            Destroy(enemyStats.enemyObject, objectDestructionDuration);
+            Destroy(enemyStats.enemyObject, deadFromBackStab ? objectDestructionDuration + 1.5f : objectDestructionDuration);
         }
 
         private IEnumerator DisolveAfterDeath()
         {
+            if (deadFromBackStab)
+            {
+                yield return CoroutineYielder.disolveAfterBackStabWaiter;
+            }
+            
             while(currentDisolveTime < disolveDurationTime)
             {
                 foreach (var cM in characterMaterials)

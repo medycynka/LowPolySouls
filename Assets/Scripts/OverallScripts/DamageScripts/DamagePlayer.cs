@@ -15,7 +15,7 @@ namespace SP
 
             if (playerStats != null)
             {
-                playerStats.TakeDamage(damage);
+                playerStats.TakeDamage(damage, false);
             }
         }
     }

@@ -61,7 +61,7 @@ namespace SP
             playerManager = FindObjectOfType<PlayerManager>();
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 14 | 1 << 20 | 1 << 21);
+            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 23);
             targetTransform = playerManager.transform;
             environmentLayer = LayerMask.NameToLayer(environmentTag);
             lockOnLayer = (1 << LayerMask.NameToLayer(environmentTag) | 1 << LayerMask.NameToLayer("Enemy"));

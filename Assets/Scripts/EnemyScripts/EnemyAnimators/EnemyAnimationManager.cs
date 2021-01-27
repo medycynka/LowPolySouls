@@ -16,11 +16,16 @@ namespace SP
             StaticAnimatorIds.EnemyVerticalId = Animator.StringToHash(StaticAnimatorIds.VerticalName);
             StaticAnimatorIds.EnemyHorizontalId = Animator.StringToHash(StaticAnimatorIds.HorizontalName);
             StaticAnimatorIds.EnemyIsInteractingId = Animator.StringToHash(StaticAnimatorIds.IsInteractingName);
+            StaticAnimatorIds.EnemyIsDeadId = Animator.StringToHash(StaticAnimatorIds.IsDeadName);
             StaticAnimatorIds.EnemyEmptyId = Animator.StringToHash(StaticAnimatorIds.EmptyName);
             StaticAnimatorIds.EnemyDamage01Id = Animator.StringToHash(StaticAnimatorIds.Damage01Name);
             StaticAnimatorIds.EnemyDeath01Id = Animator.StringToHash(StaticAnimatorIds.Death01Name);
             StaticAnimatorIds.EnemyGetUpId = Animator.StringToHash(StaticAnimatorIds.GetUpName);
             StaticAnimatorIds.EnemySleepId = Animator.StringToHash(StaticAnimatorIds.SleepName);
+            StaticAnimatorIds.EnemyBackStabId = Animator.StringToHash(StaticAnimatorIds.BackStabName);
+            StaticAnimatorIds.EnemyBackStabbedId = Animator.StringToHash(StaticAnimatorIds.BackStabbedName);
+            StaticAnimatorIds.EnemyLayDownId = Animator.StringToHash(StaticAnimatorIds.LayDownName);
+            anim.SetBool(StaticAnimatorIds.EnemyIsDeadId, false);
         }
 
         private void OnAnimatorMove()

@@ -26,7 +26,7 @@ namespace SP
 
                 playerStats.isJumpDeath = true;
                 playerStats.jumpDeathDropPosition = dropPosition.position;
-                playerStats.TakeDamage(1500f);
+                playerStats.TakeDamage(1500f, false);
             }
         }
 

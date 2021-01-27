@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -58,7 +59,13 @@ namespace SP
         private const string fogWallTag = "Fog Wall";
         private LayerMask pickUpLayer;
         private Collider[] interactColliders;
-        
+
+        private void Awake()
+        {
+            cameraHandler = FindObjectOfType<CameraHandler>();
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
+        }
+
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
@@ -66,7 +73,6 @@ namespace SP
             playerLocomotion = GetComponent<PlayerLocomotion>();
             playerStats = GetComponent<PlayerStats>();
             pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
-            cameraHandler = FindObjectOfType<CameraHandler>();
             interactableUI = FindObjectOfType<InteractableUI>();
             interactColliders = new Collider[8];
         }

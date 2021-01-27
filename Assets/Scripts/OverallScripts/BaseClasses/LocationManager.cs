@@ -30,5 +30,6 @@ namespace SP
 
         [Header("Player Stats", order = 1)]
         public PlayerStats playerStats;
+        public const string playerTag = "Player";
     }
 }

@@ -13,6 +13,9 @@ namespace SP
         PlayerInventory playerInventory;
         PlayerManager playerManager;
         PlayerStats playerStats;
+        
+        RaycastHit hit;
+        public LayerMask backStabLayer;
 
         [Header("Last Attack Name")]
         public string lastAttack;
@@ -25,6 +28,7 @@ namespace SP
             playerInventory = GetComponentInParent<PlayerInventory>();
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
+            backStabLayer = 1 << LayerMask.NameToLayer("Back Stab");
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -160,6 +164,30 @@ namespace SP
         private void SuccessfullyCastSpell()
         {
             playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+        }
+        
+        public void AttemptBackStabOrRiposte()
+        {
+            if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, 
+                transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+            {
+                EnemyManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<EnemyManager>();
+
+                if (enemyCharacterManager != null)
+                {
+                    playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                    rotationDirection = hit.transform.position - playerManager.transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    playerManager.transform.rotation = targetRotation;
+                    
+                    animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStabId, true);
+                    enemyCharacterManager.HandleGettingBackStabbed(playerInventory.rightWeapon.backStabDamage);
+                }
+            }
         }
         #endregion
     }

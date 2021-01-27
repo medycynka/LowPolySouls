@@ -15,6 +15,7 @@ namespace SP
         public const string IsUsingRightHandName = "isUsingRightHand";
         public const string IsUsingLeftHandName = "isUsingLeftHand";
         public const string IsInvulnerableName = "isInvulnerable";
+        public const string IsDeadName = "isDead";
         public const string EmptyName = "Empty";
         public const string StandUpName = "Stand Up";
         public const string SitName = "Sit Down";
@@ -31,6 +32,9 @@ namespace SP
         public const string GetUpName = "Get Up";
         public const string SleepName = "Sleep";
         public const string FogRemoveName = "Remove Fog Wall";
+        public const string BackStabName = "Back Stab";
+        public const string BackStabbedName = "Back Stabbed";
+        public const string LayDownName = "Laying Down";
         #endregion
         
         #region Player Animation Ids
@@ -42,6 +46,7 @@ namespace SP
         public static int IsUsingRightHandId;
         public static int IsUsingLeftHandId;
         public static int IsInvulnerableId;
+        public static int IsDeadId;
         public static int EmptyId;
         public static int StandUpId;
         public static int SitId;
@@ -56,17 +61,24 @@ namespace SP
         public static int Damage01Id;
         public static int Death01Id;
         public static int FogRemoveId;
+        public static int BackStabId;
+        public static int BackStabbedId;
+        public static int LayDownId;
         #endregion
         
         #region Enemy Animation Ids
         public static int EnemyVerticalId;
         public static int EnemyHorizontalId;
         public static int EnemyIsInteractingId;
+        public static int EnemyIsDeadId;
         public static int EnemyEmptyId;
         public static int EnemyDamage01Id;
         public static int EnemyDeath01Id;
         public static int EnemyGetUpId;
         public static int EnemySleepId;
+        public static int EnemyBackStabId;
+        public static int EnemyBackStabbedId;
+        public static int EnemyLayDownId;
         #endregion
     }
 }
