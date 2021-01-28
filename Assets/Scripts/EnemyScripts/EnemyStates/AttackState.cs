@@ -44,16 +44,20 @@ namespace SP
                     {
                         return this;
                     }
+
+                    float maxAttackDist = enemyStats.isBoss
+                        ? currentAttack.maximumDistanceNeededToAttack + 1.0f
+                        : currentAttack.maximumDistanceNeededToAttack;
                     
-                    if (enemyManager.distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
+                    if (enemyManager.distanceFromTarget < maxAttackDist)
                     {
                         if (enemyManager.viewableAngle <= currentAttack.maximumAttackAngle && enemyManager.viewableAngle >= currentAttack.minimumAttackAngle)
                         {
                             if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                             {
-                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
-                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyHorizontalId, 0, 0.1f, Time.deltaTime);
-                                enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.HorizontalName], 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[currentAttack.actionAnimation], true);
                                 enemyManager.isPreformingAction = true;
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
                                 currentAttack = null;

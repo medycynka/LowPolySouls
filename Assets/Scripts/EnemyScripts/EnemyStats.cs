@@ -89,7 +89,7 @@ namespace SP
 
                     if (currentHealth > 0)
                     {
-                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDamage01Id, true);
+                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
                     }
                     else
                     {
@@ -119,7 +119,7 @@ namespace SP
 
             if (currentHealth > 0)
             {
-                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDamage01Id, true);
+                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
             }
 
             yield return CoroutineYielder.enemyHpUpdateWaiter;

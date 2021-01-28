@@ -14,7 +14,7 @@ namespace SP
             base.AttemptToCastSpell(animatorHandler, playerStats);
             
             GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
-            animatorHandler.PlayTargetAnimation(spellAnimation, true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[spellAnimation], true);
         }
 
         public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)

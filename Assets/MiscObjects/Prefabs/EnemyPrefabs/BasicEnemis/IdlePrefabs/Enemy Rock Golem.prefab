@@ -3178,6 +3178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  isEnemy: 1
 --- !u!114 &1108355008689167410
 MonoBehaviour:
   m_ObjectHideFlags: 0

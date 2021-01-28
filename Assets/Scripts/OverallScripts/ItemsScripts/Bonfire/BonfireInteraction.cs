@@ -30,7 +30,7 @@ namespace SP
             bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.SitId, true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.SitName], true);
             bonfireManager.playerManager.isRestingAtBonfire = true;
 
             playerStats.RefillHealth();
@@ -51,7 +51,7 @@ namespace SP
 
             bonfireManager.uiManager.UpdateSouls();
             bonfireManager.CloseRestUI();
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.StandUpId, true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.StandUpName], true);
             bonfireManager.playerManager.isRestingAtBonfire = false;
 
             if(playerStats == null)
@@ -80,7 +80,7 @@ namespace SP
             yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
             bonfireManager.CloseQuickMoveScreen();
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.StandUpId, true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.StandUpName], true);
             bonfireManager.locationScreen.SetActive(true);
             locationNameScree.text = bonfireManager.locationName;
 

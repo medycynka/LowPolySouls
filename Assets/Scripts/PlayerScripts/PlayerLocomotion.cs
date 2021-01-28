@@ -190,7 +190,7 @@ namespace SP
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool(StaticAnimatorIds.IsInteractingId))
+            if (animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName]))
             {
                 return;
             }
@@ -204,14 +204,14 @@ namespace SP
 
                     if (inputHandler.moveAmount > 0)
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.RollId, true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.RollName], true);
                         moveDirection.y = 0;
                         Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = rollRotation;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStepId, true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.BackStepName], true);
                     }
 
                     playerStats.TakeStaminaDamage(rollStaminaCost);
@@ -255,12 +255,12 @@ namespace SP
                     if (inAirTimer > 0.5f)
                     {
                         //Debug.Log("You were in the air for " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.LandId, true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.LandName], true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EmptyId, false);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.EmptyName], false);
                         inAirTimer = 0;
                     }
 
@@ -281,7 +281,7 @@ namespace SP
                     
                     if (playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.FallId, true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.FallName], true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -319,7 +319,7 @@ namespace SP
                     {
                         //playerManager.shouldAddJumpForce = true;
                         StartCoroutine(ResizeCollider());
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.JumpId, true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.JumpName], true);
                         Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = jumpRotation;
                     }

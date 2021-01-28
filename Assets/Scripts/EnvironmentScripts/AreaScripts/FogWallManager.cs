@@ -57,7 +57,7 @@ namespace SP
             
             yield return CoroutineYielder.fogWallRemoveFirstWaiter;
             
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.FogRemoveId, true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.FogRemoveName], true);
 
             yield return CoroutineYielder.fogWallRemoveSecondWaiter;
 

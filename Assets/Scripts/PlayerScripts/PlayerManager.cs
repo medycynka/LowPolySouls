@@ -81,12 +81,12 @@ namespace SP
         {
             float delta = Time.deltaTime;
             
-            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.IsInteractingId);
-            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.CanDoComboId);
-            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.IsUsingRightHandId);
-            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.IsUsingLeftHandId);
-            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.IsInvulnerableId);
-            animatorHandler.anim.SetBool(StaticAnimatorIds.IsInAirId, isInAir);
+            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName]);
+            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingRightHandName]);
+            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingLeftHandName]);
+            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInvulnerableName]);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInAirName], isInAir);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);

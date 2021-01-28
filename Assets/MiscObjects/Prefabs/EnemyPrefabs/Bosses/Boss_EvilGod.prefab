@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 4195053369176328496}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4438211843996829135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7322187360204716765}
+  m_Layer: 17
+  m_Name: Combat Transforms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7322187360204716765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438211843996829135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4195053369176328496}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5645040121331113871
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +177,7 @@ Transform:
   - {fileID: 5637307567034338694}
   - {fileID: 96076905598821472}
   - {fileID: 5331098914938185257}
+  - {fileID: 7322187360204716765}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -294,6 +325,9 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  focusLevel: 5
+  maxFocus: 0
+  currentFocus: 0
   baseArmor: 5
   Strength: 4
   Agility: 1
@@ -309,6 +343,7 @@ MonoBehaviour:
   enemyObject: {fileID: 5684876664556426325}
   isBoss: 1
   bossAreaManager: {fileID: 0}
+  bossHpSlider: {fileID: 0}
 --- !u!114 &3550462327793374800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,12 +357,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 1775463806931985962}
+  backStabBoxCollider: {fileID: 0}
+  backStabCollider: {fileID: 0}
   enemyLocomotionManager: {fileID: 0}
-  characterMaterials: []
+  enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
   isInteracting: 0
   shouldDrop: 1
   isAlive: 1
+  deadFromBackStab: 0
   shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 96076904580637447}
@@ -358,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
   enemyRigidBody: {fileID: 0}
   stoppingDistance: 1.25
   rotationSpeed: 100
@@ -398,6 +437,9 @@ MonoBehaviour:
   movingClips: []
   attackingClips: []
   getDamageClips: []
+  faithSkillClips: []
+  curseSkillClips: []
+  destructionSkillClips: []
   rollClip: {fileID: 0}
   backStepClip: {fileID: 0}
   estusUse: {fileID: 0}
@@ -503,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  isEnemy: 0
 --- !u!114 &4998751106797106198
 MonoBehaviour:
   m_ObjectHideFlags: 0

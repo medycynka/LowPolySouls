@@ -70,6 +70,7 @@ Transform:
   - {fileID: 4886872052839873574}
   - {fileID: 918523282438739392}
   - {fileID: 4904925045679560585}
+  - {fileID: 1086512613621013400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -217,6 +218,9 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  focusLevel: 5
+  maxFocus: 0
+  currentFocus: 0
   baseArmor: 5
   Strength: 4
   Agility: 1
@@ -232,6 +236,7 @@ MonoBehaviour:
   enemyObject: {fileID: 4831984529687373301}
   isBoss: 1
   bossAreaManager: {fileID: 0}
+  bossHpSlider: {fileID: 0}
 --- !u!114 &4372946643951953904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,12 +250,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 1533936970748106634}
+  backStabBoxCollider: {fileID: 0}
+  backStabCollider: {fileID: 0}
   enemyLocomotionManager: {fileID: 0}
-  characterMaterials: []
+  enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
   isInteracting: 0
   shouldDrop: 1
   isAlive: 1
+  deadFromBackStab: 0
   shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 918523283288887975}
@@ -281,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
   enemyRigidBody: {fileID: 0}
   stoppingDistance: 3
   rotationSpeed: 100
@@ -321,6 +330,9 @@ MonoBehaviour:
   movingClips: []
   attackingClips: []
   getDamageClips: []
+  faithSkillClips: []
+  curseSkillClips: []
+  destructionSkillClips: []
   rollClip: {fileID: 0}
   backStepClip: {fileID: 0}
   estusUse: {fileID: 0}
@@ -490,6 +502,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &8283614853262167244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086512613621013400}
+  m_Layer: 17
+  m_Name: Combat Transforms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1086512613621013400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283614853262167244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4025593204181465232}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2021686463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  isEnemy: 0
 --- !u!1001 &1285069047400996307
 PrefabInstance:
   m_ObjectHideFlags: 0

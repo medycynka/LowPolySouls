@@ -183,7 +183,7 @@ namespace SP
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Damage01Id, true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.Damage01Name], true);
 
                 if (currentHealth <= 0)
                 {
@@ -279,19 +279,19 @@ namespace SP
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
-            animatorHandler.anim.SetBool(StaticAnimatorIds.IsDeadId, true);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsDeadName], true);
             
             if (isJumpDeath)
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.LayDownId, true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.LayDownName], true);
             }
             else if(isBackStabbed)
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStabId, true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.BackStabName], true);
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.Death01Id, true);
+                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.Death01Name], true);
             }
 
             isPlayerAlive = false;
@@ -308,7 +308,7 @@ namespace SP
 
             youDiedLogo.SetActive(false);
             playerManager.quickMoveScreen.SetActive(true);
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.EmptyId, false);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
             transform.position = playerManager.currentSpawnPoint.transform.position;
@@ -319,7 +319,7 @@ namespace SP
             yield return CoroutineYielder.playerRespawnWaiter;
             
             isPlayerAlive = true;
-            animatorHandler.anim.SetBool(StaticAnimatorIds.IsDeadId, false);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsDeadName], false);
             playerManager.quickMoveScreen.SetActive(false);
 
             if (isJumpDeath)

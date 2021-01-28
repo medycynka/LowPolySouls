@@ -30,7 +30,7 @@ namespace SP
             {
                 if (isSleeping && enemyManager.isInteracting == false)
                 {
-                    enemyAnimationManager.PlayTargetAnimation(sleepAnimation, true);
+                    enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[sleepAnimation], true);
                 }
 
                 #region Handle Target Detection
@@ -50,7 +50,7 @@ namespace SP
                             enemyManager.currentTarget = characterStats;
                             isSleeping = false;
                             enemyManager.enemyLocomotionManager.navMeshBlocker.enabled = false;
-                            enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
+                            enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[wakeAnimation], true);
                         }
                     }
                 }

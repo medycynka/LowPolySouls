@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
 
 namespace SP
@@ -7,6 +8,7 @@ namespace SP
     public static class StaticAnimatorIds
     {
         #region Animation names
+        #region Shared Animations
         public const string VerticalName = "Vertical";
         public const string HorizontalName = "Horizontal";
         public const string IsInteractingName = "isInteracting";
@@ -36,49 +38,55 @@ namespace SP
         public const string BackStabbedName = "Back Stabbed";
         public const string LayDownName = "Laying Down";
         #endregion
+
+        #region Player Attacks
+        public const string OhLightAttack01 = "OH_Light_Attack_01";
+        public const string OhLightAttack02 = "OH_Light_Attack_02";
+        public const string OhLightAttack03 = "OH_Light_Attack_03";
+        public const string OhLightAttack04 = "OH_Light_Attack_04";
+        public const string OhLightAttack05 = "OH_Light_Attack_05";
+        public const string OhLightAttack06 = "OH_Light_Attack_06";
+        public const string OhHeavyAttack01 = "OH_Heavy_Attack_01";
+        public const string OhHeavyAttack02 = "OH_Heavy_Attack_02";
+        public const string OhHeavyAttack03 = "OH_Heavy_Attack_03";
+        public const string OhHeavyAttack04 = "OH_Heavy_Attack_04";
+        public const string OhHeavyAttack05 = "OH_Heavy_Attack_05";
+        public const string ThLightAttack01 = "TH_Light_Attack_01";
+        public const string ThLightAttack02 = "TH_Light_Attack_02";
+        public const string ThLightAttack03 = "TH_Light_Attack_03";
+        public const string ThHeavyAttack01 = "TH_Heavy_Attack_01";
+        public const string ThHeavyAttack02 = "TH_Heavy_Attack_02";
+        public const string LightPunch01 = "Light_Punch_01";
+        public const string HeavyPunch01 = "Heavy_Punch_01";
+        public const string OhCombo01 = "OH_Combo_01";
+        public const string OhCombo02 = "OH_Combo_02";
+        public const string OhHeavyCombo01 = "OH_Heavy_Combo_01";
+        public const string HealSpell = "Heal_Spell";
+        #endregion
+        
+        #region Enemy Attacks
+        public const string EnemyMaceAttack01 = "OH_Mace_Attack_01";
+        public const string EnemyMaceAttack02 = "OH_Mace_Attack_02";
+        public const string EnemyMaceAttack03 = "OH_Mace_Attack_03";
+        public const string EnemyStaffAttack01 = "Staff_Attack_01";
+        public const string EnemyStaffAttack02 = "Staff_Attack_02";
+        public const string EnemySpearAttack01 = "Spear_Attack_01";
+        public const string EnemySpearAttack02 = "Spear_Attack_02";
+        public const string EnemySwordAttack01 = "OH_Sword_Attack_01";
+        public const string EnemySwordAttack02 = "OH_Sword_Attack_02";
+        public const string EnemySwordAttack03 = "OH_Sword_Attack_03";
+        public const string EnemySwordAttack04 = "OH_Sword_Attack_04";
+        public const string EnemySwordAttack05 = "OH_Sword_Attack_05";
+        public const string EnemySwordAttack06 = "OH_Sword_Attack_06";
+        #endregion
+        #endregion
         
         #region Player Animation Ids
-        public static int VerticalId;
-        public static int HorizontalId;
-        public static int IsInteractingId;
-        public static int CanDoComboId;
-        public static int IsInAirId;
-        public static int IsUsingRightHandId;
-        public static int IsUsingLeftHandId;
-        public static int IsInvulnerableId;
-        public static int IsDeadId;
-        public static int EmptyId;
-        public static int StandUpId;
-        public static int SitId;
-        public static int PickUpId;
-        public static int EstusId;
-        public static int UseItemId;
-        public static int RollId;
-        public static int BackStepId;
-        public static int JumpId;
-        public static int FallId;
-        public static int LandId;
-        public static int Damage01Id;
-        public static int Death01Id;
-        public static int FogRemoveId;
-        public static int BackStabId;
-        public static int BackStabbedId;
-        public static int LayDownId;
+        public static Dictionary<string, int> AnimationIds;
         #endregion
         
         #region Enemy Animation Ids
-        public static int EnemyVerticalId;
-        public static int EnemyHorizontalId;
-        public static int EnemyIsInteractingId;
-        public static int EnemyIsDeadId;
-        public static int EnemyEmptyId;
-        public static int EnemyDamage01Id;
-        public static int EnemyDeath01Id;
-        public static int EnemyGetUpId;
-        public static int EnemySleepId;
-        public static int EnemyBackStabId;
-        public static int EnemyBackStabbedId;
-        public static int EnemyLayDownId;
+        public static Dictionary<string, int> EnemyAnimationIds;
         #endregion
     }
 }

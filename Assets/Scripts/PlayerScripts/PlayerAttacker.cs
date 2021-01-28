@@ -35,7 +35,7 @@ namespace SP
         {
             if (inputHandler.comboFlag)
             {
-                animatorHandler.anim.SetBool(StaticAnimatorIds.CanDoComboId, false);
+                animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName], false);
 
                 if (lastAttack == weapon.OH_Light_Attack_1)
                 {
@@ -137,7 +137,7 @@ namespace SP
                     return;
                 }
 
-                animatorHandler.anim.SetBool(StaticAnimatorIds.IsUsingRightHandId, true);
+                animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingRightHandName], true);
                 HandleLightAttack(playerInventory.rightWeapon);
             }
         }
@@ -184,7 +184,7 @@ namespace SP
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
                     
-                    animatorHandler.PlayTargetAnimation(StaticAnimatorIds.BackStabId, true);
+                    animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.BackStabName], true);
                     enemyCharacterManager.HandleGettingBackStabbed(playerInventory.rightWeapon.backStabDamage);
                 }
             }

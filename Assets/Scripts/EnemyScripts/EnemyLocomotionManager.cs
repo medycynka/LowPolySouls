@@ -40,7 +40,7 @@ namespace SP
         {
             if (enemyManager.isPreformingAction)
             {
-                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
 
                 return;
             }
@@ -51,7 +51,7 @@ namespace SP
 
             if (enemyManager.distanceFromTarget > stoppingDistance)
             {
-                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 1, 0.1f, Time.deltaTime);
+                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f, Time.deltaTime);
             }
             else if (enemyManager.distanceFromTarget <= stoppingDistance)
             {
@@ -66,7 +66,7 @@ namespace SP
         public void StopMoving()
         {
             enemyManager.distanceFromTarget = 0;
-            enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyVerticalId, 0, 0.1f, Time.deltaTime);
+            enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
         }
 
         public void HandleRotateTowardsTarget()

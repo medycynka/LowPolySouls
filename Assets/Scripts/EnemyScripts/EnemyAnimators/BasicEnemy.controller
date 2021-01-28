@@ -278,8 +278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f252f05e01f379c45b17b955e86a6a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBool: 
-  status: 0
+  isEnemy: 0
+  targetBools: []
+  status: 
 --- !u!1107 &-5773553590264061471
 AnimatorStateMachine:
   serializedVersion: 5
@@ -671,7 +672,6 @@ AnimatorState:
   m_Transitions: []
   m_StateMachineBehaviours:
   - {fileID: 65352126867416702}
-  - {fileID: -2515510079308304046}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -735,20 +735,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &-2515510079308304046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f252f05e01f379c45b17b955e86a6a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetBool: canDoCombo
-  status: 0
 --- !u!1102 &-1618265195942945074
 AnimatorState:
   serializedVersion: 5
@@ -1011,37 +997,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Horizontal
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isInteracting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: canDoCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isInAir
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1115,8 +1101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f252f05e01f379c45b17b955e86a6a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBool: isInteracting
-  status: 0
+  isEnemy: 1
+  targetBools:
+  - isInteracting
+  status: 00
 --- !u!1101 &84680354131622448
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1726,8 +1714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f252f05e01f379c45b17b955e86a6a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBool: 
-  status: 0
+  isEnemy: 0
+  targetBools: []
+  status: 
 --- !u!1102 &6203327079350276805
 AnimatorState:
   serializedVersion: 5
@@ -1935,7 +1924,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2977027686240623159}
-    m_Position: {x: 410, y: 10, z: 0}
+    m_Position: {x: 400, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3487578341609857331}
     m_Position: {x: -230, y: -210, z: 0}

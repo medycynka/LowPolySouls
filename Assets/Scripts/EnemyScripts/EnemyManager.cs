@@ -85,8 +85,8 @@ namespace SP
         {
             HandleRecoveryTimer();
 
-            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.EnemyIsInteractingId);
-            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.EnemyIsDeadId, enemyStats.currentHealth <= 0.0f);
+            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
+            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsDeadName], enemyStats.currentHealth <= 0.0f);
         }
 
         private void FixedUpdate()
@@ -137,7 +137,7 @@ namespace SP
         {
             isAlive = false;
             enemyStats.currentHealth = 0;
-            enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.EnemyBackStabbedId : StaticAnimatorIds.EnemyDeath01Id, true);
+            enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Death01Name], true);
 
             #region Disolve Effect
             foreach (var cM in characterMaterials)
