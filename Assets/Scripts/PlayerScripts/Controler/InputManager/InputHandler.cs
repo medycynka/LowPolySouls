@@ -16,6 +16,7 @@ namespace SP
 
         [Header("Inputs", order = 1)]
         public bool b_Input;
+        public bool walk_input;
         public bool a_Input;
         public bool y_Input;
         public bool rb_Input;
@@ -37,6 +38,7 @@ namespace SP
         public bool rollFlag;
         public bool twoHandFlag;
         public bool sprintFlag;
+        public bool walkFlag;
         public bool comboFlag;
         public bool lockOnFlag;
         public bool inventoryFlag;
@@ -44,8 +46,9 @@ namespace SP
         [Header("Back Stabs", order = 1)]
         public Transform criticalAttackRayCastStartPoint;
 
-        [Header("Roll Timer", order = 1)]
+        [Header("Timers", order = 1)]
         public float rollInputTimer;
+        public float walkInputTimer;
 
         private PlayerControls playerInputActions;
         private PlayerAttacker playerAttacker;
@@ -112,6 +115,7 @@ namespace SP
                 {
                     HandleMoveInput(delta);
                     HandleRollInput(delta);
+                    HandleWalkInput(delta);
                     HandleAttackInput(delta);
                     HandleQuickSlotsInput();
                     HandleLockOnInput();
@@ -151,6 +155,26 @@ namespace SP
                 }
 
                 rollInputTimer = 0;
+            }
+        }
+
+        private void HandleWalkInput(float delta)
+        {
+            walk_input = playerInputActions.PlayerActions.Walk.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            walkFlag = walk_input;
+
+            if (walk_input)
+            {
+                walkInputTimer += delta;
+            }
+            else
+            {
+                if (walkInputTimer < 0.5f)
+                {
+                    walkFlag = false;
+                }
+
+                walkInputTimer = 0.0f;
             }
         }
 

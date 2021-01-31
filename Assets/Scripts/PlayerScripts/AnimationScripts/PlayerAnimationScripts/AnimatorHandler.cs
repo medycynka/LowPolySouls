@@ -72,7 +72,7 @@ namespace SP
             Debug.Log("Player: " + StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName]);
         }
 
-        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
+        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool isWalking)
         {
             #region Vertical
             float v = 0;
@@ -124,9 +124,19 @@ namespace SP
             }
             #endregion
 
+            if (isSprinting && isWalking)
+            {
+                isWalking = false;
+            }
+            
             if (isSprinting)
             {
                 v = 2;
+                h = horizontalMovement;
+            }
+            else if(isWalking)
+            {
+                v = 0.5f;
                 h = horizontalMovement;
             }
 

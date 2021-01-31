@@ -158,7 +158,7 @@ namespace SP
             }
             else
             {
-                if (inputHandler.moveAmount < 0.5)
+                if (inputHandler.walkFlag)
                 {
                     moveDirection *= walkingSpeed;
                     playerManager.isSprinting = false;
@@ -175,11 +175,11 @@ namespace SP
 
             if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting, inputHandler.walkFlag);
             }
             else
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting, inputHandler.walkFlag);
             }
 
             if (animatorHandler.canRotate)
