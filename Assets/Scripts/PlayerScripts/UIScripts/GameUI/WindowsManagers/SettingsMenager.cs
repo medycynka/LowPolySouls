@@ -1,19 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.PlayerScripts.CameraManager;
+using SzymonPeszek.SaveScripts;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.WindowsManagers
 {
     public class SettingsMenager : MonoBehaviour
     {
-        PlayerManager playerManager;
-        CameraHandler cameraHandler;
-        List<AudioSource> audioSources = new List<AudioSource>();
-        Resolution[] resolutionsOpts;
+        private PlayerManager _playerManager;
+        private CameraHandler _cameraHandler;
+        private readonly List<AudioSource> audioSources = new List<AudioSource>();
+        private Resolution[] _resolutionsOpts;
 
-        [Header("Settings Menager Manager", order = 0)]
+        [Header("Settings Manager Manager", order = 0)]
         [Header("Settings Options", order = 1)]
         public TMP_Dropdown resolutionDropdown;
         public Toggle fullScreenToogle;
@@ -23,9 +27,9 @@ namespace SP
 
         private void Start()
         {
-            playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
-            cameraHandler = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraHandler>();
-            audioSources.Add(playerManager.GetComponent<AudioSource>());
+            _playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+            _cameraHandler = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraHandler>();
+            audioSources.Add(_playerManager.GetComponent<AudioSource>());
 
             foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
@@ -35,14 +39,14 @@ namespace SP
                 }
             }
 
-            resolutionsOpts = Screen.resolutions;
+            _resolutionsOpts = Screen.resolutions;
             List<string> resList = new List<string>();
 
-            for (int i = 0; i < resolutionsOpts.Length; i++)
+            for (int i = 0; i < _resolutionsOpts.Length; i++)
             {
-                resList.Add(resolutionsOpts[i].width + "x" + resolutionsOpts[i].height);
+                resList.Add(_resolutionsOpts[i].width + "x" + _resolutionsOpts[i].height);
 
-                if (resolutionsOpts[i].width == Screen.width && resolutionsOpts[i].height == Screen.height)
+                if (_resolutionsOpts[i].width == Screen.width && _resolutionsOpts[i].height == Screen.height)
                 {
                     SettingsHolder.resolutionID = i;
                 }
@@ -66,7 +70,7 @@ namespace SP
 
             SetAllSounds(SettingsHolder.soundVolume);
 
-            cameraHandler.lookSpeed = SettingsHolder.mouseSensibility / 1000f;
+            _cameraHandler.lookSpeed = SettingsHolder.mouseSensibility / 1000f;
         }
 
         public void SaveSettings()
@@ -80,7 +84,7 @@ namespace SP
 
         public void SetResolution(int resolutionId)
         {
-            Screen.SetResolution(resolutionsOpts[resolutionId].width, resolutionsOpts[resolutionId].height, Screen.fullScreen);
+            Screen.SetResolution(_resolutionsOpts[resolutionId].width, _resolutionsOpts[resolutionId].height, Screen.fullScreen);
         }
 
         public void SetFullScreen(bool isFullScreen)
@@ -95,7 +99,7 @@ namespace SP
 
         public void SetMouseSensibility(float sensibility)
         {
-            cameraHandler.lookSpeed = (sensibility / 1000f);
+            _cameraHandler.lookSpeed = (sensibility / 1000f);
         }
 
         public void SetVolume(float volume)
@@ -105,7 +109,7 @@ namespace SP
 
         public void SaveAndExit()
         {
-            SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>());
+            SaveManager.SaveGame(_playerManager, _playerManager.GetComponent<PlayerStats>(), _playerManager.GetComponent<PlayerInventory>());
             Application.Quit();
         }
 

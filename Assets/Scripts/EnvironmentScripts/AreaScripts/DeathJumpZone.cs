@@ -1,40 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using SP;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class DeathJumpZone : MonoBehaviour
     {
         public bool isInside;
         public Transform dropPosition;
         
-        private PlayerStats playerStats;
-        private bool insideReset = true;
+        private PlayerStats _playerStats;
+        private bool _insideReset = true;
         
         private void OnTriggerEnter(Collider other)
         {
             isInside = true;
 
-            if (insideReset)
+            if (_insideReset)
             {
-                if (playerStats == null)
+                if (_playerStats == null)
                 {
-                    playerStats = other.GetComponent<PlayerStats>();
+                    _playerStats = other.GetComponent<PlayerStats>();
                 }
 
-                playerStats.isJumpDeath = true;
-                playerStats.jumpDeathDropPosition = dropPosition.position;
-                playerStats.TakeDamage(1500f, false);
+                _playerStats.isJumpDeath = true;
+                _playerStats.jumpDeathDropPosition = dropPosition.position;
+                _playerStats.TakeDamage(1500f, false);
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isInside && insideReset)
+            if (isInside && _insideReset)
             {
-                insideReset = false;
+                _insideReset = false;
             }
         }
     }

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts.Animations
 {
     public class ResetAnimatorBool : StateMachineBehaviour
     {
@@ -18,14 +18,14 @@ namespace SP
             {
                 for (int i = 0; i < targetBools.Length; i++)
                 {
-                    animator.SetBool(StaticAnimatorIds.EnemyAnimationIds[targetBools[i]], status[i]);
+                    animator.SetBool(StaticAnimatorIds.enemyAnimationIds[targetBools[i]], status[i]);
                 }
             }
             else
             {
                 for (int i = 0; i < targetBools.Length; i++)
                 {
-                    animator.SetBool(StaticAnimatorIds.AnimationIds[targetBools[i]], status[i]);
+                    animator.SetBool(StaticAnimatorIds.animationIds[targetBools[i]], status[i]);
                 }
             }
 

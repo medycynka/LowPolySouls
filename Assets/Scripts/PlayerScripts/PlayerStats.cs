@@ -1,15 +1,25 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using SzymonPeszek.SaveScripts;
+using SzymonPeszek.GameUI.StatBars;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.GameUI;
+using SzymonPeszek.Items.Consumable;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Environment.Areas;
+using SzymonPeszek.Misc;
+using SzymonPeszek.Enums;
+using SzymonPeszek.EnemyScripts;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts
 {
     public class PlayerStats : CharacterStats
     {
-        private PlayerManager playerManager;
-        private WeaponSlotManager weaponSlotManager;
-        private AnimatorHandler animatorHandler;
+        private PlayerManager _playerManager;
+        private WeaponSlotManager _weaponSlotManager;
+        private AnimatorHandler _animatorHandler;
 
         [Header("Player Properties", order = 1)]
 
@@ -41,14 +51,14 @@ namespace SP
         public bool isPlayerAlive = true;
         public bool isJumpDeath = false;
 
-        private EnemySpawner[] enemiesSpawners;
-        private RectTransform hpBarTransform;
-        private RectTransform staminaBarTransform;
-        private RectTransform focusBarTransform;
+        private EnemySpawner[] _enemiesSpawners;
+        private RectTransform _hpBarTransform;
+        private RectTransform _staminaBarTransform;
+        private RectTransform _focusBarTransform;
 
         private void Awake()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
             uiManager = FindObjectOfType<UIManager>();
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
@@ -57,9 +67,9 @@ namespace SP
 
         private void Start()
         {
-            playerManager = GetComponent<PlayerManager>();
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
+            _playerManager = GetComponent<PlayerManager>();
+            _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            _enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
             youDiedLogo.SetActive(false);
 
             DataManager dataManager = SettingsHolder.dataManager;
@@ -81,8 +91,8 @@ namespace SP
 
                     gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
                     gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
-                    playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
-                    playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
+                    _playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
+                    _playerManager.currentSpawnPoint.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
                 }
                 else
                 {
@@ -90,9 +100,9 @@ namespace SP
                 }
             }
 
-            hpBarTransform = healthBar.GetComponent<RectTransform>();
-            staminaBarTransform = staminaBar.GetComponent<RectTransform>();
-            focusBarTransform = focusBar.GetComponent<RectTransform>();
+            _hpBarTransform = healthBar.GetComponent<RectTransform>();
+            _staminaBarTransform = staminaBar.GetComponent<RectTransform>();
+            _focusBarTransform = focusBar.GetComponent<RectTransform>();
             
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
             UpdateStaminaBar(SetMaxStaminaFromStaminaLevel());
@@ -115,8 +125,8 @@ namespace SP
             float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
             float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
 
-            hpBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
-            hpBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _hpBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
+            _hpBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
             
             healthBar.SetMaxHealth(maxHealth);
             healthBar.SetCurrentHealth(currentHealth);
@@ -138,8 +148,8 @@ namespace SP
             float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
             float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
 
-            staminaBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
-            staminaBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _staminaBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
+            _staminaBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
             
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
@@ -161,8 +171,8 @@ namespace SP
             float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
             float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
 
-            focusBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -115f);
-            focusBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _focusBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -115f);
+            _focusBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
             
             focusBar.SetMaxFocus(maxFocus);
             focusBar.SetCurrentFocus(currentFocus);
@@ -177,13 +187,13 @@ namespace SP
 
         public void TakeDamage(float damage, bool isBackStabbed)
         {
-            if (isPlayerAlive && !playerManager.isInvulnerable)
+            if (isPlayerAlive && !_playerManager.isInvulnerable)
             {
-                playerManager.shouldRefillHealth = false;
+                _playerManager.shouldRefillHealth = false;
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.Damage01Name], true);
+                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
 
                 if (currentHealth <= 0)
                 {
@@ -268,7 +278,7 @@ namespace SP
         
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(weaponDamage * weaponSlotManager.attackingWeapon.Light_Attack_Damage_Mult + Strength * 0.5f, false);
+            enemyStats.TakeDamage(weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + Strength * 0.5f, false);
         }
 
         public int CalculateSoulsCost(int level)
@@ -279,19 +289,19 @@ namespace SP
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
-            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsDeadName], true);
+            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
             
             if (isJumpDeath)
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.LayDownName], true);
+                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LayDownName], true);
             }
             else if(isBackStabbed)
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.BackStabName], true);
+                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.Death01Name], true);
+                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Death01Name], true);
             }
 
             isPlayerAlive = false;
@@ -307,20 +317,20 @@ namespace SP
             yield return CoroutineYielder.playerRespawnWaiter;
 
             youDiedLogo.SetActive(false);
-            playerManager.quickMoveScreen.SetActive(true);
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.EmptyName], false);
+            _playerManager.quickMoveScreen.SetActive(true);
+            _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
-            transform.position = playerManager.currentSpawnPoint.transform.position;
-            transform.rotation = playerManager.currentSpawnPoint.transform.rotation;
+            transform.position = _playerManager.currentSpawnPoint.transform.position;
+            transform.rotation = _playerManager.currentSpawnPoint.transform.rotation;
             // Respawn enemis and refresh boss health if alive
             RespawnEnemiesOnDead();
 
             yield return CoroutineYielder.playerRespawnWaiter;
             
             isPlayerAlive = true;
-            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsDeadName], false);
-            playerManager.quickMoveScreen.SetActive(false);
+            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
+            _playerManager.quickMoveScreen.SetActive(false);
 
             if (isJumpDeath)
             {
@@ -330,7 +340,7 @@ namespace SP
         
         private void RespawnEnemiesOnDead()
         {
-            foreach (var eS in enemiesSpawners)
+            foreach (var eS in _enemiesSpawners)
             {
                 eS.SpawnEnemies();
             }
@@ -354,5 +364,4 @@ namespace SP
             }
         }
     }
-
 }

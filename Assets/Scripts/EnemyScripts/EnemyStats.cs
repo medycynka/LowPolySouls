@@ -1,15 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Environment.Areas;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
     public class EnemyStats : CharacterStats
     {
-        EnemyManager enemyManager;
+        private EnemyManager _enemyManager;
 
         [Header("Enemy Properties", order = 1)]
         [Header("Animator", order = 2)]
@@ -32,7 +36,7 @@ namespace SP
 
         private void Awake()
         {
-            enemyManager = GetComponent<EnemyManager>();
+            _enemyManager = GetComponent<EnemyManager>();
             animator = GetComponentInChildren<EnemyAnimationManager>();
             playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         }
@@ -80,7 +84,7 @@ namespace SP
 
         public void TakeDamage(float damage, bool isBackStabbed)
         {
-            if (enemyManager.isAlive)
+            if (_enemyManager.isAlive)
             {
                 if (isBoss)
                 {
@@ -89,11 +93,11 @@ namespace SP
 
                     if (currentHealth > 0)
                     {
-                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
+                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
                     }
                     else
                     {
-                        enemyManager.deadFromBackStab = isBackStabbed;
+                        _enemyManager.deadFromBackStab = isBackStabbed;
                         bossAreaManager.bossHpBar.SetActive(false);
                     }
                 }
@@ -111,7 +115,7 @@ namespace SP
 
         private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed)
         {
-            enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
+            _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
             healthBar.SetActive(true);
             currentHealth -= damage;
             healtBarFill.fillAmount = currentHealth / maxHealth;
@@ -119,7 +123,7 @@ namespace SP
 
             if (currentHealth > 0)
             {
-                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
+                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
             }
 
             yield return CoroutineYielder.enemyHpUpdateWaiter;

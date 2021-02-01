@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
     [CreateAssetMenu(menuName = "A.I/Enemy Actions/Attack Action")]
     public class EnemyAttackAction : EnemyAction

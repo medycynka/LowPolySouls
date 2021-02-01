@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using BattleDrakeStudios.ModularCharacters;
+using SzymonPeszek.SaveScripts;
 
-namespace SP
+namespace SzymonPeszek.MainMenuUI
 {
-    public class CharacterCreatorMenager : MonoBehaviour
+    public class CharacterCreatorManager : MonoBehaviour
     {
-        MainMenuManager mainMenuManager;
+        private MainMenuManager _mainMenuManager;
         
         [Header("Character Creator Manager", order = 0)]
         [Header("Character Creator Components", order = 1)]
@@ -24,7 +21,7 @@ namespace SP
 
         private void Start()
         {
-            mainMenuManager = GetComponentInParent<MainMenuManager>();
+            _mainMenuManager = GetComponentInParent<MainMenuManager>();
         }
 
         public void PlayGame()
@@ -33,7 +30,7 @@ namespace SP
             SaveManager.SaveMainMenu();
             creatorScreen.SetActive(false);
             
-            mainMenuManager.FadeOutMusic();
+            _mainMenuManager.FadeOutMusic();
         }
 
         public void SetMaleGender()

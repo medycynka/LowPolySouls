@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Enums;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Equipment
 {
-
     public class EquipmentPickUp : Interactable
     {
         [Header("Equipment Item Pick Up", order = 1)]
@@ -79,5 +80,4 @@ namespace SP
             Destroy(gameObject);
         }
     }
-
 }

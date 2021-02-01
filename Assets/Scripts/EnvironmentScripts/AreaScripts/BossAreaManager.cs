@@ -1,17 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Environment.Sounds;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class BossAreaManager : LocationManager
     {
         [Header("Area Manager", order = 0)]
-        AudioClip[] footStepsOnExit;
+        private AudioClip[] _footStepsOnExit;
         public AudioClip bgMusicBossDefeat;
-        bool insideReset = true;
+        private bool _insideReset = true;
 
         [Header("Fog Walls")]
         public FogWallManager[] fogWalls;
@@ -23,20 +28,20 @@ namespace SP
         public GameObject bossHpBar;
         public bool isBossAlive = true;
 
-        EnemyStats bossStats;
-        Slider bossHpSlider;
-        TextMeshProUGUI bossNameText;
+        private EnemyStats _bossStats;
+        private Slider _bossHpSlider;
+        private TextMeshProUGUI _bossNameText;
 
         private void Start()
         {
             if (isBossAlive)
             {
                 bonfiresInArea[0].gameObject.SetActive(false);
-                bossStats = bossPrefab.GetComponent<EnemyStats>();
-                bossStats.bossAreaManager = this;
+                _bossStats = bossPrefab.GetComponent<EnemyStats>();
+                _bossStats.bossAreaManager = this;
                 bossHpBar.SetActive(false);
-                bossHpSlider = bossHpBar.GetComponentInChildren<Slider>();
-                bossNameText = bossHpBar.GetComponentInChildren<TextMeshProUGUI>();
+                _bossHpSlider = bossHpBar.GetComponentInChildren<Slider>();
+                _bossNameText = bossHpBar.GetComponentInChildren<TextMeshProUGUI>();
             }
             else
             {
@@ -58,7 +63,7 @@ namespace SP
 
         public void SetExitFootSteps(AudioClip[] footSteps)
         {
-            footStepsOnExit = footSteps;
+            _footStepsOnExit = footSteps;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -67,7 +72,7 @@ namespace SP
             {
                 isInside = true;
 
-                if (insideReset)
+                if (_insideReset)
                 {
                     if (playerStats == null)
                     {
@@ -76,9 +81,9 @@ namespace SP
 
                     if (isBossAlive)
                     {
-                        bossHpSlider.minValue = 0;
-                        bossHpSlider.maxValue = bossStats.maxHealth;
-                        bossHpSlider.value = bossStats.maxHealth;
+                        _bossHpSlider.minValue = 0;
+                        _bossHpSlider.maxValue = _bossStats.maxHealth;
+                        _bossHpSlider.value = _bossStats.maxHealth;
                     }
 
                     if (playerSoundManager == null)
@@ -98,9 +103,9 @@ namespace SP
         {
             if (other.CompareTag(playerTag))
             {
-                if (isInside && insideReset)
+                if (isInside && _insideReset)
                 {
-                    insideReset = false;
+                    _insideReset = false;
                 }
             }
         }
@@ -111,9 +116,9 @@ namespace SP
             {
                 playerStats = null;
                 isInside = false;
-                insideReset = true;
+                _insideReset = true;
                 playerSoundManager.ChangeBackGroundMusic(null);
-                playerSoundManager.movingClips = footStepsOnExit;
+                playerSoundManager.movingClips = _footStepsOnExit;
                 bossHpBar.SetActive(false);
             }
         }
@@ -130,7 +135,7 @@ namespace SP
 
             if (isBossAlive)
             {
-                if (bossStats.currentHealth <= 0)
+                if (_bossStats.currentHealth <= 0)
                 {
                     foreach (var fogWall in fogWalls)
                     {
@@ -156,7 +161,7 @@ namespace SP
 
             if (isBossAlive)
             {
-                bossNameText.text = bossName;
+                _bossNameText.text = bossName;
                 bossHpBar.SetActive(true);
             }
 
@@ -173,7 +178,7 @@ namespace SP
 
             yield return CoroutineYielder.bossHealWaiter;
 
-            bossStats.InitializeHealth();
+            _bossStats.InitializeHealth();
 
             yield return CoroutineYielder.bossPositionResetWaiter;
 

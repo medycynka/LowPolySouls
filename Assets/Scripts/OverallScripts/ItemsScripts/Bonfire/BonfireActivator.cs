@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Bonfire
 {
 
     public class BonfireActivator : Interactable

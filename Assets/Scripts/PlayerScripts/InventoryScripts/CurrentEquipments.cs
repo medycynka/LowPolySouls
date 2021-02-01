@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using BattleDrakeStudios;
 using BattleDrakeStudios.ModularCharacters;
-using UnityEngine.Rendering;
+using SzymonPeszek.SaveScripts;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts.Inventory
 {
     public class CurrentEquipments : MonoBehaviour
     {

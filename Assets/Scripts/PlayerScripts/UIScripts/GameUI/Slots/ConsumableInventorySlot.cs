@@ -1,10 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.Enums;
+using SzymonPeszek.Items.Consumable;
+using SzymonPeszek.Misc;
 
-namespace SP
+    
+namespace SzymonPeszek.GameUI.Slots
 {
-
     public class ConsumableInventorySlot : InventorySlotBase
     {
         public PlayerStats playerStats;
@@ -38,11 +41,11 @@ namespace SP
                     case ConsumableType.HealItem:
                         playerStats.healthRefillAmount = item.healAmount;
                         playerManager.shouldRefillHealth = true;
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.EstusName], true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
                         break;
                     case ConsumableType.SoulItem:
                         playerStats.soulsAmount += item.soulAmount;
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.UseItemName], true);
+                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.UseItemName], true);
                         break;
                     case ConsumableType.ManaItem:
                         break;
@@ -58,5 +61,4 @@ namespace SP
             }
         }
     }
-
 }

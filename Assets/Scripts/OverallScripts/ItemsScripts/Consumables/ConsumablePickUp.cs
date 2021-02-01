@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Consumable
 {
-
     public class ConsumablePickUp : Interactable
     {
         [Header("Consumable Item Pick Up", order = 1)]
@@ -52,5 +52,4 @@ namespace SP
             Destroy(gameObject);
         }
     }
-
 }

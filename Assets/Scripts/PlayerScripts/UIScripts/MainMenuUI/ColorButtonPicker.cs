@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using BattleDrakeStudios.ModularCharacters;
 
-namespace SP
+namespace SzymonPeszek.MainMenuUI
 {
     public class ColorButtonPicker : MonoBehaviour
     {

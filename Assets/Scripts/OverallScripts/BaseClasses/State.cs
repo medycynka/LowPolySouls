@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.EnemyScripts;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
     public abstract class State : MonoBehaviour
     {

@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Enums;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Weapons
 {
     [CreateAssetMenu(menuName = "Items/Weapon Item")]
     public class WeaponItem : Item
@@ -22,35 +23,35 @@ namespace SP
         public float backSlotScale = 1.0f;
 
         [Header("Weapon Stats", order = 2)]
-        public float Light_Attack_Damage_Mult = 1.0f;
-        public float Heavy_Attack_Damage_Mult = 1.5f;
+        public float lightAttackDamageMult = 1.0f;
+        public float heavyAttackDamageMult = 1.5f;
         public float backStabDamage = 50f;
-        public int Weight;
-        public int Durability;
+        public int weight;
+        public int durability;
 
         [Header("Weapon Idle Animations", order = 2)]
-        public string Right_Hand_Idle;
-        public string Left_Hand_Idle;
-        public string TH_Idle;
+        public string rightHandIdle;
+        public string leftHandIdle;
+        public string thIdle;
 
         [Header("One Handed Attack Animations", order = 2)]
-        public string OH_Light_Attack_1 = "OH_Light_Attack_01";
-        public string OH_Light_Attack_2 = "OH_Light_Attack_02";
-        public string OH_Light_Attack_3 = "OH_Light_Attack_03";
-        public string OH_Heavy_Attack_1 = "OH_Heavy_Attack_01";
-        public string OH_Heavy_Attack_2 = "OH_Heavy_Attack_02";
-        public string TH_Light_Attack_1 = "TH_Light_Attack_01";
-        public string TH_Light_Attack_2 = "TH_Light_Attack_02";
-        public string TH_Light_Attack_3 = "TH_Light_Attack_03";
-        public string TH_Heavy_Attack_1 = "TH_Heavy_Attack_01";
-        public string TH_Heavy_Attack_2 = "TH_Heavy_Attack_02";
+        public string ohLightAttack1 = "OH_Light_Attack_01";
+        public string ohLightAttack2 = "OH_Light_Attack_02";
+        public string ohLightAttack3 = "OH_Light_Attack_03";
+        public string ohHeavyAttack1 = "OH_Heavy_Attack_01";
+        public string ohHeavyAttack2 = "OH_Heavy_Attack_02";
+        public string thLightAttack1 = "TH_Light_Attack_01";
+        public string thLightAttack2 = "TH_Light_Attack_02";
+        public string thLightAttack3 = "TH_Light_Attack_03";
+        public string thHeavyAttack1 = "TH_Heavy_Attack_01";
+        public string thHeavyAttack2 = "TH_Heavy_Attack_02";
 
         [Header("Stamina Costs", order = 2)]
         public int baseStamina;
-        public float oh_lightAttackMultiplier;
-        public float oh_heavyAttackMultiplier;
-        public float th_lightAttackMultiplier;
-        public float th_heavyAttackMultiplier;
+        public float ohLightAttackMultiplier;
+        public float ohHeavyAttackMultiplier;
+        public float thLightAttackMultiplier;
+        public float thHeavyAttackMultiplier;
 
         [Header("Weapon Specifier", order = 2)]
         public WeaponType weaponType;

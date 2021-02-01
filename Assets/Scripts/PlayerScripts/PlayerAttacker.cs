@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Misc;
+using SzymonPeszek.Enums;
+using SzymonPeszek.EnemyScripts;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        AnimatorHandler animatorHandler;
-        InputHandler inputHandler;
-        WeaponSlotManager weaponSlotManager;
-        PlayerInventory playerInventory;
-        PlayerManager playerManager;
-        PlayerStats playerStats;
+        private AnimatorHandler _animatorHandler;
+        private InputHandler _inputHandler;
+        private WeaponSlotManager _weaponSlotManager;
+        private PlayerInventory _playerInventory;
+        private PlayerManager _playerManager;
+        private PlayerStats _playerStats;
+        private RaycastHit _hit;
         
-        RaycastHit hit;
         public LayerMask backStabLayer;
 
         [Header("Last Attack Name")]
@@ -22,92 +27,92 @@ namespace SP
 
         private void Awake()
         {
-            animatorHandler = GetComponent<AnimatorHandler>();
-            weaponSlotManager = GetComponent<WeaponSlotManager>();
-            inputHandler = GetComponentInParent<InputHandler>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
-            playerManager = GetComponentInParent<PlayerManager>();
-            playerStats = GetComponentInParent<PlayerStats>();
+            _animatorHandler = GetComponent<AnimatorHandler>();
+            _weaponSlotManager = GetComponent<WeaponSlotManager>();
+            _inputHandler = GetComponentInParent<InputHandler>();
+            _playerInventory = GetComponentInParent<PlayerInventory>();
+            _playerManager = GetComponentInParent<PlayerManager>();
+            _playerStats = GetComponentInParent<PlayerStats>();
             backStabLayer = 1 << LayerMask.NameToLayer("Back Stab");
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
         {
-            if (inputHandler.comboFlag)
+            if (_inputHandler.comboFlag)
             {
-                animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName], false);
+                _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], false);
 
-                if (lastAttack == weapon.OH_Light_Attack_1)
+                if (lastAttack == weapon.ohLightAttack1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
-                    lastAttack = weapon.OH_Light_Attack_2;
+                    _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack2, true);
+                    lastAttack = weapon.ohLightAttack2;
                 }
-                else if (lastAttack == weapon.OH_Light_Attack_2)
+                else if (lastAttack == weapon.ohLightAttack2)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_3, true);
+                    _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack3, true);
                 } 
-                else if(lastAttack == weapon.OH_Heavy_Attack_1)
+                else if(lastAttack == weapon.ohHeavyAttack1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_2, true);
+                    _animatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack2, true);
                 }
-                else if (lastAttack == weapon.TH_Light_Attack_1)
+                else if (lastAttack == weapon.thLightAttack1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_2, true);
-                    lastAttack = weapon.TH_Light_Attack_2;
+                    _animatorHandler.PlayTargetAnimation(weapon.thLightAttack2, true);
+                    lastAttack = weapon.thLightAttack2;
                 }
-                else if (lastAttack == weapon.TH_Light_Attack_2)
+                else if (lastAttack == weapon.thLightAttack2)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_3, true);
+                    _animatorHandler.PlayTargetAnimation(weapon.thLightAttack3, true);
                 }
-                else if (lastAttack == weapon.TH_Heavy_Attack_1)
+                else if (lastAttack == weapon.thHeavyAttack1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.TH_Heavy_Attack_2, true);
-                    lastAttack = weapon.TH_Heavy_Attack_2;
+                    _animatorHandler.PlayTargetAnimation(weapon.thHeavyAttack2, true);
+                    lastAttack = weapon.thHeavyAttack2;
                 }
             }
         }
 
         public void HandleLightAttack(WeaponItem weapon)
         {
-            weaponSlotManager.attackingWeapon = weapon;
+            _weaponSlotManager.attackingWeapon = weapon;
 
-            if (inputHandler.twoHandFlag)
+            if (_inputHandler.twoHandFlag)
             {
-                animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
-                lastAttack = weapon.TH_Light_Attack_1;
+                _animatorHandler.PlayTargetAnimation(weapon.thLightAttack1, true);
+                lastAttack = weapon.thLightAttack1;
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
-                lastAttack = weapon.OH_Light_Attack_1;
+                _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack1, true);
+                lastAttack = weapon.ohLightAttack1;
             }
         }
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
-            weaponSlotManager.attackingWeapon = weapon;
+            _weaponSlotManager.attackingWeapon = weapon;
 
-            if (inputHandler.twoHandFlag)
+            if (_inputHandler.twoHandFlag)
             {
-                animatorHandler.PlayTargetAnimation(weapon.TH_Heavy_Attack_1, true);
-                lastAttack = weapon.TH_Heavy_Attack_1;
+                _animatorHandler.PlayTargetAnimation(weapon.thHeavyAttack1, true);
+                lastAttack = weapon.thHeavyAttack1;
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
-                lastAttack = weapon.OH_Heavy_Attack_1;
+                _animatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack1, true);
+                lastAttack = weapon.ohHeavyAttack1;
             }
         }
 
         public void HandleRbAction()
         {
-            switch (playerInventory.rightWeapon.weaponType)
+            switch (_playerInventory.rightWeapon.weaponType)
             {
                 case WeaponType.Melee:
                     PerformRbMeleeAction();
                     break;
                 case WeaponType.Casting:
-                    PerformRbMagicAction(playerInventory.rightWeapon);
+                    PerformRbMagicAction(_playerInventory.rightWeapon);
                     break;
                 case WeaponType.Shooting:
                     break;
@@ -119,43 +124,43 @@ namespace SP
         #region Attack Actions
         private void PerformRbMeleeAction()
         {
-            if (playerManager.canDoCombo)
+            if (_playerManager.canDoCombo)
             {
-                inputHandler.comboFlag = true;
-                HandleWeaponCombo(playerInventory.rightWeapon);
-                inputHandler.comboFlag = false;
+                _inputHandler.comboFlag = true;
+                HandleWeaponCombo(_playerInventory.rightWeapon);
+                _inputHandler.comboFlag = false;
             }
             else
             {
-                if (playerManager.isInteracting)
+                if (_playerManager.isInteracting)
                 {
                     return;
                 }
 
-                if (playerManager.canDoCombo)
+                if (_playerManager.canDoCombo)
                 {
                     return;
                 }
 
-                animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingRightHandName], true);
-                HandleLightAttack(playerInventory.rightWeapon);
+                _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
+                HandleLightAttack(_playerInventory.rightWeapon);
             }
         }
 
         private void PerformRbMagicAction(WeaponItem weapon)
         {
-            if (playerManager.isInteracting)
+            if (_playerManager.isInteracting)
             {
                 return;
             }
             
-            if (playerInventory.currentSpell != null && playerStats.currentFocus > 0)
+            if (_playerInventory.currentSpell != null && _playerStats.currentFocus > 0)
             {
                 if (weapon.castingType == CastingType.Faith)
                 {
-                    if (playerInventory.currentSpell.spellType == CastingType.Faith)
+                    if (_playerInventory.currentSpell.spellType == CastingType.Faith)
                     {
-                        playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+                        _playerInventory.currentSpell.AttemptToCastSpell(_animatorHandler, _playerStats);
                     }
                 }
             }
@@ -163,29 +168,29 @@ namespace SP
         
         private void SuccessfullyCastSpell()
         {
-            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+            _playerInventory.currentSpell.SuccessfullyCastSpell(_animatorHandler, _playerStats);
         }
         
         public void AttemptBackStabOrRiposte()
         {
-            if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, 
-                transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+            if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, 
+                transform.TransformDirection(Vector3.forward), out _hit, 0.5f, backStabLayer))
             {
-                EnemyManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<EnemyManager>();
+                EnemyManager enemyCharacterManager = _hit.transform.gameObject.GetComponentInParent<EnemyManager>();
 
                 if (enemyCharacterManager != null)
                 {
-                    playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
-                    Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
-                    rotationDirection = hit.transform.position - playerManager.transform.position;
+                    _playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    Vector3 rotationDirection = _playerManager.transform.root.eulerAngles;
+                    rotationDirection = _hit.transform.position - _playerManager.transform.position;
                     rotationDirection.y = 0;
                     rotationDirection.Normalize();
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
-                    playerManager.transform.rotation = targetRotation;
+                    Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    _playerManager.transform.rotation = targetRotation;
                     
-                    animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.BackStabName], true);
-                    enemyCharacterManager.HandleGettingBackStabbed(playerInventory.rightWeapon.backStabDamage);
+                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
+                    enemyCharacterManager.HandleGettingBackStabbed(_playerInventory.rightWeapon.backStabDamage);
                 }
             }
         }

@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using BattleDrakeStudios.ModularCharacters;
 using TMPro;
 
-namespace SP
+namespace SzymonPeszek.MainMenuUI
 {
     public class ColorPickerManager : MonoBehaviour
     {
         [Header("Color Picker Manager", order = 0)]
         [Header("Color Picker Components", order = 1)]
         public ModularCharacterManager modularCharacterManager;
-        public string colorPropery = "";
+        public string colorProperty = "";
 
         [Header("Color Properties", order = 1)]
         public Color partColor;
@@ -22,7 +20,7 @@ namespace SP
         public float colorG = 1.0f;
         public float colorB = 1.0f;
         public float colorA = 1.0f;
-        private Color baseColor;
+        private Color _baseColor;
 
         [Header("Sliders", order = 1)]
         public Slider rSlider;
@@ -36,11 +34,11 @@ namespace SP
         public TextMeshProUGUI bPlaceholder;
         public TextMeshProUGUI aPlaceholder;
 
-        public void InitializeContent(string s_, ColorButtonPicker cBP_)
+        public void InitializeContent(string s, ColorButtonPicker cBp)
         {
-            colorPropery = s_;
-            colorButtonPicker = cBP_;
-            partColor = modularCharacterManager.CharacterMaterial.GetColor(colorPropery);
+            colorProperty = s;
+            colorButtonPicker = cBp;
+            partColor = modularCharacterManager.CharacterMaterial.GetColor(colorProperty);
             shownColor.color = partColor;
             colorR = partColor.r;
             colorG = partColor.g;
@@ -50,29 +48,29 @@ namespace SP
             gSlider.value = colorG;
             bSlider.value = colorB;
             aSlider.value = colorA;
-            baseColor = partColor;
+            _baseColor = partColor;
             colorButtonPicker.buttonImage.color = partColor;
         }
 
-        public void SetColorR(float r_)
+        public void SetColorR(float r)
         {
-            colorR = r_;
+            colorR = r;
 
-            int i_ = (int)(255 * r_);
-            rPlaceholder.text = i_.ToString();
+            int i = (int)(255 * r);
+            rPlaceholder.text = i.ToString();
 
             SetColor();
         }
 
-        public void GetColorRValue(string s_)
+        public void GetColorRValue(string s)
         {
-            if (s_ == "")
+            if (s == "")
             {
                 colorR = 0.0f;
             }
             else
             {
-                colorR = float.Parse(s_) / 255.0f;
+                colorR = float.Parse(s) / 255.0f;
             }
 
             rSlider.value = colorR;
@@ -80,25 +78,25 @@ namespace SP
             SetColor();
         }
 
-        public void SetColorG(float g_)
+        public void SetColorG(float g)
         {
-            colorG = g_;
+            colorG = g;
 
-            int i_ = (int)(255 * g_);
-            gPlaceholder.text = i_.ToString();
+            int i = (int)(255 * g);
+            gPlaceholder.text = i.ToString();
 
             SetColor();
         }
 
-        public void GetColorGValue(string s_)
+        public void GetColorGValue(string s)
         {
-            if (s_ == "")
+            if (s == "")
             {
                 colorG = 0.0f;
             }
             else
             {
-                colorG = float.Parse(s_) / 255.0f;
+                colorG = float.Parse(s) / 255.0f;
             }
 
             gSlider.value = colorG;
@@ -106,25 +104,25 @@ namespace SP
             SetColor();
         }
 
-        public void SetColorB(float b_)
+        public void SetColorB(float b)
         {
-            colorB = b_;
+            colorB = b;
 
-            int i_ = (int)(255 * b_);
-            bPlaceholder.text = i_.ToString();
+            int i = (int)(255 * b);
+            bPlaceholder.text = i.ToString();
 
             SetColor();
         }
 
-        public void GetColorBValue(string s_)
+        public void GetColorBValue(string s)
         {
-            if (s_ == "")
+            if (s == "")
             {
                 colorB = 0.0f;
             }
             else
             {
-                colorB = float.Parse(s_) / 255.0f;
+                colorB = float.Parse(s) / 255.0f;
             }
 
             bSlider.value = colorB;
@@ -132,25 +130,25 @@ namespace SP
             SetColor();
         }
 
-        public void SetColorA(float a_)
+        public void SetColorA(float a)
         {
-            colorA = a_;
+            colorA = a;
 
-            int i_ = (int)(255 * a_);
-            aPlaceholder.text = i_.ToString();
+            int i = (int)(255 * a);
+            aPlaceholder.text = i.ToString();
 
             SetColor();
         }
 
-        public void GetColorAValue(string s_)
+        public void GetColorAValue(string s)
         {
-            if (s_ == "")
+            if (s == "")
             {
                 colorA = 0.0f;
             }
             else
             {
-                colorA = float.Parse(s_) / 255.0f;
+                colorA = float.Parse(s) / 255.0f;
             }
 
             aSlider.value = colorA;
@@ -165,9 +163,9 @@ namespace SP
 
         public void ResetColor()
         {
-            partColor = baseColor;
+            partColor = _baseColor;
             colorButtonPicker.buttonImage.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
-            modularCharacterManager.CharacterMaterial.SetColor(colorPropery, partColor);
+            modularCharacterManager.CharacterMaterial.SetColor(colorProperty, partColor);
         }
 
         private void SetColor()
@@ -175,7 +173,7 @@ namespace SP
             partColor = new Color(colorR, colorG, colorB, colorA);
             shownColor.color = partColor;
             colorButtonPicker.buttonImage.color = partColor;
-            modularCharacterManager.CharacterMaterial.SetColor(colorPropery, partColor);
+            modularCharacterManager.CharacterMaterial.SetColor(colorProperty, partColor);
         }
     }
 }

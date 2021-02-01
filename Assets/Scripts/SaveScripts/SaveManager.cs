@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
 
-namespace SP
+namespace SzymonPeszek.SaveScripts
 {
     public static class SaveManager
     {

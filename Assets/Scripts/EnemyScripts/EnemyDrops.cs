@@ -1,26 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Items.Consumable;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Items.Equipment;
+using SzymonPeszek.Items;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
-
     public class EnemyDrops : MonoBehaviour
     {
         [Header("Death Drop", order = 0)]
         [Header("Drop chances", order = 1)]
-        public float consumableChanse = 0.45f;
-        public float weaponChanse = 0.25f;
-        public float equipmentChanse = 0.2f;
+        public float consumableChance = 0.45f;
+        public float weaponChance = 0.25f;
+        public float equipmentChance = 0.2f;
 
         [Header("Drops pool", order = 1)]
         public ConsumableItem[] consumableDropPool;
         public WeaponItem[] weaponDropPool;
         public EquipmentItem[] equipmentDropPool;
 
-        [SerializeField] List<Item> dropList;
-        [SerializeField] MiscPickUp deathDrop;
-        [SerializeField] float dropChance;
+        [SerializeField] private List<Item> dropList;
+        [SerializeField] private MiscPickUp deathDrop;
+        [SerializeField] private float dropChance;
 
         private void Start()
         {
@@ -28,7 +32,7 @@ namespace SP
             dropChance = Random.Range(0.0f, 1.0f);
             deathDrop.items.Clear();
 
-            if (dropChance <= consumableChanse)
+            if (dropChance <= consumableChance)
             {
                 // Drop consumable
                 foreach (var drop in consumableDropPool)
@@ -36,7 +40,7 @@ namespace SP
                     dropList.Add(drop);
                 }
             }
-            else if (dropChance - consumableChanse <= equipmentChanse)
+            else if (dropChance - consumableChance <= equipmentChance)
             {
                 // Drop weapon
                 foreach (var drop in weaponDropPool)
@@ -44,7 +48,7 @@ namespace SP
                     dropList.Add(drop);
                 }
             }
-            else if (dropChance - consumableChanse - equipmentChanse <= weaponChanse)
+            else if (dropChance - consumableChance - equipmentChance <= weaponChance)
             {
                 // Drop equipment
                 foreach (var drop in equipmentDropPool)
@@ -79,5 +83,4 @@ namespace SP
             deathDrop.items.Clear();
         }
     }
-
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP {
 
+namespace SzymonPeszek.EnemyScripts.States
+{
     public class PursueTargetState : State
     {
         [Header("Persue Target State", order = 0)]

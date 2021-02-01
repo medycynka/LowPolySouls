@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.GameUI;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
-
     public class Interactable : MonoBehaviour
     {
         [Header("Interactable Object Properties")]
@@ -35,7 +39,7 @@ namespace SP
             uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.PickUpName], true); //Plays the animation of looting the item
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.PickUpName], true); //Plays the animation of looting the item
         }
     }
 

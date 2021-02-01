@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
     public class CharacterManager : MonoBehaviour
     {

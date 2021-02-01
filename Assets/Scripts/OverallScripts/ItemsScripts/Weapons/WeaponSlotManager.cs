@@ -1,8 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.Damage;
+using SzymonPeszek.GameUI.Slots;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Weapons
 {
     public class WeaponSlotManager : MonoBehaviour
     {
@@ -60,7 +63,7 @@ namespace SP
                 #region Handle Left Weapon Idle Animation
                 if (weaponItem != null)
                 {
-                    animator.CrossFade(weaponItem.Left_Hand_Idle, 0.2f);
+                    animator.CrossFade(weaponItem.leftHandIdle, 0.2f);
                 }
                 else
                 {
@@ -88,7 +91,7 @@ namespace SP
                 {
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                     leftHandSlot.UnloadWeaponAndDestroy();
-                    animator.CrossFade(weaponItem.TH_Idle, 0.2f);
+                    animator.CrossFade(weaponItem.thIdle, 0.2f);
                 }
                 else
                 {
@@ -99,7 +102,7 @@ namespace SP
 
                     if (weaponItem != null)
                     {
-                        animator.CrossFade(weaponItem.Right_Hand_Idle, 0.2f);
+                        animator.CrossFade(weaponItem.rightHandIdle, 0.2f);
                     }
                     else
                     {
@@ -151,22 +154,22 @@ namespace SP
 
         public void DrainStaminaLightAttack()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.oh_lightAttackMultiplier));
+            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohLightAttackMultiplier));
         }
 
         public void DrainStaminaHeavyAttack()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.oh_heavyAttackMultiplier));
+            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohHeavyAttackMultiplier));
         }
 
         public void DrainStaminaLightAttackTH()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.th_lightAttackMultiplier));
+            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thLightAttackMultiplier));
         }
 
         public void DrainStaminaHeavyAttackTH()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.th_heavyAttackMultiplier));
+            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thHeavyAttackMultiplier));
         }
 
         #endregion

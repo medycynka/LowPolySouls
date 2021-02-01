@@ -1,8 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Spells
 {
     [CreateAssetMenu(menuName = "Spells/Faith Spell")]
     public class FaithSpell : SpellItem
@@ -14,7 +17,7 @@ namespace SP
             base.AttemptToCastSpell(animatorHandler, playerStats);
             
             GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[spellAnimation], true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
         }
 
         public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)

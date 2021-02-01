@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
-
     public class EnemyLocomotionManager : MonoBehaviour
     {
-        private EnemyManager enemyManager;
-        private EnemyAnimationManager enemyAnimationManager;
+        private EnemyManager _enemyManager;
+        private EnemyAnimationManager _enemyAnimationManager;
 
         [Header("Locomotion Manager", order = 0)]
         [Header("Components", order = 1)]
@@ -23,8 +23,8 @@ namespace SP
 
         private void Awake()
         {
-            enemyManager = GetComponent<EnemyManager>();
-            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+            _enemyManager = GetComponent<EnemyManager>();
+            _enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             navMeshBlocker = GetComponent<NavMeshObstacle>();
             enemyRigidBody = GetComponent<Rigidbody>();
@@ -38,22 +38,22 @@ namespace SP
 
         public void HandleMoveToTarget()
         {
-            if (enemyManager.isPreformingAction)
+            if (_enemyManager.isPreformingAction)
             {
-                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+                _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
 
                 return;
             }
 
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
-            enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-            enemyManager.viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
+            Vector3 targetDirection = _enemyManager.currentTarget.transform.position - _enemyManager.transform.position;
+            _enemyManager.distanceFromTarget = Vector3.Distance(_enemyManager.currentTarget.transform.position, transform.position);
+            _enemyManager.viewableAngle = Vector3.Angle(targetDirection, _enemyManager.transform.forward);
 
-            if (enemyManager.distanceFromTarget > stoppingDistance)
+            if (_enemyManager.distanceFromTarget > stoppingDistance)
             {
-                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f, Time.deltaTime);
+                _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f, Time.deltaTime);
             }
-            else if (enemyManager.distanceFromTarget <= stoppingDistance)
+            else if (_enemyManager.distanceFromTarget <= stoppingDistance)
             {
                 StopMoving();
             }
@@ -65,15 +65,15 @@ namespace SP
 
         public void StopMoving()
         {
-            enemyManager.distanceFromTarget = 0;
-            enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+            _enemyManager.distanceFromTarget = 0;
+            _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
         }
 
         public void HandleRotateTowardsTarget()
         {
-            if (enemyManager.isPreformingAction)
+            if (_enemyManager.isPreformingAction)
             {
-                Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
+                Vector3 direction = _enemyManager.currentTarget.transform.position - transform.position;
                 direction.y = 0;
                 direction.Normalize();
 
@@ -92,11 +92,10 @@ namespace SP
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navmeshAgent.enabled = true;
-                navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
+                navmeshAgent.SetDestination(_enemyManager.currentTarget.transform.position);
                 enemyRigidBody.velocity = targetVelocity;
-                transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(_enemyManager.transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
             }
         }
     }
-
 }

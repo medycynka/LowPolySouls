@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Enums;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
     public class SpellItem : Item
     {

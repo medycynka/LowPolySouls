@@ -1,76 +1,77 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
+using SzymonPeszek.Misc;
 
-namespace SP {
+
+namespace SzymonPeszek.Environment.Sounds 
+{
     public class AnimationSoundPlayer : MonoBehaviour
     {
-        AnimationSoundManager animationSoundManager;
+        private AnimationSoundManager _animationSoundManager;
 
         public bool canPlayStep = true;
 
         private void Awake()
         {
-            animationSoundManager = GetComponentInParent<AnimationSoundManager>();
+            _animationSoundManager = GetComponentInParent<AnimationSoundManager>();
         }
 
         public void StepSound()
         {
             if (canPlayStep)
             {
-                animationSoundManager.PlayOnStep();
+                _animationSoundManager.PlayOnStep();
             }
         }
 
         public void RollSound()
         {
-            animationSoundManager.PlayOnRoll();
+            _animationSoundManager.PlayOnRoll();
         }
 
         public void BackStep()
         {
-            animationSoundManager.PlayOnBackStep();
+            _animationSoundManager.PlayOnBackStep();
         }
 
         public void AttackSound()
         {
-            animationSoundManager.PlayOnAttack();
+            _animationSoundManager.PlayOnAttack();
         }
 
         public void FaithSound()
         {
-            animationSoundManager.PlayOnFaith();
+            _animationSoundManager.PlayOnFaith();
         }
         
         public void CurseSound()
         {
-            animationSoundManager.PlayOnCurse();
+            _animationSoundManager.PlayOnCurse();
         }
         
         public void DestructionSound()
         {
-            animationSoundManager.PlayOnDestruction();
+            _animationSoundManager.PlayOnDestruction();
         }
 
         public void DamageSound()
         {
-            animationSoundManager.PlayOnDamage();
+            _animationSoundManager.PlayOnDamage();
         }
 
         public void EstusSound()
         {
-            animationSoundManager.PlayOnEstusUse();
+            _animationSoundManager.PlayOnEstusUse();
         }
 
         public void SoulSound()
         {
-            animationSoundManager.PlayOnSoulUse();
+            _animationSoundManager.PlayOnSoulUse();
         }
 
         public void EnableSteps()
         {
-            animationSoundManager.EnableFootStepsSound();
+            _animationSoundManager.EnableFootStepsSound();
         }
 
 	    public void EnableStepsAfterTime()
@@ -80,14 +81,14 @@ namespace SP {
         
         public void DisableSteps()
         {
-            animationSoundManager.DisableFootStepsSound();
+            _animationSoundManager.DisableFootStepsSound();
         }
 
 	    private IEnumerator EnableStepsAfterSecond()
         {
             yield return CoroutineYielder.stepSoundEnablerWaiter;
 
-		    animationSoundManager.EnableFootStepsSound();
+		    _animationSoundManager.EnableFootStepsSound();
 	    }
     }
 }

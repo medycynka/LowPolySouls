@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
     public class AnimationManager : MonoBehaviour
     {
@@ -14,14 +14,14 @@ namespace SP
         public void PlayTargetAnimation(string targetAnim, bool isInteracting)
         {
             anim.applyRootMotion = isInteracting;
-            anim.SetBool(isEnemy ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsInteractingName] : StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName], isInteracting);
-            anim.CrossFade(isEnemy ? StaticAnimatorIds.EnemyAnimationIds[targetAnim] : StaticAnimatorIds.AnimationIds[targetAnim], 0.2f);
+            anim.SetBool(isEnemy ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName] : StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName], isInteracting);
+            anim.CrossFade(isEnemy ? StaticAnimatorIds.enemyAnimationIds[targetAnim] : StaticAnimatorIds.animationIds[targetAnim], 0.2f);
         }
         
         public void PlayTargetAnimation(int targetAnim, bool isInteracting)
         {
             anim.applyRootMotion = isInteracting;
-            anim.SetBool(isEnemy ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsInteractingName] : StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName], isInteracting);
+            anim.SetBool(isEnemy ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName] : StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName], isInteracting);
             anim.CrossFade(targetAnim, 0.2f);
         }
     }

@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts.Animations
 {
     public class EnemyAnimationManager : AnimationManager
     {
@@ -13,7 +15,7 @@ namespace SP
             anim = GetComponent<Animator>();
             enemyLocomotionManager = GetComponentInParent<EnemyLocomotionManager>();
 
-            StaticAnimatorIds.EnemyAnimationIds = new Dictionary<string, int>
+            StaticAnimatorIds.enemyAnimationIds = new Dictionary<string, int>
             {
                 {StaticAnimatorIds.VerticalName, Animator.StringToHash(StaticAnimatorIds.VerticalName)},
                 {StaticAnimatorIds.HorizontalName, Animator.StringToHash(StaticAnimatorIds.HorizontalName)},
@@ -42,8 +44,8 @@ namespace SP
                 {StaticAnimatorIds.EnemySwordAttack06, Animator.StringToHash(StaticAnimatorIds.EnemySwordAttack06)},
             };
             
-            anim.SetBool(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsDeadName], false);
-            Debug.Log("Enemy: " + StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
+            anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], false);
+            Debug.Log("Enemy: " + StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
         }
 
         private void OnAnimatorMove()

@@ -1,23 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts.Animations
 {
     public class AnimatorHandler : AnimationManager
     {
-        private PlayerManager playerManager;
-        private PlayerLocomotion playerLocomotion;
+        private PlayerManager _playerManager;
+        private PlayerLocomotion _playerLocomotion;
 
         public bool canRotate;
         
         public void Initialize()
         {
-            playerManager = GetComponentInParent<PlayerManager>();
+            _playerManager = GetComponentInParent<PlayerManager>();
             anim = GetComponent<Animator>();
-            playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
 
-            StaticAnimatorIds.AnimationIds = new Dictionary<string, int>
+            StaticAnimatorIds.animationIds = new Dictionary<string, int>
             {
                 {StaticAnimatorIds.VerticalName, Animator.StringToHash(StaticAnimatorIds.VerticalName)},
                 {StaticAnimatorIds.HorizontalName, Animator.StringToHash(StaticAnimatorIds.HorizontalName)},
@@ -68,8 +70,8 @@ namespace SP
                 {StaticAnimatorIds.HealSpell, Animator.StringToHash(StaticAnimatorIds.HealSpell)},
             };
             
-            anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsDeadName], false);
-            Debug.Log("Player: " + StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName]);
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
+            Debug.Log("Player: " + StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool isWalking)
@@ -140,8 +142,8 @@ namespace SP
                 h = horizontalMovement;
             }
 
-            anim.SetFloat(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.VerticalName], v, 0.1f, Time.deltaTime);
-            anim.SetFloat(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.HorizontalName], h, 0.1f, Time.deltaTime);
+            anim.SetFloat(StaticAnimatorIds.animationIds[StaticAnimatorIds.VerticalName], v, 0.1f, Time.deltaTime);
+            anim.SetFloat(StaticAnimatorIds.animationIds[StaticAnimatorIds.HorizontalName], h, 0.1f, Time.deltaTime);
         }
 
         public void CanRotate()
@@ -156,37 +158,37 @@ namespace SP
 
         public void EnableCombo()
         {
-            anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName], true);
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], true);
         }
 
         public void DisableCombo()
         {
-            anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName], false);
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], false);
         }
 
         public void EnableIsInvulnerable()
         {
-            anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInvulnerableName], true);
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName], true);
         }
         
         public void DisableIsInvulnerable()
         {
-            anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInvulnerableName], false);
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName], false);
         }
 
         private void OnAnimatorMove()
         {
-            if (playerManager.isInteracting == false)
+            if (_playerManager.isInteracting == false)
             {
                 return;
             }
 
             var delta = Time.deltaTime;
-            playerLocomotion.rigidbody.drag = 0;
+            _playerLocomotion.rigidbody.drag = 0;
             var deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             var velocity = deltaPosition / delta;
-            playerLocomotion.rigidbody.velocity = velocity;
+            _playerLocomotion.rigidbody.velocity = velocity;
         }
     }
 }

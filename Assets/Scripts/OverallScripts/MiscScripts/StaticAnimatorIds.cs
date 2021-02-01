@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-namespace SP
+namespace SzymonPeszek.Misc
 {
     public static class StaticAnimatorIds
     {
@@ -82,11 +79,11 @@ namespace SP
         #endregion
         
         #region Player Animation Ids
-        public static Dictionary<string, int> AnimationIds;
+        public static Dictionary<string, int> animationIds;
         #endregion
         
         #region Enemy Animation Ids
-        public static Dictionary<string, int> EnemyAnimationIds;
+        public static Dictionary<string, int> enemyAnimationIds;
         #endregion
     }
 }

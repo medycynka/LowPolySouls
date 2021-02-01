@@ -1,8 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Items.Bonfire;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Items.Equipment;
+using SzymonPeszek.Items.Consumable;
+using SzymonPeszek.SaveScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class WorldManager : MonoBehaviour
     {
@@ -20,9 +25,9 @@ namespace SP
         public EquipmentItem[] ringsHolder;
         public ConsumableItem[] consumableHolder;
 
-        private const int frameCheckRate = 5;
-        private const int bossCheckVal = 0;
-        private const int bonfireCheckVal = 1;
+        private const int FrameCheckRate = 5;
+        private const int BossCheckVal = 0;
+        private const int BonfireCheckVal = 1;
         
         private void Awake()
         {
@@ -73,14 +78,14 @@ namespace SP
 
         private void FixedUpdate()
         {
-            if (Time.frameCount % frameCheckRate == bossCheckVal)
+            if (Time.frameCount % FrameCheckRate == BossCheckVal)
             {
                 for (int i = 0; i < bossAreaManagers.Length; i++)
                 {
                     SettingsHolder.bossAreaAlive[i] = bossAreaManagers[i].isBossAlive;
                 }
             }
-            else if (Time.frameCount % frameCheckRate == bonfireCheckVal)
+            else if (Time.frameCount % FrameCheckRate == BonfireCheckVal)
             {
                 for (int i = 0; i < bonfireManagers.Length; i++)
                 {

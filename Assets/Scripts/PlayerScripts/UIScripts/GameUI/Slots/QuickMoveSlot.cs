@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using SzymonPeszek.Items.Bonfire;
 
-namespace SP { 
+namespace SzymonPeszek.GameUI.Slots
+{ 
     public class QuickMoveSlot : MonoBehaviour
     {
         public GameObject bonfirePrefab;

@@ -1,26 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using SzymonPeszek.GameUI.Slots;
+using SzymonPeszek.Items.Bonfire;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.WindowsManagers
 {
     public class QuickMoveManager : MonoBehaviour
     {
         public GameObject backgroundScreen;
         public GameObject buttonPrefab;
         public BonfireManager[] bonfireList;
-        private QuickMoveSlot[] quickMoveSlots;
-
+        private QuickMoveSlot[] _quickMoveSlots;
 
         public void UpdateActiveBonfireList()
         {
             int id = 0;
-            quickMoveSlots = backgroundScreen.GetComponentsInChildren<QuickMoveSlot>();
+            _quickMoveSlots = backgroundScreen.GetComponentsInChildren<QuickMoveSlot>();
 
-            for (var i = 0; i < quickMoveSlots.Length; i++)
+            for (var i = 0; i < _quickMoveSlots.Length; i++)
             {
-                quickMoveSlots[i].ClearSlot();
+                _quickMoveSlots[i].ClearSlot();
             }
 
             for (var i = 0; i < bonfireList.Length; i++)

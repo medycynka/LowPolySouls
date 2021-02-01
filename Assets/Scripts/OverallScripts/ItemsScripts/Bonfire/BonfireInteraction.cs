@@ -1,9 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.GameUI.WindowsManagers;
+using SzymonPeszek.Misc;
+using SzymonPeszek.SaveScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Bonfire
 {
     public class BonfireInteraction : Interactable
     {
@@ -30,7 +37,7 @@ namespace SP
             bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.SitName], true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
             bonfireManager.playerManager.isRestingAtBonfire = true;
 
             playerStats.RefillHealth();
@@ -51,7 +58,7 @@ namespace SP
 
             bonfireManager.uiManager.UpdateSouls();
             bonfireManager.CloseRestUI();
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.StandUpName], true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
             bonfireManager.playerManager.isRestingAtBonfire = false;
 
             if(playerStats == null)
@@ -80,7 +87,7 @@ namespace SP
             yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
             bonfireManager.CloseQuickMoveScreen();
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.StandUpName], true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
             bonfireManager.locationScreen.SetActive(true);
             locationNameScree.text = bonfireManager.locationName;
 

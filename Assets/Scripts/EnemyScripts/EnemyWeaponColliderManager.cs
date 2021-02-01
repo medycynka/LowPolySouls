@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Damage;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
     public class EnemyWeaponColliderManager : MonoBehaviour
     {

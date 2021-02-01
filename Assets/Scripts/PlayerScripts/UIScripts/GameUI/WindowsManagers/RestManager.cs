@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using SP;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.Items.Bonfire;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.WindowsManagers
 {
     public class RestManager : MonoBehaviour
     {

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
-namespace SP
+namespace SzymonPeszek.Enums
 {
     public enum MeleeType
     {

@@ -1,8 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Items.Equipment;
+using SzymonPeszek.Items.Consumable;
 
-namespace SP {
+namespace SzymonPeszek.SaveScripts {
     public class InventoryHolder : MonoBehaviour
     {
         public List<WeaponItem> weaponsInventory;

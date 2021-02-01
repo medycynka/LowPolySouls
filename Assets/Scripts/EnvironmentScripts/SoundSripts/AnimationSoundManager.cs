@@ -1,8 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.Misc;
+using SzymonPeszek.SaveScripts;
+using SzymonPeszek.Environment.Areas;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Sounds
 {
     public class AnimationSoundManager : MonoBehaviour
     {
@@ -28,28 +31,28 @@ namespace SP
         [Header("Music Fade In/Out")]
         public float musicFadeIn = 2f;
         public float musicFadeOut = 2f;
-        public bool fadingMusic = false;
+        public bool fadingMusic;
         
-        AudioSource audioSource;
-        bool playFootsteps = true;
-        private float currTime = 0.0f;
+        private AudioSource _audioSource;
+        private bool _playFootsteps = true;
+        private float _currTime = 0.0f;
 
         private void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
-            audioSource.loop = true;
-            audioSource.clip = currentBackgroundMusic;
-            audioSource.volume = SettingsHolder.soundVolume;
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.loop = true;
+            _audioSource.clip = currentBackgroundMusic;
+            _audioSource.volume = SettingsHolder.soundVolume;
             //previouseBackgroundMusic = currentBackgroundMusic;
-            audioSource.Play();
+            _audioSource.Play();
         }
 
         public void ChangeBackGroundMusic(AudioClip newBgMusic)
         {
             currentBackgroundMusic = newBgMusic;
-            audioSource.clip = currentBackgroundMusic;
-            audioSource.volume = SettingsHolder.soundVolume;
-            audioSource.Play();
+            _audioSource.clip = currentBackgroundMusic;
+            _audioSource.volume = SettingsHolder.soundVolume;
+            _audioSource.Play();
         }
 
         public void ChangeFootstepsSound(AudioClip[] newFootSteps, AreaManager areaManager)
@@ -75,9 +78,9 @@ namespace SP
         #region Play For Animation
         public void PlayOnStep()
         {
-            if (movingClips.Length > 0 && playFootsteps)
+            if (movingClips.Length > 0 && _playFootsteps)
             {
-                audioSource.PlayOneShot(GetRandomClip(movingClips));
+                _audioSource.PlayOneShot(GetRandomClip(movingClips));
             }
         }
 
@@ -86,7 +89,7 @@ namespace SP
             if (rollClip != null)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(rollClip);
+                _audioSource.PlayOneShot(rollClip);
             }
         }
 
@@ -95,7 +98,7 @@ namespace SP
             if (backStepClip != null)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(backStepClip);
+                _audioSource.PlayOneShot(backStepClip);
             }
         }
 
@@ -104,7 +107,7 @@ namespace SP
             if (movingClips.Length > 0)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(GetRandomClip(attackingClips));
+                _audioSource.PlayOneShot(GetRandomClip(attackingClips));
             }
         }
         
@@ -113,7 +116,7 @@ namespace SP
             if (faithSkillClips.Length > 0)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(GetRandomClip(faithSkillClips));
+                _audioSource.PlayOneShot(GetRandomClip(faithSkillClips));
             }
         }
         
@@ -122,7 +125,7 @@ namespace SP
             if (curseSkillClips.Length > 0)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(GetRandomClip(curseSkillClips));
+                _audioSource.PlayOneShot(GetRandomClip(curseSkillClips));
             }
         }
         
@@ -131,7 +134,7 @@ namespace SP
             if (destructionSkillClips.Length > 0)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(GetRandomClip(destructionSkillClips));
+                _audioSource.PlayOneShot(GetRandomClip(destructionSkillClips));
             }
         }
 
@@ -140,7 +143,7 @@ namespace SP
             if (getDamageClips.Length > 0)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(GetRandomClip(getDamageClips));
+                _audioSource.PlayOneShot(GetRandomClip(getDamageClips));
             }
         }
 
@@ -149,7 +152,7 @@ namespace SP
             if (estusUse != null)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(estusUse);
+                _audioSource.PlayOneShot(estusUse);
             }
         }
 
@@ -158,20 +161,20 @@ namespace SP
             if (soulUse != null)
             {
                 StartCoroutine(StopStepSounds());
-                audioSource.PlayOneShot(soulUse);
+                _audioSource.PlayOneShot(soulUse);
             }
         }
         #endregion
 
         public void EnableFootStepsSound()
         {
-            playFootsteps = true;
+            _playFootsteps = true;
             
         }
         
         public void DisableFootStepsSound()
         {
-            playFootsteps = false;
+            _playFootsteps = false;
             
         }
         

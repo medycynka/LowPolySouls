@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.GameUI;
+using SzymonPeszek.Environment.Areas;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Bonfire
 {
     public class BonfireManager : MonoBehaviour
     {

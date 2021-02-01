@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.GameUI.Slots;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.WindowsManagers
 {
 
     public class EquipmentWindowUI : MonoBehaviour

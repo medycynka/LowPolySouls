@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Enums;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Consumable
 {
     [CreateAssetMenu(menuName = "Items/Consumable Item")]
     public class ConsumableItem : Item

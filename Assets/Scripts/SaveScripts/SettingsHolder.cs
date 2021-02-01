@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SzymonPeszek.Environment.Areas;
 
-namespace SP
+
+namespace SzymonPeszek.SaveScripts
 {
     public static class SettingsHolder
     {

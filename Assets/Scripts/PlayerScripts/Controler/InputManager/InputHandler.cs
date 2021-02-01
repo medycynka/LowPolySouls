@@ -1,8 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.PlayerScripts.CameraManager;
+using SzymonPeszek.GameUI;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Items.Consumable;
+using SzymonPeszek.Misc;
+using SzymonPeszek.Enums;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts.Controller
 {
     public class InputHandler : MonoBehaviour
     {
@@ -15,24 +22,24 @@ namespace SP
         public float mouseY;
 
         [Header("Inputs", order = 1)]
-        public bool b_Input;
-        public bool walk_input;
-        public bool a_Input;
-        public bool y_Input;
-        public bool rb_Input;
-        public bool rt_Input;
-        public bool critical_Attack_Input;
-        public bool jump_Input;
-        public bool inventory_Input;
+        public bool bInput;
+        public bool walkInput;
+        public bool aInput;
+        public bool yInput;
+        public bool rbInput;
+        public bool rtInput;
+        public bool criticalAttackInput;
+        public bool jumpInput;
+        public bool inventoryInput;
         public bool lockOnInput;
-        public bool right_Stick_Right_Input;
-        public bool right_Stick_Left_Input;
+        public bool rightStickRightInput;
+        public bool rightStickLeftInput;
         public bool estusQuickSlotUse;
 
-        public bool d_Pad_Up;
-        public bool d_Pad_Down;
-        public bool d_Pad_Left;
-        public bool d_Pad_Right;
+        public bool dPadUp;
+        public bool dPadDown;
+        public bool dPadLeft;
+        public bool dPadRight;
 
         [Header("Flags", order = 1)]
         public bool rollFlag;
@@ -50,73 +57,73 @@ namespace SP
         public float rollInputTimer;
         public float walkInputTimer;
 
-        private PlayerControls playerInputActions;
-        private PlayerAttacker playerAttacker;
-        private PlayerInventory playerInventory;
-        private PlayerManager playerManager;
-        private PlayerStats playerStats;
-        private WeaponSlotManager weaponSlotManager;
-        private AnimatorHandler animatorHandler;
+        private PlayerControls _playerInputActions;
+        private PlayerAttacker _playerAttacker;
+        private PlayerInventory _playerInventory;
+        private PlayerManager _playerManager;
+        private PlayerStats _playerStats;
+        private WeaponSlotManager _weaponSlotManager;
+        private AnimatorHandler _animatorHandler;
 
         [Header("Camera & UI", order = 1)]
         public CameraHandler cameraHandler;
         public UIManager uiManager;
 
-        private Vector2 movementInput;
-        private Vector2 cameraInput;
+        private Vector2 _movementInput;
+        private Vector2 _cameraInput;
 
         private void Awake()
         {
-            playerAttacker = GetComponentInChildren<PlayerAttacker>();
-            playerInventory = GetComponent<PlayerInventory>();
-            playerManager = GetComponent<PlayerManager>();
-            playerStats = GetComponent<PlayerStats>();
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _playerAttacker = GetComponentInChildren<PlayerAttacker>();
+            _playerInventory = GetComponent<PlayerInventory>();
+            _playerManager = GetComponent<PlayerManager>();
+            _playerStats = GetComponent<PlayerStats>();
+            _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()
         {
-            if (playerInputActions == null)
+            if (_playerInputActions == null)
             {
-                playerInputActions = new PlayerControls();
-                playerInputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
-                playerInputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
-                playerInputActions.PlayerActions.RB.performed += i => rb_Input = true;
-                playerInputActions.PlayerActions.RT.performed += i => rt_Input = true;
-                playerInputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-                playerInputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-                playerInputActions.PlayerActions.E.performed += i => a_Input = true;
-                playerInputActions.PlayerActions.Jump.performed += i => jump_Input = true;
-                playerInputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
-                playerInputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
-                playerInputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
-                playerInputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
-                playerInputActions.PlayerActions.Y.performed += i => y_Input = true;
-                playerInputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
-                playerInputActions.PlayerActions.CriticalAttack.performed += i => critical_Attack_Input = true;
+                _playerInputActions = new PlayerControls();
+                _playerInputActions.PlayerMovement.Movement.performed += inputActions => _movementInput = inputActions.ReadValue<Vector2>();
+                _playerInputActions.PlayerMovement.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
+                _playerInputActions.PlayerActions.RB.performed += i => rbInput = true;
+                _playerInputActions.PlayerActions.RT.performed += i => rtInput = true;
+                _playerInputActions.PlayerQuickSlots.DPadRight.performed += i => dPadRight = true;
+                _playerInputActions.PlayerQuickSlots.DPadLeft.performed += i => dPadLeft = true;
+                _playerInputActions.PlayerActions.E.performed += i => aInput = true;
+                _playerInputActions.PlayerActions.Jump.performed += i => jumpInput = true;
+                _playerInputActions.PlayerActions.Inventory.performed += i => inventoryInput = true;
+                _playerInputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                _playerInputActions.PlayerMovement.LockOnTargetRight.performed += i => rightStickRightInput = true;
+                _playerInputActions.PlayerMovement.LockOnTargetLeft.performed += i => rightStickLeftInput = true;
+                _playerInputActions.PlayerActions.Y.performed += i => yInput = true;
+                _playerInputActions.PlayerActions.EstusQuickSlotUse.performed += i => estusQuickSlotUse = true;
+                _playerInputActions.PlayerActions.CriticalAttack.performed += i => criticalAttackInput = true;
             }
 
-            playerInputActions.Enable();
+            _playerInputActions.Enable();
         }
 
         private void OnDisable()
         {
-            playerInputActions.Disable();
+            _playerInputActions.Disable();
         }
 
         public void TickInput(float delta)
         {
-            if (playerStats.isPlayerAlive && !playerManager.isRestingAtBonfire && !playerManager.isRemovingFog)
+            if (_playerStats.isPlayerAlive && !_playerManager.isRestingAtBonfire && !_playerManager.isRemovingFog)
             {
                 if (!inventoryFlag)
                 {
-                    HandleMoveInput(delta);
+                    HandleMoveInput();
                     HandleRollInput(delta);
                     HandleWalkInput(delta);
-                    HandleAttackInput(delta);
+                    HandleAttackInput();
                     HandleQuickSlotsInput();
                     HandleLockOnInput();
                     HandleTwoHandInput();
@@ -128,21 +135,21 @@ namespace SP
             }
         }
 
-        private void HandleMoveInput(float delta)
+        private void HandleMoveInput()
         {
-            horizontal = movementInput.x;
-            vertical = movementInput.y;
+            horizontal = _movementInput.x;
+            vertical = _movementInput.y;
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-            mouseX = cameraInput.x;
-            mouseY = cameraInput.y;
+            mouseX = _cameraInput.x;
+            mouseY = _cameraInput.y;
         }
 
         private void HandleRollInput(float delta)
         {
-            b_Input = playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            sprintFlag = b_Input;
+            bInput = _playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            sprintFlag = bInput;
 
-            if (b_Input)
+            if (bInput)
             {
                 rollInputTimer += delta;
             }
@@ -160,10 +167,10 @@ namespace SP
 
         private void HandleWalkInput(float delta)
         {
-            walk_input = playerInputActions.PlayerActions.Walk.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            walkFlag = walk_input;
+            walkInput = _playerInputActions.PlayerActions.Walk.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            walkFlag = walkInput;
 
-            if (walk_input)
+            if (walkInput)
             {
                 walkInputTimer += delta;
             }
@@ -178,40 +185,40 @@ namespace SP
             }
         }
 
-        private void HandleAttackInput(float delta)
+        private void HandleAttackInput()
         {
-            if (playerStats.currentStamina > 0)
+            if (_playerStats.currentStamina > 0)
             {
                 #region Handle Light Attack
-                if (rb_Input)
+                if (rbInput)
                 {
-                    playerAttacker.HandleRbAction();
+                    _playerAttacker.HandleRbAction();
                 }
                 #endregion
 
                 #region Handle Heavy Attack
-                if (rt_Input)
+                if (rtInput)
                 {
-                    if (playerManager.canDoCombo)
+                    if (_playerManager.canDoCombo)
                     {
                         comboFlag = true;
-                        playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                        _playerAttacker.HandleWeaponCombo(_playerInventory.rightWeapon);
                         comboFlag = false;
                     }
                     else
                     {
-                        if (playerManager.isInteracting)
+                        if (_playerManager.isInteracting)
                         {
                             return;
                         }
 
-                        if (playerManager.canDoCombo)
+                        if (_playerManager.canDoCombo)
                         {
                             return;
                         }
 
-                        animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingRightHandName], true);
-                        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                        _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
+                        _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
                     }
                 }
                 #endregion
@@ -220,19 +227,19 @@ namespace SP
 
         private void HandleQuickSlotsInput()
         {
-            if (d_Pad_Right)
+            if (dPadRight)
             {
-                playerInventory.ChangeRightWeapon();
+                _playerInventory.ChangeRightWeapon();
             }
-            else if (d_Pad_Left)
+            else if (dPadLeft)
             {
-                playerInventory.ChangeLeftWeapon();
+                _playerInventory.ChangeLeftWeapon();
             }
         }
 
         private void HandleInventoryInput()
         {
-            if (inventory_Input)
+            if (inventoryInput)
             {
                 uiManager.UpdateUI();
                 uiManager.ResetTabsSelection();
@@ -243,8 +250,8 @@ namespace SP
                     horizontal = 0f;
                     vertical = 0f;
                     moveAmount = 0f;
-                    mouseX = cameraInput.x;
-                    mouseY = cameraInput.y;
+                    mouseX = _cameraInput.x;
+                    mouseY = _cameraInput.y;
 
                     uiManager.OpenSelectWindow();
                     uiManager.UpdateUI();
@@ -283,9 +290,9 @@ namespace SP
                 }
             }
 
-            if (lockOnFlag && right_Stick_Left_Input)
+            if (lockOnFlag && rightStickLeftInput)
             {
-                right_Stick_Left_Input = false;
+                rightStickLeftInput = false;
                 cameraHandler.HandleLockOn();
 
                 if (cameraHandler.leftLockTarget != null)
@@ -294,9 +301,9 @@ namespace SP
                 }
             }
 
-            if (lockOnFlag && right_Stick_Right_Input)
+            if (lockOnFlag && rightStickRightInput)
             {
-                right_Stick_Right_Input = false;
+                rightStickRightInput = false;
                 cameraHandler.HandleLockOn();
 
                 if (cameraHandler.rightLockTarget != null)
@@ -310,20 +317,20 @@ namespace SP
 
         private void HandleTwoHandInput()
         {
-            if (y_Input)
+            if (yInput)
             {
-                y_Input = false;
+                yInput = false;
 
                 twoHandFlag = !twoHandFlag;
 
                 if (twoHandFlag)
                 {
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                    _weaponSlotManager.LoadWeaponOnSlot(_playerInventory.rightWeapon, false);
                 }
                 else
                 {
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+                    _weaponSlotManager.LoadWeaponOnSlot(_playerInventory.rightWeapon, false);
+                    _weaponSlotManager.LoadWeaponOnSlot(_playerInventory.leftWeapon, true);
                 }
             }
         }
@@ -332,21 +339,21 @@ namespace SP
         {
             if (estusQuickSlotUse && uiManager.GetEstusCountInInventory() > 0)
             {
-                ConsumableItem cI = playerInventory.consumablesInventory.Find(e => e.consumableType == ConsumableType.HealItem);
-                playerStats.healthRefillAmount = cI.healAmount;
-                playerInventory.consumablesInventory.Remove(cI);
-                playerManager.shouldRefillHealth = true;
-                animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.EstusName], true);
+                ConsumableItem cI = _playerInventory.consumablesInventory.Find(e => e.consumableType == ConsumableType.HealItem);
+                _playerStats.healthRefillAmount = cI.healAmount;
+                _playerInventory.consumablesInventory.Remove(cI);
+                _playerManager.shouldRefillHealth = true;
+                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
                 uiManager.UpdateEstusAmount();
             }
         }
         
         private void HandleCriticalAttackInput()
         {
-            if (critical_Attack_Input)
+            if (criticalAttackInput)
             {
-                critical_Attack_Input = false;
-                playerAttacker.AttemptBackStabOrRiposte();
+                criticalAttackInput = false;
+                _playerAttacker.AttemptBackStabOrRiposte();
             }
         }
     }

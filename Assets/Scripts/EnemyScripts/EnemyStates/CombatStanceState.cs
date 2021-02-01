@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts.States
 {
 
     public class CombatStanceState : State
@@ -21,7 +23,7 @@ namespace SP
 
                 if (enemyManager.isPreformingAction)
                 {
-                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
                 }
 
                 enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);

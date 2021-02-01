@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SP
+namespace SzymonPeszek.PlayerScripts
 {
     public class FootIkManager : MonoBehaviour
     {
-        private Animator anim;
-        private Vector3 rightFootPosition;
-        private Vector3 leftFootPosition;
-        private Vector3 rightFootIkPosition;
-        private Vector3 leftFootIkPosition;
-        private Quaternion leftFootIkRotation;
-        private Quaternion rightFootIkRotation;
-        private float lastPelvisPositionY;
-        private float lastRightFootPositionY;
-        private float lastLeftFootPositionY;
+        private Animator _anim;
+        private Vector3 _rightFootPosition;
+        private Vector3 _leftFootPosition;
+        private Vector3 _rightFootIkPosition;
+        private Vector3 _leftFootIkPosition;
+        private Quaternion _leftFootIkRotation;
+        private Quaternion _rightFootIkRotation;
+        private float _lastPelvisPositionY;
+        private float _lastRightFootPositionY;
+        private float _lastLeftFootPositionY;
 
         [Header("Foot IK Manager", order = 0)] 
         [Header("Feet Grounded Variables", order = 1)]
@@ -28,15 +25,15 @@ namespace SP
         [Range(0f, 1f)] public float weightRotationLeft = 0f;
         public Vector3 offsetFoot;
         
-        private const string environmentTag = "Environment";
-        private const AvatarIKGoal leftFoot = AvatarIKGoal.LeftFoot;
-        private const AvatarIKGoal rightFoot = AvatarIKGoal.RightFoot;
-        private RaycastHit hit;
+        private const string EnvironmentTag = "Environment";
+        private const AvatarIKGoal LeftFoot = AvatarIKGoal.LeftFoot;
+        private const AvatarIKGoal RightFoot = AvatarIKGoal.RightFoot;
+        private RaycastHit _hit;
         
         private void Start()
         {
-            anim = GetComponent<Animator>();
-            environmentLayer = 1 << LayerMask.NameToLayer(environmentTag);
+            _anim = GetComponent<Animator>();
+            environmentLayer = 1 << LayerMask.NameToLayer(EnvironmentTag);
         }
 
         private void OnAnimatorIK(int layerIndex)
@@ -44,49 +41,49 @@ namespace SP
             if (enableFeetIk)
             {
                 #region Right Foot IK
-                Vector3 FootPos = anim.GetIKPosition(rightFoot);
+                Vector3 footPos = _anim.GetIKPosition(RightFoot);
 
-                if (Physics.Raycast(FootPos + Vector3.up, Vector3.down, out hit, 1.2f, environmentLayer))
+                if (Physics.Raycast(footPos + Vector3.up, Vector3.down, out _hit, 1.2f, environmentLayer))
                 {
-                    anim.SetIKPositionWeight(rightFoot, weightPositionRight);
-                    anim.SetIKRotationWeight(rightFoot, weightRotationRight);
-                    anim.SetIKPosition(rightFoot, hit.point + offsetFoot);
+                    _anim.SetIKPositionWeight(RightFoot, weightPositionRight);
+                    _anim.SetIKRotationWeight(RightFoot, weightRotationRight);
+                    _anim.SetIKPosition(RightFoot, _hit.point + offsetFoot);
 
                     if (weightRotationRight > 0f)
                     {
                         Quaternion footRotation =
-                            Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal),
-                                hit.normal);
-                        anim.SetIKRotation(rightFoot, footRotation);
+                            Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, _hit.normal),
+                                _hit.normal);
+                        _anim.SetIKRotation(RightFoot, footRotation);
                     }
                 }
                 else
                 {
-                    anim.SetIKPositionWeight(rightFoot, 0f);
-                    anim.SetIKRotationWeight(rightFoot, 0f);
+                    _anim.SetIKPositionWeight(RightFoot, 0f);
+                    _anim.SetIKRotationWeight(RightFoot, 0f);
                 }
                 #endregion
 
                 #region Left Foot IK
-                FootPos = anim.GetIKPosition(leftFoot);
-                if (Physics.Raycast(FootPos + Vector3.up, Vector3.down, out hit, 1.2f, environmentLayer))
+                footPos = _anim.GetIKPosition(LeftFoot);
+                if (Physics.Raycast(footPos + Vector3.up, Vector3.down, out _hit, 1.2f, environmentLayer))
                 {
-                    anim.SetIKPositionWeight(leftFoot, weightPositionLeft);
-                    anim.SetIKRotationWeight(leftFoot, weightRotationLeft);
-                    anim.SetIKPosition(leftFoot, hit.point + offsetFoot);
+                    _anim.SetIKPositionWeight(LeftFoot, weightPositionLeft);
+                    _anim.SetIKRotationWeight(LeftFoot, weightRotationLeft);
+                    _anim.SetIKPosition(LeftFoot, _hit.point + offsetFoot);
 
                     if (weightRotationLeft > 0f)
                     {
                         Quaternion footRotation =
-                            Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal),
-                                hit.normal);
-                        anim.SetIKRotation(leftFoot, footRotation);
+                            Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, _hit.normal),
+                                _hit.normal);
+                        _anim.SetIKRotation(LeftFoot, footRotation);
                     }
                 }
                 else
                 {
-                    anim.SetIKPositionWeight(leftFoot, 0f);
-                    anim.SetIKRotationWeight(leftFoot, 0f);
+                    _anim.SetIKPositionWeight(LeftFoot, 0f);
+                    _anim.SetIKRotationWeight(LeftFoot, 0f);
                 }
                 #endregion
             }

@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.PlayerScripts.Animations;
+using SzymonPeszek.PlayerScripts.CameraManager;
+using SzymonPeszek.GameUI;
+using SzymonPeszek.Misc;
+using SzymonPeszek.Items.Bonfire;
+using SzymonPeszek.Environment.Areas;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts
 {
     public class PlayerManager : CharacterManager
     {
@@ -81,12 +85,12 @@ namespace SP
         {
             float delta = Time.deltaTime;
             
-            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInteractingName]);
-            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.CanDoComboName]);
-            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingRightHandName]);
-            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsUsingLeftHandName]);
-            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInvulnerableName]);
-            animatorHandler.anim.SetBool(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.IsInAirName], isInAir);
+            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
+            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
+            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
+            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
+            animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
@@ -104,21 +108,21 @@ namespace SP
             float delta = Time.fixedDeltaTime;
 
             playerLocomotion.HandleMovement(delta);
-            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            playerLocomotion.HandleFalling(playerLocomotion.moveDirection);
         }
 
         private void LateUpdate()
         {
             inputHandler.rollFlag = false;
-            inputHandler.rb_Input = false;
-            inputHandler.rt_Input = false;
-            inputHandler.d_Pad_Up = false;
-            inputHandler.d_Pad_Down = false;
-            inputHandler.d_Pad_Left = false;
-            inputHandler.d_Pad_Right = false;
-            inputHandler.a_Input = false;
-            inputHandler.jump_Input = false;
-            inputHandler.inventory_Input = false;
+            inputHandler.rbInput = false;
+            inputHandler.rtInput = false;
+            inputHandler.dPadUp = false;
+            inputHandler.dPadDown = false;
+            inputHandler.dPadLeft = false;
+            inputHandler.dPadRight = false;
+            inputHandler.aInput = false;
+            inputHandler.jumpInput = false;
+            inputHandler.inventoryInput = false;
             inputHandler.estusQuickSlotUse = false;
 
             float delta = Time.fixedDeltaTime;
@@ -176,7 +180,7 @@ namespace SP
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);
 
-                                if (inputHandler.a_Input)
+                                if (inputHandler.aInput)
                                 {
                                     interactableObject.Interact(this);
                                     interactableUIGameObject.SetActive(false);
@@ -194,7 +198,7 @@ namespace SP
                                     interactableUI.interactableText.text = interactableObject.interactableText;
                                     interactableUIGameObject.SetActive(true);
 
-                                    if (inputHandler.a_Input)
+                                    if (inputHandler.aInput)
                                     {
                                         interactableObject.Interact(this);
                                     }
@@ -211,7 +215,7 @@ namespace SP
                             interactableUI.interactableText.text = interactableObject.interactableText;
                             interactableUIGameObject.SetActive(true);
 
-                            if (inputHandler.a_Input)
+                            if (inputHandler.aInput)
                             {
                                 interactableObject.Interact(this);
                             }
@@ -228,7 +232,7 @@ namespace SP
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);
 
-                                if (inputHandler.a_Input)
+                                if (inputHandler.aInput)
                                 {
                                     interactableObject.Interact(this);
                                 }
@@ -244,7 +248,7 @@ namespace SP
                     interactableUIGameObject.SetActive(false);
                 }
 
-                if (itemInteractableGameObject != null && inputHandler.a_Input)
+                if (itemInteractableGameObject != null && inputHandler.aInput)
                 {
                     itemInteractableGameObject.SetActive(false);
                 }

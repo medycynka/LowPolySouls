@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Enums;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.Items.Equipment;
+using SzymonPeszek.Items.Consumable;
 
-namespace SP
+
+namespace SzymonPeszek.Items
 {
-
     public class MiscPickUp : Interactable
     {
         public List<Item> items;
@@ -103,5 +107,4 @@ namespace SP
             Destroy(gameObject);
         }
     }
-
 }

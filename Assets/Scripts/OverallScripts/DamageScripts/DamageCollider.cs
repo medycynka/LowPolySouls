@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.EnemyScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Damage
 {
-
     public class DamageCollider : MonoBehaviour
     {
         [Header("Damage Collider", order = 0)]
@@ -59,5 +59,4 @@ namespace SP
             }
         }
     }
-
 }

@@ -17,10 +17,10 @@ MonoBehaviour:
   itemId: 19
   itemType: 4
   bodyParts: 0c0000000d0000000e0000000f000000
-  partsIDS: 13000000130000001300000013000000
+  partsIds: 13000000130000001300000013000000
   removeHead: 0
   removeHeadFeatures: 0
   canDeactivate: 0
-  Armor: 5
-  Weight: 0
-  Durability: 0
+  armor: 0
+  weight: 0
+  durability: 0

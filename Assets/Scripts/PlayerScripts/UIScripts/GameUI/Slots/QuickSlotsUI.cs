@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using SzymonPeszek.Items.Weapons;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.Slots
 {
     public class QuickSlotsUI : MonoBehaviour
     {

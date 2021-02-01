@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.WindowsManagers
 {
     public class StatWinodowManager : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace SP
         public TextMeshProUGUI visibleHealth;
         public TextMeshProUGUI visibleStamina;
 
-        bool shouldUpdateSouls = true;
+        private bool _shouldUpdateSouls = true;
 
         private void Start()
         {
@@ -100,7 +100,7 @@ namespace SP
                 strenghtToAdd += 1;
                 if (playerStats.Strength + strenghtToAdd > 99)
                 {
-                    shouldUpdateSouls = false;
+                    _shouldUpdateSouls = false;
                     strenghtToAdd = 99 - playerStats.Strength;
                 }
             }
@@ -113,13 +113,13 @@ namespace SP
                 }
             }
 
-            if (shouldUpdateSouls)
+            if (_shouldUpdateSouls)
             {
                 UpdateLevel(update);
                 UpdateSouls();
             }
 
-            shouldUpdateSouls = true;
+            _shouldUpdateSouls = true;
             visibleStrength.text = (playerStats.Strength + strenghtToAdd).ToString();
         }
 
@@ -130,7 +130,7 @@ namespace SP
                 agilityToAdd += 1;
                 if (playerStats.Agility + agilityToAdd > 99)
                 {
-                    shouldUpdateSouls = false;
+                    _shouldUpdateSouls = false;
                     agilityToAdd = 99 - playerStats.Agility;
                 }
             }
@@ -143,13 +143,13 @@ namespace SP
                 }
             }
 
-            if (shouldUpdateSouls)
+            if (_shouldUpdateSouls)
             {
                 UpdateLevel(update);
                 UpdateSouls();
             }
 
-            shouldUpdateSouls = true;
+            _shouldUpdateSouls = true;
             visibleAgility.text = (playerStats.Agility + agilityToAdd).ToString();
         }
 
@@ -160,7 +160,7 @@ namespace SP
                 defenceToAdd += 1;
                 if (playerStats.Defence + defenceToAdd > 99)
                 {
-                    shouldUpdateSouls = false;
+                    _shouldUpdateSouls = false;
                     defenceToAdd = 99 - playerStats.Defence;
                 }
             }
@@ -173,13 +173,13 @@ namespace SP
                 }
             }
 
-            if (shouldUpdateSouls)
+            if (_shouldUpdateSouls)
             {
                 UpdateLevel(update);
                 UpdateSouls();
             }
 
-            shouldUpdateSouls = true;
+            _shouldUpdateSouls = true;
             visibleDefence.text = (playerStats.Defence + defenceToAdd).ToString();
         }
 
@@ -190,7 +190,7 @@ namespace SP
                 healthToAdd += 1;
                 if (playerStats.bonusHealth + healthToAdd > 99)
                 {
-                    shouldUpdateSouls = false;
+                    _shouldUpdateSouls = false;
                     healthToAdd = 99 - playerStats.bonusHealth;
                 }
             }
@@ -203,13 +203,13 @@ namespace SP
                 }
             }
 
-            if (shouldUpdateSouls)
+            if (_shouldUpdateSouls)
             {
                 UpdateLevel(update);
                 UpdateSouls();
             }
 
-            shouldUpdateSouls = true;
+            _shouldUpdateSouls = true;
             visibleHealth.text = (playerStats.bonusHealth + healthToAdd).ToString();
         }
 
@@ -220,7 +220,7 @@ namespace SP
                 staminaToAdd += 1;
                 if (playerStats.bonusStamina + staminaToAdd > 99)
                 {
-                    shouldUpdateSouls = false;
+                    _shouldUpdateSouls = false;
                     staminaToAdd = 99 - playerStats.bonusStamina;
                 }
             }
@@ -233,13 +233,13 @@ namespace SP
                 }
             }
 
-            if (shouldUpdateSouls)
+            if (_shouldUpdateSouls)
             {
                 UpdateLevel(update);
                 UpdateSouls();
             }
 
-            shouldUpdateSouls = true;
+            _shouldUpdateSouls = true;
             visibleStamina.text = (playerStats.bonusStamina + staminaToAdd).ToString();
         }
 

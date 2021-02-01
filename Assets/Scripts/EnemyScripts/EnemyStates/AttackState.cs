@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
 
-namespace SP
+namespace SzymonPeszek.EnemyScripts.States
 {
 
     public class AttackState : State
@@ -55,9 +56,9 @@ namespace SP
                         {
                             if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                             {
-                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
-                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.HorizontalName], 0, 0.1f, Time.deltaTime);
-                                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[currentAttack.actionAnimation], true);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.HorizontalName], 0, 0.1f, Time.deltaTime);
+                                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[currentAttack.actionAnimation], true);
                                 enemyManager.isPreformingAction = true;
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
                                 currentAttack = null;

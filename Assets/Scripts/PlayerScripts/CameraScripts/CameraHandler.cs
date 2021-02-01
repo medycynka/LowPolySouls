@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.BaseClasses;
 
-namespace SP
+
+namespace SzymonPeszek.PlayerScripts.CameraManager
 {
     public class CameraHandler : MonoBehaviour
     {
@@ -17,8 +17,8 @@ namespace SP
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
-        private Transform myTransform;
-        private Vector3 cameraTransformPosition;
+        private Transform _myTransform;
+        private Vector3 _cameraTransformPosition;
 
         [Header("Masks", order = 1)]
         public LayerMask ignoreLayers;
@@ -29,10 +29,10 @@ namespace SP
         public float lookSpeed = 0.025f;
         public float followSpeed = 0.5f;
         public float pivotSpeed = 0.03f;
-        private float targetPosition;
-        private float defaultPosition;
-        private float lookAngle;
-        private float pivotAngle;
+        private float _targetPosition;
+        private float _defaultPosition;
+        private float _lookAngle;
+        private float _pivotAngle;
         public float minimumPivot = -35;
         public float maximumPivot = 35;
 
@@ -45,32 +45,36 @@ namespace SP
 
         [Header("Camera Lock-on Properties", order = 1)]
         public Transform currentLockOnTarget;
-        [SerializeField] List<CharacterManager> availableTargets = new List<CharacterManager>();
+        private readonly List<CharacterManager> _availableTargets = new List<CharacterManager>();
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;
         public Transform rightLockTarget;
         public float maximumLockOnDistance = 20;
-
-        private const string environmentTag = "Environment";
-        private LayerMask lockOnLayer;
-        
+        private const string EnvironmentTag = "Environment";
+        private LayerMask _lockOnLayer;
+        private RaycastHit _hit;
+        private float _LockOnAngle = 120f;
         public Collider[] colliders;
+        private int _collidersSize = 512;
+        private int _collidersPrevSize = 512;
+        
         private void Awake()
         {
             inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
-            myTransform = transform;
-            defaultPosition = cameraTransform.localPosition.z;
+            _myTransform = transform;
+            _defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 23);
             targetTransform = playerManager.transform;
-            environmentLayer = LayerMask.NameToLayer(environmentTag);
-            lockOnLayer = (1 << LayerMask.NameToLayer(environmentTag) | 1 << LayerMask.NameToLayer("Enemy"));
+            environmentLayer = 1 << LayerMask.NameToLayer(EnvironmentTag);
+            _lockOnLayer = (1 << LayerMask.NameToLayer(EnvironmentTag) | 1 << LayerMask.NameToLayer("Enemy"));
+            colliders = new Collider[_collidersSize];
         }
 
         public void FollowTarget(float delta)
         {
-            var newTargetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
-            myTransform.position = newTargetPosition;
+            var newTargetPosition = Vector3.SmoothDamp(_myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
+            _myTransform.position = newTargetPosition;
 
             HandleCameraCollisions(delta);
         }
@@ -79,17 +83,17 @@ namespace SP
         {
             if (inputHandler.lockOnFlag == false && currentLockOnTarget == null)
             {
-                lookAngle += (mouseXInput * lookSpeed) / delta;
-                pivotAngle -= (mouseYInput * pivotSpeed) / delta;
-                pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+                _lookAngle += (mouseXInput * lookSpeed) / delta;
+                _pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+                _pivotAngle = Mathf.Clamp(_pivotAngle, minimumPivot, maximumPivot);
 
                 var rotation = Vector3.zero;
-                rotation.y = lookAngle;
+                rotation.y = _lookAngle;
                 var targetRotation = Quaternion.Euler(rotation);
-                myTransform.rotation = targetRotation;
+                _myTransform.rotation = targetRotation;
 
                 rotation = Vector3.zero;
-                rotation.x = pivotAngle;
+                rotation.x = _pivotAngle;
 
                 targetRotation = Quaternion.Euler(rotation);
                 cameraPivotTransform.localRotation = targetRotation;
@@ -120,23 +124,23 @@ namespace SP
 
         private void HandleCameraCollisions(float delta)
         {
-            targetPosition = defaultPosition;
+            _targetPosition = _defaultPosition;
             var direction = cameraTransform.position - cameraPivotTransform.position;
             direction.Normalize();
 
-            if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out var hit, Mathf.Abs(targetPosition), ignoreLayers))
+            if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out var hit, Mathf.Abs(_targetPosition), ignoreLayers))
             {
                 var dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
-                targetPosition = -(dis - cameraCollisionOffSet);
+                _targetPosition = -(dis - cameraCollisionOffSet);
             }
 
-            if (Mathf.Abs(targetPosition) < minimumCollisionOffset)
+            if (Mathf.Abs(_targetPosition) < minimumCollisionOffset)
             {
-                targetPosition = -minimumCollisionOffset;
+                _targetPosition = -minimumCollisionOffset;
             }
 
-            cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, delta / 0.2f);
-            cameraTransform.localPosition = cameraTransformPosition;
+            _cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, _targetPosition, delta / 0.2f);
+            cameraTransform.localPosition = _cameraTransformPosition;
         }
 
         public void HandleLockOn()
@@ -145,37 +149,44 @@ namespace SP
             var shortestDistanceOfLeftTarget = Mathf.Infinity;
             var shortestDistanceOfRightTarget = Mathf.Infinity;
             
-            colliders = Physics.OverlapSphere(targetTransform.position, 26, lockOnLayer);
-            //Debug.Log(colliders.Length);
+            //colliders = Physics.OverlapSphere(targetTransform.position, maximumLockOnDistance, _lockOnLayer);
+            int collidersLenght = Physics.OverlapSphereNonAlloc(targetTransform.position, maximumLockOnDistance, colliders, _lockOnLayer);
 
-            for (int i = 0; i < colliders.Length; i++)
+            if (2 * collidersLenght < _collidersSize)
+            {
+                _collidersPrevSize = _collidersSize;
+                _collidersSize /= 2;
+            }
+            else if (collidersLenght > _collidersSize)
+            {
+                _collidersPrevSize = _collidersSize;
+                _collidersSize *= 2;
+            }
+
+            for (int i = 0; i < collidersLenght; i++)
             {
                 if (colliders[i].TryGetComponent(out CharacterManager character))
                 {
                     var lockTargetDirection = character.transform.position - targetTransform.position;
                     var distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
-                    var viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
-                    RaycastHit hit;
+                    var viewableAngle = Vector3.Angle(lockTargetDirection, playerManager.gameObject.transform.forward);
 
-                    if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -50) || !(viewableAngle < 50) || !(distanceFromTarget <= maximumLockOnDistance))
+                    if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -_LockOnAngle) || !(viewableAngle < _LockOnAngle) || !(distanceFromTarget <= maximumLockOnDistance))
                     {
                         continue;
                     }
 
-                    if (!Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out hit))
+                    if (Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out _hit))
                     {
-                        continue;
-                    }
-
-                    //Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.green, 10f);
-
-                    if (hit.transform.gameObject.CompareTag(environmentTag) || hit.transform.gameObject.layer == environmentLayer)
-                    {
-                        //Cannot lock onto target, object in the way
-                    }
-                    else
-                    {
-                        availableTargets.Add(character);
+                        if (_hit.transform.gameObject.CompareTag(EnvironmentTag) ||
+                            _hit.transform.gameObject.layer == environmentLayer)
+                        {
+                            //Cannot lock onto target, object in the way
+                        }
+                        else
+                        {
+                            _availableTargets.Add(character);
+                        }
                     }
                 }
             }
@@ -185,9 +196,9 @@ namespace SP
                 return;
             }
 
-            for (int i = 0; i < availableTargets.Count; i++)
+            for (int i = 0; i < _availableTargets.Count; i++)
             {
-                var availableTarget = availableTargets[i];
+                var availableTarget = _availableTargets[i];
                 var distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
 
                 if (distanceFromTarget < shortestDistance)
@@ -222,11 +233,16 @@ namespace SP
                 shortestDistanceOfRightTarget = distanceFromRightTarget;
                 rightLockTarget = availableTarget.lockOnTransform;
             }
+
+            if (_collidersPrevSize != _collidersSize)
+            {
+                colliders = new Collider[collidersLenght];
+            }
         }
 
         public void ClearLockOnTargets()
         {
-            availableTargets.Clear();
+            _availableTargets.Clear();
             nearestLockOnTarget = null;
             currentLockOnTarget = null;
         }

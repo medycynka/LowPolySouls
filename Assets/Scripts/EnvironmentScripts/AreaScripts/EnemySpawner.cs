@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class EnemySpawner : MonoBehaviour
     {
         public List<GameObject> prefabsList;
         public List<Vector3> positionsList;
 
-        List<KeyValuePair<GameObject, Vector3>> spawnList;
-        List<GameObject> enemiesAlive;
+        private List<KeyValuePair<GameObject, Vector3>> _spawnList;
+        private List<GameObject> _enemiesAlive;
+        private int FrameCheckRate = 3;
+        private int RefreshCheckVal = 0;
 
         private void Start()
         {
-            enemiesAlive = new List<GameObject>();
+            _enemiesAlive = new List<GameObject>();
 
             InitializeSpawnerList();    
         }
@@ -26,26 +30,26 @@ namespace SP
 
         private void ClearAliveEnemies()
         {
-            foreach(var enemy_ in enemiesAlive)
+            foreach(var enemy_ in _enemiesAlive)
             {
                 Destroy(enemy_.gameObject);
             }
 
-            enemiesAlive.Clear();
+            _enemiesAlive.Clear();
         }
 
         private void InitializeSpawnerList()
         {
-            spawnList = new List<KeyValuePair<GameObject, Vector3>>();
+            _spawnList = new List<KeyValuePair<GameObject, Vector3>>();
 
             for(int i = 0; i < prefabsList.Count; i++)
             {
-                spawnList.Add(new KeyValuePair<GameObject, Vector3>(prefabsList[i], positionsList[i]));
+                _spawnList.Add(new KeyValuePair<GameObject, Vector3>(prefabsList[i], positionsList[i]));
             }
 
-            foreach(var enemyClone in spawnList)
+            foreach(var enemyClone in _spawnList)
             {
-                enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
+                _enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
             }
         }
 
@@ -55,15 +59,18 @@ namespace SP
 
             yield return CoroutineYielder.spawnRefreshWaiter;
 
-            foreach (var enemyClone in spawnList)
+            foreach (var enemyClone in _spawnList)
             {
-                enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
+                _enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
             }
         }
 
         private void FixedUpdate()
         {
-            enemiesAlive.RemoveAll(enemy => enemy == null);
+            if (Time.frameCount % FrameCheckRate == RefreshCheckVal)
+            {
+                _enemiesAlive.RemoveAll(enemy => enemy == null);
+            }
         }
     }
 }

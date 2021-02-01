@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BattleDrakeStudios;
+﻿using UnityEngine;
 using BattleDrakeStudios.ModularCharacters;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Equipment
 {
     [CreateAssetMenu(menuName = "Items/Equipment Item")]
-    public class EquipmentItem : Item
+    public class EquipmentItem : BaseClasses.Item
     {
         [Header("Equipment Item", order = 1)]
         [Header("Item Parts", order = 2)]
         public ModularBodyPart[] bodyParts;
-        public int[] partsIDS;
+        public int[] partsIds;
 
         [Header("Bools", order = 2)]
         public bool removeHead;
@@ -20,9 +18,9 @@ namespace SP
         public bool canDeactivate;
 
         [Header("Item Stats", order = 2)]
-        public float Armor;
-        public int Weight;
-        public int Durability;
+        public float armor;
+        public int weight;
+        public int durability;
     }
 
 }

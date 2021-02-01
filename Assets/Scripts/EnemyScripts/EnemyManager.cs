@@ -1,23 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts
 {
     public class EnemyManager : CharacterManager
     {
         [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
         [HideInInspector] public EnemyAnimationManager enemyAnimationManager;
-        EnemyStats enemyStats;
-        EnemyDrops enemyDrops; 
-        List<Material> characterMaterials;
-        int edgeWidthId;
-        int noiceScaleId;
-        int fresnelPowerId;
-        int glowId;
-        int aliveId;
-        int disolveId;
+        private EnemyStats _enemyStats;
+        private EnemyDrops _enemyDrops; 
+        private List<Material> _characterMaterials;
+        private int _edgeWidthId;
+        private int _noiceScaleId;
+        private int _fresnelPowerId;
+        private int _glowId;
+        private int _aliveId;
+        private int _disolveId;
 
         [Header("Manager Properties", order = 1)]
         [Header("Bools", order = 2)]
@@ -58,26 +61,26 @@ namespace SP
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
-            enemyStats = GetComponent<EnemyStats>();
-            enemyDrops = GetComponent<EnemyDrops>();
+            _enemyStats = GetComponent<EnemyStats>();
+            _enemyDrops = GetComponent<EnemyDrops>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
 
-            characterMaterials = new List<Material>();
+            _characterMaterials = new List<Material>();
             Renderer[] renders = GetComponentsInChildren<Renderer>();
 
-            edgeWidthId = Shader.PropertyToID("_EdgeWidth");
-            noiceScaleId = Shader.PropertyToID("_NoiceScale");
-            fresnelPowerId = Shader.PropertyToID("_FresnelPower");
-            glowId = Shader.PropertyToID("_ShouldBlink");
-            aliveId = Shader.PropertyToID("_IsAlive");
-            disolveId = Shader.PropertyToID("_DisolveValue");
+            _edgeWidthId = Shader.PropertyToID("_EdgeWidth");
+            _noiceScaleId = Shader.PropertyToID("_NoiceScale");
+            _fresnelPowerId = Shader.PropertyToID("_FresnelPower");
+            _glowId = Shader.PropertyToID("_ShouldBlink");
+            _aliveId = Shader.PropertyToID("_IsAlive");
+            _disolveId = Shader.PropertyToID("_DisolveValue");
 
             foreach (var r in renders)
             {
-                r.material.SetFloat(edgeWidthId, disolveEdgeWidth);
-                r.material.SetFloat(noiceScaleId, disolveNoiseScale);
-                r.material.SetFloat(fresnelPowerId, disolveFresnelPower);
-                characterMaterials.Add(r.material);
+                r.material.SetFloat(_edgeWidthId, disolveEdgeWidth);
+                r.material.SetFloat(_noiceScaleId, disolveNoiseScale);
+                r.material.SetFloat(_fresnelPowerId, disolveFresnelPower);
+                _characterMaterials.Add(r.material);
             }
         }
 
@@ -85,8 +88,8 @@ namespace SP
         {
             HandleRecoveryTimer();
 
-            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
-            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.IsDeadName], enemyStats.currentHealth <= 0.0f);
+            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
+            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], _enemyStats.currentHealth <= 0.0f);
         }
 
         private void FixedUpdate()
@@ -98,7 +101,7 @@ namespace SP
         {
             if (currentState != null)
             {
-                State nextState = currentState.Tick(this, enemyStats, enemyAnimationManager);
+                State nextState = currentState.Tick(this, _enemyStats, enemyAnimationManager);
 
                 if (nextState != null)
                 {
@@ -130,42 +133,42 @@ namespace SP
 
         public void HandleGettingBackStabbed(float damage)
         {
-            enemyStats.TakeDamage(damage, true);
+            _enemyStats.TakeDamage(damage, true);
         }
 
         public void HandleDeath()
         {
             isAlive = false;
-            enemyStats.currentHealth = 0;
-            enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.EnemyAnimationIds[StaticAnimatorIds.Death01Name], true);
+            _enemyStats.currentHealth = 0;
+            _enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Death01Name], true);
 
             #region Disolve Effect
-            foreach (var cM in characterMaterials)
+            foreach (var cM in _characterMaterials)
             {
-                cM.SetInt(aliveId, 0);
+                cM.SetInt(_aliveId, 0);
             }
 
             if (shouldGlow)
             {
-                foreach (var cM in characterMaterials)
+                foreach (var cM in _characterMaterials)
                 {
-                    cM.SetInt(glowId, 1);
+                    cM.SetInt(_glowId, 1);
                 }
             }
 
             StartCoroutine(DisolveAfterDeath());
             #endregion
 
-            enemyStats.playerStats.soulsAmount += enemyStats.soulsGiveAmount;
-            enemyStats.playerStats.uiManager.currentSoulsAmount.text = enemyStats.playerStats.soulsAmount.ToString();
+            _enemyStats.playerStats.soulsAmount += _enemyStats.soulsGiveAmount;
+            _enemyStats.playerStats.uiManager.currentSoulsAmount.text = _enemyStats.playerStats.soulsAmount.ToString();
 
             if (shouldDrop)
             {
-                enemyDrops.DropPickUp();
+                _enemyDrops.DropPickUp();
                 shouldDrop = false;
             }
 
-            Destroy(enemyStats.enemyObject, deadFromBackStab ? objectDestructionDuration + 1.5f : objectDestructionDuration);
+            Destroy(_enemyStats.enemyObject, deadFromBackStab ? objectDestructionDuration + 1.5f : objectDestructionDuration);
         }
 
         private IEnumerator DisolveAfterDeath()
@@ -177,9 +180,9 @@ namespace SP
             
             while(currentDisolveTime < disolveDurationTime)
             {
-                foreach (var cM in characterMaterials)
+                foreach (var cM in _characterMaterials)
                 {
-                    cM.SetFloat(disolveId, Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
+                    cM.SetFloat(_disolveId, Mathf.Lerp(-0.1f, 1.0f, currentDisolveTime / disolveDurationTime));
                 }
                 
                 currentDisolveTime += Time.deltaTime;

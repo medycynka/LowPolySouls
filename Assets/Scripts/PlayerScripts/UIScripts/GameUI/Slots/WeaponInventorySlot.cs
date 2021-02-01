@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Items.Weapons;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI.Slots
 {
 
     public class WeaponInventorySlot : InventorySlotBase

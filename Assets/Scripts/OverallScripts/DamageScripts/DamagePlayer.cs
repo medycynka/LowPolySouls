@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Damage
 {
     public class DamagePlayer : MonoBehaviour
     {

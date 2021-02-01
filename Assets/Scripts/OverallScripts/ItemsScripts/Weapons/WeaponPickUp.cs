@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Enums;
+using SzymonPeszek.PlayerScripts;
 
-namespace SP
+
+namespace SzymonPeszek.Items.Weapons
 {
 
     public class WeaponPickUp : Interactable

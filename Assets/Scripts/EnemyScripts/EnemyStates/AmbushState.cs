@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
+using SzymonPeszek.EnemyScripts.Animations;
 
-namespace SP
+
+namespace SzymonPeszek.EnemyScripts.States
 {
-
     public class AmbushState : State
     {
         [Header("Pursue Target State", order = 0)]
@@ -30,7 +30,7 @@ namespace SP
             {
                 if (isSleeping && enemyManager.isInteracting == false)
                 {
-                    enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[sleepAnimation], true);
+                    enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[sleepAnimation], true);
                 }
 
                 #region Handle Target Detection
@@ -50,7 +50,7 @@ namespace SP
                             enemyManager.currentTarget = characterStats;
                             isSleeping = false;
                             enemyManager.enemyLocomotionManager.navMeshBlocker.enabled = false;
-                            enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.EnemyAnimationIds[wakeAnimation], true);
+                            enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[wakeAnimation], true);
                         }
                     }
                 }

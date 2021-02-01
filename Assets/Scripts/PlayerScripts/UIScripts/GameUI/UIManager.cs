@@ -1,10 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using System.Linq;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.PlayerScripts.Controller;
+using SzymonPeszek.GameUI.WindowsManagers;
+using SzymonPeszek.GameUI.Slots;
+using SzymonPeszek.Enums;
 
-namespace SP
+
+namespace SzymonPeszek.GameUI
 {
 
     public class UIManager : MonoBehaviour
@@ -143,7 +148,7 @@ namespace SP
             return playerInventory.consumablesInventory.Count(checker => checker.consumableType == ConsumableType.HealItem);
         }
 
-        public void ResetInventoryflag()
+        public void ResetInventoryFlag()
         {
             inputHandler.inventoryFlag = false;
         }

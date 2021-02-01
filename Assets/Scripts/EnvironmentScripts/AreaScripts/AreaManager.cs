@@ -1,31 +1,33 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Environment.Sounds;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class AreaManager : LocationManager
     {
         [Header("Area Manager", order = 0)]
-        EnemySpawner enemySpawner;
-        bool insideReset = true;
-        AudioClip[] footStepsOnExit;
+        private EnemySpawner _enemySpawner;
+        private bool _insideReset = true;
+        private AudioClip[] _footStepsOnExit;
 
         private void Awake()
         {
-            enemySpawner = GetComponentInChildren<EnemySpawner>();
+            _enemySpawner = GetComponentInChildren<EnemySpawner>();
 
             foreach(var bonfire in bonfiresInArea)
             {
-                bonfire.enemySpawner = enemySpawner;
+                bonfire.enemySpawner = _enemySpawner;
             }
         }
 
-        public void SetExitFootSteps(AudioClip[] footSteps)
+        public void SetExitFootSteps(AudioClip[] exitFootStep)
         {
-            footStepsOnExit = footSteps;
+            _footStepsOnExit = exitFootStep;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,7 +36,7 @@ namespace SP
             {
                 isInside = true;
 
-                if (insideReset)
+                if (_insideReset)
                 {
                     if (playerStats == null)
                     {
@@ -58,9 +60,9 @@ namespace SP
         {
             if (other.CompareTag(playerTag))
             {
-                if (isInside && insideReset)
+                if (isInside && _insideReset)
                 {
-                    insideReset = false;
+                    _insideReset = false;
                 }
             }
         }
@@ -71,9 +73,9 @@ namespace SP
             {
                 playerStats = null;
                 isInside = false;
-                insideReset = true;
+                _insideReset = true;
                 playerSoundManager.ChangeBackGroundMusic(null);
-                playerSoundManager.movingClips = footStepsOnExit;
+                playerSoundManager.movingClips = _footStepsOnExit;
             }
         }
 

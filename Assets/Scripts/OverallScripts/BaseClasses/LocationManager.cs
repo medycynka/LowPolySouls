@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using SzymonPeszek.Items.Bonfire;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Environment.Sounds;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
     public class LocationManager : MonoBehaviour
     {

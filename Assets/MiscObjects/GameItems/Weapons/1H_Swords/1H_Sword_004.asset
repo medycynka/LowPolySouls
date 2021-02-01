@@ -23,28 +23,29 @@ MonoBehaviour:
   backSlotPosition: {x: 4, y: -8, z: 2}
   backSlotRotation: {x: 15, y: 0, z: 0}
   backSlotScale: 1
-  Light_Attack_Damage_Mult: 1
-  Heavy_Attack_Damage_Mult: 1.5
-  Weight: 0
-  Durability: 0
-  Right_Hand_Idle: Right_Arm_Idle_01
-  Left_Hand_Idle: Left_Arm_Idle_01
-  TH_Idle: TH_Idle_01
-  OH_Light_Attack_1: OH_Light_Attack_01
-  OH_Light_Attack_2: OH_Light_Attack_02
-  OH_Light_Attack_3: OH_Light_Attack_03
-  OH_Heavy_Attack_1: OH_Heavy_Attack_01
-  OH_Heavy_Attack_2: OH_Heavy_Attack_02
-  TH_Light_Attack_1: TH_Light_Attack_01
-  TH_Light_Attack_2: TH_Light_Attack_02
-  TH_Light_Attack_3: TH_Light_Attack_03
-  TH_Heavy_Attack_1: TH_Heavy_Attack_01
-  TH_Heavy_Attack_2: TH_Heavy_Attack_02
+  lightAttackDamageMult: 1
+  heavyAttackDamageMult: 1.5
+  backStabDamage: 50
+  weight: 0
+  durability: 0
+  rightHandIdle: Right_Arm_Idle_01
+  leftHandIdle: Left_Arm_Idle_01
+  thIdle: TH_Idle_01
+  ohLightAttack1: OH_Light_Attack_01
+  ohLightAttack2: OH_Light_Attack_02
+  ohLightAttack3: OH_Light_Attack_03
+  ohHeavyAttack1: OH_Heavy_Attack_01
+  ohHeavyAttack2: OH_Heavy_Attack_02
+  thLightAttack1: TH_Light_Attack_01
+  thLightAttack2: TH_Light_Attack_02
+  thLightAttack3: TH_Light_Attack_03
+  thHeavyAttack1: TH_Heavy_Attack_01
+  thHeavyAttack2: TH_Heavy_Attack_02
   baseStamina: 10
-  oh_lightAttackMultiplier: 1
-  oh_heavyAttackMultiplier: 1.1
-  th_lightAttackMultiplier: 1.3
-  th_heavyAttackMultiplier: 1.5
+  ohLightAttackMultiplier: 0
+  ohHeavyAttackMultiplier: 0
+  thLightAttackMultiplier: 0
+  thHeavyAttackMultiplier: 0
   weaponType: 0
   meleeType: 0
   castingType: 3

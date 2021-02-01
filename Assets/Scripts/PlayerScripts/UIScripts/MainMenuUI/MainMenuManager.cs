@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using SzymonPeszek.SaveScripts;
 
-namespace SP {
+namespace SzymonPeszek.MainMenuUI {
     public class MainMenuManager : MonoBehaviour
     {
-        AudioSource audioSource;
-        Resolution[] resolutionsOpts;
+        private AudioSource _audioSource;
+        private Resolution[] _resolutionsOpts;
 
-        [Header("Settings Menager Manager", order = 0)]
+        [Header("Settings Manager Manager", order = 0)]
         [Header("Character Creator Components", order = 1)]
         public GameObject characterCreatorScreen;
 
@@ -24,21 +25,21 @@ namespace SP {
         public Slider mouseSlider;
         public Slider volumeSlider;
 
-        float startMusicVolume;
-        float currentTime = 0.0f;
+        private float _startMusicVolume;
+        private float _currentTime = 0.0f;
 
         private void Start()
         {
-            audioSource = GetComponent<AudioSource>();
-            resolutionsOpts = Screen.resolutions;
+            _audioSource = GetComponent<AudioSource>();
+            _resolutionsOpts = Screen.resolutions;
             SettingsHolder.qualityID = QualitySettings.GetQualityLevel();
 
             List<string> resList = new List<string>();
-            for (int i = 0; i < resolutionsOpts.Length; i++)
+            for (int i = 0; i < _resolutionsOpts.Length; i++)
             {
-                resList.Add(resolutionsOpts[i].width + "x" + resolutionsOpts[i].height);
+                resList.Add(_resolutionsOpts[i].width + "x" + _resolutionsOpts[i].height);
 
-                if (resolutionsOpts[i].width == Screen.width && resolutionsOpts[i].height == Screen.height)
+                if (_resolutionsOpts[i].width == Screen.width && _resolutionsOpts[i].height == Screen.height)
                 {
                     SettingsHolder.resolutionID = i;
                 }
@@ -70,8 +71,8 @@ namespace SP {
             qualityDropdown.value = SettingsHolder.qualityID;
             mouseSlider.value = SettingsHolder.mouseSensibility;
             volumeSlider.value = SettingsHolder.soundVolume;
-            audioSource.volume = SettingsHolder.soundVolume;
-            startMusicVolume = SettingsHolder.soundVolume;
+            _audioSource.volume = SettingsHolder.soundVolume;
+            _startMusicVolume = SettingsHolder.soundVolume;
 
             resolutionDropdown.RefreshShownValue();
 
@@ -114,7 +115,7 @@ namespace SP {
 
         public void SetResolution(int resolutionId)
         {
-            Screen.SetResolution(resolutionsOpts[resolutionId].width, resolutionsOpts[resolutionId].height, Screen.fullScreen);
+            Screen.SetResolution(_resolutionsOpts[resolutionId].width, _resolutionsOpts[resolutionId].height, Screen.fullScreen);
             SettingsHolder.resolutionID = resolutionId;
         }
 
@@ -137,17 +138,17 @@ namespace SP {
 
         public void SetVolume(float volume)
         {
-            audioSource.volume = volume;
-            startMusicVolume = volume;
+            _audioSource.volume = volume;
+            _startMusicVolume = volume;
             SettingsHolder.soundVolume = volume;
         }
 
         private IEnumerator SwitchToNextScene()
         {
-            while (currentTime <= fadeOutTime)
+            while (_currentTime <= fadeOutTime)
             {
-                audioSource.volume = Mathf.Lerp(startMusicVolume, 0.0f, currentTime / fadeOutTime);
-                currentTime += Time.deltaTime;
+                _audioSource.volume = Mathf.Lerp(_startMusicVolume, 0.0f, _currentTime / fadeOutTime);
+                _currentTime += Time.deltaTime;
 
                 yield return null;
             }

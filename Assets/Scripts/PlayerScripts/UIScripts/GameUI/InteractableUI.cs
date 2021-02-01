@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace SP
+namespace SzymonPeszek.GameUI
 {
-
     public class InteractableUI : MonoBehaviour
     {
         public TextMeshProUGUI interactableText;
@@ -14,5 +11,4 @@ namespace SP
         public TextMeshProUGUI itemText;
         public RawImage itemImage;
     }
-
 }

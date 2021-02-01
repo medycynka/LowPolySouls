@@ -1,8 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using SzymonPeszek.BaseClasses;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.Misc;
 
-namespace SP
+
+namespace SzymonPeszek.Environment.Areas
 {
     public class FogWallManager : Interactable
     {
@@ -57,7 +60,7 @@ namespace SP
             
             yield return CoroutineYielder.fogWallRemoveFirstWaiter;
             
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.AnimationIds[StaticAnimatorIds.FogRemoveName], true);
+            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FogRemoveName], true);
 
             yield return CoroutineYielder.fogWallRemoveSecondWaiter;
 

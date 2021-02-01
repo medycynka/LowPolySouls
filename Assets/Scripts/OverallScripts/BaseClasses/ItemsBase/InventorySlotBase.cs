@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.Items.Weapons;
+using SzymonPeszek.GameUI;
 
-namespace SP
+
+namespace SzymonPeszek.BaseClasses
 {
-
     public class InventorySlotBase : MonoBehaviour
     {
         [Header("Inventory Slot", order = 0)]
@@ -17,5 +18,4 @@ namespace SP
         [Header("Inventory Slot Icon", order = 1)]
         public Image icon;
     }
-
 }

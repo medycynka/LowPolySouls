@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System.Linq;
+using SzymonPeszek.PlayerScripts;
+using SzymonPeszek.PlayerScripts.Inventory;
+using SzymonPeszek.Enums;
 
-namespace SP
+
+namespace SzymonPeszek.SaveScripts
 {
     [System.Serializable]
     public class DataManager
