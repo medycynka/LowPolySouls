@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using SzymonPeszek.SaveScripts;
 
+
 namespace SzymonPeszek.MainMenuUI {
     public class MainMenuManager : MonoBehaviour
     {
@@ -20,7 +21,7 @@ namespace SzymonPeszek.MainMenuUI {
 
         [Header("Settings Options", order = 1)]
         public TMP_Dropdown resolutionDropdown;
-        public Toggle fullScreenToogle;
+        public Toggle fullScreenToggle;
         public TMP_Dropdown qualityDropdown;
         public Slider mouseSlider;
         public Slider volumeSlider;
@@ -67,7 +68,7 @@ namespace SzymonPeszek.MainMenuUI {
             }
 
             resolutionDropdown.value = SettingsHolder.resolutionID;
-            fullScreenToogle.isOn = SettingsHolder.isFullscreen;
+            fullScreenToggle.isOn = SettingsHolder.isFullscreen;
             qualityDropdown.value = SettingsHolder.qualityID;
             mouseSlider.value = SettingsHolder.mouseSensibility;
             volumeSlider.value = SettingsHolder.soundVolume;
@@ -82,7 +83,7 @@ namespace SzymonPeszek.MainMenuUI {
         public void SaveSettings()
         {
             SettingsHolder.resolutionID = resolutionDropdown.value;
-            SettingsHolder.isFullscreen = fullScreenToogle.isOn;
+            SettingsHolder.isFullscreen = fullScreenToggle.isOn;
             SettingsHolder.qualityID = qualityDropdown.value;
             SettingsHolder.mouseSensibility = mouseSlider.value;
             SettingsHolder.soundVolume = volumeSlider.value;

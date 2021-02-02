@@ -34,11 +34,11 @@ namespace SzymonPeszek.PlayerScripts
 
         [Header("Ground & Air Detection Stats", order = 1)]
         [SerializeField]
-        float groundDetectionRayStartPoint = 0.5f;
+        private float groundDetectionRayStartPoint = 0.5f;
         [SerializeField]
-        float minimumDistanceNeededToBeginFall = 1f;
+        private float minimumDistanceNeededToBeginFall = 1f;
         [SerializeField]
-        float groundDirectionRayDistance = 0.2f;
+        private float groundDirectionRayDistance = 0.2f;
         private LayerMask _ignoreForGroundCheck;
         public float inAirTimer;
 

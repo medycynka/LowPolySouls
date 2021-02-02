@@ -14,19 +14,19 @@ namespace SzymonPeszek.GameUI.Slots
         public PlayerManager playerManager;
         public AnimatorHandler animatorHandler;
 
-        private ConsumableItem item;
+        private ConsumableItem _item;
 
         public void AddItem(ConsumableItem newItem)
         {
-            item = newItem;
-            icon.sprite = item.itemIcon;
+            _item = newItem;
+            icon.sprite = _item.itemIcon;
             icon.enabled = true;
             gameObject.SetActive(true);
         }
 
         public void ClearInventorySlot(bool lastSlot)
         {
-            item = null;
+            _item = null;
             icon.sprite = null;
             icon.enabled = false;
             gameObject.SetActive(lastSlot);
@@ -34,26 +34,24 @@ namespace SzymonPeszek.GameUI.Slots
 
         public void UseThisItem()
         {
-            if (item != null)
+            if (_item != null)
             {
-                switch (item.consumableType)
+                switch (_item.consumableType)
                 {
                     case ConsumableType.HealItem:
-                        playerStats.healthRefillAmount = item.healAmount;
+                        playerStats.healthRefillAmount = _item.healAmount;
                         playerManager.shouldRefillHealth = true;
                         animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
                         break;
                     case ConsumableType.SoulItem:
-                        playerStats.soulsAmount += item.soulAmount;
+                        playerStats.soulsAmount += _item.soulAmount;
                         animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.UseItemName], true);
                         break;
                     case ConsumableType.ManaItem:
                         break;
-                    default:
-                        break;
                 }
 
-                playerInventory.consumablesInventory.Remove(item);
+                playerInventory.consumablesInventory.Remove(_item);
                 uiManager.GetConsumableInventorySlot();
                 uiManager.UpdateConsumableInventory();
                 uiManager.UpdateEstusAmount();

@@ -72,9 +72,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
 
         public void UpdateStatsWindow(PlayerStats playerStats)
         {
-            strengthValue.text = playerStats.Strength.ToString();
-            agilityValue.text = playerStats.Agility.ToString();
-            defenceValue.text = playerStats.Defence.ToString();
+            strengthValue.text = playerStats.strength.ToString();
+            agilityValue.text = playerStats.agility.ToString();
+            defenceValue.text = playerStats.defence.ToString();
             allDefenceValue.text = playerStats.currentArmorValue.ToString();
             healthValue.text = playerStats.bonusHealth.ToString();
             maxHealthValue.text = playerStats.maxHealth.ToString();

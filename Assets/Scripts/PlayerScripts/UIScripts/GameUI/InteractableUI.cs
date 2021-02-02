@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
+
 namespace SzymonPeszek.GameUI
 {
     public class InteractableUI : MonoBehaviour

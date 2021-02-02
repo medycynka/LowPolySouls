@@ -5,16 +5,16 @@ using SzymonPeszek.PlayerScripts;
 
 namespace SzymonPeszek.GameUI.WindowsManagers
 {
-    public class StatWinodowManager : MonoBehaviour
+    public class StatWindowManager : MonoBehaviour
     {
         public PlayerStats playerStats;
-        public int levelToAdd = 0;
-        public int soulsCost = 0;
-        public float strenghtToAdd = 0;
-        public float agilityToAdd = 0;
-        public float defenceToAdd = 0;
-        public float healthToAdd = 0;
-        public float staminaToAdd = 0;
+        public int levelToAdd;
+        public int soulsCost;
+        public float strengthToAdd;
+        public float agilityToAdd;
+        public float defenceToAdd;
+        public float healthToAdd;
+        public float staminaToAdd;
 
         public TextMeshProUGUI visibleLevel;
         public TextMeshProUGUI visibleSouls;
@@ -44,14 +44,14 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleLevel.text = playerStats.playerLevel.ToString();
             visibleSouls.color = Color.white;
             visibleSouls.text = soulsCost.ToString();
-            visibleStrength.text = playerStats.Strength.ToString();
-            visibleAgility.text = playerStats.Agility.ToString();
-            visibleDefence.text = playerStats.Defence.ToString();
+            visibleStrength.text = playerStats.strength.ToString();
+            visibleAgility.text = playerStats.agility.ToString();
+            visibleDefence.text = playerStats.defence.ToString();
             visibleHealth.text = playerStats.bonusHealth.ToString();
             visibleStamina.text = playerStats.bonusStamina.ToString();
         }
 
-        public void UpdateLevel(bool update)
+        private void UpdateLevel(bool update)
         {
             if (update)
             {
@@ -69,20 +69,13 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleLevel.text = (playerStats.playerLevel + levelToAdd).ToString();
         }
 
-        public void UpdateSouls()
+        private void UpdateSouls()
         {
             if (levelToAdd > 0)
             {
                 soulsCost = playerStats.CalculateSoulsCost(playerStats.playerLevel + levelToAdd);
 
-                if (soulsCost > playerStats.soulsAmount)
-                {
-                    visibleSouls.color = Color.red;
-                }
-                else
-                {
-                    visibleSouls.color = Color.white;
-                }
+                visibleSouls.color = soulsCost > playerStats.soulsAmount ? Color.red : Color.white;
             }
             else
             {
@@ -93,23 +86,23 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleSouls.text = soulsCost.ToString();
         }
 
-        public void UpdateStrenght(bool update) 
+        public void UpdateStrength(bool update) 
         {
             if (update)
             {
-                strenghtToAdd += 1;
-                if (playerStats.Strength + strenghtToAdd > 99)
+                strengthToAdd += 1;
+                if (playerStats.strength + strengthToAdd > 99)
                 {
                     _shouldUpdateSouls = false;
-                    strenghtToAdd = 99 - playerStats.Strength;
+                    strengthToAdd = 99 - playerStats.strength;
                 }
             }
             else
             {
-                strenghtToAdd -= 1;
-                if (strenghtToAdd < 0)
+                strengthToAdd -= 1;
+                if (strengthToAdd < 0)
                 {
-                    strenghtToAdd = 0;
+                    strengthToAdd = 0;
                 }
             }
 
@@ -120,7 +113,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             }
 
             _shouldUpdateSouls = true;
-            visibleStrength.text = (playerStats.Strength + strenghtToAdd).ToString();
+            visibleStrength.text = (playerStats.strength + strengthToAdd).ToString();
         }
 
         public void UpdateAgility(bool update)
@@ -128,10 +121,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             if (update)
             {
                 agilityToAdd += 1;
-                if (playerStats.Agility + agilityToAdd > 99)
+                if (playerStats.agility + agilityToAdd > 99)
                 {
                     _shouldUpdateSouls = false;
-                    agilityToAdd = 99 - playerStats.Agility;
+                    agilityToAdd = 99 - playerStats.agility;
                 }
             }
             else
@@ -150,7 +143,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             }
 
             _shouldUpdateSouls = true;
-            visibleAgility.text = (playerStats.Agility + agilityToAdd).ToString();
+            visibleAgility.text = (playerStats.agility + agilityToAdd).ToString();
         }
 
         public void UpdateDefence(bool update)
@@ -158,10 +151,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             if (update)
             {
                 defenceToAdd += 1;
-                if (playerStats.Defence + defenceToAdd > 99)
+                if (playerStats.defence + defenceToAdd > 99)
                 {
                     _shouldUpdateSouls = false;
-                    defenceToAdd = 99 - playerStats.Defence;
+                    defenceToAdd = 99 - playerStats.defence;
                 }
             }
             else
@@ -180,7 +173,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             }
 
             _shouldUpdateSouls = true;
-            visibleDefence.text = (playerStats.Defence + defenceToAdd).ToString();
+            visibleDefence.text = (playerStats.defence + defenceToAdd).ToString();
         }
 
         public void UpdateHealth(bool update)
@@ -249,9 +242,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             {
                 playerStats.playerLevel += levelToAdd;
                 playerStats.soulsAmount -= soulsCost;
-                playerStats.Strength += strenghtToAdd;
-                playerStats.Agility += agilityToAdd;
-                playerStats.Defence += defenceToAdd;
+                playerStats.strength += strengthToAdd;
+                playerStats.agility += agilityToAdd;
+                playerStats.defence += defenceToAdd;
                 playerStats.bonusHealth += healthToAdd;
                 playerStats.bonusStamina += staminaToAdd;
 
@@ -266,7 +259,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         {
             levelToAdd = 0;
             soulsCost = 0;
-            strenghtToAdd = 0;
+            strengthToAdd = 0;
             agilityToAdd = 0;
             defenceToAdd = 0;
             healthToAdd = 0;

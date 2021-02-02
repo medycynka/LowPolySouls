@@ -14,13 +14,13 @@ namespace SzymonPeszek.GameUI.WindowsManagers
     {
         private PlayerManager _playerManager;
         private CameraHandler _cameraHandler;
-        private readonly List<AudioSource> audioSources = new List<AudioSource>();
+        private readonly List<AudioSource> _audioSources = new List<AudioSource>();
         private Resolution[] _resolutionsOpts;
 
         [Header("Settings Manager Manager", order = 0)]
         [Header("Settings Options", order = 1)]
         public TMP_Dropdown resolutionDropdown;
-        public Toggle fullScreenToogle;
+        public Toggle fullScreenToggle;
         public TMP_Dropdown qualityDropdown;
         public Slider mouseSlider;
         public Slider volumeSlider;
@@ -29,13 +29,13 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         {
             _playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
             _cameraHandler = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraHandler>();
-            audioSources.Add(_playerManager.GetComponent<AudioSource>());
+            _audioSources.Add(_playerManager.GetComponent<AudioSource>());
 
             foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 if (enemy.GetComponent<AudioSource>() != null)
                 {
-                    audioSources.Add(enemy.GetComponent<AudioSource>());
+                    _audioSources.Add(enemy.GetComponent<AudioSource>());
                 }
             }
 
@@ -62,7 +62,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             resolutionDropdown.value = SettingsHolder.resolutionID;
             resolutionDropdown.RefreshShownValue();
 
-            fullScreenToogle.isOn = SettingsHolder.isFullscreen;
+            fullScreenToggle.isOn = SettingsHolder.isFullscreen;
             qualityDropdown.value = SettingsHolder.qualityID;
             qualityDropdown.RefreshShownValue();
             mouseSlider.value = SettingsHolder.mouseSensibility;
@@ -76,7 +76,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         public void SaveSettings()
         {
             SettingsHolder.resolutionID = resolutionDropdown.value;
-            SettingsHolder.isFullscreen = fullScreenToogle.isOn;
+            SettingsHolder.isFullscreen = fullScreenToggle.isOn;
             SettingsHolder.qualityID = qualityDropdown.value;
             SettingsHolder.mouseSensibility = mouseSlider.value;
             SettingsHolder.soundVolume = volumeSlider.value;
@@ -115,7 +115,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
 
         private void SetAllSounds(float volume)
         {
-            foreach (var audioSource in audioSources)
+            foreach (var audioSource in _audioSources)
             {
                 audioSource.volume = volume;
             }

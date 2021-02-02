@@ -16,7 +16,7 @@ namespace SzymonPeszek.EnemyScripts
         private EnemyDrops _enemyDrops; 
         private List<Material> _characterMaterials;
         private int _edgeWidthId;
-        private int _noiceScaleId;
+        private int _noiseScaleId;
         private int _fresnelPowerId;
         private int _glowId;
         private int _aliveId;
@@ -59,6 +59,7 @@ namespace SzymonPeszek.EnemyScripts
 
         private void Awake()
         {
+            characterTransform = transform;
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             _enemyStats = GetComponent<EnemyStats>();
@@ -69,7 +70,7 @@ namespace SzymonPeszek.EnemyScripts
             Renderer[] renders = GetComponentsInChildren<Renderer>();
 
             _edgeWidthId = Shader.PropertyToID("_EdgeWidth");
-            _noiceScaleId = Shader.PropertyToID("_NoiceScale");
+            _noiseScaleId = Shader.PropertyToID("_NoiceScale");
             _fresnelPowerId = Shader.PropertyToID("_FresnelPower");
             _glowId = Shader.PropertyToID("_ShouldBlink");
             _aliveId = Shader.PropertyToID("_IsAlive");
@@ -78,7 +79,7 @@ namespace SzymonPeszek.EnemyScripts
             foreach (var r in renders)
             {
                 r.material.SetFloat(_edgeWidthId, disolveEdgeWidth);
-                r.material.SetFloat(_noiceScaleId, disolveNoiseScale);
+                r.material.SetFloat(_noiseScaleId, disolveNoiseScale);
                 r.material.SetFloat(_fresnelPowerId, disolveFresnelPower);
                 _characterMaterials.Add(r.material);
             }

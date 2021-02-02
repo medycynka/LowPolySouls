@@ -20,9 +20,9 @@ namespace SzymonPeszek.PlayerScripts
         public bool enableFeetIk = true;
         public LayerMask environmentLayer;
         [Range(0f, 1f)] public float weightPositionRight = 1f;
-        [Range(0f, 1f)] public float weightRotationRight = 0f;
+        [Range(0f, 1f)] public float weightRotationRight;
         [Range(0f, 1f)] public float weightPositionLeft = 1f;
-        [Range(0f, 1f)] public float weightRotationLeft = 0f;
+        [Range(0f, 1f)] public float weightRotationLeft;
         public Vector3 offsetFoot;
         
         private const string EnvironmentTag = "Environment";

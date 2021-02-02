@@ -24,7 +24,7 @@ namespace SzymonPeszek.SaveScripts
         public static bool[] bossAreaAlive = { true };
 
         // Bonfires
-        public static bool[] bonfiresAcrivation = { false, false, false };
+        public static bool[] bonfiresActivation = { false, false, false };
         
         // Data Manager
         public static DataManager dataManager;

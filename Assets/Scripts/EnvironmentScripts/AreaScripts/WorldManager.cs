@@ -89,7 +89,7 @@ namespace SzymonPeszek.Environment.Areas
             {
                 for (int i = 0; i < bonfireManagers.Length; i++)
                 {
-                    SettingsHolder.bonfiresAcrivation[i] = bonfireManagers[i].isActivated;
+                    SettingsHolder.bonfiresActivation[i] = bonfireManagers[i].isActivated;
                 }
             }
         }

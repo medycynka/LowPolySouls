@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace SzymonPeszek.GameUI.StatBars
 {
     public class HealthBar : MonoBehaviour

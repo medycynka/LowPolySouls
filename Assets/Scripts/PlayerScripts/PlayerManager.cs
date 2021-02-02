@@ -13,13 +13,13 @@ namespace SzymonPeszek.PlayerScripts
 {
     public class PlayerManager : CharacterManager
     {
-        private InputHandler inputHandler;
-        private AnimatorHandler animatorHandler;
+        private InputHandler _inputHandler;
+        private AnimatorHandler _animatorHandler;
         [Header("Player Components", order = 1)]
         [Header("Camera Component", order = 2)]
         public CameraHandler cameraHandler;
-        private PlayerLocomotion playerLocomotion;
-        private PlayerStats playerStats;
+        private PlayerLocomotion _playerLocomotion;
+        private PlayerStats _playerStats;
         
         [Header("UI", order = 2)]
         public InteractableUI interactableUI;
@@ -53,53 +53,54 @@ namespace SzymonPeszek.PlayerScripts
         public GameObject quickMoveScreen;
         public GameObject currentSpawnPoint;
 
-        private float healthBgRefillTimer = 0.0f;
-        private float staminaRefillTimer = 0.0f;
-        private float focusRefillTimer = 0.0f;
-        private float addJumpForceTimer = 1.25f;
+        private float _healthBgRefillTimer = 0.0f;
+        private float _staminaRefillTimer = 0.0f;
+        private float _focusRefillTimer = 0.0f;
+        private float _addJumpForceTimer = 1.25f;
 
-        private const string bonfireTag = "Bonfire";
-        private const string interactableTag = "Interactable";
-        private const string fogWallTag = "Fog Wall";
-        private LayerMask pickUpLayer;
-        private Collider[] interactColliders;
+        private const string BonfireTag = "Bonfire";
+        private const string InteractableTag = "Interactable";
+        private const string FogWallTag = "Fog Wall";
+        private LayerMask _pickUpLayer;
+        private Collider[] _interactColliders;
 
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
+            characterTransform = transform;
         }
 
         private void Start()
         {
-            inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            playerLocomotion = GetComponent<PlayerLocomotion>();
-            playerStats = GetComponent<PlayerStats>();
-            pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
+            _inputHandler = GetComponent<InputHandler>();
+            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _playerLocomotion = GetComponent<PlayerLocomotion>();
+            _playerStats = GetComponent<PlayerStats>();
+            _pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
             interactableUI = FindObjectOfType<InteractableUI>();
-            interactColliders = new Collider[8];
+            _interactColliders = new Collider[8];
         }
 
         private void Update()
         {
             float delta = Time.deltaTime;
             
-            isInteracting = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
-            canDoCombo = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
-            isUsingRightHand = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
-            isUsingLeftHand = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
-            isInvulnerable = animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
-            animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
+            isInteracting = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
+            isUsingRightHand = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
+            isUsingLeftHand = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
+            isInvulnerable = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
+            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
 
-            inputHandler.TickInput(delta);
-            playerLocomotion.HandleRollingAndSprinting(delta);
+            _inputHandler.TickInput(delta);
+            _playerLocomotion.HandleRollingAndSprinting(delta);
 
             CheckAllFunctions(delta);
 
-            if (Time.time > playerLocomotion.nextJump)
+            if (Time.time > _playerLocomotion.nextJump)
             {
-                playerLocomotion.HandleJumping(delta);
+                _playerLocomotion.HandleJumping(delta);
             }
         }
 
@@ -107,43 +108,43 @@ namespace SzymonPeszek.PlayerScripts
         {
             float delta = Time.fixedDeltaTime;
 
-            playerLocomotion.HandleMovement(delta);
-            playerLocomotion.HandleFalling(playerLocomotion.moveDirection);
+            _playerLocomotion.HandleMovement(delta);
+            _playerLocomotion.HandleFalling(_playerLocomotion.moveDirection);
         }
 
         private void LateUpdate()
         {
-            inputHandler.rollFlag = false;
-            inputHandler.rbInput = false;
-            inputHandler.rtInput = false;
-            inputHandler.dPadUp = false;
-            inputHandler.dPadDown = false;
-            inputHandler.dPadLeft = false;
-            inputHandler.dPadRight = false;
-            inputHandler.aInput = false;
-            inputHandler.jumpInput = false;
-            inputHandler.inventoryInput = false;
-            inputHandler.estusQuickSlotUse = false;
+            _inputHandler.rollFlag = false;
+            _inputHandler.rbInput = false;
+            _inputHandler.rtInput = false;
+            _inputHandler.dPadUp = false;
+            _inputHandler.dPadDown = false;
+            _inputHandler.dPadLeft = false;
+            _inputHandler.dPadRight = false;
+            _inputHandler.aInput = false;
+            _inputHandler.jumpInput = false;
+            _inputHandler.inventoryInput = false;
+            _inputHandler.estusQuickSlotUse = false;
 
             float delta = Time.fixedDeltaTime;
 
             if (cameraHandler != null)
             {
-                if (!inputHandler.inventoryFlag)
+                if (!_inputHandler.inventoryFlag)
                 {
                     cameraHandler.FollowTarget(delta);
-                    cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+                    cameraHandler.HandleCameraRotation(delta, _inputHandler.mouseX, _inputHandler.mouseY);
                 }
 
-                if(cameraHandler.currentLockOnTarget == null && inputHandler.lockOnFlag)
+                if(cameraHandler.currentLockOnTarget == null && _inputHandler.lockOnFlag)
                 {
-                    inputHandler.lockOnFlag = false;
+                    _inputHandler.lockOnFlag = false;
                 }
             }
 
             if (isInAir)
             {
-                playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+                _playerLocomotion.inAirTimer = _playerLocomotion.inAirTimer + Time.deltaTime;
             }
         }
 
@@ -161,15 +162,15 @@ namespace SzymonPeszek.PlayerScripts
 
         private void CheckForInteractableObject()
         {
-            int collidersLength = Physics.OverlapSphereNonAlloc(transform.position, 1f, interactColliders, pickUpLayer);
+            int collidersLength = Physics.OverlapSphereNonAlloc(transform.position, 1f, _interactColliders, _pickUpLayer);
             
             if (collidersLength > 0)
             {
                 for (int i = 0; i < collidersLength; i++)
                 {
-                    if (interactColliders[i].CompareTag(bonfireTag))
+                    if (_interactColliders[i].CompareTag(BonfireTag))
                     {
-                        BonfireManager bonManager = interactColliders[i].GetComponent<BonfireManager>();
+                        BonfireManager bonManager = _interactColliders[i].GetComponent<BonfireManager>();
 
                         if (!bonManager.isActivated)
                         {
@@ -180,7 +181,7 @@ namespace SzymonPeszek.PlayerScripts
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);
 
-                                if (inputHandler.aInput)
+                                if (_inputHandler.aInput)
                                 {
                                     interactableObject.Interact(this);
                                     interactableUIGameObject.SetActive(false);
@@ -198,7 +199,7 @@ namespace SzymonPeszek.PlayerScripts
                                     interactableUI.interactableText.text = interactableObject.interactableText;
                                     interactableUIGameObject.SetActive(true);
 
-                                    if (inputHandler.aInput)
+                                    if (_inputHandler.aInput)
                                     {
                                         interactableObject.Interact(this);
                                     }
@@ -206,24 +207,24 @@ namespace SzymonPeszek.PlayerScripts
                             }
                         }
                     }
-                    else if (interactColliders[i].CompareTag(interactableTag))
+                    else if (_interactColliders[i].CompareTag(InteractableTag))
                     {
-                        Interactable interactableObject = interactColliders[i].GetComponent<Interactable>();
+                        Interactable interactableObject = _interactColliders[i].GetComponent<Interactable>();
 
                         if (interactableObject != null)
                         {
                             interactableUI.interactableText.text = interactableObject.interactableText;
                             interactableUIGameObject.SetActive(true);
 
-                            if (inputHandler.aInput)
+                            if (_inputHandler.aInput)
                             {
                                 interactableObject.Interact(this);
                             }
                         }
                     }
-                    else if (interactColliders[i].CompareTag(fogWallTag))
+                    else if (_interactColliders[i].CompareTag(FogWallTag))
                     {
-                        FogWallManager interactableObject = interactColliders[i].GetComponent<FogWallManager>();
+                        FogWallManager interactableObject = _interactColliders[i].GetComponent<FogWallManager>();
 
                         if (interactableObject != null)
                         {
@@ -232,7 +233,7 @@ namespace SzymonPeszek.PlayerScripts
                                 interactableUI.interactableText.text = interactableObject.interactableText;
                                 interactableUIGameObject.SetActive(true);
 
-                                if (inputHandler.aInput)
+                                if (_inputHandler.aInput)
                                 {
                                     interactableObject.Interact(this);
                                 }
@@ -248,7 +249,7 @@ namespace SzymonPeszek.PlayerScripts
                     interactableUIGameObject.SetActive(false);
                 }
 
-                if (itemInteractableGameObject != null && inputHandler.aInput)
+                if (itemInteractableGameObject != null && _inputHandler.aInput)
                 {
                     itemInteractableGameObject.SetActive(false);
                 }
@@ -257,22 +258,22 @@ namespace SzymonPeszek.PlayerScripts
 
         private void FillHealthBarBackGround(float delta)
         {
-            shouldRefillHealthBg = playerStats.healthBar.backgroundSlider.value > playerStats.healthBar.healthBarSlider.value;
+            shouldRefillHealthBg = _playerStats.healthBar.backgroundSlider.value > _playerStats.healthBar.healthBarSlider.value;
 
             if (shouldRefillHealthBg)
             {
-                if(healthBgRefillTimer > 1.5f)
+                if(_healthBgRefillTimer > 1.5f)
                 {
-                    playerStats.healthBar.backgroundSlider.value -= playerStats.healthBgRefillAmount * delta;
+                    _playerStats.healthBar.backgroundSlider.value -= _playerStats.healthBgRefillAmount * delta;
 
-                    if(playerStats.healthBar.backgroundSlider.value <= playerStats.healthBar.healthBarSlider.value)
+                    if(_playerStats.healthBar.backgroundSlider.value <= _playerStats.healthBar.healthBarSlider.value)
                     {
-                        playerStats.healthBar.backgroundSlider.value = playerStats.healthBar.healthBarSlider.value;
+                        _playerStats.healthBar.backgroundSlider.value = _playerStats.healthBar.healthBarSlider.value;
                     }
                 }
                 else
                 {
-                    healthBgRefillTimer += delta;
+                    _healthBgRefillTimer += delta;
                 }
             }
         }
@@ -281,9 +282,9 @@ namespace SzymonPeszek.PlayerScripts
         {
             if (shouldRefillHealth)
             {
-                playerStats.RefillHealth();
+                _playerStats.RefillHealth();
 
-                if(playerStats.currentHealth >= playerStats.maxHealth)
+                if(_playerStats.currentHealth >= _playerStats.maxHealth)
                 {
                     shouldRefillHealth = false;
                 }
@@ -292,43 +293,43 @@ namespace SzymonPeszek.PlayerScripts
 
         private void CheckForStaminaRefill(float delta)
         {
-            shouldRefillStamina = !isInteracting && !inputHandler.comboFlag && !inputHandler.sprintFlag && (playerStats.currentStamina < playerStats.maxStamina);
+            shouldRefillStamina = !isInteracting && !_inputHandler.comboFlag && !_inputHandler.sprintFlag && (_playerStats.currentStamina < _playerStats.maxStamina);
 
             if (shouldRefillStamina)
             {
-                if (staminaRefillTimer > 2.0f)
+                if (_staminaRefillTimer > 2.0f)
                 {
-                    playerStats.RefillStamina();
+                    _playerStats.RefillStamina();
                 }
                 else
                 {
-                    staminaRefillTimer += delta;
+                    _staminaRefillTimer += delta;
                 }
             }
             else
             {
-                staminaRefillTimer = 0.0f;
+                _staminaRefillTimer = 0.0f;
             }
         }
 
         private void CheckForFocusRefill(float delta)
         {
-            shouldRefillFocus = !isInteracting && (playerStats.currentFocus < playerStats.maxFocus);
+            shouldRefillFocus = !isInteracting && (_playerStats.currentFocus < _playerStats.maxFocus);
 
             if (shouldRefillFocus)
             {
-                if (focusRefillTimer > 1.0f)
+                if (_focusRefillTimer > 1.0f)
                 {
-                    playerStats.RefillFocus();
+                    _playerStats.RefillFocus();
                 }
                 else
                 {
-                    focusRefillTimer += delta;
+                    _focusRefillTimer += delta;
                 }
             }
             else
             {
-                focusRefillTimer = 0.0f;
+                _focusRefillTimer = 0.0f;
             }
         }
 
@@ -336,27 +337,27 @@ namespace SzymonPeszek.PlayerScripts
         {
             if (shouldAddJumpForce)
             {
-                addJumpForceTimer -= delta;
-                playerLocomotion.AddJumpForce(delta, addJumpForceTimer <= 0.5);
+                _addJumpForceTimer -= delta;
+                _playerLocomotion.AddJumpForce(delta, _addJumpForceTimer <= 0.5);
 
-                if(addJumpForceTimer <= 0)
+                if(_addJumpForceTimer <= 0)
                 {
                     shouldAddJumpForce = false;
-                    addJumpForceTimer = 1.25f;
+                    _addJumpForceTimer = 1.25f;
                 }
             }
         }
 
         private void CheckForSprintStaminaDrain(float delta)
         {
-            if (inputHandler.sprintFlag)
+            if (_inputHandler.sprintFlag)
             {
-                if (inputHandler.moveAmount > 0)
+                if (_inputHandler.moveAmount > 0)
                 {
-                    playerStats.TakeStaminaDamage(playerLocomotion.sprintStaminaCost * delta);
+                    _playerStats.TakeStaminaDamage((_playerLocomotion.sprintStaminaCost * _playerStats.bonusBuffEndurance) * delta);
                 }
 
-                if(playerStats.currentStamina <= 0f)
+                if(_playerStats.currentStamina <= 0f)
                 {
                     isSprinting = false;
                 }

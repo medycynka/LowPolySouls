@@ -40,6 +40,10 @@ namespace SzymonPeszek.PlayerScripts
         public int playerLevel = 12;
         public float soulsAmount = 0;
         public float currentArmorValue = 0;
+        public float bonusBuffAttack = 1.0f;
+        public float bonusBuffDefence = 1.0f;
+        public float bonusBuffMagic = 1.0f;
+        public float bonusBuffEndurance = 1.0f;
 
         [Header("Health & Stamina refill values", order = 2)]
         public float healthRefillAmount = 20f;
@@ -56,6 +60,9 @@ namespace SzymonPeszek.PlayerScripts
         private RectTransform _staminaBarTransform;
         private RectTransform _focusBarTransform;
 
+        [Header("Player Transform", order = 2)]
+        public Transform playerTransform;
+
         private void Awake()
         {
             _animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -63,6 +70,7 @@ namespace SzymonPeszek.PlayerScripts
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
             focusBar = FindObjectOfType<FocusBar>();
+            playerTransform = GetComponent<Transform>();
         }
 
         private void Start()
@@ -81,9 +89,9 @@ namespace SzymonPeszek.PlayerScripts
                     currentHealth = dataManager.currentHealth;
                     currentStamina = dataManager.currentStamina;
                     baseArmor = dataManager.baseArmor;
-                    Strength = dataManager.Strength;
-                    Agility = dataManager.Agility;
-                    Defence = dataManager.Defence;
+                    strength = dataManager.strength;
+                    agility = dataManager.agility;
+                    defence = dataManager.defence;
                     bonusHealth = dataManager.bonusHealth;
                     bonusStamina = dataManager.bonusStamina;
                     playerLevel = dataManager.playerLevel;
@@ -111,22 +119,22 @@ namespace SzymonPeszek.PlayerScripts
 
         private float SetMaxHealthFromHealthLevel()
         {
-            maxHealth = healthLevel * 10 + bonusHealth * 10 + Strength * 2.5f;
+            maxHealth = healthLevel * 10 + bonusHealth * 10 + strength * 2.5f;
 
             return maxHealth;
         }
 
-        public void UpdateHealthBar(float newHealth)
+        private void UpdateHealthBar(float newHealth)
         {
             maxHealth = newHealth;
             currentHealth = maxHealth;
 
             float currentPixelWidth = 180f * (maxHealth / 100f);
-            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
-            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+            float remappedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float widthToSet = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remappedPixelWidth), remappedPixelWidth);
 
-            _hpBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180.0f) / 2f, -45f);
-            _hpBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _hpBarTransform.anchoredPosition = new Vector2(120f + (widthToSet - 180.0f) / 2f, -45f);
+            _hpBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, widthToSet);
             
             healthBar.SetMaxHealth(maxHealth);
             healthBar.SetCurrentHealth(currentHealth);
@@ -134,22 +142,22 @@ namespace SzymonPeszek.PlayerScripts
 
         private float SetMaxStaminaFromStaminaLevel()
         {
-            maxStamina = staminaLevel * 10 + bonusStamina * 10 + Agility * 2.5f;
+            maxStamina = staminaLevel * 10 + bonusStamina * 10 + agility * 2.5f;
 
             return maxStamina;
         }
 
-        public void UpdateStaminaBar(float newStamina)
+        private void UpdateStaminaBar(float newStamina)
         {
             maxStamina = newStamina;
             currentStamina = maxStamina;
 
             float currentPixelWidth = 180f * (maxStamina / 100f);
-            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
-            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+            float remappedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float widthToSet = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remappedPixelWidth), remappedPixelWidth);
 
-            _staminaBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -80f);
-            _staminaBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _staminaBarTransform.anchoredPosition = new Vector2(120f + (widthToSet - 180f) / 2f, -80f);
+            _staminaBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, widthToSet);
             
             staminaBar.SetMaxStamina(maxStamina);
             staminaBar.SetCurrentStamina(currentStamina);
@@ -162,7 +170,7 @@ namespace SzymonPeszek.PlayerScripts
             return maxFocus;
         }
 
-        public void UpdateFocusBar(float newFocus)
+        private void UpdateFocusBar(float newFocus)
         {
             maxFocus = newFocus;
             currentFocus = maxFocus;
@@ -217,7 +225,7 @@ namespace SzymonPeszek.PlayerScripts
 
         public void HealPlayer(float healAmount)
         {
-            currentHealth += healAmount;
+            currentHealth += healAmount * bonusBuffMagic;
 
             if(currentHealth > maxHealth)
             {
@@ -226,6 +234,25 @@ namespace SzymonPeszek.PlayerScripts
 
             healthBar.healthBarSlider.value += healAmount;
             healthBar.backgroundSlider.value += healAmount;
+        }
+
+        public void BuffPlayer(StatsBuffType buffType, BuffRang buffRang, float value)
+        {
+            switch (buffType)
+            {
+                case StatsBuffType.Attack:
+                    StartCoroutine(BuffAttack(buffRang, value));
+                    break;
+                case StatsBuffType.Defence:
+                    StartCoroutine(BuffDefence(buffRang, value));
+                    break;
+                case StatsBuffType.MagicAttack:
+                    StartCoroutine(BuffMagic(buffRang, value));
+                    break;
+                case StatsBuffType.Endurance:
+                    StartCoroutine(BuffEndurance(buffRang, value));
+                    break;
+            }
         }
 
         public void TakeStaminaDamage(float drain)
@@ -278,7 +305,7 @@ namespace SzymonPeszek.PlayerScripts
         
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + Strength * 0.5f, false);
+            enemyStats.TakeDamage((weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + strength * 0.5f) * bonusBuffAttack, false);
         }
 
         public int CalculateSoulsCost(int level)
@@ -321,8 +348,8 @@ namespace SzymonPeszek.PlayerScripts
             _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
-            transform.position = _playerManager.currentSpawnPoint.transform.position;
-            transform.rotation = _playerManager.currentSpawnPoint.transform.rotation;
+            playerTransform.position = _playerManager.currentSpawnPoint.transform.position;
+            playerTransform.rotation = _playerManager.currentSpawnPoint.transform.rotation;
             // Respawn enemis and refresh boss health if alive
             RespawnEnemiesOnDead();
 
@@ -362,6 +389,98 @@ namespace SzymonPeszek.PlayerScripts
                 soulDeathDrop.interactableText = "Recover souls";
                 Instantiate(soulDeathDrop, dropPosition, Quaternion.identity);
             }
+        }
+
+        private IEnumerator BuffAttack(BuffRang buffRang, float value)
+        {
+            bonusBuffAttack = value;
+
+            switch (buffRang)
+            {
+                case BuffRang.Lesser:
+                    yield return CoroutineYielder.lesserBuffWaiter;
+                    break;
+                case BuffRang.Medium:
+                    yield return CoroutineYielder.mediumBuffWaiter;
+                    break;
+                case BuffRang.Grand:
+                    yield return CoroutineYielder.grandBuffWaiter;
+                    break;
+                default:
+                    yield return null;
+                    break;
+            }
+
+            bonusBuffAttack = 1.0f;
+        }
+        
+        private IEnumerator BuffDefence(BuffRang buffRang, float value)
+        {
+            bonusBuffDefence = value;
+
+            switch (buffRang)
+            {
+                case BuffRang.Lesser:
+                    yield return CoroutineYielder.lesserBuffWaiter;
+                    break;
+                case BuffRang.Medium:
+                    yield return CoroutineYielder.mediumBuffWaiter;
+                    break;
+                case BuffRang.Grand:
+                    yield return CoroutineYielder.grandBuffWaiter;
+                    break;
+                default:
+                    yield return null;
+                    break;
+            }
+
+            bonusBuffDefence = 1.0f;
+        }
+        
+        private IEnumerator BuffMagic(BuffRang buffRang, float value)
+        {
+            bonusBuffMagic = value;
+
+            switch (buffRang)
+            {
+                case BuffRang.Lesser:
+                    yield return CoroutineYielder.lesserBuffWaiter;
+                    break;
+                case BuffRang.Medium:
+                    yield return CoroutineYielder.mediumBuffWaiter;
+                    break;
+                case BuffRang.Grand:
+                    yield return CoroutineYielder.grandBuffWaiter;
+                    break;
+                default:
+                    yield return null;
+                    break;
+            }
+
+            bonusBuffAttack = 1.0f;
+        }
+        
+        private IEnumerator BuffEndurance(BuffRang buffRang, float value)
+        {
+            bonusBuffEndurance = value;
+
+            switch (buffRang)
+            {
+                case BuffRang.Lesser:
+                    yield return CoroutineYielder.lesserBuffWaiter;
+                    break;
+                case BuffRang.Medium:
+                    yield return CoroutineYielder.mediumBuffWaiter;
+                    break;
+                case BuffRang.Grand:
+                    yield return CoroutineYielder.grandBuffWaiter;
+                    break;
+                default:
+                    yield return null;
+                    break;
+            }
+
+            bonusBuffEndurance = 1.0f;
         }
     }
 }

@@ -7,51 +7,51 @@ namespace SzymonPeszek.GameUI.Slots
 
     public class WeaponInventorySlot : InventorySlotBase
     {
-        WeaponItem item;
+        private WeaponItem _item;
 
         public void AddItem(WeaponItem newItem)
         {
-            item = newItem;
-            icon.sprite = item.itemIcon;
+            _item = newItem;
+            icon.sprite = _item.itemIcon;
             icon.enabled = true;
             gameObject.SetActive(true);
         }
 
-        public void ClearInventorySlot(bool last_slot)
+        public void ClearInventorySlot(bool lastSlot)
         {
-            item = null;
+            _item = null;
             icon.sprite = null;
             icon.enabled = false;
-            gameObject.SetActive(last_slot);
+            gameObject.SetActive(lastSlot);
         }
 
         public void EquipThisItem()
         {
-            if (item != null)
+            if (_item != null)
             {
                 if (uiManager.rightHandSlot01Selected)
                 {
                     playerInventory.weaponsInventory.Add(playerInventory.weaponsInRightHandSlots[0]);
-                    playerInventory.weaponsInRightHandSlots[0] = item;
-                    playerInventory.weaponsInventory.Remove(item);
+                    playerInventory.weaponsInRightHandSlots[0] = _item;
+                    playerInventory.weaponsInventory.Remove(_item);
                 }
                 else if (uiManager.rightHandSlot02Selected)
                 {
                     playerInventory.weaponsInventory.Add(playerInventory.weaponsInRightHandSlots[1]);
-                    playerInventory.weaponsInRightHandSlots[1] = item;
-                    playerInventory.weaponsInventory.Remove(item);
+                    playerInventory.weaponsInRightHandSlots[1] = _item;
+                    playerInventory.weaponsInventory.Remove(_item);
                 }
                 else if (uiManager.leftHandSlot01Selected)
                 {
                     playerInventory.weaponsInventory.Add(playerInventory.weaponsInLeftHandSlots[0]);
-                    playerInventory.weaponsInLeftHandSlots[0] = item;
-                    playerInventory.weaponsInventory.Remove(item);
+                    playerInventory.weaponsInLeftHandSlots[0] = _item;
+                    playerInventory.weaponsInventory.Remove(_item);
                 }
                 else if (uiManager.leftHandSlot02Selected)
                 {
                     playerInventory.weaponsInventory.Add(playerInventory.weaponsInLeftHandSlots[1]);
-                    playerInventory.weaponsInLeftHandSlots[1] = item;
-                    playerInventory.weaponsInventory.Remove(item);
+                    playerInventory.weaponsInLeftHandSlots[1] = _item;
+                    playerInventory.weaponsInventory.Remove(_item);
                 }
                 else
                 {

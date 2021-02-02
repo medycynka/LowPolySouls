@@ -27428,7 +27428,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5661620404266356364}
-        m_MethodName: UpdateStrenght
+        m_MethodName: UpdateStrength
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27969,7 +27969,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5661620404266356364}
-        m_MethodName: UpdateStrenght
+        m_MethodName: UpdateStrength
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

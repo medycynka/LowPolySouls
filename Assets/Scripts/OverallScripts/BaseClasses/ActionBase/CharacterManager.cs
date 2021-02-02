@@ -13,5 +13,8 @@ namespace SzymonPeszek.BaseClasses
         [Header("Combat Colliders", order = 1)]
         public BoxCollider backStabBoxCollider;
         public BackStabCollider backStabCollider;
+
+        [Header("Combat Colliders", order = 1)]
+        public Transform characterTransform;
     }
 }

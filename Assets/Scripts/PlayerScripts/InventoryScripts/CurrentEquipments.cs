@@ -10,8 +10,8 @@ namespace SzymonPeszek.PlayerScripts.Inventory
 {
     public class CurrentEquipments : MonoBehaviour
     {
-        private PlayerStats playerStats;
-        private ModularCharacterManager modularCharacterManager;
+        private PlayerStats _playerStats;
+        private ModularCharacterManager _modularCharacterManager;
 
         [Serializable]
         public class EquipmentPart
@@ -30,17 +30,17 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             }
         }
 
-        public Dictionary<ModularBodyPart, EquipmentPart> CurrentEq;
+        public Dictionary<ModularBodyPart, EquipmentPart> currentEq;
 
         private void Awake()
         {
-            playerStats = GetComponent<PlayerStats>();
-            modularCharacterManager = GetComponentInChildren<ModularCharacterManager>();
+            _playerStats = GetComponent<PlayerStats>();
+            _modularCharacterManager = GetComponentInChildren<ModularCharacterManager>();
         }
 
         private void Start()
         {
-            modularCharacterManager.SwapGender(SettingsHolder.isMale ? Gender.Male : Gender.Female);
+            _modularCharacterManager.SwapGender(SettingsHolder.isMale ? Gender.Male : Gender.Female);
 
             InitializeCurrentEquipment();
             EquipPlayerWithCurrentItems();
@@ -49,7 +49,7 @@ namespace SzymonPeszek.PlayerScripts.Inventory
 
         public void InitializeCurrentEquipment()
         {
-            CurrentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
+            currentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
                 { ModularBodyPart.Helmet, new EquipmentPart(0, ModularBodyPart.Helmet, SettingsHolder.partsID[0], SettingsHolder.partsArmor[0]) },
                 { ModularBodyPart.HeadAttachment, new EquipmentPart(1, ModularBodyPart.HeadAttachment, SettingsHolder.partsID[1], SettingsHolder.partsArmor[1]) },
                 { ModularBodyPart.Head, new EquipmentPart(2, ModularBodyPart.Head, SettingsHolder.partsID[2], SettingsHolder.partsArmor[2]) },
@@ -81,18 +81,18 @@ namespace SzymonPeszek.PlayerScripts.Inventory
 
         public void EquipPlayerWithCurrentItems()
         {
-            foreach(var kvp in CurrentEq)
+            foreach(var kvp in currentEq)
             {
                 if(kvp.Value.partID > -1)
                 {
-                    modularCharacterManager.ActivatePart(kvp.Value.eqPart, kvp.Value.partID);
+                    _modularCharacterManager.ActivatePart(kvp.Value.eqPart, kvp.Value.partID);
                 }
             }
         }
 
         public void SaveCurrentEqIds()
         {
-            foreach (var kvp in CurrentEq)
+            foreach (var kvp in currentEq)
             {
                 SettingsHolder.partsID[kvp.Value.dictID] = kvp.Value.partID;
                 SettingsHolder.partsArmor[kvp.Value.dictID] = kvp.Value.armorValue;
@@ -101,12 +101,12 @@ namespace SzymonPeszek.PlayerScripts.Inventory
 
         public void UpdateArmorValue()
         {
-            playerStats.currentArmorValue = playerStats.baseArmor + CalculateArmorOfCurrentEquipment() + 2.5f * playerStats.Defence + 0.5f * playerStats.Agility;
+            _playerStats.currentArmorValue = _playerStats.baseArmor + CalculateArmorOfCurrentEquipment() + 2.5f * _playerStats.defence + 0.5f * _playerStats.agility;
         }
 
         private float CalculateArmorOfCurrentEquipment()
         {
-            return CurrentEq.Sum(kvp => kvp.Value.armorValue);
+            return currentEq.Sum(kvp => kvp.Value.armorValue);
         }
     }
 

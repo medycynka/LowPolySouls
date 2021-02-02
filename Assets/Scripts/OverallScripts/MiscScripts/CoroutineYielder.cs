@@ -25,5 +25,8 @@ namespace SzymonPeszek.Misc
         public static WaitForSeconds jumpFirstWaiter { get; } = new WaitForSeconds(0.2f);
         public static WaitForSeconds jumpSecondWaiter { get; } = new WaitForSeconds(0.5f);
         public static WaitForSeconds disolveAfterBackStabWaiter { get; } = new WaitForSeconds(1.5f);
+        public static WaitForSeconds lesserBuffWaiter { get; } = new WaitForSeconds(10f);
+        public static WaitForSeconds mediumBuffWaiter { get; } = new WaitForSeconds(20f);
+        public static WaitForSeconds grandBuffWaiter { get; } = new WaitForSeconds(30f);
     }
 }

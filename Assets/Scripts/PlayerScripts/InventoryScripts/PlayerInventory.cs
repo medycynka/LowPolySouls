@@ -28,8 +28,8 @@ namespace SzymonPeszek.PlayerScripts.Inventory
         public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];
 
         [Header("Current Weapon Index", order = 1)]
-        public int currentRightWeaponIndex = 0;
-        public int currentLeftWeaponIndex = 0;
+        public int currentRightWeaponIndex;
+        public int currentLeftWeaponIndex;
 
         [Header("Items Lists", order = 1)]
         public List<WeaponItem> weaponsInventory;

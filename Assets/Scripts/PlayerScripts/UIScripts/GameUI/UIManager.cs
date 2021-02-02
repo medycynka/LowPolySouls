@@ -235,7 +235,8 @@ namespace SzymonPeszek.GameUI
         #endregion
 
         #region Update Inventory Tabs
-        public void UpdateAllInventoryTabs()
+
+        private void UpdateAllInventoryTabs()
         {
             UpdateWeaponInventory();
             UpdateShieldInventory();

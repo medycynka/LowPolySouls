@@ -72,7 +72,7 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
-        public void HandleLightAttack(WeaponItem weapon)
+        private void HandleLightAttack(WeaponItem weapon)
         {
             _weaponSlotManager.attackingWeapon = weapon;
 
@@ -115,8 +115,6 @@ namespace SzymonPeszek.PlayerScripts
                     PerformRbMagicAction(_playerInventory.rightWeapon);
                     break;
                 case WeaponType.Shooting:
-                    break;
-                default:
                     break;
             }
         }
@@ -181,13 +179,12 @@ namespace SzymonPeszek.PlayerScripts
                 if (enemyCharacterManager != null)
                 {
                     _playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
-                    Vector3 rotationDirection = _playerManager.transform.root.eulerAngles;
-                    rotationDirection = _hit.transform.position - _playerManager.transform.position;
+                    Vector3 rotationDirection = _hit.transform.position - _playerStats.playerTransform.position;
                     rotationDirection.y = 0;
                     rotationDirection.Normalize();
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
-                    _playerManager.transform.rotation = targetRotation;
+                    Quaternion targetRotation = Quaternion.Slerp(_playerStats.playerTransform.rotation, tr, 500 * Time.deltaTime);
+                    _playerStats.playerTransform.rotation = targetRotation;
                     
                     _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
                     enemyCharacterManager.HandleGettingBackStabbed(_playerInventory.rightWeapon.backStabDamage);

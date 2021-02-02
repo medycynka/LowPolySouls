@@ -28,9 +28,9 @@ namespace SzymonPeszek.SaveScripts
         public float currentHealth;
         public float currentStamina;
         public float baseArmor;
-        public float Strength;
-        public float Agility;
-        public float Defence;
+        public float strength;
+        public float agility;
+        public float defence;
         public float bonusHealth;
         public float bonusStamina;
         public int playerLevel;
@@ -52,7 +52,7 @@ namespace SzymonPeszek.SaveScripts
         public int[] ringIds;
         public int[] consumableIds;
 
-        // Area Menagers
+        // Area Managers
         public bool[] areaBossesAlive;
         public bool[] bonfireActivators;
 
@@ -104,9 +104,9 @@ namespace SzymonPeszek.SaveScripts
 
             #region Stats
             baseArmor = playerStats.baseArmor;
-            Strength = playerStats.Strength;
-            Agility = playerStats.Agility;
-            Defence = playerStats.Defence;
+            strength = playerStats.strength;
+            agility = playerStats.agility;
+            defence = playerStats.defence;
             bonusHealth = playerStats.bonusHealth;
             bonusStamina = playerStats.bonusStamina;
             playerLevel = playerStats.playerLevel;
@@ -135,7 +135,7 @@ namespace SzymonPeszek.SaveScripts
             bonfireActivators = new bool[3];
             for(int i = 0; i < bonfireActivators.Length; i++)
             {
-                bonfireActivators[i] = SettingsHolder.bonfiresAcrivation[i];
+                bonfireActivators[i] = SettingsHolder.bonfiresActivation[i];
             }
             #endregion
             

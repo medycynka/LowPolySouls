@@ -104,19 +104,20 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                 {
                     return;
                 }
-                
-                var dir = currentLockOnTarget.position - transform.position;
+
+                Vector3 currentLockOnTargetPosition = currentLockOnTarget.position;
+                Vector3 dir = currentLockOnTargetPosition - transform.position;
                 dir.Normalize();
                 dir.y = 0;
 
-                var targetRotation = Quaternion.LookRotation(dir);
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
                 transform.rotation = targetRotation;
 
-                dir = currentLockOnTarget.position - cameraPivotTransform.position;
+                dir = currentLockOnTargetPosition - cameraPivotTransform.position;
                 dir.Normalize();
 
                 targetRotation = Quaternion.LookRotation(dir);
-                var eulerAngle = targetRotation.eulerAngles;
+                Vector3 eulerAngle = targetRotation.eulerAngles;
                 eulerAngle.y = 0;
                 cameraPivotTransform.localEulerAngles = eulerAngle;
             }
@@ -148,8 +149,6 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             var shortestDistance = Mathf.Infinity;
             var shortestDistanceOfLeftTarget = Mathf.Infinity;
             var shortestDistanceOfRightTarget = Mathf.Infinity;
-            
-            //colliders = Physics.OverlapSphere(targetTransform.position, maximumLockOnDistance, _lockOnLayer);
             int collidersLenght = Physics.OverlapSphereNonAlloc(targetTransform.position, maximumLockOnDistance, colliders, _lockOnLayer);
 
             if (2 * collidersLenght < _collidersSize)
@@ -163,12 +162,14 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                 _collidersSize *= 2;
             }
 
+            Vector3 currentTargetPosition = targetTransform.position;
+            
             for (int i = 0; i < collidersLenght; i++)
             {
                 if (colliders[i].TryGetComponent(out CharacterManager character))
                 {
                     var lockTargetDirection = character.transform.position - targetTransform.position;
-                    var distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
+                    var distanceFromTarget = Vector3.Distance(currentTargetPosition, character.characterTransform.position);
                     var viewableAngle = Vector3.Angle(lockTargetDirection, playerManager.gameObject.transform.forward);
 
                     if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -_LockOnAngle) || !(viewableAngle < _LockOnAngle) || !(distanceFromTarget <= maximumLockOnDistance))
@@ -212,12 +213,11 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                     continue;
                 }
 
-                var relativeEnemyPosition =
-                    currentLockOnTarget.InverseTransformPoint(availableTarget.transform.position);
-                var distanceFromLeftTarget =
-                    currentLockOnTarget.transform.position.x - availableTarget.transform.position.x;
-                var distanceFromRightTarget =
-                    currentLockOnTarget.transform.position.x + availableTarget.transform.position.x;
+                Vector3 availableTargetPosition = availableTarget.characterTransform.position;
+                Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTargetPosition);
+                Vector3 currentLockOnTargetPosition = currentLockOnTarget.position;
+                float distanceFromLeftTarget = currentLockOnTargetPosition.x - availableTargetPosition.x;
+                float distanceFromRightTarget = currentLockOnTargetPosition.x + availableTargetPosition.x;
 
                 if (relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
                 {

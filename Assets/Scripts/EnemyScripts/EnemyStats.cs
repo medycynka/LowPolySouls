@@ -110,7 +110,7 @@ namespace SzymonPeszek.EnemyScripts
 
         public void DealDamage(PlayerStats playerStat, float weaponDamage)
         {
-            playerStat.TakeDamage(weaponDamage + Strength, false);
+            playerStat.TakeDamage(weaponDamage + strength, false);
         }
 
         private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed)
