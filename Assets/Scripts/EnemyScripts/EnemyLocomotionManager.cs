@@ -16,6 +16,7 @@ namespace SzymonPeszek.EnemyScripts
         public NavMeshAgent navmeshAgent;
         public NavMeshObstacle navMeshBlocker;
         public Rigidbody enemyRigidBody;
+        private Transform _navMeshTransform;
 
         [Header("A.I Movement Stats", order = 1)]
         public float stoppingDistance = 1.25f;
@@ -27,6 +28,7 @@ namespace SzymonPeszek.EnemyScripts
             _enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             navMeshBlocker = GetComponent<NavMeshObstacle>();
+            _navMeshTransform = navmeshAgent.transform;
             enemyRigidBody = GetComponent<Rigidbody>();
         }
 
@@ -45,8 +47,9 @@ namespace SzymonPeszek.EnemyScripts
                 return;
             }
 
-            Vector3 targetDirection = _enemyManager.currentTarget.transform.position - _enemyManager.transform.position;
-            _enemyManager.distanceFromTarget = Vector3.Distance(_enemyManager.currentTarget.transform.position, transform.position);
+            Vector3 currentTargetPosition = _enemyManager.currentTarget.transform.position;
+            Vector3 targetDirection = currentTargetPosition - _enemyManager.transform.position;
+            _enemyManager.distanceFromTarget = Vector3.Distance(currentTargetPosition, transform.position);
             _enemyManager.viewableAngle = Vector3.Angle(targetDirection, _enemyManager.transform.forward);
 
             if (_enemyManager.distanceFromTarget > stoppingDistance)
@@ -59,8 +62,8 @@ namespace SzymonPeszek.EnemyScripts
             }
 
             HandleRotateTowardsTarget();
-            navmeshAgent.transform.localPosition = Vector3.zero;
-            navmeshAgent.transform.localRotation = Quaternion.identity;
+            _navMeshTransform.localPosition = Vector3.zero;
+            _navMeshTransform.localRotation = Quaternion.identity;
         }
 
         public void StopMoving()
@@ -88,7 +91,7 @@ namespace SzymonPeszek.EnemyScripts
             //Rotate with pathfinding on navmesh -> make A*?
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(navmeshAgent.desiredVelocity);
+                //Vector3 relativeDirection = transform.InverseTransformDirection(navmeshAgent.desiredVelocity);
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navmeshAgent.enabled = true;

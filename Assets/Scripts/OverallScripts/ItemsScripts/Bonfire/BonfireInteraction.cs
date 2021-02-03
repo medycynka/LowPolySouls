@@ -14,14 +14,14 @@ namespace SzymonPeszek.Items.Bonfire
 {
     public class BonfireInteraction : Interactable
     {
-        BonfireManager bonfireManager;
-        PlayerStats playerStats;
-        private TextMeshProUGUI locationNameScree;
+        private BonfireManager _bonfireManager;
+        private PlayerStats _playerStats;
+        private TextMeshProUGUI _locationNameScree;
 
         private void Awake()
         {
-            bonfireManager = GetComponent<BonfireManager>();
-            locationNameScree = bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>();
+            _bonfireManager = GetComponent<BonfireManager>();
+            _locationNameScree = _bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public override void Interact(PlayerManager playerManager)
@@ -33,37 +33,37 @@ namespace SzymonPeszek.Items.Bonfire
         {
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
             animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
-            playerStats = playerManager.GetComponent<PlayerStats>();
-            bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
+            _playerStats = playerManager.GetComponent<PlayerStats>();
+            _bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
             animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
-            bonfireManager.playerManager.isRestingAtBonfire = true;
+            _bonfireManager.playerManager.isRestingAtBonfire = true;
 
-            playerStats.RefillHealth();
-            playerStats.RefillStamina();
-            bonfireManager.ActivateRestUI();
-            playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
-            bonfireManager.RespawnEnemis();
+            _playerStats.RefillHealth();
+            _playerStats.RefillStamina();
+            _bonfireManager.ActivateRestUI();
+            playerManager.currentSpawnPoint = _bonfireManager.spawnPoint;
+            _bonfireManager.RespawnEnemies();
 
-            SaveManager.SaveGame(playerManager, playerStats, playerManager.GetComponent<PlayerInventory>());
+            SaveManager.SaveGame(playerManager, _playerStats, playerManager.GetComponent<PlayerInventory>());
         }
 
         public void GetUp()
         {
             if (animatorHandler == null)
             {
-                animatorHandler = bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
+                animatorHandler = _bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
             }
 
-            bonfireManager.uiManager.UpdateSouls();
-            bonfireManager.CloseRestUI();
+            _bonfireManager.uiManager.UpdateSouls();
+            _bonfireManager.CloseRestUI();
             animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
-            bonfireManager.playerManager.isRestingAtBonfire = false;
+            _bonfireManager.playerManager.isRestingAtBonfire = false;
 
-            if(playerStats == null)
+            if(_playerStats == null)
             {
-                playerStats = bonfireManager.playerManager.GetComponent<PlayerStats>();
+                _playerStats = _bonfireManager.playerManager.GetComponent<PlayerStats>();
             }
         }
 
@@ -71,7 +71,7 @@ namespace SzymonPeszek.Items.Bonfire
         {
             if(animatorHandler == null)
             {
-                animatorHandler = bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
+                animatorHandler = _bonfireManager.playerManager.GetComponentInChildren<AnimatorHandler>();
             }
 
             StartCoroutine(TeleportToNextBonfire());
@@ -79,23 +79,23 @@ namespace SzymonPeszek.Items.Bonfire
 
         private IEnumerator TeleportToNextBonfire()
         {
-            bonfireManager.ActivateQuickMoveScreen();
-            bonfireManager.uiManager.UpdateSouls();
-            bonfireManager.playerManager.transform.position = bonfireManager.spawnPoint.transform.position;
-            bonfireManager.playerManager.transform.rotation = bonfireManager.spawnPoint.transform.rotation;
+            _bonfireManager.ActivateQuickMoveScreen();
+            _bonfireManager.uiManager.UpdateSouls();
+            _playerStats.characterTransform.position = _bonfireManager.spawnPoint.transform.position;
+            _playerStats.characterTransform.rotation = _bonfireManager.spawnPoint.transform.rotation;
 
             yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
-            bonfireManager.CloseQuickMoveScreen();
+            _bonfireManager.CloseQuickMoveScreen();
             animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
-            bonfireManager.locationScreen.SetActive(true);
-            locationNameScree.text = bonfireManager.locationName;
+            _bonfireManager.locationScreen.SetActive(true);
+            _locationNameScree.text = _bonfireManager.locationName;
 
             yield return CoroutineYielder.bonfireTeleportSecondWaiter;
 
-            bonfireManager.locationScreen.SetActive(false);
-            bonfireManager.playerManager.isRestingAtBonfire = false;
-            bonfireManager.playerManager.currentSpawnPoint = bonfireManager.spawnPoint;
+            _bonfireManager.locationScreen.SetActive(false);
+            _bonfireManager.playerManager.isRestingAtBonfire = false;
+            _bonfireManager.playerManager.currentSpawnPoint = _bonfireManager.spawnPoint;
         }
     }
 }

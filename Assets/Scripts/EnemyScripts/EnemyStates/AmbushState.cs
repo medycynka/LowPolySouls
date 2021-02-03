@@ -22,7 +22,7 @@ namespace SzymonPeszek.EnemyScripts.States
         [Header("Player Detection Layer", order = 1)]
         public LayerMask detectionLayer;
         
-        private Collider[] detectPlayer = new Collider[2];
+        private Collider[] _detectPlayer = new Collider[2];
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
@@ -34,16 +34,16 @@ namespace SzymonPeszek.EnemyScripts.States
                 }
 
                 #region Handle Target Detection
-                int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
+                int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, _detectPlayer, detectionLayer);
 
                 for (int i = 0; i < detectLength; i++)
                 {
-                    CharacterStats characterStats = detectPlayer[i].transform.GetComponent<CharacterStats>();
+                    CharacterStats characterStats = _detectPlayer[i].transform.GetComponent<CharacterStats>();
 
                     if (characterStats != null)
                     {
-                        Vector3 targetsDirection = characterStats.transform.position - enemyManager.transform.position;
-                        enemyManager.viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
+                        Vector3 targetsDirection = characterStats.characterTransform.position - enemyStats.characterTransform.position;
+                        enemyManager.viewableAngle = Vector3.Angle(targetsDirection, enemyStats.characterTransform.forward);
 
                         if (enemyManager.viewableAngle > enemyManager.minimumDetectionAngle && enemyManager.viewableAngle < enemyManager.maximumDetectionAngle)
                         {

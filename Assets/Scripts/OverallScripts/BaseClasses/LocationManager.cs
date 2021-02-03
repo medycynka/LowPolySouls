@@ -27,11 +27,11 @@ namespace SzymonPeszek.BaseClasses
         public AudioClip[] footSteps;
 
         [Header("Bools", order = 1)]
-        public bool isInside = false;
-        public bool isPlayerDead = false;
+        public bool isInside;
+        public bool isPlayerDead;
 
         [Header("Player Stats", order = 1)]
         public PlayerStats playerStats;
-        public const string playerTag = "Player";
+        protected const string PlayerTag = "Player";
     }
 }

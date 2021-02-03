@@ -20,7 +20,7 @@ namespace SzymonPeszek.Items.Weapons
             PickUpItem(playerManager);
         }
 
-        public override void PickUpItem(PlayerManager playerManager)
+        protected override void PickUpItem(PlayerManager playerManager)
         {
             base.PickUpItem(playerManager);
 

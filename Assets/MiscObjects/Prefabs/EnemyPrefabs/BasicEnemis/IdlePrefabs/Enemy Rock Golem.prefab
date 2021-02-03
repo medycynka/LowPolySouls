@@ -699,6 +699,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 3060950883069289617}
   backStabBoxCollider: {fileID: 7384066787226523223}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
   enemyLocomotionManager: {fileID: 0}
   enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
@@ -745,14 +746,14 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
   animator: {fileID: 0}
   healthBar: {fileID: 1130068639}
-  healtBarFill: {fileID: 228082683}
+  healthBarFill: {fileID: 228082683}
   damageValue: {fileID: 555634556}
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
@@ -789,9 +790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChanse: 0.45
-  weaponChanse: 0.25
-  equipmentChanse: 0.2
+  consumableChance: 0.45
+  weaponChance: 0.25
+  equipmentChance: 0.2
   consumableDropPool:
   - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}

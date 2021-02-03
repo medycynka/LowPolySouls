@@ -20,7 +20,7 @@ namespace SzymonPeszek.Items
             PickUpItem(playerManager);
         }
 
-        public override void PickUpItem(PlayerManager playerManager)
+        protected override void PickUpItem(PlayerManager playerManager)
         {
             base.PickUpItem(playerManager);
 
@@ -84,8 +84,6 @@ namespace SzymonPeszek.Items
                                     playerInventory.ringsInventory.Add((EquipmentItem) item);
                                     uIManager.GetRingInventorySlot();
                                     uIManager.UpdateRingInventory();
-                                    break;
-                                default:
                                     break;
                             }
                         }

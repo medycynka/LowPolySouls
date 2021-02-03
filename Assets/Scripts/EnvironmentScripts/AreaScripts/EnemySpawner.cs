@@ -13,8 +13,8 @@ namespace SzymonPeszek.Environment.Areas
 
         private List<KeyValuePair<GameObject, Vector3>> _spawnList;
         private List<GameObject> _enemiesAlive;
-        private int FrameCheckRate = 3;
-        private int RefreshCheckVal = 0;
+        private readonly int FrameCheckRate = 3;
+        private const int RefreshCheckVal = 0;
 
         private void Start()
         {
@@ -30,9 +30,9 @@ namespace SzymonPeszek.Environment.Areas
 
         private void ClearAliveEnemies()
         {
-            foreach(var enemy_ in _enemiesAlive)
+            foreach(var enemy in _enemiesAlive)
             {
-                Destroy(enemy_.gameObject);
+                Destroy(enemy.gameObject);
             }
 
             _enemiesAlive.Clear();

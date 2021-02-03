@@ -10,8 +10,8 @@ namespace SzymonPeszek.Items.Bonfire
     {
         [Header("Bonfire Manager", order = 0)]
         [Header("Activation properties", order = 1)]
-        public bool isActivated = false;
-        public bool showRestPopUp = false;
+        public bool isActivated;
+        public bool showRestPopUp;
         public Light bonfireLight;
         public ParticleSystem bonfireParticleSystem;
         public GameObject bonfireLitScreen;
@@ -30,7 +30,7 @@ namespace SzymonPeszek.Items.Bonfire
         public string locationName = "Test Field";
         public GameObject locationListScreen;
         public GameObject locationScreen;
-        public int qucikMoveID = 0;
+        public int quickMoveID;
         public GameObject spawnPoint;
 
         [Header("Enemy Spawner", order = 1)]
@@ -80,7 +80,7 @@ namespace SzymonPeszek.Items.Bonfire
             quickMoveScreen.SetActive(false);
         }
 
-        public void RespawnEnemis()
+        public void RespawnEnemies()
         {
             if (!isBossBonfire)
             {

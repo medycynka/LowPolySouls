@@ -29,7 +29,7 @@ namespace SzymonPeszek.EnemyScripts
         public bool shouldDrop = true;
         public bool isAlive = true;
         public bool deadFromBackStab;
-        public bool shouldFollowTarget = false;
+        public bool shouldFollowTarget;
 
         [Header("Current Target", order = 2)]
         public CharacterStats currentTarget;
@@ -52,9 +52,9 @@ namespace SzymonPeszek.EnemyScripts
         public float disolveEdgeWidth = 0.015f;
         public float disolveNoiseScale = 30.0f;
         public float disolveFresnelPower = 15.0f;
-        public float currentDisolveTime = 0.0f;
+        public float currentDisolveTime;
         public float disolveDurationTime = 4.0f;
-        public bool shouldGlow = false;
+        public bool shouldGlow;
         public float objectDestructionDuration = 5.0f;
 
         private void Awake()
@@ -78,10 +78,11 @@ namespace SzymonPeszek.EnemyScripts
 
             foreach (var r in renders)
             {
-                r.material.SetFloat(_edgeWidthId, disolveEdgeWidth);
-                r.material.SetFloat(_noiseScaleId, disolveNoiseScale);
-                r.material.SetFloat(_fresnelPowerId, disolveFresnelPower);
-                _characterMaterials.Add(r.material);
+                Material mat = r.material;
+                mat.SetFloat(_edgeWidthId, disolveEdgeWidth);
+                mat.SetFloat(_noiseScaleId, disolveNoiseScale);
+                mat.SetFloat(_fresnelPowerId, disolveFresnelPower);
+                _characterMaterials.Add(mat);
             }
         }
 

@@ -61,14 +61,14 @@ namespace SzymonPeszek.Environment.Areas
             }
         }
 
-        public void SetExitFootSteps(AudioClip[] footSteps)
+        public void SetExitFootSteps(AudioClip[] footStep)
         {
-            _footStepsOnExit = footSteps;
+            _footStepsOnExit = footStep;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(playerTag))
+            if (other.CompareTag(PlayerTag))
             {
                 isInside = true;
 
@@ -101,7 +101,7 @@ namespace SzymonPeszek.Environment.Areas
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag(playerTag))
+            if (other.CompareTag(PlayerTag))
             {
                 if (isInside && _insideReset)
                 {
@@ -112,7 +112,7 @@ namespace SzymonPeszek.Environment.Areas
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(playerTag))
+            if (other.CompareTag(PlayerTag))
             {
                 playerStats = null;
                 isInside = false;

@@ -6,6 +6,9 @@ namespace SzymonPeszek.BaseClasses
     public class CharacterStats : MonoBehaviour
     {
         [Header("Stats", order = 0)]
+        [Header("Player Transform", order = 2)]
+        public Transform characterTransform;
+        
         [Header("Health", order = 1)]
         public float healthLevel = 10f;
         public float maxHealth;

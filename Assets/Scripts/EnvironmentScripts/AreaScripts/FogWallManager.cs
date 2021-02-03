@@ -25,20 +25,13 @@ namespace SzymonPeszek.Environment.Areas
             PickUpItem(playerManager);
         }
 
-        public override void PickUpItem(PlayerManager playerManager)
+        protected override void PickUpItem(PlayerManager playerManager)
         {
             boxCollider.enabled = false;
 
             base.PickUpItem(playerManager);
 
-            if (shouldDestroy)
-            {
-                StartCoroutine(DestroyFog(playerManager));
-            }
-            else
-            {
-                StartCoroutine(RemoveFog(playerManager));
-            }
+            StartCoroutine(shouldDestroy ? DestroyFog(playerManager) : RemoveFog(playerManager));
         }
 
         private IEnumerator DestroyFog(PlayerManager playerManager)

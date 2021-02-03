@@ -35,7 +35,7 @@ namespace SzymonPeszek.Environment.Sounds
         
         private AudioSource _audioSource;
         private bool _playFootsteps = true;
-        private float _currTime = 0.0f;
+        private float _currTime;
 
         private void Awake()
         {
@@ -178,7 +178,7 @@ namespace SzymonPeszek.Environment.Sounds
             
         }
         
-        private AudioClip GetRandomClip(AudioClip[] clips)
+        private static AudioClip GetRandomClip(AudioClip[] clips)
         {
             return clips[Random.Range(0, clips.Length)];
         }

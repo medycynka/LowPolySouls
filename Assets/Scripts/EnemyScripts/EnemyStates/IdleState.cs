@@ -8,7 +8,7 @@ namespace SzymonPeszek.EnemyScripts.States
 
     public class IdleState : State
     {
-        [Header("Persue Target State", order = 0)]
+        [Header("Pursue Target State", order = 0)]
         [Header("Possible After States", order = 1)]
         public PursueTargetState pursueTargetState;
         public DeathState deathState;
@@ -29,6 +29,7 @@ namespace SzymonPeszek.EnemyScripts.States
 
                 #region Handle Enemy Target Detection
                 int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
+                Transform currentTransform = transform;
                 
                 for (int i = 0; i < detectLength; i++)
                 {
@@ -38,8 +39,8 @@ namespace SzymonPeszek.EnemyScripts.States
                     {
                         //CHECK FOR TEAM ID
 
-                        Vector3 targetDirection = characterStats.transform.position - transform.position;
-                        float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+                        Vector3 targetDirection = characterStats.transform.position - currentTransform.position;
+                        float viewableAngle = Vector3.Angle(targetDirection, currentTransform.forward);
 
                         if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                         {

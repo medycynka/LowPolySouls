@@ -253,14 +253,7 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             Vector3 newLockedPosition = new Vector3(0, lockedPivotPosition);
             Vector3 newUnlockedPosition = new Vector3(0, unlockedPivotPosition);
 
-            if (currentLockOnTarget != null)
-            {
-                cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity, Time.deltaTime);
-            }
-            else
-            {
-                cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
-            }
+            cameraPivotTransform.localPosition = currentLockOnTarget != null ? Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity, Time.deltaTime) : Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
         }
 
         private void OnDrawGizmosSelected()

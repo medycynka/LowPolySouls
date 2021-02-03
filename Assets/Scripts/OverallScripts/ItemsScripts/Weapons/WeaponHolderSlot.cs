@@ -16,7 +16,7 @@ namespace SzymonPeszek.Items.Weapons
         public bool isRightHandSlot;
         public bool isBackSlot;
 
-        public void UnloadWeapon()
+        private void UnloadWeapon()
         {
             if (currentWeaponModel != null)
             {
@@ -42,7 +42,7 @@ namespace SzymonPeszek.Items.Weapons
                 return;
             }
 
-            GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject;
+            GameObject model = Instantiate(weaponItem.modelPrefab);
             if (model != null)
             {
                 if (parentOverride != null)

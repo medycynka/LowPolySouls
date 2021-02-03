@@ -179,12 +179,12 @@ namespace SzymonPeszek.PlayerScripts
                 if (enemyCharacterManager != null)
                 {
                     _playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
-                    Vector3 rotationDirection = _hit.transform.position - _playerStats.playerTransform.position;
+                    Vector3 rotationDirection = _hit.transform.position - _playerStats.characterTransform.position;
                     rotationDirection.y = 0;
                     rotationDirection.Normalize();
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(_playerStats.playerTransform.rotation, tr, 500 * Time.deltaTime);
-                    _playerStats.playerTransform.rotation = targetRotation;
+                    Quaternion targetRotation = Quaternion.Slerp(_playerStats.characterTransform.rotation, tr, 500 * Time.deltaTime);
+                    _playerStats.characterTransform.rotation = targetRotation;
                     
                     _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
                     enemyCharacterManager.HandleGettingBackStabbed(_playerInventory.rightWeapon.backStabDamage);

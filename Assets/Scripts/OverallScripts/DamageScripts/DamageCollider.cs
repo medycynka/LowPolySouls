@@ -8,7 +8,7 @@ namespace SzymonPeszek.Damage
     public class DamageCollider : MonoBehaviour
     {
         [Header("Damage Collider", order = 0)]
-        [SerializeField] Collider damageCollider;
+        [SerializeField] private Collider damageCollider;
 
         [Header("Weapon Damage", order = 1)]
         public float currentWeaponDamage = 25;
@@ -26,7 +26,7 @@ namespace SzymonPeszek.Damage
             damageCollider.enabled = true;
         }
 
-        public void DisaleDamageCollider()
+        public void DisableDamageCollider()
         {
             if (damageCollider != null)
             {

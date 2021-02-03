@@ -26,7 +26,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             {
                 if (bonfireList[i].isActivated)
                 {
-                    bonfireList[i].qucikMoveID = id;
+                    bonfireList[i].quickMoveID = id;
                     Instantiate(buttonPrefab, backgroundScreen.transform);
 
                     buttonPrefab.GetComponent<QuickMoveSlot>().AddSlot(bonfireList[i].gameObject);

@@ -31,7 +31,7 @@ namespace SzymonPeszek.BaseClasses
             
         }
 
-        public virtual void PickUpItem(PlayerManager playerManager)
+        protected virtual void PickUpItem(PlayerManager playerManager)
         {
             playerInventory = playerManager.GetComponent<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();

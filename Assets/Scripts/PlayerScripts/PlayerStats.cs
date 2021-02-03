@@ -39,7 +39,7 @@ namespace SzymonPeszek.PlayerScripts
         public string playerName = SettingsHolder.playerName;
         public int playerLevel = 12;
         public float soulsAmount = 0;
-        public float currentArmorValue = 0;
+        public float currentArmorValue;
         public float bonusBuffAttack = 1.0f;
         public float bonusBuffDefence = 1.0f;
         public float bonusBuffMagic = 1.0f;
@@ -53,15 +53,12 @@ namespace SzymonPeszek.PlayerScripts
 
         [Header("Bools", order = 2)]
         public bool isPlayerAlive = true;
-        public bool isJumpDeath = false;
+        public bool isJumpDeath;
 
         private EnemySpawner[] _enemiesSpawners;
         private RectTransform _hpBarTransform;
         private RectTransform _staminaBarTransform;
         private RectTransform _focusBarTransform;
-
-        [Header("Player Transform", order = 2)]
-        public Transform playerTransform;
 
         private void Awake()
         {
@@ -70,7 +67,7 @@ namespace SzymonPeszek.PlayerScripts
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
             focusBar = FindObjectOfType<FocusBar>();
-            playerTransform = GetComponent<Transform>();
+            characterTransform = GetComponent<Transform>();
         }
 
         private void Start()
@@ -176,11 +173,11 @@ namespace SzymonPeszek.PlayerScripts
             currentFocus = maxFocus;
 
             float currentPixelWidth = 180f * (maxFocus / 100f);
-            float remapedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
-            float lerpedPixelWidth = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remapedPixelWidth), remapedPixelWidth);
+            float remappedPixelWidth = currentPixelWidth.Remap(100.0f, 1337.5f, 0.0f, 1.0f);
+            float widthToSet = Mathf.Lerp(180.0f, Screen.width - Mathf.Lerp(60, 120, remappedPixelWidth), remappedPixelWidth);
 
-            _focusBarTransform.anchoredPosition = new Vector2(120f + (lerpedPixelWidth - 180f) / 2f, -115f);
-            _focusBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lerpedPixelWidth);
+            _focusBarTransform.anchoredPosition = new Vector2(120f + (widthToSet - 180f) / 2f, -115f);
+            _focusBarTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, widthToSet);
             
             focusBar.SetMaxFocus(maxFocus);
             focusBar.SetCurrentFocus(currentFocus);
@@ -241,15 +238,19 @@ namespace SzymonPeszek.PlayerScripts
             switch (buffType)
             {
                 case StatsBuffType.Attack:
+                    StopCoroutine(BuffAttack(buffRang, value));
                     StartCoroutine(BuffAttack(buffRang, value));
                     break;
                 case StatsBuffType.Defence:
+                    StopCoroutine(BuffDefence(buffRang, value));
                     StartCoroutine(BuffDefence(buffRang, value));
                     break;
                 case StatsBuffType.MagicAttack:
+                    StopCoroutine(BuffMagic(buffRang, value));
                     StartCoroutine(BuffMagic(buffRang, value));
                     break;
                 case StatsBuffType.Endurance:
+                    StopCoroutine(BuffEndurance(buffRang, value));
                     StartCoroutine(BuffEndurance(buffRang, value));
                     break;
             }
@@ -348,9 +349,9 @@ namespace SzymonPeszek.PlayerScripts
             _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
-            playerTransform.position = _playerManager.currentSpawnPoint.transform.position;
-            playerTransform.rotation = _playerManager.currentSpawnPoint.transform.rotation;
-            // Respawn enemis and refresh boss health if alive
+            characterTransform.position = _playerManager.currentSpawnPoint.transform.position;
+            characterTransform.rotation = _playerManager.currentSpawnPoint.transform.rotation;
+            // Respawn enemies and refresh boss health if alive
             RespawnEnemiesOnDead();
 
             yield return CoroutineYielder.playerRespawnWaiter;

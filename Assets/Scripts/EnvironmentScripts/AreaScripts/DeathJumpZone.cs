@@ -25,7 +25,7 @@ namespace SzymonPeszek.Environment.Areas
 
                 _playerStats.isJumpDeath = true;
                 _playerStats.jumpDeathDropPosition = dropPosition.position;
-                _playerStats.TakeDamage(1500f, false);
+                _playerStats.TakeDamage(2000f, false);
             }
         }
 

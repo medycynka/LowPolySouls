@@ -3,55 +3,57 @@ using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.PlayerScripts.Controller;
 using SzymonPeszek.Damage;
 using SzymonPeszek.GameUI.Slots;
+using SzymonPeszek.Misc;
+using SzymonPeszek.PlayerScripts.Animations;
 
 
 namespace SzymonPeszek.Items.Weapons
 {
     public class WeaponSlotManager : MonoBehaviour
     {
-        private PlayerManager playerManager;
+        private PlayerManager _playerManager;
 
         [Header("Weapon Slot Manager", order = 0)]
         [Header("Current Weapon", order = 1)]
         public WeaponItem attackingWeapon;
 
-        private WeaponHolderSlot leftHandSlot;
-        private WeaponHolderSlot rightHandSlot;
-        private WeaponHolderSlot backSlot;
+        private WeaponHolderSlot _leftHandSlot;
+        private WeaponHolderSlot _rightHandSlot;
+        private WeaponHolderSlot _backSlot;
 
-        private DamageCollider leftHandDamageCollider;
-        private DamageCollider rightHandDamageCollider;
+        private DamageCollider _leftHandDamageCollider;
+        private DamageCollider _rightHandDamageCollider;
 
-        private Animator animator;
+        private AnimatorHandler _animatorHandler;
 
         [Header("Quick Slots", order = 1)]
         public QuickSlotsUI quickSlotsUI;
 
-        private PlayerStats playerStats;
-        private InputHandler inputHandler;
-        private WeaponHolderSlot[] weaponHolderSlots;
+        private PlayerStats _playerStats;
+        private InputHandler _inputHandler;
+        private WeaponHolderSlot[] _weaponHolderSlots;
 
         private void Awake()
         {
-            playerManager = GetComponentInParent<PlayerManager>();
-            animator = GetComponent<Animator>();
-            playerStats = GetComponentInParent<PlayerStats>();
-            inputHandler = GetComponentInParent<InputHandler>();
+            _playerManager = GetComponentInParent<PlayerManager>();
+            _animatorHandler = GetComponent<AnimatorHandler>();
+            _playerStats = GetComponentInParent<PlayerStats>();
+            _inputHandler = GetComponentInParent<InputHandler>();
             quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
-            weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-            foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
+            _weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+            foreach (WeaponHolderSlot weaponSlot in _weaponHolderSlots)
             {
                 if (weaponSlot.isLeftHandSlot)
                 {
-                    leftHandSlot = weaponSlot;
+                    _leftHandSlot = weaponSlot;
                 }
                 else if (weaponSlot.isRightHandSlot)
                 {
-                    rightHandSlot = weaponSlot;
+                    _rightHandSlot = weaponSlot;
                 }
                 else if (weaponSlot.isBackSlot) {
-                    backSlot = weaponSlot;
+                    _backSlot = weaponSlot;
                 }
             }
         }
@@ -63,58 +65,58 @@ namespace SzymonPeszek.Items.Weapons
                 #region Handle Left Weapon Idle Animation
                 if (weaponItem != null)
                 {
-                    animator.CrossFade(weaponItem.leftHandIdle, 0.2f);
+                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.leftHandIdle], false);
                 }
                 else
                 {
-                    animator.CrossFade("Left Arm Empty", 0.2f);
+                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LeftArmEmptyName], false);
                 }
                 #endregion
 
-                if (!inputHandler.twoHandFlag)
+                if (!_inputHandler.twoHandFlag)
                 {
-                    leftHandSlot.currentWeapon = weaponItem;
-                    leftHandSlot.LoadWeaponModel(weaponItem);
+                    _leftHandSlot.currentWeapon = weaponItem;
+                    _leftHandSlot.LoadWeaponModel(weaponItem);
                     LoadLeftWeaponDamageCollider();
-                    quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+                    quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
                 }
                 else
                 {
-                    backSlot.currentWeapon = weaponItem;
-                    backSlot.LoadWeaponModel(weaponItem);
-                    quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+                    _backSlot.currentWeapon = weaponItem;
+                    _backSlot.LoadWeaponModel(weaponItem);
+                    quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
                 }
             }
             else
             {
-                if (inputHandler.twoHandFlag)
+                if (_inputHandler.twoHandFlag)
                 {
-                    backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
-                    leftHandSlot.UnloadWeaponAndDestroy();
-                    animator.CrossFade(weaponItem.thIdle, 0.2f);
+                    _backSlot.LoadWeaponModel(_leftHandSlot.currentWeapon);
+                    _leftHandSlot.UnloadWeaponAndDestroy();
+                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.thIdle], false);
                 }
                 else
                 {
                     #region Handle Right Weapon Idle Animation
 
-                    animator.CrossFade("Both Arms Empty", 0.2f);
-                    backSlot.UnloadWeaponAndDestroy();
+                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BothArmsEmptyName], false);
+                    _backSlot.UnloadWeaponAndDestroy();
 
                     if (weaponItem != null)
                     {
-                        animator.CrossFade(weaponItem.rightHandIdle, 0.2f);
+                        _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.rightHandIdle], false);
                     }
                     else
                     {
-                        animator.CrossFade("Right Arm Empty", 0.2f);
+                        _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RightArmEmptyName], false);
                     }
                     #endregion
                 }
 
-                rightHandSlot.currentWeapon = weaponItem;
-                rightHandSlot.LoadWeaponModel(weaponItem);
+                _rightHandSlot.currentWeapon = weaponItem;
+                _rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
-                quickSlotsUI.UpdateWeaponQuickSlotsUI(isLeft, weaponItem);
+                quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
             }
         }
 
@@ -122,30 +124,30 @@ namespace SzymonPeszek.Items.Weapons
 
         private void LoadLeftWeaponDamageCollider()
         {
-            leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            _leftHandDamageCollider = _leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
         private void LoadRightWeaponDamageCollider()
         {
-            rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            _rightHandDamageCollider = _rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
         public void OpenDamageCollider()
         {
-            if (playerManager.isUsingRightHand)
+            if (_playerManager.isUsingRightHand)
             {
-                rightHandDamageCollider.EnableDamageCollider();
+                _rightHandDamageCollider.EnableDamageCollider();
             }
-            else if (playerManager.isUsingLeftHand)
+            else if (_playerManager.isUsingLeftHand)
             {
-                leftHandDamageCollider.EnableDamageCollider();
+                _leftHandDamageCollider.EnableDamageCollider();
             }
         }
 
         public void CloseDamageCollider()
         {
-            rightHandDamageCollider.DisaleDamageCollider();
-            leftHandDamageCollider.DisaleDamageCollider();
+            _rightHandDamageCollider.DisableDamageCollider();
+            _leftHandDamageCollider.DisableDamageCollider();
         }
 
         #endregion
@@ -154,22 +156,22 @@ namespace SzymonPeszek.Items.Weapons
 
         public void DrainStaminaLightAttack()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohLightAttackMultiplier));
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohLightAttackMultiplier));
         }
 
         public void DrainStaminaHeavyAttack()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohHeavyAttackMultiplier));
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohHeavyAttackMultiplier));
         }
 
         public void DrainStaminaLightAttackTH()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thLightAttackMultiplier));
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thLightAttackMultiplier));
         }
 
         public void DrainStaminaHeavyAttackTH()
         {
-            playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thHeavyAttackMultiplier));
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thHeavyAttackMultiplier));
         }
 
         #endregion

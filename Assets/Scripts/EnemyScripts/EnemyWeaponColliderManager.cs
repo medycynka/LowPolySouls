@@ -22,7 +22,7 @@ namespace SzymonPeszek.EnemyScripts
 
         public void CloseDamageCollider()
         {
-            damageCollider.DisaleDamageCollider();
+            damageCollider.DisableDamageCollider();
         }
     }
 }

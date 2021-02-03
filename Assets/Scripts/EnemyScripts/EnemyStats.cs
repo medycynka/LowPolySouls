@@ -21,7 +21,7 @@ namespace SzymonPeszek.EnemyScripts
 
         [Header("Health Bar", order = 2)]
         public GameObject healthBar;
-        public Image healtBarFill;
+        public Image healthBarFill;
         public TextMeshProUGUI damageValue;
 
         [Header("Souls & souls target", order = 2)]
@@ -34,11 +34,19 @@ namespace SzymonPeszek.EnemyScripts
         public BossAreaManager bossAreaManager;
         public Slider bossHpSlider;
 
+        private Transform _mainCameraTransform;
+
         private void Awake()
         {
             _enemyManager = GetComponent<EnemyManager>();
             animator = GetComponentInChildren<EnemyAnimationManager>();
             playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+            characterTransform = GetComponent<Transform>();
+
+            if (!(Camera.main is null))
+            {
+                _mainCameraTransform = Camera.main.transform;
+            }
         }
 
         void Start()
@@ -50,7 +58,7 @@ namespace SzymonPeszek.EnemyScripts
         {
             if (!isBoss)
             {
-                healthBar.transform.LookAt(Camera.main.transform);
+                healthBar.transform.LookAt(_mainCameraTransform);
                 healthBar.transform.Rotate(0, 180, 0);
             }
         }
@@ -77,7 +85,7 @@ namespace SzymonPeszek.EnemyScripts
             {
                 maxHealth = SetMaxHealthFromHealthLevel();
                 currentHealth = maxHealth;
-                healtBarFill.fillAmount = 1f;
+                healthBarFill.fillAmount = 1f;
                 healthBar.SetActive(false);
             }
         }
@@ -118,7 +126,7 @@ namespace SzymonPeszek.EnemyScripts
             _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
             healthBar.SetActive(true);
             currentHealth -= damage;
-            healtBarFill.fillAmount = currentHealth / maxHealth;
+            healthBarFill.fillAmount = currentHealth / maxHealth;
             damageValue.text = damage.ToString();
 
             if (currentHealth > 0)

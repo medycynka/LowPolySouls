@@ -30,8 +30,9 @@ namespace SzymonPeszek.EnemyScripts.States
 
                 enemyManager.enemyLocomotionManager.HandleRotateTowardsTarget();
 
-                Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-                enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+                Vector3 currentTargetPosition = enemyManager.currentTarget.transform.position;
+                Vector3 targetDirection = currentTargetPosition - transform.position;
+                enemyManager.distanceFromTarget = Vector3.Distance(currentTargetPosition, enemyManager.transform.position);
                 enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
                 if (enemyManager.isPreformingAction)
@@ -81,9 +82,11 @@ namespace SzymonPeszek.EnemyScripts.States
 
         private void GetNewAttack(EnemyManager enemyManager)
         {
-            Vector3 targetsDirection = enemyManager.currentTarget.transform.position - transform.position;
+            Vector3 currTransformPosition = enemyManager.transform.position;
+            Vector3 currTargetPosition = enemyManager.currentTarget.transform.position;
+            Vector3 targetsDirection = currTargetPosition - currTransformPosition;
             float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-            enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+            enemyManager.distanceFromTarget = Vector3.Distance(currTargetPosition, currTransformPosition);
 
             int maxScore = 0;
 

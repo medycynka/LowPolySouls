@@ -18,7 +18,7 @@ namespace SzymonPeszek.Items.Consumable
             PickUpItem(playerManager);
         }
 
-        public override void PickUpItem(PlayerManager playerManager)
+        protected override void PickUpItem(PlayerManager playerManager)
         {
             base.PickUpItem(playerManager);
 
