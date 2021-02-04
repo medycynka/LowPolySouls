@@ -23,6 +23,7 @@ TagManager:
   - Collision Blocker
   - UI Settings
   - Inventory Holder
+  - Destructible
   layers:
   - Default
   - TransparentFX

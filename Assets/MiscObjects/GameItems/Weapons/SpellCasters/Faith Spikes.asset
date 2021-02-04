@@ -50,5 +50,5 @@ MonoBehaviour:
   thHeavyAttackMultiplier: 0
   weaponType: 1
   meleeType: 9
-  castingType: 0
+  castingType: 2
   shootingType: 3

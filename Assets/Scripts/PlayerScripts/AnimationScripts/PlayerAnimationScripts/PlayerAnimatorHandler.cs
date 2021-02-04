@@ -13,6 +13,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         private PlayerStats _playerStats;
 
         public bool canRotate;
+        public Transform spellProjectilesTransform;
         
         public void Initialize()
         {

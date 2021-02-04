@@ -4,7 +4,6 @@ using SzymonPeszek.Enums;
 using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.PlayerScripts.Animations;
 using SzymonPeszek.Misc;
-using SzymonPeszek.PlayerScripts.Inventory;
 
 
 namespace SzymonPeszek.Items.Spells
