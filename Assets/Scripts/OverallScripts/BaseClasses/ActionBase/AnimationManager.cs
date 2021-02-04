@@ -24,6 +24,11 @@ namespace SzymonPeszek.BaseClasses
             anim.SetBool(isEnemy ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName] : StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName], isInteracting);
             anim.CrossFade(targetAnim, 0.2f);
         }
+
+        public virtual void TakeCriticalDamageAnimationEvent()
+        {
+            
+        }
     }
 
 }

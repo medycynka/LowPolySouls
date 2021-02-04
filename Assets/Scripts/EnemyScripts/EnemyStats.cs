@@ -85,12 +85,18 @@ namespace SzymonPeszek.EnemyScripts
             {
                 maxHealth = SetMaxHealthFromHealthLevel();
                 currentHealth = maxHealth;
+
+                if (healthBarFill == null)
+                {
+                    healthBarFill = healthBar.GetComponentInChildren<Image>();
+                }
+                
                 healthBarFill.fillAmount = 1f;
                 healthBar.SetActive(false);
             }
         }
 
-        public void TakeDamage(float damage, bool isBackStabbed)
+        public void TakeDamage(float damage, bool isBackStabbed, bool isRiposted = false)
         {
             if (_enemyManager.isAlive)
             {
@@ -101,7 +107,7 @@ namespace SzymonPeszek.EnemyScripts
 
                     if (currentHealth > 0)
                     {
-                        animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
+                        animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
                     }
                     else
                     {
@@ -111,17 +117,17 @@ namespace SzymonPeszek.EnemyScripts
                 }
                 else
                 {
-                    StartCoroutine(UpdateEnemyHealthBar(damage, isBackStabbed));
+                    StartCoroutine(UpdateEnemyHealthBar(damage, isBackStabbed, isRiposted));
                 }
             }
         }
 
         public void DealDamage(PlayerStats playerStat, float weaponDamage)
         {
-            playerStat.TakeDamage(weaponDamage + strength, false);
+            playerStat.TakeDamage(weaponDamage + strength);
         }
 
-        private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed)
+        private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed, bool isRiposted)
         {
             _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
             healthBar.SetActive(true);

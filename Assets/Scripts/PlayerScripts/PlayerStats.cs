@@ -19,7 +19,7 @@ namespace SzymonPeszek.PlayerScripts
     {
         private PlayerManager _playerManager;
         private WeaponSlotManager _weaponSlotManager;
-        private AnimatorHandler _animatorHandler;
+        private PlayerAnimatorHandler _playerAnimatorHandler;
 
         [Header("Player Properties", order = 1)]
 
@@ -62,7 +62,7 @@ namespace SzymonPeszek.PlayerScripts
 
         private void Awake()
         {
-            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             uiManager = FindObjectOfType<UIManager>();
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
@@ -190,7 +190,7 @@ namespace SzymonPeszek.PlayerScripts
             //UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
-        public void TakeDamage(float damage, bool isBackStabbed)
+        public void TakeDamage(float damage, bool isBackStabbed = false, bool isRiposted = false)
         {
             if (isPlayerAlive && !_playerManager.isInvulnerable)
             {
@@ -198,7 +198,7 @@ namespace SzymonPeszek.PlayerScripts
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
+                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
 
                 if (currentHealth <= 0)
                 {
@@ -317,19 +317,19 @@ namespace SzymonPeszek.PlayerScripts
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
-            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
+            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
             
             if (isJumpDeath)
             {
-                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LayDownName], true);
+                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LayDownName], true);
             }
             else if(isBackStabbed)
             {
-                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
+                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
             }
             else
             {
-                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Death01Name], true);
+                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Death01Name], true);
             }
 
             isPlayerAlive = false;
@@ -346,7 +346,7 @@ namespace SzymonPeszek.PlayerScripts
 
             youDiedLogo.SetActive(false);
             _playerManager.quickMoveScreen.SetActive(true);
-            _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
+            _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
             characterTransform.position = _playerManager.currentSpawnPoint.transform.position;
@@ -357,7 +357,7 @@ namespace SzymonPeszek.PlayerScripts
             yield return CoroutineYielder.playerRespawnWaiter;
             
             isPlayerAlive = true;
-            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
+            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
             _playerManager.quickMoveScreen.SetActive(false);
 
             if (isJumpDeath)

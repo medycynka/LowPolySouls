@@ -22,10 +22,11 @@ namespace SzymonPeszek.Items.Weapons
         public Vector3 backSlotRotation;
         public float backSlotScale = 1.0f;
 
-        [Header("Weapon Stats", order = 2)]
+        [Header("Weapon Stats", order = 2)] 
+        public float baseAttack = 25f;
         public float lightAttackDamageMult = 1.0f;
         public float heavyAttackDamageMult = 1.5f;
-        public float backStabDamage = 50f;
+        public float criticalDamageMult = 2.5f;
         public int weight;
         public int durability;
 

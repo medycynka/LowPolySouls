@@ -65,6 +65,7 @@ namespace SzymonPeszek.Misc
         public const string OhCombo02 = "OH_Combo_02";
         public const string OhHeavyCombo01 = "OH_Heavy_Combo_01";
         public const string HealSpell = "Heal Spell";
+        public const string FireballSpell = "Fireball Cast";
         #endregion
         
         #region Enemy Attacks

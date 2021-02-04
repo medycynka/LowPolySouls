@@ -53,7 +53,7 @@ namespace SzymonPeszek.Environment.Areas
             
             yield return CoroutineYielder.fogWallRemoveFirstWaiter;
             
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FogRemoveName], true);
+            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FogRemoveName], true);
 
             yield return CoroutineYielder.fogWallRemoveSecondWaiter;
 

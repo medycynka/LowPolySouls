@@ -14,7 +14,7 @@ namespace SzymonPeszek.PlayerScripts
     public class PlayerManager : CharacterManager
     {
         private InputHandler _inputHandler;
-        private AnimatorHandler _animatorHandler;
+        private PlayerAnimatorHandler _playerAnimatorHandler;
         [Header("Player Components", order = 1)]
         [Header("Camera Component", order = 2)]
         public CameraHandler cameraHandler;
@@ -74,7 +74,7 @@ namespace SzymonPeszek.PlayerScripts
         private void Start()
         {
             _inputHandler = GetComponent<InputHandler>();
-            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _playerStats = GetComponent<PlayerStats>();
             _pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
@@ -86,12 +86,12 @@ namespace SzymonPeszek.PlayerScripts
         {
             float delta = Time.deltaTime;
             
-            isInteracting = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
-            canDoCombo = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
-            isUsingRightHand = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
-            isUsingLeftHand = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
-            isInvulnerable = _animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
-            _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
+            isInteracting = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
+            isUsingRightHand = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
+            isUsingLeftHand = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
+            isInvulnerable = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
+            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
 
             _inputHandler.TickInput(delta);
             _playerLocomotion.HandleRollingAndSprinting(delta);

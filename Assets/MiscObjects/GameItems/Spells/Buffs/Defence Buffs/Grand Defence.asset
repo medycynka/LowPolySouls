@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: Grand Defence
   itemId: 8
   itemType: 10
-  spellWarmUpFX: {fileID: 177120, guid: e588452f7723c0c429de60f7a9d28e9e, type: 3}
-  spellCastFX: {fileID: 157402, guid: 8e537a24a0db5ef418ee74c34aca2151, type: 3}
+  spellWarmUpFX: {fileID: 177120, guid: 0428c5aff3810944f86dfe45d1a60a70, type: 3}
+  spellCastFX: {fileID: 157402, guid: a512ac3daed3f8b41b0c01612d41ba24, type: 3}
   spellAnimation: Heal Spell
   focusPointCost: 60
   spellType: 0

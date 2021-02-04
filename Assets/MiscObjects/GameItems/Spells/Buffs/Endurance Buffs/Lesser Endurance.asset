@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: Lesser Endurance
   itemId: 12
   itemType: 10
-  spellWarmUpFX: {fileID: 177120, guid: e588452f7723c0c429de60f7a9d28e9e, type: 3}
-  spellCastFX: {fileID: 157402, guid: 8e537a24a0db5ef418ee74c34aca2151, type: 3}
+  spellWarmUpFX: {fileID: 177120, guid: de0de5e1cc7c6a2488a379068358485a, type: 3}
+  spellCastFX: {fileID: 157402, guid: 1f1e5079a645cfc48966bb8710239890, type: 3}
   spellAnimation: Heal Spell
   focusPointCost: 20
   spellType: 0

@@ -9,11 +9,15 @@ namespace SzymonPeszek.EnemyScripts.Animations
     public class EnemyAnimationManager : AnimationManager
     {
         private EnemyLocomotionManager _enemyLocomotionManager;
+        private EnemyManager _enemyManager;
+        private EnemyStats _enemyStats;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
             _enemyLocomotionManager = GetComponentInParent<EnemyLocomotionManager>();
+            _enemyManager = GetComponentInParent<EnemyManager>();
+            _enemyStats = GetComponentInParent<EnemyStats>();
 
             StaticAnimatorIds.enemyAnimationIds = new Dictionary<string, int>
             {
@@ -64,6 +68,12 @@ namespace SzymonPeszek.EnemyScripts.Animations
             {
                 _enemyLocomotionManager.enemyRigidBody.velocity = Vector3.zero;
             }
+        }
+
+        public override void TakeCriticalDamageAnimationEvent()
+        {
+            _enemyStats.TakeDamage(_enemyManager.pendingCriticalDamage, false, true);
+            _enemyManager.pendingCriticalDamage = 0.0f;
         }
     }
 

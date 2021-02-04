@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using SzymonPeszek.PlayerScripts.Animations;
 using SzymonPeszek.PlayerScripts.Controller;
 using SzymonPeszek.PlayerScripts.Inventory;
@@ -12,7 +13,7 @@ namespace SzymonPeszek.PlayerScripts
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        private AnimatorHandler _animatorHandler;
+        private PlayerAnimatorHandler _playerAnimatorHandler;
         private InputHandler _inputHandler;
         private WeaponSlotManager _weaponSlotManager;
         private PlayerInventory _playerInventory;
@@ -27,7 +28,7 @@ namespace SzymonPeszek.PlayerScripts
 
         private void Awake()
         {
-            _animatorHandler = GetComponent<AnimatorHandler>();
+            _playerAnimatorHandler = GetComponent<PlayerAnimatorHandler>();
             _weaponSlotManager = GetComponent<WeaponSlotManager>();
             _inputHandler = GetComponentInParent<InputHandler>();
             _playerInventory = GetComponentInParent<PlayerInventory>();
@@ -40,33 +41,33 @@ namespace SzymonPeszek.PlayerScripts
         {
             if (_inputHandler.comboFlag)
             {
-                _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], false);
+                _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], false);
 
                 if (lastAttack == weapon.ohLightAttack1)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack2, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.ohLightAttack2, true);
                     lastAttack = weapon.ohLightAttack2;
                 }
                 else if (lastAttack == weapon.ohLightAttack2)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack3, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.ohLightAttack3, true);
                 } 
                 else if(lastAttack == weapon.ohHeavyAttack1)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack2, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack2, true);
                 }
                 else if (lastAttack == weapon.thLightAttack1)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.thLightAttack2, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.thLightAttack2, true);
                     lastAttack = weapon.thLightAttack2;
                 }
                 else if (lastAttack == weapon.thLightAttack2)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.thLightAttack3, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.thLightAttack3, true);
                 }
                 else if (lastAttack == weapon.thHeavyAttack1)
                 {
-                    _animatorHandler.PlayTargetAnimation(weapon.thHeavyAttack2, true);
+                    _playerAnimatorHandler.PlayTargetAnimation(weapon.thHeavyAttack2, true);
                     lastAttack = weapon.thHeavyAttack2;
                 }
             }
@@ -78,12 +79,12 @@ namespace SzymonPeszek.PlayerScripts
 
             if (_inputHandler.twoHandFlag)
             {
-                _animatorHandler.PlayTargetAnimation(weapon.thLightAttack1, true);
+                _playerAnimatorHandler.PlayTargetAnimation(weapon.thLightAttack1, true);
                 lastAttack = weapon.thLightAttack1;
             }
             else
             {
-                _animatorHandler.PlayTargetAnimation(weapon.ohLightAttack1, true);
+                _playerAnimatorHandler.PlayTargetAnimation(weapon.ohLightAttack1, true);
                 lastAttack = weapon.ohLightAttack1;
             }
         }
@@ -94,12 +95,12 @@ namespace SzymonPeszek.PlayerScripts
 
             if (_inputHandler.twoHandFlag)
             {
-                _animatorHandler.PlayTargetAnimation(weapon.thHeavyAttack1, true);
+                _playerAnimatorHandler.PlayTargetAnimation(weapon.thHeavyAttack1, true);
                 lastAttack = weapon.thHeavyAttack1;
             }
             else
             {
-                _animatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack1, true);
+                _playerAnimatorHandler.PlayTargetAnimation(weapon.ohHeavyAttack1, true);
                 lastAttack = weapon.ohHeavyAttack1;
             }
         }
@@ -140,7 +141,7 @@ namespace SzymonPeszek.PlayerScripts
                     return;
                 }
 
-                _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
+                _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
                 HandleLightAttack(_playerInventory.rightWeapon);
             }
         }
@@ -154,19 +155,36 @@ namespace SzymonPeszek.PlayerScripts
             
             if (_playerInventory.currentSpell != null && _playerStats.currentFocus > 0)
             {
-                if (weapon.castingType == CastingType.Faith)
+                switch (weapon.castingType)
                 {
-                    if (_playerInventory.currentSpell.spellType == CastingType.Faith)
-                    {
-                        _playerInventory.currentSpell.AttemptToCastSpell(_animatorHandler, _playerStats);
-                    }
+                    case CastingType.Faith:
+                        if (_playerInventory.currentSpell.spellType == CastingType.Faith)
+                        {
+                            _playerInventory.currentSpell.AttemptToCastSpell(_playerAnimatorHandler, _playerStats);
+                        }
+                        
+                        break;
+                    case CastingType.Curse:
+                        if (_playerInventory.currentSpell.spellType == CastingType.Curse)
+                        {
+                            _playerInventory.currentSpell.AttemptToCastSpell(_playerAnimatorHandler, _playerStats);
+                        }
+                        break;
+                    case CastingType.Destruction:
+                        if (_playerInventory.currentSpell.spellType == CastingType.Destruction)
+                        {
+                            _playerInventory.currentSpell.AttemptToCastSpell(_playerAnimatorHandler, _playerStats);
+                        }
+                        break;
+                    case CastingType.NotCasting:
+                        break;
                 }
             }
         }
         
         private void SuccessfullyCastSpell()
         {
-            _playerInventory.currentSpell.SuccessfullyCastSpell(_animatorHandler, _playerStats);
+            _playerInventory.currentSpell.SuccessfullyCastSpell(_playerAnimatorHandler, _playerStats);
         }
         
         public void AttemptBackStabOrRiposte()
@@ -185,9 +203,12 @@ namespace SzymonPeszek.PlayerScripts
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
                     Quaternion targetRotation = Quaternion.Slerp(_playerStats.characterTransform.rotation, tr, 500 * Time.deltaTime);
                     _playerStats.characterTransform.rotation = targetRotation;
-                    
-                    _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
-                    enemyCharacterManager.HandleGettingBackStabbed(_playerInventory.rightWeapon.backStabDamage);
+
+                    float criticalHitDamage = _playerInventory.rightWeapon.criticalDamageMult * _weaponSlotManager.rightHandDamageCollider.currentWeaponDamage;
+
+                    enemyCharacterManager.pendingCriticalDamage = criticalHitDamage;
+                    _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
+                    enemyCharacterManager.HandleGettingBackStabbed();
                 }
             }
         }

@@ -24,9 +24,10 @@ MonoBehaviour:
   backSlotPosition: {x: 0, y: 0, z: 0}
   backSlotRotation: {x: 0, y: 0, z: 0}
   backSlotScale: 1
+  baseAttack: 25
   lightAttackDamageMult: 1
   heavyAttackDamageMult: 1.5
-  backStabDamage: 50
+  criticalDamageMult: 2.5
   weight: 0
   durability: 0
   rightHandIdle: Right_Arm_Idle_01

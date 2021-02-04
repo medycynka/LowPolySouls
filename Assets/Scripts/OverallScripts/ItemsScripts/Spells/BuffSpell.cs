@@ -4,6 +4,7 @@ using SzymonPeszek.Enums;
 using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.PlayerScripts.Animations;
 using SzymonPeszek.Misc;
+using SzymonPeszek.PlayerScripts.Inventory;
 
 
 namespace SzymonPeszek.Items.Spells
@@ -15,19 +16,19 @@ namespace SzymonPeszek.Items.Spells
         public BuffRang buffRang;
         public float buffAmount;
         
-        public override void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)
+        public override void AttemptToCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
         {
-            base.AttemptToCastSpell(animatorHandler, playerStats);
+            base.AttemptToCastSpell(playerAnimatorHandler, playerStats);
             
-            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
-            animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
+            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.transform);
+            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
         }
 
-        public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats)
+        public override void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
         {
-            base.SuccessfullyCastSpell(animatorHandler, playerStats);
+            base.SuccessfullyCastSpell(playerAnimatorHandler, playerStats);
             
-            GameObject instantiatedSpellFX = Instantiate(spellCastFX, animatorHandler.transform); 
+            GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerAnimatorHandler.transform); 
             playerStats.BuffPlayer(buffType, buffRang, buffAmount);
         }
     }

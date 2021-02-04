@@ -133,9 +133,9 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
-        public void HandleGettingBackStabbed(float damage)
+        public void HandleGettingBackStabbed()
         {
-            _enemyStats.TakeDamage(damage, true);
+            _enemyStats.TakeDamage(pendingCriticalDamage, true);
         }
 
         public void HandleDeath()

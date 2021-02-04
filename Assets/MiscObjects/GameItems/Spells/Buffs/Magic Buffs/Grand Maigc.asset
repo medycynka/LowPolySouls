@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: Grand Magic
   itemId: 11
   itemType: 10
-  spellWarmUpFX: {fileID: 177120, guid: e588452f7723c0c429de60f7a9d28e9e, type: 3}
-  spellCastFX: {fileID: 157402, guid: 8e537a24a0db5ef418ee74c34aca2151, type: 3}
+  spellWarmUpFX: {fileID: 177120, guid: 543187520727b514db55a4fbeab2f51f, type: 3}
+  spellCastFX: {fileID: 157402, guid: b4bfc9eff08a24c46b6daef0ea947a48, type: 3}
   spellAnimation: Heal Spell
   focusPointCost: 60
   spellType: 0

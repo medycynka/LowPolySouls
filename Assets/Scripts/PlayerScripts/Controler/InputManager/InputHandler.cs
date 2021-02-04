@@ -63,7 +63,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         private PlayerManager _playerManager;
         private PlayerStats _playerStats;
         private WeaponSlotManager _weaponSlotManager;
-        private AnimatorHandler _animatorHandler;
+        private PlayerAnimatorHandler _playerAnimatorHandler;
 
         [Header("Camera & UI", order = 1)]
         public CameraHandler cameraHandler;
@@ -79,7 +79,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
             _playerManager = GetComponent<PlayerManager>();
             _playerStats = GetComponent<PlayerStats>();
             _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
         }
@@ -217,7 +217,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
                             return;
                         }
 
-                        _animatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
+                        _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
                         _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
                     }
                 }
@@ -343,7 +343,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 _playerStats.healthRefillAmount = cI.healAmount;
                 _playerInventory.consumablesInventory.Remove(cI);
                 _playerManager.shouldRefillHealth = true;
-                _animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
+                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
                 uiManager.UpdateEstusAmount();
             }
         }

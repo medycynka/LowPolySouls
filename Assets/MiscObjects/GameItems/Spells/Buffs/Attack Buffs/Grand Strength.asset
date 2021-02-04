@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: Grand Strength
   itemId: 5
   itemType: 10
-  spellWarmUpFX: {fileID: 177120, guid: e588452f7723c0c429de60f7a9d28e9e, type: 3}
-  spellCastFX: {fileID: 157402, guid: 8e537a24a0db5ef418ee74c34aca2151, type: 3}
+  spellWarmUpFX: {fileID: 177120, guid: 2a6a9d7c7e0d51b4faa9d64e4cca803c, type: 3}
+  spellCastFX: {fileID: 157402, guid: ed2400a51d6c9b34b8072beb71daac24, type: 3}
   spellAnimation: Heal Spell
   focusPointCost: 60
   spellType: 0

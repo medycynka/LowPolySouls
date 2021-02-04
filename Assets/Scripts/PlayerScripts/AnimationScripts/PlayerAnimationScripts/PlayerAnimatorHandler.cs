@@ -6,10 +6,11 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.PlayerScripts.Animations
 {
-    public class AnimatorHandler : AnimationManager
+    public class PlayerAnimatorHandler : AnimationManager
     {
         private PlayerManager _playerManager;
         private PlayerLocomotion _playerLocomotion;
+        private PlayerStats _playerStats;
 
         public bool canRotate;
         
@@ -18,6 +19,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
             _playerManager = GetComponentInParent<PlayerManager>();
             anim = GetComponent<Animator>();
             _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            _playerStats = GetComponentInParent<PlayerStats>();
 
             StaticAnimatorIds.animationIds = new Dictionary<string, int>
             {
@@ -74,6 +76,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
                 {StaticAnimatorIds.OhCombo02, Animator.StringToHash(StaticAnimatorIds.OhCombo02)},
                 {StaticAnimatorIds.OhHeavyCombo01, Animator.StringToHash(StaticAnimatorIds.OhHeavyCombo01)},
                 {StaticAnimatorIds.HealSpell, Animator.StringToHash(StaticAnimatorIds.HealSpell)},
+                {StaticAnimatorIds.FireballSpell, Animator.StringToHash(StaticAnimatorIds.FireballSpell)}
             };
             
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
@@ -83,7 +86,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool isWalking)
         {
             #region Vertical
-            float v = 0;
+            float v;
 
             if (verticalMovement > 0 && verticalMovement < 0.55f)
             {
@@ -108,7 +111,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
             #endregion
 
             #region Horizontal
-            float h = 0;
+            float h;
 
             if (horizontalMovement > 0 && horizontalMovement < 0.55f)
             {
@@ -195,6 +198,12 @@ namespace SzymonPeszek.PlayerScripts.Animations
             deltaPosition.y = 0;
             var velocity = deltaPosition / delta;
             _playerLocomotion.rigidbody.velocity = velocity;
+        }
+
+        public override void TakeCriticalDamageAnimationEvent()
+        {
+            _playerStats.TakeDamage(_playerManager.pendingCriticalDamage, false, true);
+            _playerManager.pendingCriticalDamage = 0.0f;
         }
     }
 }

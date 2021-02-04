@@ -15,7 +15,7 @@ namespace SzymonPeszek.Damage
 
             if (playerStats != null)
             {
-                playerStats.TakeDamage(damage, false);
+                playerStats.TakeDamage(damage);
             }
         }
     }

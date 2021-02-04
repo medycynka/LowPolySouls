@@ -16,5 +16,8 @@ namespace SzymonPeszek.BaseClasses
 
         [Header("Combat Colliders", order = 1)]
         public Transform characterTransform;
+        
+        [Header("Critical Damage for Animations", order = 1)]
+        public float pendingCriticalDamage;
     }
 }

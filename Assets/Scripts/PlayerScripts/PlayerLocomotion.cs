@@ -27,7 +27,7 @@ namespace SzymonPeszek.PlayerScripts
         [HideInInspector]
         public Transform myTransform;
         [HideInInspector]
-        public AnimatorHandler animatorHandler;
+        public PlayerAnimatorHandler playerAnimatorHandler;
 
         [Header("Player Rigidbody", order = 1)]
         public new Rigidbody rigidbody;
@@ -65,7 +65,7 @@ namespace SzymonPeszek.PlayerScripts
             rigidbody = GetComponent<Rigidbody>();
             _inputHandler = GetComponent<InputHandler>();
             _playerStats = GetComponent<PlayerStats>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             _playerCollider = GetComponent<CapsuleCollider>();
             _footIkManager = GetComponentInChildren<FootIkManager>();
             
@@ -80,10 +80,10 @@ namespace SzymonPeszek.PlayerScripts
             }
             
             myTransform = transform;
-            animatorHandler.Initialize();
+            playerAnimatorHandler.Initialize();
 
             _playerManager.isGrounded = true;
-            _ignoreForGroundCheck = ~(1 << 8 | 1 << 11 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 22 | 1 << 23);
+            _ignoreForGroundCheck = ~(1 << 8 | 1 << 11 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 22 | 1 << 23 | 1 << 24);
         }
 
         #region Movement
@@ -182,14 +182,14 @@ namespace SzymonPeszek.PlayerScripts
 
             if (_inputHandler.lockOnFlag && _inputHandler.sprintFlag == false)
             {
-                animatorHandler.UpdateAnimatorValues(_inputHandler.vertical, _inputHandler.horizontal, _playerManager.isSprinting, _inputHandler.walkFlag);
+                playerAnimatorHandler.UpdateAnimatorValues(_inputHandler.vertical, _inputHandler.horizontal, _playerManager.isSprinting, _inputHandler.walkFlag);
             }
             else
             {
-                animatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, _playerManager.isSprinting, _inputHandler.walkFlag);
+                playerAnimatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, _playerManager.isSprinting, _inputHandler.walkFlag);
             }
 
-            if (animatorHandler.canRotate)
+            if (playerAnimatorHandler.canRotate)
             {
                 HandleRotation(delta);
             }
@@ -197,7 +197,7 @@ namespace SzymonPeszek.PlayerScripts
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]))
+            if (playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]))
             {
                 return;
             }
@@ -211,14 +211,14 @@ namespace SzymonPeszek.PlayerScripts
 
                     if (_inputHandler.moveAmount > 0)
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RollName], true);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RollName], true);
                         moveDirection.y = 0;
                         Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = rollRotation;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStepName], true);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStepName], true);
                     }
 
                     _playerStats.TakeStaminaDamage(rollStaminaCost);
@@ -262,12 +262,12 @@ namespace SzymonPeszek.PlayerScripts
                     if (inAirTimer > 0.5f)
                     {
                         //Debug.Log("You were in the air for " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LandName], true);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LandName], true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
                         inAirTimer = 0;
                     }
 
@@ -288,7 +288,7 @@ namespace SzymonPeszek.PlayerScripts
                     
                     if (_playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FallName], true);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FallName], true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -326,7 +326,7 @@ namespace SzymonPeszek.PlayerScripts
                     {
                         //playerManager.shouldAddJumpForce = true;
                         StartCoroutine(ResizeCollider());
-                        animatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.JumpName], true);
+                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.JumpName], true);
                         Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                         myTransform.rotation = jumpRotation;
                     }
