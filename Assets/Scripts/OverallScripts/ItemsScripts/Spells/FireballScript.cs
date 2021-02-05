@@ -29,8 +29,8 @@ namespace SzymonPeszek.Items.Spells
             _raycastDetectionLayer = (1 << LayerMask.NameToLayer(EnvironmentName) | 1 << LayerMask.NameToLayer(EnemyName));
             _mainCamera = Camera.main;
             
-            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.spellProjectilesTransform);
             playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
+            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.spellProjectilesTransform);
         }
 
         public override void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
