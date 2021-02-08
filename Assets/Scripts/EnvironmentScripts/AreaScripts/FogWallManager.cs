@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using SzymonPeszek.BaseClasses;
 using SzymonPeszek.PlayerScripts;
@@ -17,6 +18,14 @@ namespace SzymonPeszek.Environment.Areas
         [Header("Bools", order = 2)]
         public bool canInteract = true;
         public bool shouldDestroy = false;
+
+        private void Awake()
+        {
+            if (wallParticles)
+            {
+                wallParticles.Play();
+            }
+        }
 
         public override void Interact(PlayerManager playerManager)
         {

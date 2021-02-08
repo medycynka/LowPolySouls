@@ -212,9 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077adfdb47e935541b7c7551b08f9f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
   healthLevel: 60
   maxHealth: 0
-  currentHealth: 0
+  currentHealth: 600
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -222,14 +223,14 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
   animator: {fileID: 0}
   healthBar: {fileID: 0}
-  healtBarFill: {fileID: 0}
+  healthBarFill: {fileID: 0}
   damageValue: {fileID: 0}
   soulsGiveAmount: 0
   playerStats: {fileID: 0}
@@ -252,6 +253,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 1533936970748106634}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
+  pendingCriticalDamage: 0
   enemyLocomotionManager: {fileID: 0}
   enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
@@ -305,9 +308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChanse: 0.45
-  weaponChanse: 0.25
-  equipmentChanse: 0.2
+  consumableChance: 0.45
+  weaponChance: 0.25
+  equipmentChance: 0.2
   consumableDropPool: []
   weaponDropPool: []
   equipmentDropPool: []

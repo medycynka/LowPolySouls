@@ -71,11 +71,11 @@ namespace SzymonPeszek.EnemyScripts
 
         public void InitializeHealth()
         {
+            maxHealth = SetMaxHealthFromHealthLevel();
+            currentHealth = maxHealth;
+            
             if (isBoss)
             {
-                maxHealth = SetMaxHealthFromHealthLevel();
-                currentHealth = maxHealth;
-
                 if (bossHpSlider == null)
                 {
                     bossHpSlider = bossAreaManager.bossHpBar.GetComponentInChildren<Slider>();
@@ -83,9 +83,6 @@ namespace SzymonPeszek.EnemyScripts
             }
             else
             {
-                maxHealth = SetMaxHealthFromHealthLevel();
-                currentHealth = maxHealth;
-
                 if (healthBarFill == null)
                 {
                     healthBarFill = healthBar.GetComponentInChildren<Image>();

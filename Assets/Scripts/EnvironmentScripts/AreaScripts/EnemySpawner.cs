@@ -30,9 +30,9 @@ namespace SzymonPeszek.Environment.Areas
 
         private void ClearAliveEnemies()
         {
-            foreach(var enemy in _enemiesAlive)
+            for (var i = 0; i < _enemiesAlive.Count; i++)
             {
-                Destroy(enemy.gameObject);
+                Destroy(_enemiesAlive[i].gameObject);
             }
 
             _enemiesAlive.Clear();
@@ -59,9 +59,9 @@ namespace SzymonPeszek.Environment.Areas
 
             yield return CoroutineYielder.spawnRefreshWaiter;
 
-            foreach (var enemyClone in _spawnList)
+            for (var i = 0; i < _spawnList.Count; i++)
             {
-                _enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
+                _enemiesAlive.Add(Instantiate(_spawnList[i].Key, _spawnList[i].Value, Quaternion.identity));
             }
         }
 
