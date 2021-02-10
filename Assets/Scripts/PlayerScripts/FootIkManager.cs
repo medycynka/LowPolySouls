@@ -30,7 +30,7 @@ namespace SzymonPeszek.PlayerScripts
         private const AvatarIKGoal RightFoot = AvatarIKGoal.RightFoot;
         private RaycastHit _hit;
         
-        private void Start()
+        private void Awake()
         {
             _anim = GetComponent<Animator>();
             environmentLayer = 1 << LayerMask.NameToLayer(EnvironmentTag);

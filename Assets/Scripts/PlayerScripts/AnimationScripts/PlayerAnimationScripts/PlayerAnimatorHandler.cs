@@ -12,7 +12,6 @@ namespace SzymonPeszek.PlayerScripts.Animations
         private PlayerLocomotion _playerLocomotion;
         private PlayerStats _playerStats;
 
-        public bool canRotate;
         public Transform spellProjectilesTransform;
         
         public void Initialize()
@@ -31,6 +30,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
                 {StaticAnimatorIds.IsInvulnerableName, Animator.StringToHash(StaticAnimatorIds.IsInvulnerableName)},
                 {StaticAnimatorIds.IsDeadName, Animator.StringToHash(StaticAnimatorIds.IsDeadName)},
                 {StaticAnimatorIds.IsInAirName, Animator.StringToHash(StaticAnimatorIds.IsInAirName)},
+                {StaticAnimatorIds.CanRotateName, Animator.StringToHash(StaticAnimatorIds.CanRotateName)},
                 {StaticAnimatorIds.IsUsingLeftHandName, Animator.StringToHash(StaticAnimatorIds.IsUsingLeftHandName)},
                 {StaticAnimatorIds.IsUsingRightHandName, Animator.StringToHash(StaticAnimatorIds.IsUsingRightHandName)},
                 {StaticAnimatorIds.EmptyName, Animator.StringToHash(StaticAnimatorIds.EmptyName)},
@@ -158,12 +158,12 @@ namespace SzymonPeszek.PlayerScripts.Animations
 
         public void CanRotate()
         {
-            canRotate = true;
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName], true);
         }
 
         public void StopRotation()
         {
-            canRotate = false;
+            anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName], false);
         }
 
         public void EnableCombo()

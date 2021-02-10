@@ -63,18 +63,19 @@ namespace SzymonPeszek.PlayerScripts
         private void Awake()
         {
             _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
+            _playerManager = GetComponent<PlayerManager>();
+            _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             uiManager = FindObjectOfType<UIManager>();
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
             focusBar = FindObjectOfType<FocusBar>();
             characterTransform = GetComponent<Transform>();
+            
         }
 
         private void Start()
         {
-            _playerManager = GetComponent<PlayerManager>();
-            _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            _enemiesSpawners = GameObject.FindObjectsOfType<EnemySpawner>();
+            _enemiesSpawners = FindObjectsOfType<EnemySpawner>();
             youDiedLogo.SetActive(false);
 
             DataManager dataManager = SettingsHolder.dataManager;

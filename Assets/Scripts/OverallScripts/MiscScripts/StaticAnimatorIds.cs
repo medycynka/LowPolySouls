@@ -15,6 +15,7 @@ namespace SzymonPeszek.Misc
         public const string IsUsingLeftHandName = "isUsingLeftHand";
         public const string IsInvulnerableName = "isInvulnerable";
         public const string IsDeadName = "isDead";
+        public const string CanRotateName = "canRotate";
         public const string EmptyName = "Empty";
         public const string LeftArmEmptyName = "Left Arm Empty";
         public const string RightArmEmptyName = "Right Arm Empty";

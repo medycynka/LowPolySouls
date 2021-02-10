@@ -2672,6 +2672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   canRotate: 1
+  isEnemy: 0
+  spellProjectilesTransform: {fileID: 4966070490633524609}
 --- !u!114 &4966070490633684526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2685,6 +2687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingWeapon: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
   quickSlotsUI: {fileID: 0}
 --- !u!114 &3517719973692865818
 MonoBehaviour:
@@ -3808,30 +3812,33 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
-  b_Input: 0
-  a_Input: 0
-  y_Input: 0
-  rb_Input: 0
-  rt_Input: 0
-  critical_Attack_Input: 0
-  jump_Input: 0
-  inventory_Input: 0
+  bInput: 0
+  walkInput: 0
+  aInput: 0
+  yInput: 0
+  rbInput: 0
+  rtInput: 0
+  criticalAttackInput: 0
+  jumpInput: 0
+  inventoryInput: 0
   lockOnInput: 0
-  right_Stick_Right_Input: 0
-  right_Stick_Left_Input: 0
+  rightStickRightInput: 0
+  rightStickLeftInput: 0
   estusQuickSlotUse: 0
-  d_Pad_Up: 0
-  d_Pad_Down: 0
-  d_Pad_Left: 0
-  d_Pad_Right: 0
+  dPadUp: 0
+  dPadDown: 0
+  dPadLeft: 0
+  dPadRight: 0
   rollFlag: 0
   twoHandFlag: 0
   sprintFlag: 0
+  walkFlag: 0
   comboFlag: 0
   lockOnFlag: 0
   inventoryFlag: 0
   criticalAttackRayCastStartPoint: {fileID: 335818280}
   rollInputTimer: 0
+  walkInputTimer: 0
   cameraHandler: {fileID: 0}
   uiManager: {fileID: 0}
 --- !u!114 &4281836137122507302
@@ -3849,7 +3856,7 @@ MonoBehaviour:
   cameraHandler: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   myTransform: {fileID: 0}
-  animatorHandler: {fileID: 0}
+  playerAnimatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
   minimumDistanceNeededToBeginFall: 1
@@ -3858,7 +3865,7 @@ MonoBehaviour:
   movementSpeed: 5
   walkingSpeed: 1
   sprintSpeed: 7
-  rotationSpeed: 10
+  rotationSpeed: 16
   fallingSpeed: 150
   jumpMult: 50
   nextJump: 0
@@ -3879,6 +3886,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 989904172}
   backStabBoxCollider: {fileID: 1113674838}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
+  pendingCriticalDamage: 0
   cameraHandler: {fileID: 0}
   interactableUI: {fileID: 0}
   interactableUIGameObject: {fileID: 0}
@@ -3912,12 +3921,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bce5fce2f721c48837370ec7eb7389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
+  rightWeapon: {fileID: 11400000, guid: b4bfca7ae14a20d409431db3ec18aa0c, type: 2}
   leftWeapon: {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 179a4f0368fb0c64c8a791d4150536d1, type: 2}
-  currentSpell: {fileID: 11400000, guid: 1e5d5afa20e40e8409300e0b8b04f92c, type: 2}
+  currentSpell: {fileID: 11400000, guid: 66ee5fb93f78d574ea574991e1063037, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
+  - {fileID: 11400000, guid: b4bfca7ae14a20d409431db3ec18aa0c, type: 2}
   - {fileID: 11400000, guid: bd035952e8bccc546a2bd9275c1e7aa5, type: 2}
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: e628e226889a60f46bef691624ac7789, type: 2}
@@ -3946,6 +3955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8604268fc16a3b4aa4a6754279105ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -3956,9 +3966,9 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
   uiManager: {fileID: 0}
@@ -3974,6 +3984,10 @@ MonoBehaviour:
   playerLevel: 12
   soulsAmount: 500000
   currentArmorValue: 0
+  bonusBuffAttack: 1
+  bonusBuffDefence: 1
+  bonusBuffMagic: 1
+  bonusBuffEndurance: 1
   healthRefillAmount: 20
   healthBgRefillAmount: 20
   staminaRefillAmount: 20

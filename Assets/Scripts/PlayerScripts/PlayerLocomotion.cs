@@ -46,7 +46,7 @@ namespace SzymonPeszek.PlayerScripts
         public float movementSpeed = 5;
         public float walkingSpeed = 1;
         public float sprintSpeed = 7;
-        public float rotationSpeed = 10;
+        public float rotationSpeed = 16;
         public float fallingSpeed = 80;
         public float jumpMult = 10;
 
@@ -59,7 +59,7 @@ namespace SzymonPeszek.PlayerScripts
         
         private RaycastHit _hit;
 
-        private void Start()
+        private void Awake()
         {
             _playerManager = GetComponent<PlayerManager>();
             rigidbody = GetComponent<Rigidbody>();
@@ -90,52 +90,57 @@ namespace SzymonPeszek.PlayerScripts
         private Vector3 _normalVector;
         private Vector3 _targetPosition;
 
-        private void HandleRotation(float delta)
+        public void HandleRotation(float delta)
         {
-            if (_inputHandler.lockOnFlag)
+            if (playerAnimatorHandler.canRotate)
             {
-                if (_inputHandler.sprintFlag || _inputHandler.rollFlag)
+                if (_inputHandler.lockOnFlag)
                 {
-                    Vector3 targetDirection = cameraHandler.cameraTransform.forward * _inputHandler.vertical;
-                    targetDirection += cameraHandler.cameraTransform.right * _inputHandler.horizontal;
-                    targetDirection.Normalize();
-                    targetDirection.y = 0;
-
-                    if (targetDirection == Vector3.zero)
+                    if (_inputHandler.sprintFlag || _inputHandler.rollFlag)
                     {
-                        targetDirection = transform.forward;
-                    }
+                        Vector3 targetDirection = cameraHandler.cameraTransform.forward * _inputHandler.vertical;
+                        targetDirection += cameraHandler.cameraTransform.right * _inputHandler.horizontal;
+                        targetDirection.Normalize();
+                        targetDirection.y = 0;
 
-                    Quaternion tr = Quaternion.LookRotation(targetDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
-                    transform.rotation = targetRotation;
+                        if (targetDirection == Vector3.zero)
+                        {
+                            targetDirection = transform.forward;
+                        }
+
+                        Quaternion tr = Quaternion.LookRotation(targetDirection);
+                        Quaternion targetRotation =
+                            Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                        transform.rotation = targetRotation;
+                    }
+                    else
+                    {
+                        Vector3 rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
+                        rotationDirection.y = 0;
+                        rotationDirection.Normalize();
+                        Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                        Quaternion targetRotation =
+                            Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                        transform.rotation = targetRotation;
+                    }
                 }
                 else
                 {
-                    Vector3 rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
-                    rotationDirection.y = 0;
-                    rotationDirection.Normalize();
-                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
-                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
-                    transform.rotation = targetRotation;
-                }
-            }
-            else
-            {
-                Vector3 targetDir = _cameraObject.forward * _inputHandler.vertical;
-                targetDir += _cameraObject.right * _inputHandler.horizontal;
-                targetDir.Normalize();
-                targetDir.y = 0;
+                    Vector3 targetDir = _cameraObject.forward * _inputHandler.vertical;
+                    targetDir += _cameraObject.right * _inputHandler.horizontal;
+                    targetDir.Normalize();
+                    targetDir.y = 0;
 
-                if (targetDir == Vector3.zero)
-                {
-                    targetDir = myTransform.forward;
-                }
+                    if (targetDir == Vector3.zero)
+                    {
+                        targetDir = myTransform.forward;
+                    }
 
-                float rs = rotationSpeed;
-                Quaternion tr = Quaternion.LookRotation(targetDir);
-                Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
-                myTransform.rotation = targetRotation;
+                    float rs = rotationSpeed;
+                    Quaternion tr = Quaternion.LookRotation(targetDir);
+                    Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+                    myTransform.rotation = targetRotation;
+                }
             }
         }
 
@@ -187,11 +192,6 @@ namespace SzymonPeszek.PlayerScripts
             else
             {
                 playerAnimatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, _playerManager.isSprinting, _inputHandler.walkFlag);
-            }
-
-            if (playerAnimatorHandler.canRotate)
-            {
-                HandleRotation(delta);
             }
         }
 

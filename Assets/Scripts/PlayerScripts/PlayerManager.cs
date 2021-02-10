@@ -20,6 +20,7 @@ namespace SzymonPeszek.PlayerScripts
         public CameraHandler cameraHandler;
         private PlayerLocomotion _playerLocomotion;
         private PlayerStats _playerStats;
+        private Animator _animator;
         
         [Header("UI", order = 2)]
         public InteractableUI interactableUI;
@@ -69,14 +70,12 @@ namespace SzymonPeszek.PlayerScripts
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
             characterTransform = transform;
-        }
-
-        private void Start()
-        {
+            
             _inputHandler = GetComponent<InputHandler>();
             _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _playerStats = GetComponent<PlayerStats>();
+            _animator = GetComponentInChildren<Animator>();
             _pickUpLayer = 1 << LayerMask.NameToLayer("Pick Up");
             interactableUI = FindObjectOfType<InteractableUI>();
             _interactColliders = new Collider[8];
@@ -86,12 +85,13 @@ namespace SzymonPeszek.PlayerScripts
         {
             float delta = Time.deltaTime;
             
-            isInteracting = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
-            canDoCombo = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
-            isUsingRightHand = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
-            isUsingLeftHand = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
-            isInvulnerable = _playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
-            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
+            isInteracting = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName]);
+            isUsingRightHand = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
+            isUsingLeftHand = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
+            isInvulnerable = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
+            _animator.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
+            _playerAnimatorHandler.canRotate = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName]);
 
             _inputHandler.TickInput(delta);
             _playerLocomotion.HandleRollingAndSprinting(delta);
@@ -109,6 +109,7 @@ namespace SzymonPeszek.PlayerScripts
             float delta = Time.fixedDeltaTime;
 
             _playerLocomotion.HandleMovement(delta);
+            _playerLocomotion.HandleRotation(delta);
             _playerLocomotion.HandleFalling(_playerLocomotion.moveDirection);
         }
 
