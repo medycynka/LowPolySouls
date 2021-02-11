@@ -92,12 +92,14 @@ namespace BattleDrakeStudios.SimpleIconCreator {
         }
 
         private void OnGUI() {
-            _customStyle = new GUIStyle(GUI.skin.button);
-            _customStyle.padding = new RectOffset(10, 10, 10, 10);
-
-            _titleStyle = new GUIStyle(GUI.skin.button);
-            _titleStyle.fontStyle = FontStyle.Bold;
-            _titleStyle.alignment = TextAnchor.MiddleCenter;
+            _customStyle = new GUIStyle(GUI.skin.button)
+            {
+                padding = new RectOffset(10, 10, 10, 10)
+            };
+            _titleStyle = new GUIStyle(GUI.skin.button)
+            {
+                fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter
+            };
 
             if (_targetObject != null) {
                 if (_previewWindow == null) {

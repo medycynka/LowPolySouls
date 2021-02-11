@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: Hat_008
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 364d5c5684e8ec349989808c7ce2ea1b, type: 3}
+  itemIcon: {fileID: 21300000, guid: cd6e18cb8e00d5540b45d6c407a68144, type: 3}
   itemName: Hat_008
   itemId: 19
   itemType: 2

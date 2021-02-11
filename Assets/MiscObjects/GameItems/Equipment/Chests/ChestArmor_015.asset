@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: ChestArmor_015
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: c9d48411a39cdc9429fca1da96828e34, type: 3}
+  itemIcon: {fileID: 21300000, guid: 5de865fe982b88b4ba219c60b935f4f8, type: 3}
   itemName: ChestArmor_015
   itemId: 14
   itemType: 3

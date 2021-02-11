@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: HeadCover_008
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 1e16518344dcc984a819375fb6a17d71, type: 3}
+  itemIcon: {fileID: 21300000, guid: 908eac89eaf845a418332d784002426f, type: 3}
   itemName: HeadCovering_008
   itemId: 28
   itemType: 2
