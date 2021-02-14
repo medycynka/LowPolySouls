@@ -31,6 +31,7 @@ namespace SzymonPeszek.BaseClasses
         public float defence = 3f;       // +2.5 to defence
         public float bonusHealth = 2f;   // +10 to maxHealth
         public float bonusStamina = 2f;  // +10 to maxStamina
+        public float bonusFocus;  // +10 to maxFocus
     }
 
 }

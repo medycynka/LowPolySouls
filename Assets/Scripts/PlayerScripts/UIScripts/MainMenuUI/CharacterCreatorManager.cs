@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using BattleDrakeStudios.ModularCharacters;
 using SzymonPeszek.SaveScripts;
+
 
 namespace SzymonPeszek.MainMenuUI
 {
@@ -19,20 +21,61 @@ namespace SzymonPeszek.MainMenuUI
         public Slider earSlider;
         public Slider facialHairSlider;
 
+        [Header("Character Stats Components", order = 1)]
+        public int currentLevel = 1;
+        public int pointsToSpend = 11;
+        public float startStrength = 1f;
+        public float startAgility;
+        public float startDefence;
+        public float startBonusHealth;
+        public float startBonusStamina;
+        public float startBonusFocus;
+        public TextMeshProUGUI pointsToSpendText;
+        public TextMeshProUGUI strengthText;
+        public TextMeshProUGUI agilityText;
+        public TextMeshProUGUI defenceText;
+        public TextMeshProUGUI healthText;
+        public TextMeshProUGUI staminaText;
+        public TextMeshProUGUI focusText;
+
         private void Start()
         {
             _mainMenuManager = GetComponentInParent<MainMenuManager>();
+            
+            strengthText.text = startStrength.ToString();
+            agilityText.text = startAgility.ToString();
+            defenceText.text = startDefence.ToString();
+            healthText.text = startBonusHealth.ToString();
+            staminaText.text = startBonusStamina.ToString();
+            focusText.text = startBonusFocus.ToString();
+            pointsToSpendText.text = pointsToSpend.ToString();
         }
 
         public void PlayGame()
         {
-            SettingsHolder.isCharacterCreated = true;
-            SaveManager.SaveMainMenu();
-            creatorScreen.SetActive(false);
-            
-            _mainMenuManager.FadeOutMusic();
+            if (currentLevel == 12 && pointsToSpend == 0)
+            {
+                SaveStartingStats();
+                SettingsHolder.isCharacterCreated = true;
+                SaveManager.SaveMainMenu();
+                creatorScreen.SetActive(false);
+
+                _mainMenuManager.FadeOutMusic();
+            }
         }
 
+        private void SaveStartingStats()
+        {
+            SettingsHolder.currentLevel = currentLevel;
+            SettingsHolder.currentStrength = startStrength;
+            SettingsHolder.currentAgility = startAgility;
+            SettingsHolder.currentDefence = startDefence;
+            SettingsHolder.currentBonusHealth = startBonusHealth;
+            SettingsHolder.currentBonusStamina = startBonusStamina;
+            SettingsHolder.currentBonusFocus = startBonusFocus;
+        }
+
+        #region Character Appearance
         public void SetMaleGender()
         {
             if (!SettingsHolder.isMale)
@@ -131,5 +174,164 @@ namespace SzymonPeszek.MainMenuUI
                 modularCharacterManager.DeactivatePart(ModularBodyPart.FacialHair);
             }
         }
+        #endregion
+
+        #region Character Stats
+        public void IncreaseStrength()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startStrength += 1f;
+                pointsToSpend--;
+
+                strengthText.text = startStrength.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseStrength()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startStrength > 0)
+            {
+                currentLevel--;
+                startStrength -= 1f;
+                pointsToSpend++;
+                
+                strengthText.text = startStrength.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void IncreaseAgility()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startAgility += 1f;
+                pointsToSpend--;
+                
+                agilityText.text = startAgility.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseAgility()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startAgility > 0)
+            {
+                currentLevel--;
+                startAgility -= 1f;
+                pointsToSpend++;
+                
+                agilityText.text = startAgility.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void IncreaseDefence()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startDefence += 1f;
+                pointsToSpend--;
+                
+                defenceText.text = startDefence.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseDefence()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startDefence > 0)
+            {
+                currentLevel--;
+                startDefence -= 1f;
+                pointsToSpend++;
+                
+                defenceText.text = startDefence.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void IncreaseHealth()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startBonusHealth += 1f;
+                pointsToSpend--;
+                
+                healthText.text = startBonusHealth.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseHealth()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startBonusHealth > 0)
+            {
+                currentLevel--;
+                startBonusHealth -= 1f;
+                pointsToSpend++;
+                
+                healthText.text = startBonusHealth.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void IncreaseStamina()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startBonusStamina += 1f;
+                pointsToSpend--;
+                
+                staminaText.text = startBonusStamina.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseStamina()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startBonusStamina > 0)
+            {
+                currentLevel--;
+                startBonusStamina -= 1f;
+                pointsToSpend++;
+                
+                staminaText.text = startBonusStamina.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void IncreaseFocus()
+        {
+            if (pointsToSpend > 0 && currentLevel < 12)
+            {
+                currentLevel++;
+                startBonusFocus += 1f;
+                pointsToSpend--;
+                
+                focusText.text = startBonusFocus.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        
+        public void DecreaseFocus()
+        {
+            if (currentLevel > 1 && pointsToSpend < 12 && startBonusFocus > 0)
+            {
+                currentLevel--;
+                startBonusFocus -= 1f;
+                pointsToSpend++;
+                
+                focusText.text = startBonusFocus.ToString();
+                pointsToSpendText.text = pointsToSpend.ToString();
+            }
+        }
+        #endregion
     }
 }

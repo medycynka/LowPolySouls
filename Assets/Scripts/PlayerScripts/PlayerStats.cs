@@ -82,19 +82,21 @@ namespace SzymonPeszek.PlayerScripts
 
             if (dataManager != null)
             {
+                currentHealth = dataManager.currentHealth;
+                currentStamina = dataManager.currentStamina;
+                baseArmor = dataManager.baseArmor;
+                strength = dataManager.strength;
+                agility = dataManager.agility;
+                defence = dataManager.defence;
+                bonusHealth = dataManager.bonusHealth;
+                bonusStamina = dataManager.bonusStamina;
+                bonusFocus = dataManager.bonusFocus;
+                playerLevel = dataManager.playerLevel;
+
                 if (!dataManager.isFirstStart)
                 {
-                    currentHealth = dataManager.currentHealth;
-                    currentStamina = dataManager.currentStamina;
-                    baseArmor = dataManager.baseArmor;
-                    strength = dataManager.strength;
-                    agility = dataManager.agility;
-                    defence = dataManager.defence;
-                    bonusHealth = dataManager.bonusHealth;
-                    bonusStamina = dataManager.bonusStamina;
-                    playerLevel = dataManager.playerLevel;
                     soulsAmount = dataManager.soulsAmount;
-
+                    
                     gameObject.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
                     gameObject.transform.rotation = Quaternion.Euler(dataManager.spawnPointRotation[0], dataManager.spawnPointRotation[1], dataManager.spawnPointRotation[2]);
                     _playerManager.currentSpawnPoint.transform.position = new Vector3(dataManager.spawnPointPosition[0], dataManager.spawnPointPosition[1], dataManager.spawnPointPosition[2]);
@@ -104,6 +106,16 @@ namespace SzymonPeszek.PlayerScripts
                 {
                     SettingsHolder.firstStart = false;
                 }
+            }
+            else
+            {
+                strength = SettingsHolder.currentStrength;
+                agility = SettingsHolder.currentAgility;
+                defence = SettingsHolder.currentDefence;
+                bonusHealth = SettingsHolder.currentBonusHealth;
+                bonusStamina = SettingsHolder.currentBonusStamina;
+                bonusFocus = SettingsHolder.currentBonusFocus;
+                playerLevel = SettingsHolder.currentLevel;
             }
 
             _hpBarTransform = healthBar.GetComponent<RectTransform>();
@@ -163,7 +175,7 @@ namespace SzymonPeszek.PlayerScripts
         
         private float SetMaxFocusFromFocusLevel()
         {
-            maxFocus = focusLevel * 10;
+            maxFocus = focusLevel * 10 + bonusFocus * 10;
 
             return maxFocus;
         }

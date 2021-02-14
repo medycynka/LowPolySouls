@@ -33,6 +33,7 @@ namespace SzymonPeszek.SaveScripts
         public float defence;
         public float bonusHealth;
         public float bonusStamina;
+        public float bonusFocus;
         public int playerLevel;
         public float soulsAmount;
         public float[] spawnPointPosition;
@@ -68,6 +69,13 @@ namespace SzymonPeszek.SaveScripts
             isFirstStart = SettingsHolder.firstStart;
             playerName = SettingsHolder.playerName;
             isMale = SettingsHolder.isMale;
+            strength = SettingsHolder.currentStrength;
+            agility = SettingsHolder.currentAgility;
+            defence = SettingsHolder.currentDefence;
+            bonusHealth = SettingsHolder.currentBonusHealth;
+            bonusStamina = SettingsHolder.currentBonusStamina;
+            bonusFocus = SettingsHolder.currentBonusFocus;
+            playerLevel = SettingsHolder.currentLevel;
 
             partsID = new int[SettingsHolder.partsID.Length];
             partsArmor = new float[SettingsHolder.partsID.Length];
@@ -109,6 +117,7 @@ namespace SzymonPeszek.SaveScripts
             defence = playerStats.defence;
             bonusHealth = playerStats.bonusHealth;
             bonusStamina = playerStats.bonusStamina;
+            bonusFocus = playerStats.bonusFocus;
             playerLevel = playerStats.playerLevel;
             soulsAmount = playerStats.soulsAmount;
 
