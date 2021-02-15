@@ -44,10 +44,10 @@ MonoBehaviour:
   thHeavyAttack1: TH_Heavy_Attack_01
   thHeavyAttack2: TH_Heavy_Attack_02
   baseStamina: 35
-  ohLightAttackMultiplier: 0
-  ohHeavyAttackMultiplier: 0
-  thLightAttackMultiplier: 0
-  thHeavyAttackMultiplier: 0
+  ohLightAttackMultiplier: 1.5
+  ohHeavyAttackMultiplier: 2.25
+  thLightAttackMultiplier: 2
+  thHeavyAttackMultiplier: 3
   weaponType: 0
   meleeType: 3
   castingType: 3

@@ -39,7 +39,7 @@ namespace SzymonPeszek.PlayerScripts
         private float minimumDistanceNeededToBeginFall = 1f;
         [SerializeField]
         private float groundDirectionRayDistance = 0.2f;
-        [SerializeField] private LayerMask _ignoreForGroundCheck;
+        private LayerMask _ignoreForGroundCheck;
         public float inAirTimer;
 
         [Header("Movement Stats", order = 1)]

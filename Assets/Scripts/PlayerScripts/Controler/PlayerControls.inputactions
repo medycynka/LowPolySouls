@@ -161,6 +161,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Critical Attack",
+                    "type": "Button",
+                    "id": "6170f936-0772-4a96-872e-e920b3e73d3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "RT",
                     "type": "Button",
                     "id": "b38e3579-d2bd-4375-8426-187fe459aeb1",
@@ -172,14 +180,6 @@
                     "name": "E",
                     "type": "Button",
                     "id": "1c8ff5db-7180-4eb3-a176-3a02cf47d057",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Critical Attack",
-                    "type": "Button",
-                    "id": "6170f936-0772-4a96-872e-e920b3e73d3b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -249,7 +249,7 @@
                     "name": "",
                     "id": "9bd35847-772e-49c0-8765-645a645da6b0",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "RB",
@@ -347,7 +347,7 @@
                 {
                     "name": "",
                     "id": "f7855eb6-940a-478e-8f40-73cf9551abd5",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "Hold(duration=0.2)",
                     "processors": "",
                     "groups": "",

@@ -96,6 +96,10 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 _playerInputActions.PlayerQuickSlots.DPadRight.performed += i => dPadRight = true;
                 _playerInputActions.PlayerQuickSlots.DPadLeft.performed += i => dPadLeft = true;
                 _playerInputActions.PlayerActions.E.performed += i => aInput = true;
+                _playerInputActions.PlayerActions.Roll.performed += i => bInput = true;
+                _playerInputActions.PlayerActions.Roll.canceled += i => bInput = false;
+                _playerInputActions.PlayerActions.Walk.performed += i => walkInput = true;
+                _playerInputActions.PlayerActions.Walk.canceled += i => walkInput = false;
                 _playerInputActions.PlayerActions.Jump.performed += i => jumpInput = true;
                 _playerInputActions.PlayerActions.Inventory.performed += i => inventoryInput = true;
                 _playerInputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
@@ -146,12 +150,20 @@ namespace SzymonPeszek.PlayerScripts.Controller
 
         private void HandleRollInput(float delta)
         {
-            bInput = _playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            sprintFlag = bInput;
-
             if (bInput)
             {
                 rollInputTimer += delta;
+
+                if (_playerStats.currentStamina <= 0)
+                {
+                    bInput = false;
+                    sprintFlag = false;
+                }
+
+                if (moveAmount > 0.5f && _playerStats.currentStamina > 0)
+                {
+                    sprintFlag = true;
+                }
             }
             else
             {
@@ -167,12 +179,11 @@ namespace SzymonPeszek.PlayerScripts.Controller
 
         private void HandleWalkInput(float delta)
         {
-            walkInput = _playerInputActions.PlayerActions.Walk.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            walkFlag = walkInput;
-
             if (walkInput)
             {
                 walkInputTimer += delta;
+
+                walkFlag = moveAmount > 0.5f;
             }
             else
             {
