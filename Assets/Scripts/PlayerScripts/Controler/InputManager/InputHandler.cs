@@ -150,6 +150,8 @@ namespace SzymonPeszek.PlayerScripts.Controller
 
         private void HandleRollInput(float delta)
         {
+            sprintFlag = bInput;
+            
             if (bInput)
             {
                 rollInputTimer += delta;
@@ -158,11 +160,6 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 {
                     bInput = false;
                     sprintFlag = false;
-                }
-
-                if (moveAmount > 0.5f && _playerStats.currentStamina > 0)
-                {
-                    sprintFlag = true;
                 }
             }
             else

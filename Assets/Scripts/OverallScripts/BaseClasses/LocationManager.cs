@@ -19,7 +19,7 @@ namespace SzymonPeszek.BaseClasses
         [Header("Bonfires in Area", order = 1)]
         public BonfireManager[] bonfiresInArea;
 
-        [Header("Bonfires in Area", order = 1)]
+        [Header("Sound Manager", order = 1)]
         public AnimationSoundManager playerSoundManager;
 
         [Header("Area Sounds", order = 1)]

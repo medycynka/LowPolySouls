@@ -56,6 +56,9 @@ namespace SzymonPeszek.PlayerScripts
         [Header("Stamina Costs", order = 1)]
         public float rollStaminaCost = 10;
         public float sprintStaminaCost = 5;
+
+        [Header("Fall Damage", order = 1)]
+        public float fallDamage = 10f;
         
         private RaycastHit _hit;
 
@@ -263,6 +266,12 @@ namespace SzymonPeszek.PlayerScripts
                     {
                         //Debug.Log("You were in the air for " + inAirTimer);
                         playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LandName], true);
+
+                        if (inAirTimer > 2.5f)
+                        {
+                            _playerStats.TakeDamage(fallDamage * inAirTimer);
+                        }
+                        
                         inAirTimer = 0;
                     }
                     else
