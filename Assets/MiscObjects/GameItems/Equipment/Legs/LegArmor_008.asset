@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: LegArmor_008
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 69aaf000ffeac1d428b655ee0b268225, type: 3}
+  itemIcon: {fileID: 21300000, guid: 84beb9022f9efdf499fddea336f81d99, type: 3}
   itemName: LegArmor_008
   itemId: 7
   itemType: 6

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718909ac1136fb343be1390c1911791a, type: 3}
   m_Name: Shield_001
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d113594eea11b6d44b34a4b4ea9b584c, type: 3}
+  itemIcon: {fileID: 21300000, guid: 7a9b70eca1aec614fb510f4a021f8eb3, type: 3}
   itemName: Shield_001
   itemId: 0
   itemType: 1
@@ -23,9 +23,10 @@ MonoBehaviour:
   backSlotPosition: {x: 0, y: 0, z: 0}
   backSlotRotation: {x: 0, y: 0, z: 0}
   backSlotScale: 1
+  baseAttack: 25
   lightAttackDamageMult: 1
   heavyAttackDamageMult: 1.5
-  backStabDamage: 50
+  criticalDamageMult: 2.5
   weight: 0
   durability: 0
   rightHandIdle: Right_Arm_Idle_01

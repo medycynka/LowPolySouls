@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: Gloves_015
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d4f5634edede200468fc1ccf30e6f3a1, type: 3}
+  itemIcon: {fileID: 21300000, guid: c3d7d28aa349a524a841a16e4a798abf, type: 3}
   itemName: Gloves_015
   itemId: 14
   itemType: 5

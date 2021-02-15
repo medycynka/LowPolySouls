@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718909ac1136fb343be1390c1911791a, type: 3}
   m_Name: 1H_Sword_003
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 19e6cdfb45120fc449d46c5d708b8072, type: 3}
+  itemIcon: {fileID: 21300000, guid: ed4fbcdd690e97a4694008128c14995e, type: 3}
   itemName: 1H_Sword_003
   itemId: 1
   itemType: 0

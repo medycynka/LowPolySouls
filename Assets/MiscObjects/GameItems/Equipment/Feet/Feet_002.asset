@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: Feet_002
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: c3b8a181fa8778a4e96c0f9e1df0bd3a, type: 3}
   itemName: Feet_002
   itemId: 1
   itemType: 7

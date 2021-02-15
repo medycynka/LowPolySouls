@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4cc0211a02c85498c9d8abae6e58a4, type: 3}
   m_Name: Shoulder_013
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 5cf93782a34f2494a8bb93ca57d33904, type: 3}
+  itemIcon: {fileID: 21300000, guid: 98144c4c5a9f8cf4790b2a8744f06da2, type: 3}
   itemName: Shoulder_013
   itemId: 12
   itemType: 4
