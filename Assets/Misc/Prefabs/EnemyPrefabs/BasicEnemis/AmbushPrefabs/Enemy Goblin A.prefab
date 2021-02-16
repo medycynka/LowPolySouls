@@ -2226,6 +2226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   isEnemy: 0
 --- !u!114 &3236686469441091658
 MonoBehaviour:
@@ -4732,6 +4733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077adfdb47e935541b7c7551b08f9f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
   healthLevel: 10
   maxHealth: 100
   currentHealth: 100
@@ -4742,14 +4744,15 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
+  bonusFocus: 0
   animator: {fileID: 0}
   healthBar: {fileID: 2561050875115298535}
-  healtBarFill: {fileID: 2561050875941382019}
+  healthBarFill: {fileID: 2561050875941382019}
   damageValue: {fileID: 2561050875614620420}
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
@@ -4772,6 +4775,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 716073095087735017}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
+  pendingCriticalDamage: 0
   enemyLocomotionManager: {fileID: 0}
   enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
@@ -4825,9 +4830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChanse: 0.45
-  weaponChanse: 0.25
-  equipmentChanse: 0.2
+  consumableChance: 0.45
+  weaponChance: 0.25
+  equipmentChance: 0.2
   consumableDropPool:
   - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
@@ -5489,7 +5494,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5328207775710980629}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: -1372625422
   m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8

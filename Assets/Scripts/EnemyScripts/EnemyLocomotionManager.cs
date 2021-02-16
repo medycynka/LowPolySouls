@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
-using SzymonPeszek.Misc;
 using SzymonPeszek.EnemyScripts.Animations;
 
 
@@ -11,12 +9,9 @@ namespace SzymonPeszek.EnemyScripts
         private EnemyManager _enemyManager;
         private EnemyAnimationManager _enemyAnimationManager;
 
-        [Header("Locomotion Manager", order = 0)]
+        [Header("Locomotion Manager", order = 0)] 
         [Header("Components", order = 1)]
-        public NavMeshAgent navmeshAgent;
-        public NavMeshObstacle navMeshBlocker;
-        public Rigidbody enemyRigidBody;
-        private Transform _navMeshTransform;
+        public LayerMask detectionLayer;
 
         [Header("A.I Movement Stats", order = 1)]
         public float stoppingDistance = 1.25f;
@@ -26,79 +21,6 @@ namespace SzymonPeszek.EnemyScripts
         {
             _enemyManager = GetComponent<EnemyManager>();
             _enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
-            navmeshAgent = GetComponentInChildren<NavMeshAgent>();
-            navMeshBlocker = GetComponent<NavMeshObstacle>();
-            _navMeshTransform = navmeshAgent.transform;
-            enemyRigidBody = GetComponent<Rigidbody>();
-        }
-
-        private void Start()
-        {
-            navmeshAgent.enabled = false;
-            enemyRigidBody.isKinematic = false;
-        }
-
-        public void HandleMoveToTarget()
-        {
-            if (_enemyManager.isPreformingAction)
-            {
-                _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
-
-                return;
-            }
-
-            Vector3 currentTargetPosition = _enemyManager.currentTarget.transform.position;
-            Vector3 targetDirection = currentTargetPosition - _enemyManager.transform.position;
-            _enemyManager.distanceFromTarget = Vector3.Distance(currentTargetPosition, transform.position);
-            _enemyManager.viewableAngle = Vector3.Angle(targetDirection, _enemyManager.transform.forward);
-
-            if (_enemyManager.distanceFromTarget > stoppingDistance)
-            {
-                _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f, Time.deltaTime);
-            }
-            else if (_enemyManager.distanceFromTarget <= stoppingDistance)
-            {
-                StopMoving();
-            }
-
-            HandleRotateTowardsTarget();
-            _navMeshTransform.localPosition = Vector3.zero;
-            _navMeshTransform.localRotation = Quaternion.identity;
-        }
-
-        public void StopMoving()
-        {
-            _enemyManager.distanceFromTarget = 0;
-            _enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
-        }
-
-        public void HandleRotateTowardsTarget()
-        {
-            if (_enemyManager.isPreformingAction)
-            {
-                Vector3 direction = _enemyManager.currentTarget.transform.position - transform.position;
-                direction.y = 0;
-                direction.Normalize();
-
-                if (direction == Vector3.zero)
-                {
-                    direction = transform.forward;
-                }
-
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed / Time.deltaTime);
-            }
-            //Rotate with pathfinding on navmesh -> make A*?
-            else
-            {
-                //Vector3 relativeDirection = transform.InverseTransformDirection(navmeshAgent.desiredVelocity);
-                Vector3 targetVelocity = enemyRigidBody.velocity;
-
-                navmeshAgent.enabled = true;
-                navmeshAgent.SetDestination(_enemyManager.currentTarget.transform.position);
-                enemyRigidBody.velocity = targetVelocity;
-                transform.rotation = Quaternion.Slerp(_enemyManager.transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
-            }
         }
     }
 }

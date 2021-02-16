@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SzymonPeszek.BaseClasses;
 using SzymonPeszek.Misc;
 using SzymonPeszek.EnemyScripts.Animations;
+using UnityEngine.AI;
 
 
 namespace SzymonPeszek.EnemyScripts
@@ -29,7 +31,6 @@ namespace SzymonPeszek.EnemyScripts
         public bool shouldDrop = true;
         public bool isAlive = true;
         public bool deadFromBackStab;
-        public bool shouldFollowTarget;
 
         [Header("Current Target", order = 2)]
         public CharacterStats currentTarget;
@@ -38,8 +39,10 @@ namespace SzymonPeszek.EnemyScripts
         public State currentState;
 
         [Header("A.I Settings", order = 2)]
-        public float distanceFromTarget;
-        public float viewableAngle;
+        public NavMeshAgent navmeshAgent;
+        public NavMeshObstacle navMeshBlocker;
+        public Rigidbody enemyRigidBody;
+        public float rotationSpeed = 15;
         public float detectionRadius = 15;
         public float maximumAttackRange = 1.5f;
         public float maximumDetectionAngle = 75;
@@ -57,6 +60,8 @@ namespace SzymonPeszek.EnemyScripts
         public bool shouldGlow;
         public float objectDestructionDuration = 5.0f;
 
+        [HideInInspector] public Transform enemyTransform;
+
         private void Awake()
         {
             characterTransform = transform;
@@ -65,7 +70,13 @@ namespace SzymonPeszek.EnemyScripts
             _enemyStats = GetComponent<EnemyStats>();
             _enemyDrops = GetComponent<EnemyDrops>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
+            enemyRigidBody = GetComponent<Rigidbody>();
+            navmeshAgent = GetComponentInChildren<NavMeshAgent>();
+            navmeshAgent.enabled = false;
+            navMeshBlocker = GetComponent<NavMeshObstacle>();
+            enemyTransform = GetComponent<Transform>();
 
+            #region Get Model Materials
             _characterMaterials = new List<Material>();
             Renderer[] renders = GetComponentsInChildren<Renderer>();
 
@@ -84,6 +95,12 @@ namespace SzymonPeszek.EnemyScripts
                 mat.SetFloat(_fresnelPowerId, disolveFresnelPower);
                 _characterMaterials.Add(mat);
             }
+            #endregion
+        }
+
+        private void Start()
+        {
+            enemyRigidBody.isKinematic = false;
         }
 
         private void Update()

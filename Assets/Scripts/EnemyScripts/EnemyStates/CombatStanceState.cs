@@ -19,26 +19,22 @@ namespace SzymonPeszek.EnemyScripts.States
         {
             if (enemyStats.currentHealth > 0)
             {
-                enemyManager.enemyLocomotionManager.HandleRotateTowardsTarget();
-
+                float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
+                
                 if (enemyManager.isPreformingAction)
                 {
                     enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
                 }
 
-                enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-
-                if (enemyManager.currentRecoveryTime <= 0 && enemyManager.distanceFromTarget <= enemyManager.maximumAttackRange)
+                if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange)
                 {
                     return attackState;
                 }
                 
-                if (enemyManager.distanceFromTarget > enemyManager.enemyLocomotionManager.stoppingDistance)
+                if (distanceFromTarget > enemyManager.maximumAttackRange)
                 {
                     return pursueTargetState;
                 }
-                
-                enemyManager.enemyLocomotionManager.StopMoving();
 
                 return this;
             }

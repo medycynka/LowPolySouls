@@ -8,14 +8,12 @@ namespace SzymonPeszek.EnemyScripts.Animations
 {
     public class EnemyAnimationManager : AnimationManager
     {
-        private EnemyLocomotionManager _enemyLocomotionManager;
         private EnemyManager _enemyManager;
         private EnemyStats _enemyStats;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
-            _enemyLocomotionManager = GetComponentInParent<EnemyLocomotionManager>();
             _enemyManager = GetComponentInParent<EnemyManager>();
             _enemyStats = GetComponentInParent<EnemyStats>();
 
@@ -50,24 +48,23 @@ namespace SzymonPeszek.EnemyScripts.Animations
             };
             
             anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], false);
-            Debug.Log("Enemy: " + StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
         }
 
         private void OnAnimatorMove()
         {
             float delta = Time.deltaTime;
-            _enemyLocomotionManager.enemyRigidBody.drag = 0;
+            _enemyManager.enemyRigidBody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             
             if (delta != 0.0f)
             {
                 Vector3 velocity = deltaPosition / delta;
-                _enemyLocomotionManager.enemyRigidBody.velocity = velocity;
+                _enemyManager.enemyRigidBody.velocity = velocity;
             }
             else
             {
-                _enemyLocomotionManager.enemyRigidBody.velocity = Vector3.zero;
+                _enemyManager.enemyRigidBody.velocity = Vector3.zero;
             }
         }
 

@@ -81,7 +81,6 @@ namespace SzymonPeszek.PlayerScripts.Animations
             };
             
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
-            Debug.Log("Player: " + StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]);
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool isWalking)

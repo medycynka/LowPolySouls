@@ -28,13 +28,10 @@ namespace SzymonPeszek.EnemyScripts.States
                     return idleState;
                 }
 
-                enemyManager.enemyLocomotionManager.HandleRotateTowardsTarget();
-
-                Vector3 currentTargetPosition = enemyManager.currentTarget.transform.position;
-                Vector3 targetDirection = currentTargetPosition - transform.position;
-                enemyManager.distanceFromTarget = Vector3.Distance(currentTargetPosition, enemyManager.transform.position);
-                enemyManager.viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
+                Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;
+                float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
+                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+                
                 if (enemyManager.isPreformingAction)
                 {
                     return combatStanceState;
@@ -42,18 +39,14 @@ namespace SzymonPeszek.EnemyScripts.States
 
                 if (currentAttack != null)
                 {
-                    if (enemyManager.distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
+                    if (distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
                     {
                         return this;
                     }
-
-                    float maxAttackDist = enemyStats.isBoss
-                        ? currentAttack.maximumDistanceNeededToAttack + 1.0f
-                        : currentAttack.maximumDistanceNeededToAttack;
                     
-                    if (enemyManager.distanceFromTarget < maxAttackDist)
+                    if (distanceFromTarget < currentAttack.maximumDistanceNeededToAttack)
                     {
-                        if (enemyManager.viewableAngle <= currentAttack.maximumAttackAngle && enemyManager.viewableAngle >= currentAttack.minimumAttackAngle)
+                        if (viewableAngle <= currentAttack.maximumAttackAngle && viewableAngle >= currentAttack.minimumAttackAngle)
                         {
                             if (enemyManager.currentRecoveryTime <= 0 && enemyManager.isPreformingAction == false)
                             {
@@ -63,7 +56,7 @@ namespace SzymonPeszek.EnemyScripts.States
                                 enemyManager.isPreformingAction = true;
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
                                 currentAttack = null;
-
+                                
                                 return combatStanceState;
                             }
                         }
@@ -82,19 +75,16 @@ namespace SzymonPeszek.EnemyScripts.States
 
         private void GetNewAttack(EnemyManager enemyManager)
         {
-            Vector3 currTransformPosition = enemyManager.transform.position;
-            Vector3 currTargetPosition = enemyManager.currentTarget.transform.position;
-            Vector3 targetsDirection = currTargetPosition - currTransformPosition;
-            float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-            enemyManager.distanceFromTarget = Vector3.Distance(currTargetPosition, currTransformPosition);
-
+            Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;
+            float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.enemyTransform.forward);
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
             int maxScore = 0;
 
             for (int i = 0; i < enemyAttacks.Length; i++)
             {
                 EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-                if (enemyManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyManager.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
                 {
                     if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                     {
@@ -103,7 +93,6 @@ namespace SzymonPeszek.EnemyScripts.States
                 }
             }
 
-
             int randomValue = Random.Range(0, maxScore);
             int temporaryScore = 0;
 
@@ -111,7 +100,7 @@ namespace SzymonPeszek.EnemyScripts.States
             {
                 EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-                if (enemyManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyManager.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
                 {
                     if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
                     {

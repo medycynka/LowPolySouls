@@ -22,25 +22,17 @@ namespace SzymonPeszek.EnemyScripts.States
         {
             if (enemyStats.currentHealth > 0)
             {
-                if (!enemyManager.shouldFollowTarget)
-                {
-                    enemyManager.enemyLocomotionManager.StopMoving();
-                }
-
                 #region Handle Enemy Target Detection
-                int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
-                Transform currentTransform = transform;
-                
+                int detectLength = Physics.OverlapSphereNonAlloc(enemyManager.enemyTransform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
+
                 for (int i = 0; i < detectLength; i++)
                 {
                     CharacterStats characterStats = detectPlayer[i].transform.GetComponent<CharacterStats>();
-                    
+
                     if (characterStats != null)
                     {
-                        //CHECK FOR TEAM ID
-
-                        Vector3 targetDirection = characterStats.transform.position - currentTransform.position;
-                        float viewableAngle = Vector3.Angle(targetDirection, currentTransform.forward);
+                        Vector3 targetDirection = characterStats.transform.position - enemyManager.enemyTransform.position;
+                        float viewableAngle = Vector3.Angle(targetDirection, enemyManager.enemyTransform.forward);
 
                         if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                         {
@@ -53,8 +45,6 @@ namespace SzymonPeszek.EnemyScripts.States
                 #region Handle Switching To Next State
                 if (enemyManager.currentTarget != null)
                 {
-                    enemyManager.shouldFollowTarget = true;
-
                     return pursueTargetState;
                 }
                 

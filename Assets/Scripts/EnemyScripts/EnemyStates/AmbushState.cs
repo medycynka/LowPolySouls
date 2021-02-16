@@ -34,7 +34,7 @@ namespace SzymonPeszek.EnemyScripts.States
                 }
 
                 #region Handle Target Detection
-                int detectLength = Physics.OverlapSphereNonAlloc(transform.position, enemyManager.detectionRadius, _detectPlayer, detectionLayer);
+                int detectLength = Physics.OverlapSphereNonAlloc(enemyManager.enemyTransform.position, detectionRadius, _detectPlayer, detectionLayer);
 
                 for (int i = 0; i < detectLength; i++)
                 {
@@ -43,13 +43,13 @@ namespace SzymonPeszek.EnemyScripts.States
                     if (characterStats != null)
                     {
                         Vector3 targetsDirection = characterStats.characterTransform.position - enemyStats.characterTransform.position;
-                        enemyManager.viewableAngle = Vector3.Angle(targetsDirection, enemyStats.characterTransform.forward);
+                        float viewableAngle = Vector3.Angle(targetsDirection, enemyStats.characterTransform.forward);
 
-                        if (enemyManager.viewableAngle > enemyManager.minimumDetectionAngle && enemyManager.viewableAngle < enemyManager.maximumDetectionAngle)
+                        if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                         {
                             enemyManager.currentTarget = characterStats;
                             isSleeping = false;
-                            enemyManager.enemyLocomotionManager.navMeshBlocker.enabled = false;
+                            enemyManager.navMeshBlocker.enabled = false;
                             enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[wakeAnimation], true);
                         }
                     }

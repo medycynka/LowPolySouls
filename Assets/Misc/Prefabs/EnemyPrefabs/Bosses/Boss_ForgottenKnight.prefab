@@ -524,11 +524,12 @@ MonoBehaviour:
   defence: 3
   bonusHealth: 2
   bonusStamina: 2
+  bonusFocus: 0
   animator: {fileID: 0}
   healthBar: {fileID: 0}
   healthBarFill: {fileID: 0}
   damageValue: {fileID: 0}
-  soulsGiveAmount: 0
+  soulsGiveAmount: 15000
   playerStats: {fileID: 0}
   enemyObject: {fileID: 6751287847623445390}
   isBoss: 1
@@ -604,11 +605,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChance: 0.45
-  weaponChance: 0.25
-  equipmentChance: 0.2
+  consumableChance: 0
+  weaponChance: 1
+  equipmentChance: 0
   consumableDropPool: []
-  weaponDropPool: []
+  weaponDropPool:
+  - {fileID: 11400000, guid: 4e66a74b089a42f42b9bdf65f70e89bf, type: 2}
   equipmentDropPool: []
   dropList: []
   deathDrop: {fileID: 7946515326730370419, guid: 4d928ade9cb139c4fba3948661e7ba91,
@@ -653,6 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   isEnemy: 0
 --- !u!114 &2215714749821440699
 MonoBehaviour:

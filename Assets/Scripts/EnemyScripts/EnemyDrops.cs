@@ -32,7 +32,7 @@ namespace SzymonPeszek.EnemyScripts
             dropChance = Random.Range(0.0f, 1.0f);
             deathDrop.items.Clear();
 
-            if (dropChance <= consumableChance)
+            if (dropChance < consumableChance)
             {
                 // Drop consumable
                 foreach (var drop in consumableDropPool)
@@ -40,7 +40,7 @@ namespace SzymonPeszek.EnemyScripts
                     dropList.Add(drop);
                 }
             }
-            else if (dropChance - consumableChance <= equipmentChance)
+            else if (dropChance - consumableChance < weaponChance)
             {
                 // Drop weapon
                 foreach (var drop in weaponDropPool)
@@ -48,7 +48,7 @@ namespace SzymonPeszek.EnemyScripts
                     dropList.Add(drop);
                 }
             }
-            else if (dropChance - consumableChance - equipmentChance <= weaponChance)
+            else if (dropChance - consumableChance - weaponChance < equipmentChance)
             {
                 // Drop equipment
                 foreach (var drop in equipmentDropPool)
