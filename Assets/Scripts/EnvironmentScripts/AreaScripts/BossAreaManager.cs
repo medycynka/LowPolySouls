@@ -26,6 +26,7 @@ namespace SzymonPeszek.Environment.Areas
         public GameObject bossPrefab;
         public Vector3 startPosition;
         public Quaternion startRotation;
+        public Transform parentTransform;
         public GameObject bossHpBar;
         public bool isBossAlive = true;
 
@@ -37,7 +38,7 @@ namespace SzymonPeszek.Environment.Areas
         {
             if (isBossAlive)
             {
-                bossPrefab = Instantiate(bossPrefab, startPosition, startRotation);
+                bossPrefab = Instantiate(bossPrefab, startPosition, startRotation, parentTransform);
                 bonfiresInArea[0].gameObject.SetActive(false);
                 _bossStats = bossPrefab.GetComponent<EnemyStats>();
                 _bossStats.bossAreaManager = this;

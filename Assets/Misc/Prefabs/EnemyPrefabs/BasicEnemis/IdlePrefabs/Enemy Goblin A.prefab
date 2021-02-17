@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077adfdb47e935541b7c7551b08f9f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
   healthLevel: 10
   maxHealth: 100
   currentHealth: 100
@@ -193,14 +194,15 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
+  bonusFocus: 0
   animator: {fileID: 0}
   healthBar: {fileID: 3088459209441535152}
-  healtBarFill: {fileID: 3088459210695433684}
+  healthBarFill: {fileID: 0}
   damageValue: {fileID: 3088459209949237587}
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
@@ -223,6 +225,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 46944566679698110}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
+  pendingCriticalDamage: 0
   enemyLocomotionManager: {fileID: 0}
   enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
@@ -230,15 +234,16 @@ MonoBehaviour:
   shouldDrop: 1
   isAlive: 1
   deadFromBackStab: 0
-  shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 2936848220394843712}
-  distanceFromTarget: 0
-  viewableAngle: 0
+  navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
+  rotationSpeed: 15
   detectionRadius: 15
   maximumAttackRange: 1.5
-  maximumDetectionAngle: 75
-  minimumDetectionAngle: -75
+  maximumDetectionAngle: 120
+  minimumDetectionAngle: -120
   currentRecoveryTime: 0
   disolveEdgeWidth: 0.015
   disolveNoiseScale: 30
@@ -247,6 +252,7 @@ MonoBehaviour:
   disolveDurationTime: 4
   shouldGlow: 0
   objectDestructionDuration: 5
+  enemyTransform: {fileID: 0}
 --- !u!114 &46944566002826846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,9 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8f14037264634db09d485a350d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navmeshAgent: {fileID: 0}
-  navMeshBlocker: {fileID: 0}
-  enemyRigidBody: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   stoppingDistance: 1.25
   rotationSpeed: 100
 --- !u!114 &3088459209813192643
@@ -276,12 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChanse: 0.45
-  weaponChanse: 0.25
-  equipmentChanse: 0.2
+  consumableChance: 1
+  weaponChance: 0
+  equipmentChance: 0
   consumableDropPool:
-  - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
-  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   weaponDropPool:
   - {fileID: 11400000, guid: 8d3a99efa49105c49a210678a6fb7340, type: 2}
@@ -955,6 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   isEnemy: 0
 --- !u!114 &2719543381417116189
 MonoBehaviour:

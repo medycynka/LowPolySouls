@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077adfdb47e935541b7c7551b08f9f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
   healthLevel: 10
   maxHealth: 100
   currentHealth: 100
@@ -803,14 +804,15 @@ MonoBehaviour:
   maxFocus: 0
   currentFocus: 0
   baseArmor: 5
-  Strength: 4
-  Agility: 1
-  Defence: 3
+  strength: 4
+  agility: 1
+  defence: 3
   bonusHealth: 2
   bonusStamina: 2
+  bonusFocus: 0
   animator: {fileID: 0}
   healthBar: {fileID: 4670558424220370308}
-  healtBarFill: {fileID: 4670558425466158304}
+  healthBarFill: {fileID: 0}
   damageValue: {fileID: 4670558424719175783}
   soulsGiveAmount: 10
   playerStats: {fileID: 0}
@@ -833,6 +835,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 7686385314629491594}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  characterTransform: {fileID: 0}
+  pendingCriticalDamage: 0
   enemyLocomotionManager: {fileID: 0}
   enemyAnimationManager: {fileID: 0}
   isPreformingAction: 0
@@ -840,15 +844,16 @@ MonoBehaviour:
   shouldDrop: 1
   isAlive: 1
   deadFromBackStab: 0
-  shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 4813370024578879348}
-  distanceFromTarget: 0
-  viewableAngle: 0
+  navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
+  rotationSpeed: 15
   detectionRadius: 15
   maximumAttackRange: 1.5
-  maximumDetectionAngle: 75
-  minimumDetectionAngle: -75
+  maximumDetectionAngle: 120
+  minimumDetectionAngle: -120
   currentRecoveryTime: 0
   disolveEdgeWidth: 0.015
   disolveNoiseScale: 30
@@ -857,6 +862,7 @@ MonoBehaviour:
   disolveDurationTime: 4
   shouldGlow: 0
   objectDestructionDuration: 5
+  enemyTransform: {fileID: 0}
 --- !u!114 &7686385313952653162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,9 +875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8f14037264634db09d485a350d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navmeshAgent: {fileID: 0}
-  navMeshBlocker: {fileID: 0}
-  enemyRigidBody: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   stoppingDistance: 1.25
   rotationSpeed: 100
 --- !u!114 &4670558424589930231
@@ -886,18 +892,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChanse: 0.45
-  weaponChanse: 0.25
-  equipmentChanse: 0.2
+  consumableChance: 0.65
+  weaponChance: 0.25
+  equipmentChance: 0.095
   consumableDropPool:
   - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
-  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
-  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
   weaponDropPool:
-  - {fileID: 11400000, guid: 8d3a99efa49105c49a210678a6fb7340, type: 2}
+  - {fileID: 11400000, guid: e46cdd48310c58f49b47dfdcbf9c9c6a, type: 2}
   equipmentDropPool:
-  - {fileID: 11400000, guid: 90cd5c31ba0210f48b2d0fe1affdc046, type: 2}
-  - {fileID: 11400000, guid: bfa3170a09393424393b8ce64e9b8917, type: 2}
+  - {fileID: 11400000, guid: b64110c19d405eb41b429607589ab69d, type: 2}
+  - {fileID: 11400000, guid: d1c75ad959b46194da567b098d9a19f0, type: 2}
+  - {fileID: 11400000, guid: 4091e9a68340f254fa69570456f2cd5e, type: 2}
   dropList: []
   deathDrop: {fileID: 7946515326730370419, guid: 4d928ade9cb139c4fba3948661e7ba91,
     type: 3}
@@ -5057,6 +5062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   isEnemy: 0
 --- !u!114 &5742233726024622889
 MonoBehaviour:

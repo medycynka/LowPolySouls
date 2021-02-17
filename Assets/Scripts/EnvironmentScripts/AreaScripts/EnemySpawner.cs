@@ -8,10 +8,10 @@ namespace SzymonPeszek.Environment.Areas
 {
     public class EnemySpawner : MonoBehaviour
     {
+        public Transform parentTransform;
         public List<GameObject> prefabsList;
         public List<Vector3> positionsList;
 
-        private List<KeyValuePair<GameObject, Vector3>> _spawnList;
         private List<GameObject> _enemiesAlive;
         private readonly int FrameCheckRate = 3;
         private const int RefreshCheckVal = 0;
@@ -40,16 +40,9 @@ namespace SzymonPeszek.Environment.Areas
 
         private void InitializeSpawnerList()
         {
-            _spawnList = new List<KeyValuePair<GameObject, Vector3>>();
-
-            for(int i = 0; i < prefabsList.Count; i++)
+            for (int i = 0; i < prefabsList.Count; i++)
             {
-                _spawnList.Add(new KeyValuePair<GameObject, Vector3>(prefabsList[i], positionsList[i]));
-            }
-
-            foreach(var enemyClone in _spawnList)
-            {
-                _enemiesAlive.Add(Instantiate(enemyClone.Key, enemyClone.Value, Quaternion.identity));
+                _enemiesAlive.Add(Instantiate(prefabsList[i], positionsList[i], Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f), parentTransform));
             }
         }
 
@@ -59,9 +52,9 @@ namespace SzymonPeszek.Environment.Areas
 
             yield return CoroutineYielder.spawnRefreshWaiter;
 
-            for (var i = 0; i < _spawnList.Count; i++)
+            for (int i = 0; i < prefabsList.Count; i++)
             {
-                _enemiesAlive.Add(Instantiate(_spawnList[i].Key, _spawnList[i].Value, Quaternion.identity));
+                _enemiesAlive.Add(Instantiate(prefabsList[i], positionsList[i], Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f), parentTransform));
             }
         }
 
