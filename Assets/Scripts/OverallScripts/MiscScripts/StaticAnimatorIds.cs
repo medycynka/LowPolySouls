@@ -2,6 +2,9 @@
 
 namespace SzymonPeszek.Misc
 {
+    /// <summary>
+    /// Class for storing animations names and their hash codes
+    /// </summary>
     public static class StaticAnimatorIds
     {
         #region Animation names

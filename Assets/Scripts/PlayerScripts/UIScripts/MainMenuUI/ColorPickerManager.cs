@@ -5,6 +5,9 @@ using TMPro;
 
 namespace SzymonPeszek.MainMenuUI
 {
+    /// <summary>
+    /// Class for picking color of character's parts
+    /// </summary>
     public class ColorPickerManager : MonoBehaviour
     {
         [Header("Color Picker Manager", order = 0)]
@@ -34,6 +37,11 @@ namespace SzymonPeszek.MainMenuUI
         public TextMeshProUGUI bPlaceholder;
         public TextMeshProUGUI aPlaceholder;
 
+        /// <summary>
+        /// Initialize class's properties
+        /// </summary>
+        /// <param name="s">Color property name</param>
+        /// <param name="cBp">ColorButtonPicker component</param>
         public void InitializeContent(string s, ColorButtonPicker cBp)
         {
             colorProperty = s;
@@ -52,6 +60,10 @@ namespace SzymonPeszek.MainMenuUI
             colorButtonPicker.buttonImage.color = partColor;
         }
 
+        /// <summary>
+        /// Set red value of rgba color
+        /// </summary>
+        /// <param name="r">Red value of current color</param>
         public void SetColorR(float r)
         {
             colorR = r;
@@ -62,6 +74,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Get red color value from text field
+        /// </summary>
+        /// <param name="s">Red color value</param>
         public void GetColorRValue(string s)
         {
             if (s == "")
@@ -78,6 +94,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Set green value of rgba color
+        /// </summary>
+        /// <param name="g">Green value of current color</param>
         public void SetColorG(float g)
         {
             colorG = g;
@@ -88,6 +108,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Get green color value from text field
+        /// </summary>
+        /// <param name="s">Green color value</param>
         public void GetColorGValue(string s)
         {
             if (s == "")
@@ -104,6 +128,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Set blue value of rgba color
+        /// </summary>
+        /// <param name="b">Blue value of current color</param>
         public void SetColorB(float b)
         {
             colorB = b;
@@ -114,6 +142,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Get blue color value from text field
+        /// </summary>
+        /// <param name="s">Blue color value</param>
         public void GetColorBValue(string s)
         {
             if (s == "")
@@ -130,6 +162,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Set alpha value of rgba color
+        /// </summary>
+        /// <param name="a">Alpha value of current color</param>
         public void SetColorA(float a)
         {
             colorA = a;
@@ -140,6 +176,10 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Get alpha value from text field
+        /// </summary>
+        /// <param name="s">Alpha value</param>
         public void GetColorAValue(string s)
         {
             if (s == "")
@@ -156,11 +196,17 @@ namespace SzymonPeszek.MainMenuUI
             SetColor();
         }
 
+        /// <summary>
+        /// Save created color
+        /// </summary>
         public void SaveColor()
         {
             colorButtonPicker.buttonImage.color = new Color(partColor.r, partColor.g, partColor.b, 1.0f);
         }
 
+        /// <summary>
+        /// Reset color to previous value
+        /// </summary>
         public void ResetColor()
         {
             partColor = _baseColor;
@@ -168,6 +214,9 @@ namespace SzymonPeszek.MainMenuUI
             modularCharacterManager.CharacterMaterial.SetColor(colorProperty, partColor);
         }
 
+        /// <summary>
+        /// Sets color for colorProperty part
+        /// </summary>
         private void SetColor()
         {
             partColor = new Color(colorR, colorG, colorB, colorA);

@@ -11,6 +11,9 @@ using SzymonPeszek.Environment.Areas;
 
 namespace SzymonPeszek.PlayerScripts
 {
+    /// <summary>
+    /// Class which manages player's behaviour
+    /// </summary>
     public class PlayerManager : CharacterManager
     {
         private InputHandler _inputHandler;
@@ -150,6 +153,10 @@ namespace SzymonPeszek.PlayerScripts
         }
 
         #region Checking Funkctions
+        /// <summary>
+        /// Use all "checkers" functions
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void CheckAllFunctions(float delta)
         {
             CheckForJumpForce(delta);
@@ -161,6 +168,9 @@ namespace SzymonPeszek.PlayerScripts
             CheckForSprintStaminaDrain(delta);
         }
 
+        /// <summary>
+        /// Check for interactable objects (pick ups, bonfires and fog walls) in range
+        /// </summary>
         private void CheckForInteractableObject()
         {
             int collidersLength = Physics.OverlapSphereNonAlloc(transform.position, 1f, _interactColliders, _pickUpLayer);
@@ -257,6 +267,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Fills health bar background image for smooth damage takes
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void FillHealthBarBackGround(float delta)
         {
             shouldRefillHealthBg = _playerStats.healthBar.backgroundSlider.value > _playerStats.healthBar.healthBarSlider.value;
@@ -279,6 +293,9 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Check if health should be refiled
+        /// </summary>
         private void CheckForHealthRefill()
         {
             if (shouldRefillHealth)
@@ -292,6 +309,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Check if stamina should be refiled
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void CheckForStaminaRefill(float delta)
         {
             shouldRefillStamina = !isInteracting && !_inputHandler.comboFlag && !_inputHandler.sprintFlag && (_playerStats.currentStamina < _playerStats.maxStamina);
@@ -313,6 +334,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Check if focus should be refiled
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void CheckForFocusRefill(float delta)
         {
             shouldRefillFocus = !isInteracting && (_playerStats.currentFocus < _playerStats.maxFocus);
@@ -334,6 +359,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Check if there should be added force to player's jump
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void CheckForJumpForce(float delta)
         {
             if (shouldAddJumpForce)
@@ -349,6 +378,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Check if stamina should be drained during sprint, roll or back step
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void CheckForSprintStaminaDrain(float delta)
         {
             if (_inputHandler.sprintFlag)

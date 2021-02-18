@@ -8,6 +8,9 @@ using SzymonPeszek.Misc;
     
 namespace SzymonPeszek.GameUI.Slots
 {
+    /// <summary>
+    /// Class representing consumable item slots in player's inventory 
+    /// </summary>
     public class ConsumableInventorySlot : InventorySlotBase
     {
         public PlayerStats playerStats;
@@ -16,6 +19,10 @@ namespace SzymonPeszek.GameUI.Slots
 
         private ConsumableItem _item;
 
+        /// <summary>
+        /// Add consumable item to this slot
+        /// </summary>
+        /// <param name="newItem">Consumable item</param>
         public void AddItem(ConsumableItem newItem)
         {
             _item = newItem;
@@ -24,6 +31,10 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Delete item from this slot
+        /// </summary>
+        /// <param name="lastSlot">Is it last slot in inventory tab?</param>
         public void ClearInventorySlot(bool lastSlot)
         {
             _item = null;
@@ -32,6 +43,9 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(lastSlot);
         }
 
+        /// <summary>
+        /// Use item represents by this slot
+        /// </summary>
         public void UseThisItem()
         {
             if (_item != null)

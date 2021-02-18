@@ -8,6 +8,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.Items.Spells
 {
+    /// <summary>
+    /// Class representing fire ball spell
+    /// </summary>
     [CreateAssetMenu(menuName = "Spells/Fireball Spell")]
     public class FireballScript : SpellItem
     {
@@ -22,6 +25,11 @@ namespace SzymonPeszek.Items.Spells
         private RaycastHit _hit;
         private SpellCollision _spellCollision;
         
+        /// <summary>
+        /// Attempt to cast this spell
+        /// </summary>
+        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerStats">Player stats</param>
         public override void AttemptToCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
         {
             base.AttemptToCastSpell(playerAnimatorHandler, playerStats);
@@ -33,6 +41,11 @@ namespace SzymonPeszek.Items.Spells
             GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.spellProjectilesTransform);
         }
 
+        /// <summary>
+        /// Successfully cast this spell
+        /// </summary>
+        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerStats">Player stats</param>
         public override void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
         {
             base.SuccessfullyCastSpell(playerAnimatorHandler, playerStats);

@@ -8,6 +8,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// Class representing fog wall object
+    /// </summary>
     public class FogWallManager : Interactable
     {
         [Header("Fog Wall Manager", order = 1)]
@@ -27,13 +30,19 @@ namespace SzymonPeszek.Environment.Areas
             }
         }
 
+        /// <summary>
+        /// Interact with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             PickUpItem(playerManager);
         }
 
+        /// <summary>
+        /// Remove fog wall or go through it with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         protected override void PickUpItem(PlayerManager playerManager)
         {
             boxCollider.enabled = false;
@@ -43,6 +52,11 @@ namespace SzymonPeszek.Environment.Areas
             StartCoroutine(shouldDestroy ? DestroyFog(playerManager) : RemoveFog(playerManager));
         }
 
+        /// <summary>
+        /// Coroutine for destroying fog wall
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator DestroyFog(PlayerManager playerManager)
         {
             playerManager.isRemovingFog = true;
@@ -55,6 +69,11 @@ namespace SzymonPeszek.Environment.Areas
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Coroutine for temporary removing fog wall
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator RemoveFog(PlayerManager playerManager)
         {
             canInteract = false;

@@ -5,6 +5,9 @@ using SzymonPeszek.EnemyScripts;
 
 namespace SzymonPeszek.Damage
 {
+    /// <summary>
+    /// Class for dealing damage from attacks
+    /// </summary>
     public class DamageCollider : MonoBehaviour
     {
         [Header("Damage Collider", order = 0)]
@@ -21,11 +24,17 @@ namespace SzymonPeszek.Damage
             damageCollider.enabled = false;
         }
 
+        /// <summary>
+        /// Enable object's collider
+        /// </summary>
         public void EnableDamageCollider()
         {
             damageCollider.enabled = true;
         }
 
+        /// <summary>
+        /// Disable object's collider
+        /// </summary>
         public void DisableDamageCollider()
         {
             if (damageCollider != null)

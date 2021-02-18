@@ -3,6 +3,9 @@
 
 namespace SzymonPeszek.SaveScripts
 {
+    /// <summary>
+    /// Static class for storing settings
+    /// </summary>
     public static class SettingsHolder
     {
         // Settings

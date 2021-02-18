@@ -2,6 +2,9 @@
 
 namespace SzymonPeszek.BaseClasses
 {
+    /// <summary>
+    /// Base class for enemy action, like attacking
+    /// </summary>
     public class EnemyAction : ScriptableObject
     {
         [Header("Attack Action", order = 0)]

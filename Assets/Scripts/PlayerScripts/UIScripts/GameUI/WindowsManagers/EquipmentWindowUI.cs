@@ -7,7 +7,9 @@ using SzymonPeszek.GameUI.Slots;
 
 namespace SzymonPeszek.GameUI.WindowsManagers
 {
-
+    /// <summary>
+    /// Class for displaying and managing player's current equipment
+    /// </summary>
     public class EquipmentWindowUI : MonoBehaviour
     {
         [Header("Weapon Quick Slots")]
@@ -27,6 +29,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         public TextMeshProUGUI staminaValue;
         public TextMeshProUGUI maxStaminaValue;
 
+        /// <summary>
+        /// Load current weapons to equipment screen
+        /// </summary>
+        /// <param name="playerInventory">Player's inventory</param>
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
         {
             for (int i = 0; i < handEquipmentSlotUI.Length; i++)
@@ -50,26 +56,42 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             }
         }
 
+        /// <summary>
+        /// Select right hand main slot
+        /// </summary>
         public void SelectRightHandSlot01()
         {
             rightHandSlot01Selected = true;
         }
 
+        /// <summary>
+        /// Select right hand secondary slot
+        /// </summary>
         public void SelectRightHandSlot02()
         {
             rightHandSlot02Selected = true;
         }
 
+        /// <summary>
+        /// Select left hand main slot
+        /// </summary>
         public void SelectLeftHandSlot01()
         {
             leftHandSlot01Selected = true;
         }
 
+        /// <summary>
+        /// Select left hand secondary slot
+        /// </summary>
         public void SelectLeftHandSlot02()
         {
             leftHandSlot02Selected = true;
         }
 
+        /// <summary>
+        /// Update visible player's stats
+        /// </summary>
+        /// <param name="playerStats">Player's stats</param>
         public void UpdateStatsWindow(PlayerStats playerStats)
         {
             strengthValue.text = playerStats.strength.ToString();

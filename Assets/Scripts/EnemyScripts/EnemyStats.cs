@@ -11,6 +11,9 @@ using SzymonPeszek.EnemyScripts.Animations;
 
 namespace SzymonPeszek.EnemyScripts
 {
+    /// <summary>
+    /// Class for managing enemy's stats
+    /// </summary>
     public class EnemyStats : CharacterStats
     {
         private EnemyManager _enemyManager;
@@ -62,13 +65,20 @@ namespace SzymonPeszek.EnemyScripts
                 healthBar.transform.Rotate(0, 180, 0);
             }
         }
-
+        
+        /// <summary>
+        /// Calculate maximum health value
+        /// </summary>
+        /// <returns>Maximum health value</returns>
         private float SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10;
             return maxHealth;
         }
 
+        /// <summary>
+        /// Initialize character's health
+        /// </summary>
         public void InitializeHealth()
         {
             maxHealth = SetMaxHealthFromHealthLevel();
@@ -93,6 +103,12 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Take damage from player
+        /// </summary>
+        /// <param name="damage">Damage amount</param>
+        /// <param name="isBackStabbed">Is it from back stab?</param>
+        /// <param name="isRiposted">Is it from riposte?</param>
         public void TakeDamage(float damage, bool isBackStabbed, bool isRiposted = false)
         {
             if (_enemyManager.isAlive)
@@ -119,11 +135,23 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Deal damage to the player
+        /// </summary>
+        /// <param name="playerStat">Player stats</param>
+        /// <param name="weaponDamage">Current weapon damage</param>
         public void DealDamage(PlayerStats playerStat, float weaponDamage)
         {
             playerStat.TakeDamage(weaponDamage + strength);
         }
 
+        /// <summary>
+        /// Coroutine for updating enemy's health bar
+        /// </summary>
+        /// <param name="damage">Damage get form player</param>
+        /// <param name="isBackStabbed">Is it from back stab?</param>
+        /// <param name="isRiposted">Is it from riposte?</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed, bool isRiposted)
         {
             _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);

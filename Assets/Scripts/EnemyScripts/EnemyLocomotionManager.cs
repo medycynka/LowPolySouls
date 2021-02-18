@@ -4,6 +4,9 @@ using SzymonPeszek.EnemyScripts.Animations;
 
 namespace SzymonPeszek.EnemyScripts
 {
+    /// <summary>
+    /// Class managing enemy movement
+    /// </summary>
     public class EnemyLocomotionManager : MonoBehaviour
     {
         private EnemyManager _enemyManager;

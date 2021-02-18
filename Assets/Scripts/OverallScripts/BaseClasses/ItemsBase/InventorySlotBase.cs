@@ -7,6 +7,9 @@ using SzymonPeszek.GameUI;
 
 namespace SzymonPeszek.BaseClasses
 {
+    /// <summary>
+    /// Base class for inventory slots storing items in inventory UI
+    /// </summary>
     public class InventorySlotBase : MonoBehaviour
     {
         [Header("Inventory Slot", order = 0)]

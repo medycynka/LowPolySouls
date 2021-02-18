@@ -3,6 +3,9 @@
 
 namespace SzymonPeszek.Misc
 {
+    /// <summary>
+    /// Class storing extension methods for mesh, terrain, floats, etc 
+    /// </summary>
     public static class ExtensionMethods
     {
         #region Custom float extensions
@@ -387,6 +390,12 @@ namespace SzymonPeszek.Misc
         #endregion
 
         #region Custom terrain extension
+        /// <summary>
+        /// Generate random point on surface (terrain).
+        /// </summary>
+        /// <param name="t">Terrain</param>
+        /// <param name="terrainLayer">Terrain's layer mask</param>
+        /// <returns>Random point on surface</returns>
         public static Vector3 GetRandomPointOnSurface(this Terrain t, LayerMask terrainLayer)
         {
             float terrainLeft = t.transform.position.x;
@@ -408,6 +417,13 @@ namespace SzymonPeszek.Misc
             return randomPosition;
         }
 
+        /// <summary>
+        /// Generate random point on given surface (terrain) without unnecessary reference to surface properties.
+        /// </summary>
+        /// <param name="terrainPosition">Surface's position</param>
+        /// <param name="terrainSize">Surface's size</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <returns>Random point on surface</returns>
         public static Vector3 GetRandomPointOnSurfaceNonRef(Vector3 terrainPosition, Vector3 terrainSize, LayerMask terrainLayer)
         {
             float terrainLeft = terrainPosition.x;
@@ -418,7 +434,7 @@ namespace SzymonPeszek.Misc
             float maxHeight = terrainSize.y;
             bool heightCheck = true;
             float randomX = Random.Range(terrainLeft, terrainRight);
-            float randomZ = Random.Range(terrainBottom, terrainTop);;
+            float randomZ = Random.Range(terrainBottom, terrainTop);
 
             while (heightCheck)
             {
@@ -444,6 +460,13 @@ namespace SzymonPeszek.Misc
             return randomPosition;
         }
 
+        /// <summary>
+        /// Generate array of random points on surface (terrain).
+        /// </summary>
+        /// <param name="t">Terrain</param>
+        /// <param name="terrainLayer">Terrain's layer mask</param>
+        /// <param name="amount">Amount of points to generate</param>
+        /// <returns>Array of random points on surface</returns>
         public static Vector3[] GetRandomPointsOnSurface(this Terrain t, LayerMask terrainLayer, int amount)
         {
             Vector3[] randomPoints = new Vector3[amount];
@@ -456,6 +479,14 @@ namespace SzymonPeszek.Misc
             return randomPoints;
         }
 
+        /// <summary>
+        /// Generate array of random points on given surface (terrain) without unnecessary reference to surface properties.
+        /// </summary>
+        /// <param name="terrainPosition">Surface's position</param>
+        /// <param name="terrainSize">Surface's size</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <param name="amount">Amount of points to generate</param>
+        /// <returns>Array of random points on surface</returns>
         public static Vector3[] GetRandomPointsOnSurfaceNonRef(Vector3 terrainPosition, Vector3 terrainSize,
             LayerMask terrainLayer, int amount)
         {
@@ -469,6 +500,13 @@ namespace SzymonPeszek.Misc
             return randomPoints;
         }
 
+        /// <summary>
+        /// Generate random point on surface (terrain) in given bounds.
+        /// </summary>
+        /// <param name="t">Terrain</param>
+        /// <param name="terrainLayer">Terrain's layer mask</param>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <returns>Random point on surface in given bounds</returns>
         public static Vector3 GetRandomPointOnSurfaceInBounds(this Terrain t, LayerMask terrainLayer, Bounds bounds)
         {
             Vector3 randomPoint = t.GetRandomPointOnSurface(terrainLayer);
@@ -481,6 +519,15 @@ namespace SzymonPeszek.Misc
             return randomPoint;
         }
 
+        /// <summary>
+        /// Generate random point on given surface (terrain) without unnecessary reference to surface properties
+        /// in given bounds.
+        /// </summary>
+        /// <param name="terrainPosition">Surface's position</param>
+        /// <param name="terrainSize">Surface's size</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <returns>Random point on surface in given bounds</returns>
         public static Vector3 GetRandomPointOnSurfaceInBoundsNonRef(Vector3 terrainPosition, Vector3 terrainSize,
             LayerMask terrainLayer, Bounds bounds)
         {
@@ -494,6 +541,13 @@ namespace SzymonPeszek.Misc
             return randomPoint;
         }
         
+        /// <summary>
+        /// Generate random point on given surface (terrain) without unnecessary reference to surface properties
+        /// in given bounds. Faster than GetRandomPointOnSurfaceInBoundsNonRef.
+        /// </summary>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <returns>Random point on surface in given bounds</returns>
         public static Vector3 GetRandomPointOnSurfaceInBoundsNonRefFast(Bounds bounds,
             LayerMask terrainLayer)
         {
@@ -503,6 +557,14 @@ namespace SzymonPeszek.Misc
             return randomPoint;
         }
         
+        /// <summary>
+        /// Generate array of random points on surface (terrain) in given bounds.
+        /// </summary>
+        /// <param name="t">Terrain</param>
+        /// <param name="terrainLayer">Terrain's layer mask</param>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <param name="amount">Amount of points to generate</param>
+        /// <returns>Array of random points on surface in given bounds</returns>
         public static Vector3[] GetRandomPointsOnSurfaceInBounds(this Terrain t, LayerMask terrainLayer, Bounds bounds, int amount)
         {
             Vector3[] randomPoints = new Vector3[amount];
@@ -515,6 +577,16 @@ namespace SzymonPeszek.Misc
             return randomPoints;
         }
 
+        /// <summary>
+        /// Generate array of random points on given surface (terrain) without unnecessary reference to surface properties
+        /// in given bounds.
+        /// </summary>
+        /// <param name="terrainPosition">Surface's position</param>
+        /// <param name="terrainSize">Surface's size</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <param name="amount">Amount of points to generate</param>
+        /// <returns>Array of random points on surface in given bounds</returns>
         public static Vector3[] GetRandomPointsOnSurfaceInBoundsNonRef(Vector3 terrainPosition, Vector3 terrainSize,
             LayerMask terrainLayer, Bounds bounds, int amount)
         {
@@ -529,6 +601,14 @@ namespace SzymonPeszek.Misc
             return randomPoints;
         }
 
+        /// <summary>
+        /// Generate random point on given surface (terrain) without unnecessary reference to surface properties
+        /// in given bounds. Faster than GetRandomPointOnSurfaceInBoundsNonRef.
+        /// </summary>
+        /// <param name="bounds">Bounds in which point will be generated</param>
+        /// <param name="terrainLayer">Surface's layer mask</param>
+        /// <param name="amount">Amount of points to generate</param>
+        /// <returns>Array of random points on surface in given bounds</returns>
         public static Vector3[] GetRandomPointsOnSurfaceInBoundsNonRefFast(Bounds bounds, LayerMask terrainLayer,
             int amount)
         {

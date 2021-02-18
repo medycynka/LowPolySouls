@@ -11,6 +11,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.PlayerScripts.Controller
 {
+    /// <summary>
+    /// Class for managing inputs from InputSystem
+    /// </summary>
     public class InputHandler : MonoBehaviour
     {
         [Header("Input Handler",order = 0)]
@@ -118,6 +121,10 @@ namespace SzymonPeszek.PlayerScripts.Controller
             _playerInputActions.Disable();
         }
 
+        /// <summary>
+        /// Handle all inputs
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void TickInput(float delta)
         {
             if (_playerStats.isPlayerAlive && !_playerManager.isRestingAtBonfire && !_playerManager.isRemovingFog)
@@ -139,6 +146,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle movement input
+        /// </summary>
         private void HandleMoveInput()
         {
             horizontal = _movementInput.x;
@@ -148,6 +158,10 @@ namespace SzymonPeszek.PlayerScripts.Controller
             mouseY = _cameraInput.y;
         }
 
+        /// <summary>
+        /// Handle roll, back step and sprint input
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void HandleRollInput(float delta)
         {
             sprintFlag = bInput;
@@ -174,6 +188,10 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle "slow" walking input
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void HandleWalkInput(float delta)
         {
             if (walkInput)
@@ -193,6 +211,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle attack input
+        /// </summary>
         private void HandleAttackInput()
         {
             if (_playerStats.currentStamina > 0)
@@ -233,6 +254,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle quick slot input
+        /// </summary>
         private void HandleQuickSlotsInput()
         {
             if (dPadRight)
@@ -245,6 +269,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle inventory input
+        /// </summary>
         private void HandleInventoryInput()
         {
             if (inventoryInput)
@@ -275,6 +302,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// Handle lock on input
+        /// </summary>
         private void HandleLockOnInput()
         {
             if (lockOnInput)
@@ -323,6 +353,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             cameraHandler.SetCameraHeight();
         }
 
+        /// <summary>
+        /// Handle two hand input
+        /// </summary>
         private void HandleTwoHandInput()
         {
             if (yInput)
@@ -343,6 +376,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
 
+        /// <summary>
+        /// handle heal (estus use) input
+        /// </summary>
         private void HandleQuickHealInput()
         {
             if (estusQuickSlotUse && uiManager.GetEstusCountInInventory() > 0)
@@ -356,6 +392,9 @@ namespace SzymonPeszek.PlayerScripts.Controller
             }
         }
         
+        /// <summary>
+        /// Handle back stab or riposte input
+        /// </summary>
         private void HandleCriticalAttackInput()
         {
             if (criticalAttackInput)

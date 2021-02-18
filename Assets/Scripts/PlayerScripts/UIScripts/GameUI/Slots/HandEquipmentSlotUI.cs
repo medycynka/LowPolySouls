@@ -4,7 +4,9 @@ using SzymonPeszek.Items.Weapons;
 
 namespace SzymonPeszek.GameUI.Slots
 {
-
+    /// <summary>
+    /// Class representing weapon item slots in player's equipment screen
+    /// </summary>
     public class HandEquipmentSlotUI : InventorySlotBase
     {
         private WeaponItem _weapon;
@@ -14,6 +16,10 @@ namespace SzymonPeszek.GameUI.Slots
         public bool leftHandSlot01;
         public bool leftHandSlot02;
 
+        /// <summary>
+        /// Add weapon to this slot
+        /// </summary>
+        /// <param name="newWeapon">Weapon item</param>
         public void AddItem(WeaponItem newWeapon)
         {
             _weapon = newWeapon;
@@ -22,6 +28,9 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Remove item from this slot
+        /// </summary>
         public void ClearItem()
         {
             _weapon = null;
@@ -30,6 +39,9 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// Select this slot for weapon changing
+        /// </summary>
         public void SelectThisSlot()
         {
             if (rightHandSlot01)

@@ -3,6 +3,9 @@
 
 namespace SzymonPeszek.Items.Weapons
 {
+    /// <summary>
+    /// Class for managing weapon in right hand, left hand and in the back slot
+    /// </summary>
     public class WeaponHolderSlot : MonoBehaviour
     {
         [Header("Weapon Holder", order = 0)]
@@ -16,6 +19,9 @@ namespace SzymonPeszek.Items.Weapons
         public bool isRightHandSlot;
         public bool isBackSlot;
 
+        /// <summary>
+        /// Deactivate current weapon
+        /// </summary>
         private void UnloadWeapon()
         {
             if (currentWeaponModel != null)
@@ -24,6 +30,9 @@ namespace SzymonPeszek.Items.Weapons
             }
         }
 
+        /// <summary>
+        /// Destroy current weapon
+        /// </summary>
         public void UnloadWeaponAndDestroy()
         {
             if (currentWeaponModel != null)
@@ -32,6 +41,10 @@ namespace SzymonPeszek.Items.Weapons
             }
         }
 
+        /// <summary>
+        /// Load weapon model in slot
+        /// </summary>
+        /// <param name="weaponItem">Weapon to load</param>
         public void LoadWeaponModel(WeaponItem weaponItem)
         {
             UnloadWeaponAndDestroy();

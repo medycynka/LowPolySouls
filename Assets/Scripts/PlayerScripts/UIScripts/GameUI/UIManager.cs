@@ -11,7 +11,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.GameUI
 {
-
+    /// <summary>
+    /// Class for managing UI during game
+    /// </summary>
     public class UIManager : MonoBehaviour
     {
         public PlayerInventory playerInventory;
@@ -93,6 +95,9 @@ namespace SzymonPeszek.GameUI
             UpdateEstusAmount();
         }
 
+        /// <summary>
+        /// Update UI
+        /// </summary>
         public void UpdateUI()
         {
             equipmentWindowUI.UpdateStatsWindow(playerStats);
@@ -100,23 +105,35 @@ namespace SzymonPeszek.GameUI
             UpdateAllInventoryTabs();
         }
 
+        /// <summary>
+        /// Update soul value in UI
+        /// </summary>
         public void UpdateSouls()
         {
             currentSoulsAmount.text = playerStats.soulsAmount.ToString();
         }
 
+        /// <summary>
+        /// Open option window
+        /// </summary>
         public void OpenSelectWindow()
         {
             uiWindow.SetActive(true);
             selectWindow.SetActive(true);
         }
 
+        /// <summary>
+        /// Close option window
+        /// </summary>
         public void CloseSelectWindow()
         {
             selectWindow.SetActive(false);
             uiWindow.SetActive(false);
         }
 
+        /// <summary>
+        /// Close inventory's windows
+        /// </summary>
         public void CloseAllInventoryWindows()
         {
             ResetAllSelectedSlots();
@@ -124,6 +141,9 @@ namespace SzymonPeszek.GameUI
             equipmentScreenWindow.SetActive(false);
         }
 
+        /// <summary>
+        /// Reset selected weapon slots
+        /// </summary>
         public void ResetAllSelectedSlots()
         {
             rightHandSlot01Selected = false;
@@ -131,6 +151,10 @@ namespace SzymonPeszek.GameUI
             leftHandSlot01Selected = false;
             leftHandSlot02Selected = false;
         }
+        
+        /// <summary>
+        /// Update estus amount in UI
+        /// </summary>
         public void UpdateEstusAmount()
         {
             int estusCount = GetEstusCountInInventory();
@@ -143,17 +167,27 @@ namespace SzymonPeszek.GameUI
             estusSlotAmount.text = estusCount.ToString();
         }
 
+        /// <summary>
+        /// Calculate how many estuses player currently owns
+        /// </summary>
+        /// <returns>Amount of estuses in player's inventory</returns>
         public int GetEstusCountInInventory()
         {
             return playerInventory.consumablesInventory.Count(checker => checker.consumableType == ConsumableType.HealItem);
         }
 
+        /// <summary>
+        /// Reset inventory flag when closing inventory
+        /// </summary>
         public void ResetInventoryFlag()
         {
             inputHandler.inventoryFlag = false;
         }
 
         #region Manage Inventory Tabs
+        /// <summary>
+        /// Resets inventory tabs
+        /// </summary>
         public void ResetTabsSelection()
         {
             weaponInventoryTab.SetActive(true);
@@ -169,56 +203,89 @@ namespace SzymonPeszek.GameUI
         }
 
         #region Get Current Items list
+        /// <summary>
+        /// Get weapon slots from inventory
+        /// </summary>
         public void GetWeaponInventorySlot()
         {
             weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         }
 
+        /// <summary>
+        /// Get shield slots from inventory
+        /// </summary>
         public void GetShieldInventorySlot()
         {
             shieldInventorySlots = shieldInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
         }
 
+        /// <summary>
+        /// Get helmet slots from inventory
+        /// </summary>
         public void GetHelmetInventorySlot()
         {
             helmetInventorySlots = helmetInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get chest slots from inventory
+        /// </summary>
         public void GetChestInventorySlot()
         {
             chestInventorySlots = chestInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get shoulder slots from inventory
+        /// </summary>
         public void GetShoulderInventorySlot()
         {
             shoulderInventorySlots = shoulderInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get glove slots from inventory
+        /// </summary>
         public void GetHandInventorySlot()
         {
             handInventorySlots = handInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get leg slots from inventory
+        /// </summary>
         public void GetLegInventorySlot()
         {
             legInventorySlots = legInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get foot slots from inventory
+        /// </summary>
         public void GetFootInventorySlot()
         {
             footInventorySlots = footInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get ring slots from inventory
+        /// </summary>
         public void GetRingInventorySlot()
         {
             ringInventorySlots = ringInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>();
         }
 
+        /// <summary>
+        /// Get consumable item slots from inventory
+        /// </summary>
         public void GetConsumableInventorySlot()
         {
             consumableInventorySlots = consumableInventorySlotsParent.GetComponentsInChildren<ConsumableInventorySlot>();
         }
 
+        /// <summary>
+        /// Get all item slots from inventory
+        /// </summary>
         public void GetAllInventorySlots()
         {
             GetWeaponInventorySlot();
@@ -235,7 +302,9 @@ namespace SzymonPeszek.GameUI
         #endregion
 
         #region Update Inventory Tabs
-
+        /// <summary>
+        /// Update all inventory tabs
+        /// </summary>
         private void UpdateAllInventoryTabs()
         {
             UpdateWeaponInventory();
@@ -250,6 +319,9 @@ namespace SzymonPeszek.GameUI
             UpdateConsumableInventory();
         }
         
+        /// <summary>
+        /// Update weapon inventory tab
+        /// </summary>
         public void UpdateWeaponInventory()
         {
             #region Weapon Inventory Slots
@@ -272,6 +344,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update shield inventory tab
+        /// </summary>
         public void UpdateShieldInventory()
         {
             #region Shield Inventory Slots
@@ -294,6 +369,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update helmet inventory tab
+        /// </summary>
         public void UpdateHelmetInventory()
         {
             #region Helmet Inventory Slots
@@ -317,6 +395,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update chest inventory tab
+        /// </summary>
         public void UpdateChestInventory()
         {
             #region Chest Inventory Slots
@@ -340,6 +421,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update shoulder inventory tab
+        /// </summary>
         public void UpdateShoulderInventory()
         {
             #region Shoulder Inventory Slots
@@ -363,6 +447,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update glove inventory tab
+        /// </summary>
         public void UpdateHandInventory()
         {
             #region Hand Inventory Slots
@@ -386,6 +473,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update leg inventory tab
+        /// </summary>
         public void UpdateLegInventory()
         {
             #region Leg Inventory Slots
@@ -409,6 +499,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update foot inventory tab
+        /// </summary>
         public void UpdateFootInventory()
         {
             #region Foot Inventory Slots
@@ -432,6 +525,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update ring inventory tab
+        /// </summary>
         public void UpdateRingInventory()
         {
             #region Ring Inventory Slots
@@ -455,6 +551,9 @@ namespace SzymonPeszek.GameUI
             #endregion
         }
 
+        /// <summary>
+        /// Update consumable items inventory tab
+        /// </summary>
         public void UpdateConsumableInventory()
         {
             #region Consumable Inventory Slots

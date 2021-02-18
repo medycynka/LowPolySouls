@@ -7,17 +7,22 @@ using SzymonPeszek.Items.Equipment;
 
 namespace SzymonPeszek.GameUI.Slots
 {
-
+    /// <summary>
+    /// Class representing equipment item slots in player's inventory 
+    /// </summary>
     public class EquipmentInventorySlot : InventorySlotBase
     {
         public CurrentEquipments currentEquipments;
         public ModularCharacterManager modularCharacterManager;
-
         public bool equipUnEquip;
         
         private EquipmentItem _item;
         private bool _shouldDeactivate;
 
+        /// <summary>
+        /// Add equipment item to this slot
+        /// </summary>
+        /// <param name="newItem">Equipment item</param>
         public void AddItem(EquipmentItem newItem)
         {
             _item = newItem;
@@ -26,6 +31,10 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Delete item from this slot
+        /// </summary>
+        /// <param name="lastSlot">Is it last slot in inventory tab?</param>
         public void ClearInventorySlot(bool lastSlot)
         {
             _item = null;
@@ -34,7 +43,10 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(lastSlot);
         }
 
-        public void HandleEquiping()
+        /// <summary>
+        /// Equip or unequip item from this slot
+        /// </summary>
+        public void HandleEquipping()
         {
             if (_item != null)
             {
@@ -84,6 +96,10 @@ namespace SzymonPeszek.GameUI.Slots
                 }
             }
         }
+        
+        /// <summary>
+        /// Equip item from this slot
+        /// </summary>
         private void EquipThisItem()
         {
             if (_item.itemType == ItemType.Ring)
@@ -213,6 +229,9 @@ namespace SzymonPeszek.GameUI.Slots
             currentEquipments.UpdateArmorValue();
         }
 
+        /// <summary>
+        /// Unequip item from this slot
+        /// </summary>
         private void UnequipThisItem()
         {
             if (_item.itemType == ItemType.Ring)

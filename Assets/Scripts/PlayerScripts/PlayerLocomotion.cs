@@ -8,6 +8,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.PlayerScripts
 {
+    /// <summary>
+    /// Class which manages player movement
+    /// </summary>
     public class PlayerLocomotion : MonoBehaviour
     {
         [Header("Locomotion Manager", order = 0)]
@@ -93,6 +96,10 @@ namespace SzymonPeszek.PlayerScripts
         private Vector3 _normalVector;
         private Vector3 _targetPosition;
 
+        /// <summary>
+        /// Rotate player
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void HandleRotation(float delta)
         {
             if (playerAnimatorHandler.canRotate)
@@ -146,7 +153,11 @@ namespace SzymonPeszek.PlayerScripts
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Move player
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void HandleMovement(float delta)
         {
             if (_inputHandler.rollFlag)
@@ -198,6 +209,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Roll, Back step or sprint player
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void HandleRollingAndSprinting(float delta)
         {
             if (playerAnimatorHandler.anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]))
@@ -229,6 +244,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Handle falling and ground detection
+        /// </summary>
+        /// <param name="moveDir">Move direction</param>
         public void HandleFalling(Vector3 moveDir)
         {
             _playerManager.isGrounded = false;
@@ -318,6 +337,10 @@ namespace SzymonPeszek.PlayerScripts
 
         }
 
+        /// <summary>
+        /// Handle player jumping
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void HandleJumping(float delta)
         {
             if (_playerManager.isInteracting)
@@ -343,6 +366,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Coroutine which resize player's collider during jump
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator ResizeCollider()
         {
             yield return CoroutineYielder.jumpFirstWaiter;
@@ -356,6 +383,11 @@ namespace SzymonPeszek.PlayerScripts
             _playerCollider.height = 1.5f;
         }
 
+        /// <summary>
+        /// Add force to player during jump
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
+        /// <param name="reverse">Should force be reversed?</param>
         public void AddJumpForce(float delta, bool reverse)
         {
             if (reverse)

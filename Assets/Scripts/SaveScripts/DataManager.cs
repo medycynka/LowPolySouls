@@ -6,6 +6,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.SaveScripts
 {
+    /// <summary>
+    /// Storage class for data that will be saved (and loaded) 
+    /// </summary>
     [System.Serializable]
     public class DataManager
     {
@@ -58,6 +61,9 @@ namespace SzymonPeszek.SaveScripts
         public bool[] bonfireActivators;
 
         // Constructor
+        /// <summary>
+        /// Constructor for saving data from main menu
+        /// </summary>
         public DataManager()
         {
             resolutionID = SettingsHolder.resolutionID;
@@ -87,6 +93,12 @@ namespace SzymonPeszek.SaveScripts
             }
         }
 
+        /// <summary>
+        /// Constructor for saving data during game
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
+        /// <param name="playerStats">Player Stats</param>
+        /// <param name="playerInventory">Player inventory</param>
         public DataManager(PlayerManager playerManager, PlayerStats playerStats, PlayerInventory playerInventory)
         {
             #region Setting

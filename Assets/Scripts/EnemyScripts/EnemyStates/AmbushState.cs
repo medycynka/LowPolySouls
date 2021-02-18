@@ -6,6 +6,9 @@ using SzymonPeszek.EnemyScripts.Animations;
 
 namespace SzymonPeszek.EnemyScripts.States
 {
+    /// <summary>
+    /// Class representing ambush state
+    /// </summary>
     public class AmbushState : State
     {
         [Header("Pursue Target State", order = 0)]
@@ -24,6 +27,13 @@ namespace SzymonPeszek.EnemyScripts.States
         
         private Collider[] _detectPlayer = new Collider[2];
 
+        /// <summary>
+        /// Use state behaviour
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
+        /// <param name="enemyStats">Enemy stats</param>
+        /// <param name="enemyAnimationManager">Enemy animation manager</param>
+        /// <returns>This or next state</returns>
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)

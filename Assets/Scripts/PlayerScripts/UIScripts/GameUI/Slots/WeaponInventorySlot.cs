@@ -4,11 +4,17 @@ using SzymonPeszek.Items.Weapons;
 
 namespace SzymonPeszek.GameUI.Slots
 {
-
+    /// <summary>
+    /// Class representing weapon item slots in player's inventory
+    /// </summary>
     public class WeaponInventorySlot : InventorySlotBase
     {
         private WeaponItem _item;
 
+        /// <summary>
+        /// Add item to this slot
+        /// </summary>
+        /// <param name="newItem">Weapon item</param>
         public void AddItem(WeaponItem newItem)
         {
             _item = newItem;
@@ -17,6 +23,10 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Delete item from this slot
+        /// </summary>
+        /// <param name="lastSlot"></param>
         public void ClearInventorySlot(bool lastSlot)
         {
             _item = null;
@@ -25,6 +35,9 @@ namespace SzymonPeszek.GameUI.Slots
             gameObject.SetActive(lastSlot);
         }
 
+        /// <summary>
+        /// Equip item from this slot
+        /// </summary>
         public void EquipThisItem()
         {
             if (_item != null)

@@ -3,6 +3,9 @@
 
 namespace SzymonPeszek.Misc
 {
+    /// <summary>
+    /// Class for blocking characters pushing each other
+    /// </summary>
     public class CollisionBlocker : MonoBehaviour
     {
         public CapsuleCollider characterCollider;

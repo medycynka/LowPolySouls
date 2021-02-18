@@ -9,6 +9,9 @@ using SzymonPeszek.PlayerScripts.Inventory;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// Class for monitoring area events and loading saved inventory
+    /// </summary>
     public class WorldManager : MonoBehaviour
     {
         public BossAreaManager[] bossAreaManagers;

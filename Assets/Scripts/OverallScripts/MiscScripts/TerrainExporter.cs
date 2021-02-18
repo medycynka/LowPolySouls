@@ -21,7 +21,9 @@ namespace SzymonPeszek.Misc
       Eighth,
       Sixteenth
    }
-
+   /// <summary>
+   /// Class for creating mesh from terrain
+   /// </summary>
    internal class TerrainExporter : EditorWindow
    {
       private SaveFormat _saveFormat = SaveFormat.Triangles;

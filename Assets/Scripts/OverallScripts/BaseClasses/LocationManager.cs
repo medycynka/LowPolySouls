@@ -7,6 +7,9 @@ using SzymonPeszek.Environment.Sounds;
 
 namespace SzymonPeszek.BaseClasses
 {
+    /// <summary>
+    /// Base class for area managers
+    /// </summary>
     public class LocationManager : MonoBehaviour
     {
         [Header("Area Name", order = 1)]

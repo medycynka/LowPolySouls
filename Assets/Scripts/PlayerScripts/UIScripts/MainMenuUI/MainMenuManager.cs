@@ -8,6 +8,9 @@ using SzymonPeszek.SaveScripts;
 
 
 namespace SzymonPeszek.MainMenuUI {
+    /// <summary>
+    /// Class which manages main menu actions
+    /// </summary>
     public class MainMenuManager : MonoBehaviour
     {
         private AudioSource _audioSource;
@@ -80,6 +83,9 @@ namespace SzymonPeszek.MainMenuUI {
             SettingsHolder.dataManager = dataManager;
         }
 
+        /// <summary>
+        /// Save settings data
+        /// </summary>
         public void SaveSettings()
         {
             SettingsHolder.resolutionID = resolutionDropdown.value;
@@ -89,6 +95,9 @@ namespace SzymonPeszek.MainMenuUI {
             SettingsHolder.soundVolume = volumeSlider.value;
         }
 
+        /// <summary>
+        /// Load main level or open character creation screen on first play
+        /// </summary>
         public void PlayGame()
         {
             if (SettingsHolder.isCharacterCreated)
@@ -103,40 +112,66 @@ namespace SzymonPeszek.MainMenuUI {
             }
         }
 
+        /// <summary>
+        /// Fade out music during next scene loading
+        /// </summary>
         public void FadeOutMusic()
         {
             StartCoroutine(SwitchToNextScene());
         }
         
+        /// <summary>
+        /// Exit game
+        /// </summary>
         public void QuitGame()
         {
             Debug.Log("Quitting the game...");
             Application.Quit();
         }
 
+        /// <summary>
+        /// Set game resolution
+        /// </summary>
+        /// <param name="resolutionId">Game resolution</param>
         public void SetResolution(int resolutionId)
         {
             Screen.SetResolution(_resolutionsOpts[resolutionId].width, _resolutionsOpts[resolutionId].height, Screen.fullScreen);
             SettingsHolder.resolutionID = resolutionId;
         }
 
+        /// <summary>
+        /// Set game window to fullscreen or revert to normal window
+        /// </summary>
+        /// <param name="isFullScreen">Should screen be set to fullscreen?</param>
         public void SetFullScreen(bool isFullScreen)
         {
             Screen.fullScreen = isFullScreen;
             SettingsHolder.isFullscreen = isFullScreen;
         }
 
+        /// <summary>
+        /// Set game quality
+        /// </summary>
+        /// <param name="qualityId">Game quality</param>
         public void SetQuality(int qualityId)
         {
             QualitySettings.SetQualityLevel(qualityId);
             SettingsHolder.qualityID = qualityId;
         }
 
+        /// <summary>
+        /// Set mouse sensibility
+        /// </summary>
+        /// <param name="sensibility">Mouse sensibility</param>
         public void SetMouseSensibility(float sensibility)
         {
             SettingsHolder.mouseSensibility = sensibility;
         }
 
+        /// <summary>
+        /// Set music volume
+        /// </summary>
+        /// <param name="volume">Music Volume</param>
         public void SetVolume(float volume)
         {
             _audioSource.volume = volume;
@@ -144,6 +179,10 @@ namespace SzymonPeszek.MainMenuUI {
             SettingsHolder.soundVolume = volume;
         }
 
+        /// <summary>
+        /// Coroutine whick loads next scene
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator SwitchToNextScene()
         {
             while (_currentTime <= fadeOutTime)

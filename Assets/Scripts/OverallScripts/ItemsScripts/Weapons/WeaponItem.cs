@@ -5,6 +5,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.Items.Weapons
 {
+    /// <summary>
+    /// Class representing weapon item
+    /// </summary>
     [CreateAssetMenu(menuName = "Items/Weapon Item")]
     public class WeaponItem : Item
     {

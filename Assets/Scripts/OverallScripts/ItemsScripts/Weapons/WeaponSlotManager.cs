@@ -9,6 +9,9 @@ using SzymonPeszek.PlayerScripts.Animations;
 
 namespace SzymonPeszek.Items.Weapons
 {
+    /// <summary>
+    /// Class for managing weapons in right hand slot, left hand slot and back slot
+    /// </summary>
     public class WeaponSlotManager : MonoBehaviour
     {
         private PlayerManager _playerManager;
@@ -59,6 +62,11 @@ namespace SzymonPeszek.Items.Weapons
             }
         }
 
+        /// <summary>
+        /// Load weapon on given slot
+        /// </summary>
+        /// <param name="weaponItem">Weapon to load</param>
+        /// <param name="isLeft">Is it left hand slot?</param>
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
             if (isLeft)
@@ -122,19 +130,27 @@ namespace SzymonPeszek.Items.Weapons
         }
 
         #region Handle Weapon's Damage Collider
-
+        /// <summary>
+        /// Load damage collider from weapon in left hand slot
+        /// </summary>
         private void LoadLeftWeaponDamageCollider()
         {
             leftHandDamageCollider = _leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.currentWeaponDamage = _leftHandSlot.currentWeapon.baseAttack;
         }
 
+        /// <summary>
+        /// Load damage collider from weapon in right hand slot
+        /// </summary>
         private void LoadRightWeaponDamageCollider()
         {
             rightHandDamageCollider = _rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.currentWeaponDamage = _rightHandSlot.currentWeapon.baseAttack;
         }
 
+        /// <summary>
+        /// Enable collider during attack
+        /// </summary>
         public void OpenDamageCollider()
         {
             if (_playerManager.isUsingRightHand)
@@ -146,33 +162,46 @@ namespace SzymonPeszek.Items.Weapons
                 leftHandDamageCollider.EnableDamageCollider();
             }
         }
-
+        
+        /// <summary>
+        /// Disable collider
+        /// </summary>
         public void CloseDamageCollider()
         {
             rightHandDamageCollider.DisableDamageCollider();
             leftHandDamageCollider.DisableDamageCollider();
         }
-
         #endregion
 
         #region Handle Weapon's Stamina Drainage
-
+        /// <summary>
+        /// Drain stamina during light attack
+        /// </summary>
         public void DrainStaminaLightAttack()
         {
             _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohLightAttackMultiplier));
         }
 
+        /// <summary>
+        /// Drain stamina during heavy attack
+        /// </summary>
         public void DrainStaminaHeavyAttack()
         {
             _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.ohHeavyAttackMultiplier));
         }
 
-        public void DrainStaminaLightAttackTH()
+        /// <summary>
+        /// Drain stamina during two-handed light attack
+        /// </summary>
+        public void DrainStaminaLightAttackTh()
         {
             _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thLightAttackMultiplier));
         }
 
-        public void DrainStaminaHeavyAttackTH()
+        /// <summary>
+        /// Drain stamina during two-handed heavy attack
+        /// </summary>
+        public void DrainStaminaHeavyAttackTh()
         {
             _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.thHeavyAttackMultiplier));
         }

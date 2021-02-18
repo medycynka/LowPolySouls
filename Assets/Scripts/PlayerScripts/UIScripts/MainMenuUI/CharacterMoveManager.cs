@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 namespace SzymonPeszek.MainMenuUI
 {
+    /// <summary>
+    /// Class which allows player to rotate character during character's creation
+    /// </summary>
     public class CharacterMoveManager : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         public Transform characterTransform;

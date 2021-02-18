@@ -11,15 +11,26 @@ using SzymonPeszek.Items.Consumable;
 
 namespace SzymonPeszek.Items
 {
+    /// <summary>
+    /// Class for managing misc (different types) items pick up
+    /// </summary>
     public class MiscPickUp : Interactable
     {
         public List<Item> items;
 
+        /// <summary>
+        /// Interact with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         public override void Interact(PlayerManager playerManager)
         {
             PickUpItem(playerManager);
         }
 
+        /// <summary>
+        /// Pick up this item
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         protected override void PickUpItem(PlayerManager playerManager)
         {
             base.PickUpItem(playerManager);

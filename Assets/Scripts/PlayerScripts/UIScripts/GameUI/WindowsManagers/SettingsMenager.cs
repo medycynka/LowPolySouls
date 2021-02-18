@@ -10,6 +10,9 @@ using SzymonPeszek.SaveScripts;
 
 namespace SzymonPeszek.GameUI.WindowsManagers
 {
+    /// <summary>
+    /// Class for managing settings during game
+    /// </summary>
     public class SettingsMenager : MonoBehaviour
     {
         private PlayerManager _playerManager;
@@ -57,6 +60,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             LoadSettings();
         }
 
+        /// <summary>
+        /// Loads settings properties
+        /// </summary>
         private void LoadSettings()
         {
             resolutionDropdown.value = SettingsHolder.resolutionID;
@@ -73,6 +79,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             _cameraHandler.lookSpeed = SettingsHolder.mouseSensibility / 1000f;
         }
 
+        /// <summary>
+        /// Save settings properties
+        /// </summary>
         public void SaveSettings()
         {
             SettingsHolder.resolutionID = resolutionDropdown.value;
@@ -82,37 +91,64 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             SettingsHolder.soundVolume = volumeSlider.value;
         }
 
+        /// <summary>
+        /// Set screen resolution
+        /// </summary>
+        /// <param name="resolutionId">Screen resolution</param>
         public void SetResolution(int resolutionId)
         {
             Screen.SetResolution(_resolutionsOpts[resolutionId].width, _resolutionsOpts[resolutionId].height, Screen.fullScreen);
         }
 
+        /// <summary>
+        /// Set or unset fullscreen
+        /// </summary>
+        /// <param name="isFullScreen">Set or unset?</param>
         public void SetFullScreen(bool isFullScreen)
         {
             Screen.fullScreen = isFullScreen;
         }
 
+        /// <summary>
+        /// Set game's graphic quality
+        /// </summary>
+        /// <param name="qualityId">Graphic quality</param>
         public void SetQuality(int qualityId)
         {
             QualitySettings.SetQualityLevel(qualityId);
         }
 
+        /// <summary>
+        /// Set mouse sensibility
+        /// </summary>
+        /// <param name="sensibility">Mouse sensibility</param>
         public void SetMouseSensibility(float sensibility)
         {
             _cameraHandler.lookSpeed = (sensibility / 1000f);
         }
 
+        /// <summary>
+        /// Set sound volume
+        /// </summary>
+        /// <param name="volume">Sound volume</param>
         public void SetVolume(float volume)
         {
             SetAllSounds(volume);
         }
 
+        /// <summary>
+        /// Save game's data and exit the game
+        /// </summary>
         public void SaveAndExit()
         {
             SaveManager.SaveGame(_playerManager, _playerManager.GetComponent<PlayerStats>(), _playerManager.GetComponent<PlayerInventory>());
             Application.Quit();
         }
 
+        /// <summary>
+        /// Set all sounds volume
+        /// </summary>
+        /// <param name="volume">Sounds volume</param>
         private void SetAllSounds(float volume)
         {
             foreach (var audioSource in _audioSources)

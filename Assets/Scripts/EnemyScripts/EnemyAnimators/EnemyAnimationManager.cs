@@ -6,6 +6,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.EnemyScripts.Animations
 {
+    /// <summary>
+    /// Class for managing enemy's animations
+    /// </summary>
     public class EnemyAnimationManager : AnimationManager
     {
         private EnemyManager _enemyManager;

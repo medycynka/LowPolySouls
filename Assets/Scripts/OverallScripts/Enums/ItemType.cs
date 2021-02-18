@@ -2,6 +2,9 @@
 
 namespace SzymonPeszek.Enums
 {
+    /// <summary>
+    /// Item types
+    /// </summary>
     [System.Serializable]
     public enum ItemType
     {

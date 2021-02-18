@@ -3,6 +3,9 @@
 
 namespace SzymonPeszek.Misc
 {
+    /// <summary>
+    /// Class for storing coroutines WaitForSecond enumerators for less cache garbage creation
+    /// </summary>
     public static class CoroutineYielder
     {
         public static WaitForFixedUpdate fixedUpdateWait { get; } = new WaitForFixedUpdate();

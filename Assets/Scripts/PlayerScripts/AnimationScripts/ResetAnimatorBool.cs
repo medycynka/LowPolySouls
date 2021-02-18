@@ -4,6 +4,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.PlayerScripts.Animations
 {
+    /// <summary>
+    /// Class for resetting Animator's bool parameters
+    /// </summary>
     public class ResetAnimatorBool : StateMachineBehaviour
     {
         [Header("Animator's Bool Reset", order = 0)] 

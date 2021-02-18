@@ -5,6 +5,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.Environment.Sounds 
 {
+    /// <summary>
+    /// Helper class for playing footsteps, attack sound, etc during animation
+    /// </summary>
     public class AnimationSoundPlayer : MonoBehaviour
     {
         private AnimationSoundManager _animationSoundManager;

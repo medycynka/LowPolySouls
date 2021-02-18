@@ -9,6 +9,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.BaseClasses
 {
+    /// <summary>
+    /// Base class for interactable objects
+    /// </summary>
     public class Interactable : MonoBehaviour
     {
         [Header("Interactable Object Properties")]
@@ -26,11 +29,19 @@ namespace SzymonPeszek.BaseClasses
             Gizmos.DrawWireSphere(transform.position, radius);
         }
 
+        /// <summary>
+        /// Interact with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         public virtual void Interact(PlayerManager playerManager)
         {
             
         }
 
+        /// <summary>
+        /// Pick up interactable item
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         protected virtual void PickUpItem(PlayerManager playerManager)
         {
             playerInventory = playerManager.GetComponent<PlayerInventory>();

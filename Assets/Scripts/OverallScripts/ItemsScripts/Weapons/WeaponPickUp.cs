@@ -8,18 +8,28 @@ using SzymonPeszek.PlayerScripts;
 
 namespace SzymonPeszek.Items.Weapons
 {
-
+    /// <summary>
+    /// Class for managing equipment item pick up
+    /// </summary>
     public class WeaponPickUp : Interactable
     {
         [Header("Consumable Item Pick Up", order = 1)]
         [Header("Consumable Items List", order = 2)]
         public WeaponItem[] weapons;
 
+        /// <summary>
+        /// Interact with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         public override void Interact(PlayerManager playerManager)
         {
             PickUpItem(playerManager);
         }
 
+        /// <summary>
+        /// Pick up this item
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         protected override void PickUpItem(PlayerManager playerManager)
         {
             base.PickUpItem(playerManager);

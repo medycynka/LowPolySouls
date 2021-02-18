@@ -10,6 +10,9 @@ using SzymonPeszek.SaveScripts;
 
 namespace SzymonPeszek.PlayerScripts.Inventory
 {
+    /// <summary>
+    /// Class for storing and managing player's inventory
+    /// </summary>
     public class PlayerInventory : MonoBehaviour
     {
         private WeaponSlotManager _weaponSlotManager;
@@ -207,6 +210,9 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             _weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
         }
 
+        /// <summary>
+        /// Change weapon in right hand
+        /// </summary>
         public void ChangeRightWeapon()
         {
             currentRightWeaponIndex++;
@@ -239,6 +245,9 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             }
         }
 
+        /// <summary>
+        /// Change weapon in left hand
+        /// </summary>
         public void ChangeLeftWeapon()
         {
             currentLeftWeaponIndex++;

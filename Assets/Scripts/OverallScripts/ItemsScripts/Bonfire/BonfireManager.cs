@@ -6,6 +6,9 @@ using SzymonPeszek.Environment.Areas;
 
 namespace SzymonPeszek.Items.Bonfire
 {
+    /// <summary>
+    /// Class for managing bonfire's actions
+    /// </summary>
     public class BonfireManager : MonoBehaviour
     {
         [Header("Bonfire Manager", order = 0)]
@@ -51,6 +54,9 @@ namespace SzymonPeszek.Items.Bonfire
             }
         }
 
+        /// <summary>
+        /// Activate rest UI
+        /// </summary>
         public void ActivateRestUI()
         {
             playerUI.SetActive(false);
@@ -58,6 +64,9 @@ namespace SzymonPeszek.Items.Bonfire
             restUI.SetActive(true);
         }
 
+        /// <summary>
+        /// Close rest UI
+        /// </summary>
         public void CloseRestUI()
         {
             restUI.SetActive(false);
@@ -66,6 +75,9 @@ namespace SzymonPeszek.Items.Bonfire
             playerUI.SetActive(true);
         }
 
+        /// <summary>
+        /// Activate quick move locations screen
+        /// </summary>
         public void ActivateQuickMoveScreen()
         {
             locationListScreen.SetActive(false);
@@ -75,11 +87,17 @@ namespace SzymonPeszek.Items.Bonfire
             quickMoveScreen.SetActive(true);
         }
 
+        /// <summary>
+        /// Close quick move locations screen
+        /// </summary>
         public void CloseQuickMoveScreen()
         {
             quickMoveScreen.SetActive(false);
         }
 
+        /// <summary>
+        /// Respawn enemies in current area
+        /// </summary>
         public void RespawnEnemies()
         {
             if (!isBossBonfire)

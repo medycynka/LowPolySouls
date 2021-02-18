@@ -15,6 +15,9 @@ using SzymonPeszek.EnemyScripts;
 
 namespace SzymonPeszek.PlayerScripts
 {
+    /// <summary>
+    /// Class representing player stats like health, stamina, strength, etc.
+    /// </summary>
     public class PlayerStats : CharacterStats
     {
         private PlayerManager _playerManager;
@@ -127,6 +130,10 @@ namespace SzymonPeszek.PlayerScripts
             UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
+        /// <summary>
+        /// Calculate maximum health points amount
+        /// </summary>
+        /// <returns>Maximum health points amount</returns>
         private float SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10 + bonusHealth * 10 + strength * 2.5f;
@@ -134,6 +141,10 @@ namespace SzymonPeszek.PlayerScripts
             return maxHealth;
         }
 
+        /// <summary>
+        /// Update health bar with new value
+        /// </summary>
+        /// <param name="newHealth">New health points amount</param>
         private void UpdateHealthBar(float newHealth)
         {
             maxHealth = newHealth;
@@ -150,6 +161,10 @@ namespace SzymonPeszek.PlayerScripts
             healthBar.SetCurrentHealth(currentHealth);
         }
 
+        /// <summary>
+        /// Calculate maximum stamina points amount
+        /// </summary>
+        /// <returns>Maximum stamina points amount</returns>
         private float SetMaxStaminaFromStaminaLevel()
         {
             maxStamina = staminaLevel * 10 + bonusStamina * 10 + agility * 2.5f;
@@ -157,6 +172,10 @@ namespace SzymonPeszek.PlayerScripts
             return maxStamina;
         }
 
+        /// <summary>
+        /// Update stamina bar with new value
+        /// </summary>
+        /// <param name="newStamina">New stamina points amount</param>
         private void UpdateStaminaBar(float newStamina)
         {
             maxStamina = newStamina;
@@ -173,6 +192,10 @@ namespace SzymonPeszek.PlayerScripts
             staminaBar.SetCurrentStamina(currentStamina);
         }
         
+        /// <summary>
+        /// Calculate maximum focus points amount
+        /// </summary>
+        /// <returns>Maximum focus points amount</returns>
         private float SetMaxFocusFromFocusLevel()
         {
             maxFocus = focusLevel * 10 + bonusFocus * 10;
@@ -180,6 +203,10 @@ namespace SzymonPeszek.PlayerScripts
             return maxFocus;
         }
 
+        /// <summary>
+        /// Update focus bar with new value
+        /// </summary>
+        /// <param name="newFocus">New focus points amount</param>
         private void UpdateFocusBar(float newFocus)
         {
             maxFocus = newFocus;
@@ -196,6 +223,9 @@ namespace SzymonPeszek.PlayerScripts
             focusBar.SetCurrentFocus(currentFocus);
         }
 
+        /// <summary>
+        /// Updates health bar, stamina bar and focus bar
+        /// </summary>
         public void UpdatePlayerStats()
         {
             UpdateHealthBar(SetMaxHealthFromHealthLevel());
@@ -203,6 +233,12 @@ namespace SzymonPeszek.PlayerScripts
             //UpdateFocusBar(SetMaxFocusFromFocusLevel());
         }
 
+        /// <summary>
+        /// Damage player
+        /// </summary>
+        /// <param name="damage">Damage dealt to the player</param>
+        /// <param name="isBackStabbed">Is damage from back stab?</param>
+        /// <param name="isRiposted">Is damage from riposte?</param>
         public void TakeDamage(float damage, bool isBackStabbed = false, bool isRiposted = false)
         {
             if (isPlayerAlive && !_playerManager.isInvulnerable)
@@ -220,6 +256,9 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Heal player to max health
+        /// </summary>
         public void RefillHealth()
         {
             currentHealth += healthRefillAmount * Time.deltaTime;
@@ -233,6 +272,10 @@ namespace SzymonPeszek.PlayerScripts
             healthBar.backgroundSlider.value += healthRefillAmount * Time.deltaTime;
         }
 
+        /// <summary>
+        /// Heal player with given amount of health
+        /// </summary>
+        /// <param name="healAmount">Health points amount to heal</param>
         public void HealPlayer(float healAmount)
         {
             currentHealth += healAmount * bonusBuffMagic;
@@ -246,6 +289,12 @@ namespace SzymonPeszek.PlayerScripts
             healthBar.backgroundSlider.value += healAmount;
         }
 
+        /// <summary>
+        /// Buffs player stats
+        /// </summary>
+        /// <param name="buffType">Type fo buff</param>
+        /// <param name="buffRang">Rang of the buff</param>
+        /// <param name="value">Buff value</param>
         public void BuffPlayer(StatsBuffType buffType, BuffRang buffRang, float value)
         {
             switch (buffType)
@@ -269,6 +318,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Drain stamina points during attack, sprint, etc
+        /// </summary>
+        /// <param name="drain">Amount of stamina points to drain</param>
         public void TakeStaminaDamage(float drain)
         {
             currentStamina = currentStamina - drain;
@@ -281,6 +334,9 @@ namespace SzymonPeszek.PlayerScripts
             staminaBar.SetCurrentStamina(currentStamina);
         }
 
+        /// <summary>
+        /// Refill stamina to max stamina
+        /// </summary>
         public void RefillStamina()
         {
             currentStamina += staminaRefillAmount * Time.deltaTime;
@@ -293,6 +349,10 @@ namespace SzymonPeszek.PlayerScripts
             staminaBar.staminaBarSlider.value += staminaRefillAmount * Time.deltaTime;
         }
         
+        /// <summary>
+        /// Drain focus points during magic action
+        /// </summary>
+        /// <param name="drain">Amount of focus points to drain</param>
         public void TakeFocusDamage(float drain)
         {
             currentFocus = currentFocus - drain;
@@ -305,6 +365,9 @@ namespace SzymonPeszek.PlayerScripts
             focusBar.SetCurrentFocus(currentFocus);
         }
 
+        /// <summary>
+        /// Refill focus to max focus
+        /// </summary>
         public void RefillFocus()
         {
             currentFocus += focusRefillAmount * Time.deltaTime;
@@ -317,16 +380,30 @@ namespace SzymonPeszek.PlayerScripts
             focusBar.focusBarSlider.value += focusRefillAmount * Time.deltaTime;
         }
         
+        /// <summary>
+        /// Deal damage to the enemy
+        /// </summary>
+        /// <param name="enemyStats">Enemy's stats</param>
+        /// <param name="weaponDamage">Damage to deal</param>
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
             enemyStats.TakeDamage((weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + strength * 0.5f) * bonusBuffAttack, false);
         }
 
+        /// <summary>
+        /// Calculate soul costs for stats upgrade
+        /// </summary>
+        /// <param name="level">Player's level after upgrade</param>
+        /// <returns>Soul cost of upgrade</returns>
         public int CalculateSoulsCost(int level)
         {
             return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
         }
 
+        /// <summary>
+        /// Respawn player after death
+        /// </summary>
+        /// <param name="isBackStabbed">Was player killed from back stab?</param>
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
@@ -350,6 +427,10 @@ namespace SzymonPeszek.PlayerScripts
             StartCoroutine(Respawn());
         }
 
+        /// <summary>
+        /// Player respawn coroutine
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator Respawn()
         {
             youDiedLogo.SetActive(true);
@@ -379,6 +460,9 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
         
+        /// <summary>
+        /// Respawn enemies when player dies
+        /// </summary>
         private void RespawnEnemiesOnDead()
         {
             foreach (var eS in _enemiesSpawners)
@@ -387,6 +471,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Drop owned souls after death
+        /// </summary>
+        /// <param name="dropPosition">Position of souls drop</param>
         private void DropSouls(Vector3 dropPosition)
         {
             if (soulsAmount > 0)
@@ -405,6 +493,12 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Coroutine which buffs player attack
+        /// </summary>
+        /// <param name="buffRang">Rang of the buff</param>
+        /// <param name="value">Buff's value</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator BuffAttack(BuffRang buffRang, float value)
         {
             bonusBuffAttack = value;
@@ -428,6 +522,12 @@ namespace SzymonPeszek.PlayerScripts
             bonusBuffAttack = 1.0f;
         }
         
+        /// <summary>
+        /// Coroutine which buffs player defence
+        /// </summary>
+        /// <param name="buffRang">Rang of the buff</param>
+        /// <param name="value">Buff's value</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator BuffDefence(BuffRang buffRang, float value)
         {
             bonusBuffDefence = value;
@@ -451,6 +551,12 @@ namespace SzymonPeszek.PlayerScripts
             bonusBuffDefence = 1.0f;
         }
         
+        /// <summary>
+        /// Coroutine which buffs player magic attack
+        /// </summary>
+        /// <param name="buffRang">Rang of the buff</param>
+        /// <param name="value">Buff's value</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator BuffMagic(BuffRang buffRang, float value)
         {
             bonusBuffMagic = value;
@@ -474,6 +580,12 @@ namespace SzymonPeszek.PlayerScripts
             bonusBuffAttack = 1.0f;
         }
         
+        /// <summary>
+        /// Coroutine which buffs player endurance
+        /// </summary>
+        /// <param name="buffRang">Rang of the buff</param>
+        /// <param name="value">Buff's value</param>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator BuffEndurance(BuffRang buffRang, float value)
         {
             bonusBuffEndurance = value;

@@ -8,11 +8,17 @@ using SzymonPeszek.SaveScripts;
 
 namespace SzymonPeszek.PlayerScripts.Inventory
 {
+    /// <summary>
+    /// Class for storing player current equipment
+    /// </summary>
     public class CurrentEquipments : MonoBehaviour
     {
         private PlayerStats _playerStats;
         private ModularCharacterManager _modularCharacterManager;
 
+        /// <summary>
+        /// Helper class for quick managing player's equipment in equipment dictionary
+        /// </summary>
         [Serializable]
         public class EquipmentPart
         {
@@ -21,6 +27,13 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             public int partID { get; set; }
             public float armorValue { get; set; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="did">Id in dictionary</param>
+            /// <param name="mbp">Equipment represents by ModularBody part from FantasyModularCharacter pack</param>
+            /// <param name="id">Part id</param>
+            /// <param name="armor">Armor value</param>
             public EquipmentPart(int did, ModularBodyPart mbp, int id, float armor)
             {
                 dictID = did;
@@ -47,6 +60,9 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             UpdateArmorValue();
         }
 
+        /// <summary>
+        /// Initialize current equipment
+        /// </summary>
         public void InitializeCurrentEquipment()
         {
             currentEq = new Dictionary<ModularBodyPart, EquipmentPart>(){
@@ -79,6 +95,9 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             };
         }
 
+        /// <summary>
+        /// Equip player with current equipments
+        /// </summary>
         public void EquipPlayerWithCurrentItems()
         {
             foreach(var kvp in currentEq)
@@ -90,6 +109,9 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             }
         }
 
+        /// <summary>
+        /// Save current equipment
+        /// </summary>
         public void SaveCurrentEqIds()
         {
             foreach (var kvp in currentEq)
@@ -99,11 +121,18 @@ namespace SzymonPeszek.PlayerScripts.Inventory
             }
         }
 
+        /// <summary>
+        /// Updates player's current armor value
+        /// </summary>
         public void UpdateArmorValue()
         {
             _playerStats.currentArmorValue = _playerStats.baseArmor + CalculateArmorOfCurrentEquipment() + 2.5f * _playerStats.defence + 0.5f * _playerStats.agility;
         }
 
+        /// <summary>
+        /// Calculate cumulative armor from current equipments
+        /// </summary>
+        /// <returns>Cumulative armor value</returns>
         private float CalculateArmorOfCurrentEquipment()
         {
             return currentEq.Sum(kvp => kvp.Value.armorValue);

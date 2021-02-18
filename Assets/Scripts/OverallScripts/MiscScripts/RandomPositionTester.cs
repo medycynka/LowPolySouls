@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace SzymonPeszek.Misc
 {
+    /// <summary>
+    /// Class for placing objects at random position
+    /// </summary>
     public class RandomPositionTester : MonoBehaviour
     {
         public Bounds bounds;

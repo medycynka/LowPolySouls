@@ -2,6 +2,10 @@
 
 namespace SzymonPeszek.Enums
 {
+    /// <summary>
+    /// Spell buff types
+    /// </summary>
+    [System.Serializable]
     public enum StatsBuffType
     {
         Attack,
@@ -10,6 +14,10 @@ namespace SzymonPeszek.Enums
         Endurance
     }
     
+    /// <summary>
+    /// Spell buff rangs
+    /// </summary>
+    [System.Serializable]
     public enum BuffRang
     {
         Lesser,

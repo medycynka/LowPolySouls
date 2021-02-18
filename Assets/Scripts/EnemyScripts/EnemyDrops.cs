@@ -9,6 +9,9 @@ using SzymonPeszek.Items;
 
 namespace SzymonPeszek.EnemyScripts
 {
+    /// <summary>
+    /// Class managing enemy's drop items and corresponding drop chances
+    /// </summary>
     public class EnemyDrops : MonoBehaviour
     {
         [Header("Death Drop", order = 0)]

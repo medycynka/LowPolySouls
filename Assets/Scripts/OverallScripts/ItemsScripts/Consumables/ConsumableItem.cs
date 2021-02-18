@@ -5,6 +5,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.Items.Consumable
 {
+    /// <summary>
+    /// Class representing consumable item
+    /// </summary>
     [CreateAssetMenu(menuName = "Items/Consumable Item")]
     public class ConsumableItem : Item
     {

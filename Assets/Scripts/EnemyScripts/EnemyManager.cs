@@ -10,6 +10,9 @@ using UnityEngine.AI;
 
 namespace SzymonPeszek.EnemyScripts
 {
+    /// <summary>
+    /// Class managing enemy behaviour
+    /// </summary>
     public class EnemyManager : CharacterManager
     {
         [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
@@ -116,6 +119,9 @@ namespace SzymonPeszek.EnemyScripts
             HandleStateMachine();
         }
 
+        /// <summary>
+        /// Use current state from FSM and save next state
+        /// </summary>
         private void HandleStateMachine()
         {
             if (currentState != null)
@@ -129,11 +135,18 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Update current state
+        /// </summary>
+        /// <param name="state">Next state</param>
         private void SwitchToNextState(State state)
         {
             currentState = state;
         }
 
+        /// <summary>
+        /// Manage recovery from actions
+        /// </summary>
         private void HandleRecoveryTimer()
         {
             if (currentRecoveryTime > 0)
@@ -150,11 +163,17 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
+        /// <summary>
+        /// Get back stabbed
+        /// </summary>
         public void HandleGettingBackStabbed()
         {
             _enemyStats.TakeDamage(pendingCriticalDamage, true);
         }
 
+        /// <summary>
+        /// Handle character's death
+        /// </summary>
         public void HandleDeath()
         {
             isAlive = false;
@@ -190,6 +209,10 @@ namespace SzymonPeszek.EnemyScripts
             Destroy(_enemyStats.enemyObject, deadFromBackStab ? objectDestructionDuration + 1.5f : objectDestructionDuration);
         }
 
+        /// <summary>
+        /// Coroutine for managing disolve effect after death
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator DisolveAfterDeath()
         {
             if (deadFromBackStab)

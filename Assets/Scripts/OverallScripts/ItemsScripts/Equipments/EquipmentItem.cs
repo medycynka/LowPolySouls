@@ -4,6 +4,9 @@ using BattleDrakeStudios.ModularCharacters;
 
 namespace SzymonPeszek.Items.Equipment
 {
+    /// <summary>
+    /// Class representing equipment item
+    /// </summary>
     [CreateAssetMenu(menuName = "Items/Equipment Item")]
     public class EquipmentItem : BaseClasses.Item
     {

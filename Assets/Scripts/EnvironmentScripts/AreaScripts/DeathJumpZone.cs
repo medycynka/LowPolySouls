@@ -4,6 +4,9 @@ using SzymonPeszek.PlayerScripts;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// class for killing player after falling
+    /// </summary>
     public class DeathJumpZone : MonoBehaviour
     {
         public bool isInside;

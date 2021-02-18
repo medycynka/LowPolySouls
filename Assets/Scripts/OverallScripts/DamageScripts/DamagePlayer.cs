@@ -4,6 +4,9 @@ using SzymonPeszek.PlayerScripts;
 
 namespace SzymonPeszek.Damage
 {
+    /// <summary>
+    /// Class for dealing damage from traps
+    /// </summary>
     public class DamagePlayer : MonoBehaviour
     {
         [Header("Damage Value")]

@@ -4,6 +4,9 @@ using SzymonPeszek.BaseClasses;
 
 namespace SzymonPeszek.EnemyScripts
 {
+    /// <summary>
+    /// Class representing enemy's attack action
+    /// </summary>
     [CreateAssetMenu(menuName = "A.I/Enemy Actions/Attack Action")]
     public class EnemyAttackAction : EnemyAction
     {

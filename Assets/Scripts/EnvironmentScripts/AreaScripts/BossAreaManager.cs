@@ -11,6 +11,9 @@ using SzymonPeszek.EnemyScripts;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// Class for managing boss area events
+    /// </summary>
     public class BossAreaManager : LocationManager
     {
         [Header("Area Manager", order = 0)]

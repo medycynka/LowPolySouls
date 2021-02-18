@@ -8,6 +8,9 @@ using SzymonPeszek.Environment.Sounds;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// Class for managing area events
+    /// </summary>
     public class AreaManager : LocationManager
     {
         [Header("Area Manager", order = 0)]

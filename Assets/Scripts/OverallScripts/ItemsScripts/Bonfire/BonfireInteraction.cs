@@ -12,6 +12,9 @@ using SzymonPeszek.SaveScripts;
 
 namespace SzymonPeszek.Items.Bonfire
 {
+    /// <summary>
+    /// Class allowing resting at the bonfire
+    /// </summary>
     public class BonfireInteraction : Interactable
     {
         private BonfireManager _bonfireManager;
@@ -24,11 +27,19 @@ namespace SzymonPeszek.Items.Bonfire
             _locationNameScree = _bonfireManager.locationScreen.GetComponentInChildren<TextMeshProUGUI>();
         }
 
+        /// <summary>
+        /// Interact with object
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         public override void Interact(PlayerManager playerManager)
         {
             RestAtBonfire(playerManager);
         }
 
+        /// <summary>
+        /// Rest at bonfire
+        /// </summary>
+        /// <param name="playerManager">Player manager</param>
         private void RestAtBonfire(PlayerManager playerManager)
         {
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
@@ -49,6 +60,9 @@ namespace SzymonPeszek.Items.Bonfire
             SaveManager.SaveGame(playerManager, _playerStats, playerManager.GetComponent<PlayerInventory>());
         }
 
+        /// <summary>
+        /// Stop resting and get up
+        /// </summary>
         public void GetUp()
         {
             if (playerAnimatorHandler == null)
@@ -67,6 +81,9 @@ namespace SzymonPeszek.Items.Bonfire
             }
         }
 
+        /// <summary>
+        /// Move to this bonfire
+        /// </summary>
         public void QuickMove()
         {
             if(playerAnimatorHandler == null)
@@ -77,6 +94,10 @@ namespace SzymonPeszek.Items.Bonfire
             StartCoroutine(TeleportToNextBonfire());
         }
 
+        /// <summary>
+        /// Coroutine for teleporting player to this bonfire
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator TeleportToNextBonfire()
         {
             _bonfireManager.ActivateQuickMoveScreen();

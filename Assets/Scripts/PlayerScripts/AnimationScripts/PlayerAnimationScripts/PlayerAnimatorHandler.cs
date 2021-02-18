@@ -6,6 +6,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.PlayerScripts.Animations
 {
+    /// <summary>
+    /// Class for managing player's animations
+    /// </summary>
     public class PlayerAnimatorHandler : AnimationManager
     {
         private PlayerManager _playerManager;
@@ -14,6 +17,9 @@ namespace SzymonPeszek.PlayerScripts.Animations
 
         public Transform spellProjectilesTransform;
         
+        /// <summary>
+        /// Initialize fields and Animator's hash values of all animations
+        /// </summary>
         public void Initialize()
         {
             _playerManager = GetComponentInParent<PlayerManager>();
@@ -83,6 +89,13 @@ namespace SzymonPeszek.PlayerScripts.Animations
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
         }
 
+        /// <summary>
+        /// Update animator vertical and horizontal parameter
+        /// </summary>
+        /// <param name="verticalMovement">Movement in vertical axis</param>
+        /// <param name="horizontalMovement">Movement in horizontal axis</param>
+        /// <param name="isSprinting">Is player sprinting?</param>
+        /// <param name="isWalking">Is player walking?</param>
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool isWalking)
         {
             #region Vertical
@@ -155,31 +168,49 @@ namespace SzymonPeszek.PlayerScripts.Animations
             anim.SetFloat(StaticAnimatorIds.animationIds[StaticAnimatorIds.HorizontalName], h, 0.1f, Time.deltaTime);
         }
 
+        /// <summary>
+        /// Enable rotation
+        /// </summary>
         public void CanRotate()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName], true);
         }
 
+        /// <summary>
+        /// Disable rotation
+        /// </summary>
         public void StopRotation()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName], false);
         }
 
+        /// <summary>
+        /// Enable attack combo
+        /// </summary>
         public void EnableCombo()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], true);
         }
 
+        /// <summary>
+        /// Disable attack combo
+        /// </summary>
         public void DisableCombo()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanDoComboName], false);
         }
 
+        /// <summary>
+        /// Enable invulnerability
+        /// </summary>
         public void EnableIsInvulnerable()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName], true);
         }
         
+        /// <summary>
+        /// Disable invulnerability
+        /// </summary>
         public void DisableIsInvulnerable()
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName], false);
@@ -200,6 +231,9 @@ namespace SzymonPeszek.PlayerScripts.Animations
             _playerLocomotion.rigidbody.velocity = velocity;
         }
 
+        /// <summary>
+        /// Handle being back stabbed or riposted
+        /// </summary>
         public override void TakeCriticalDamageAnimationEvent()
         {
             _playerStats.TakeDamage(_playerManager.pendingCriticalDamage, false, true);

@@ -6,7 +6,9 @@ using SzymonPeszek.EnemyScripts.Animations;
 
 namespace SzymonPeszek.EnemyScripts.States
 {
-
+    /// <summary>
+    /// Class representing attack state 
+    /// </summary>
     public class AttackState : State
     {
         [Header("Attack State", order = 0)]
@@ -19,6 +21,13 @@ namespace SzymonPeszek.EnemyScripts.States
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
 
+        /// <summary>
+        /// Use state behaviour
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
+        /// <param name="enemyStats">Enemy stats</param>
+        /// <param name="enemyAnimationManager">Enemy animation manager</param>
+        /// <returns>This or next state</returns>
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)
@@ -73,6 +82,10 @@ namespace SzymonPeszek.EnemyScripts.States
             return deathState;
         }
 
+        /// <summary>
+        /// Helper function for getting random attack from attacks list
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
         private void GetNewAttack(EnemyManager enemyManager)
         {
             Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;

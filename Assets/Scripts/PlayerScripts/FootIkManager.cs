@@ -2,6 +2,9 @@
 
 namespace SzymonPeszek.PlayerScripts
 {
+    /// <summary>
+    /// Class which manages foot IK placement
+    /// </summary>
     public class FootIkManager : MonoBehaviour
     {
         private Animator _anim;

@@ -6,7 +6,9 @@ using SzymonPeszek.EnemyScripts.Animations;
 
 namespace SzymonPeszek.EnemyScripts.States
 {
-
+    /// <summary>
+    /// Class representing combat state
+    /// </summary>
     public class CombatStanceState : State
     {
         [Header("Combat Stance State", order = 0)]
@@ -15,6 +17,13 @@ namespace SzymonPeszek.EnemyScripts.States
         public PursueTargetState pursueTargetState;
         public DeathState deathState;
 
+        /// <summary>
+        /// Use state behaviour
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
+        /// <param name="enemyStats">Enemy stats</param>
+        /// <param name="enemyAnimationManager">Enemy animation manager</param>
+        /// <returns>This or next state</returns>
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)

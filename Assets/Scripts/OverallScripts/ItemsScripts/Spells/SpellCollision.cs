@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace SzymonPeszek.Items.Spells.Helpers
 {
+    /// <summary>
+    /// Class for detecting spell projectiles collision
+    /// </summary>
     public class SpellCollision : MonoBehaviour
     {
         public GameObject collisionFx;

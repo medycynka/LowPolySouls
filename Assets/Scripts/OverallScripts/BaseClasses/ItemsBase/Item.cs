@@ -4,6 +4,9 @@ using SzymonPeszek.Enums;
 
 namespace SzymonPeszek.BaseClasses
 {
+    /// <summary>
+    /// Base class for item object
+    /// </summary>
     public class Item : ScriptableObject
     {
         [Header("Item",order = 0)]

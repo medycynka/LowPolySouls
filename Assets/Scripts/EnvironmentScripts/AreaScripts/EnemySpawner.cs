@@ -6,6 +6,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.Environment.Areas
 {
+    /// <summary>
+    /// Class for enemies spawning
+    /// </summary>
     public class EnemySpawner : MonoBehaviour
     {
         public Transform parentTransform;
@@ -23,11 +26,17 @@ namespace SzymonPeszek.Environment.Areas
             InitializeSpawnerList();    
         }
 
+        /// <summary>
+        /// Spawn enemies at given positions and random rotations
+        /// </summary>
         public void SpawnEnemies()
         {
             StartCoroutine(RefreshSpawner());
         }
 
+        /// <summary>
+        /// Remove alive enemies
+        /// </summary>
         private void ClearAliveEnemies()
         {
             for (var i = 0; i < _enemiesAlive.Count; i++)
@@ -38,6 +47,9 @@ namespace SzymonPeszek.Environment.Areas
             _enemiesAlive.Clear();
         }
 
+        /// <summary>
+        /// Initialize spawning list
+        /// </summary>
         private void InitializeSpawnerList()
         {
             for (int i = 0; i < prefabsList.Count; i++)
@@ -46,6 +58,10 @@ namespace SzymonPeszek.Environment.Areas
             }
         }
 
+        /// <summary>
+        /// Coroutine for respawning enemies
+        /// </summary>
+        /// <returns>Coroutine's enumerator</returns>
         private IEnumerator RefreshSpawner()
         {
             ClearAliveEnemies();

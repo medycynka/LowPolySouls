@@ -7,6 +7,9 @@ using SzymonPeszek.Environment.Areas;
 
 namespace SzymonPeszek.Environment.Sounds
 {
+    /// <summary>
+    /// Class for managing sounds
+    /// </summary>
     public class AnimationSoundManager : MonoBehaviour
     {
         [Header("Audio Clips", order = 0)]

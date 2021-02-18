@@ -5,6 +5,9 @@ using SzymonPeszek.Items.Bonfire;
 
 namespace SzymonPeszek.GameUI.WindowsManagers
 {
+    /// <summary>
+    /// Class for moving between bonfires
+    /// </summary>
     public class QuickMoveManager : MonoBehaviour
     {
         public GameObject backgroundScreen;
@@ -12,6 +15,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         public BonfireManager[] bonfireList;
         private QuickMoveSlot[] _quickMoveSlots;
 
+        /// <summary>
+        /// Update activated bonfires
+        /// </summary>
         public void UpdateActiveBonfireList()
         {
             int id = 0;

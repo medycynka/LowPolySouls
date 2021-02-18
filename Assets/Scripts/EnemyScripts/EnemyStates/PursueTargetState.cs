@@ -6,6 +6,9 @@ using SzymonPeszek.Misc;
 
 namespace SzymonPeszek.EnemyScripts.States
 {
+    /// <summary>
+    /// Class representing pursue target state
+    /// </summary>
     public class PursueTargetState : State
     {
         [Header("Pursue Target State", order = 0)]
@@ -14,6 +17,13 @@ namespace SzymonPeszek.EnemyScripts.States
         public CombatStanceState combatStanceState;
         public DeathState deathState;
 
+        /// <summary>
+        /// Use state behaviour
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
+        /// <param name="enemyStats">Enemy stats</param>
+        /// <param name="enemyAnimationManager">Enemy animation manager</param>
+        /// <returns>This or next state</returns>
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
             if (enemyStats.currentHealth > 0)
@@ -54,6 +64,10 @@ namespace SzymonPeszek.EnemyScripts.States
             return deathState;
         }
         
+        /// <summary>
+        /// Helper function for rotating character towards player
+        /// </summary>
+        /// <param name="enemyManager">Enemy manager</param>
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
             if (enemyManager.isPreformingAction)

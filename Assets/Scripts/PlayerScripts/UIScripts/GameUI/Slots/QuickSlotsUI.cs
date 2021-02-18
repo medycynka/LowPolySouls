@@ -5,11 +5,19 @@ using SzymonPeszek.Items.Weapons;
 
 namespace SzymonPeszek.GameUI.Slots
 {
+    /// <summary>
+    /// Class for displaying items in quick slots
+    /// </summary>
     public class QuickSlotsUI : MonoBehaviour
     {
         public Image leftWeaponIcon;
         public Image rightWeaponIcon;
 
+        /// <summary>
+        /// Update displayed weapon in left or right quick slot
+        /// </summary>
+        /// <param name="isLeft">Is weapon in left hand?</param>
+        /// <param name="weapon">Weapon to show</param>
         public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weapon)
         {
             if (isLeft == false)

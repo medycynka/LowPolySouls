@@ -2,7 +2,9 @@
 
 namespace SzymonPeszek.BaseClasses
 {
-
+    /// <summary>
+    /// Base class for character (player or enemy) stat manager
+    /// </summary>
     public class CharacterStats : MonoBehaviour
     {
         [Header("Stats", order = 0)]

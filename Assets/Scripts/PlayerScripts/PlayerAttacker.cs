@@ -11,6 +11,9 @@ using SzymonPeszek.EnemyScripts;
 
 namespace SzymonPeszek.PlayerScripts
 {
+    /// <summary>
+    /// Class which manages player's attacks
+    /// </summary>
     public class PlayerAttacker : MonoBehaviour
     {
         private PlayerAnimatorHandler _playerAnimatorHandler;
@@ -37,6 +40,10 @@ namespace SzymonPeszek.PlayerScripts
             backStabLayer = 1 << LayerMask.NameToLayer("Back Stab");
         }
 
+        /// <summary>
+        /// Perform combo attack
+        /// </summary>
+        /// <param name="weapon">Attacking weapon</param>
         public void HandleWeaponCombo(WeaponItem weapon)
         {
             if (_inputHandler.comboFlag)
@@ -73,6 +80,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Perform light attack
+        /// </summary>
+        /// <param name="weapon">Attacking weapon</param>
         private void HandleLightAttack(WeaponItem weapon)
         {
             _weaponSlotManager.attackingWeapon = weapon;
@@ -89,6 +100,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Perform heavy attack
+        /// </summary>
+        /// <param name="weapon">Attacking weapon</param>
         public void HandleHeavyAttack(WeaponItem weapon)
         {
             _weaponSlotManager.attackingWeapon = weapon;
@@ -105,6 +120,9 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Handle right hand attack
+        /// </summary>
         public void HandleRbAction()
         {
             switch (_playerInventory.rightWeapon.weaponType)
@@ -121,6 +139,9 @@ namespace SzymonPeszek.PlayerScripts
         }
         
         #region Attack Actions
+        /// <summary>
+        /// Perform right hand attack
+        /// </summary>
         private void PerformRbMeleeAction()
         {
             if (_playerManager.canDoCombo)
@@ -146,6 +167,10 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
 
+        /// <summary>
+        /// Perform right hand magic attack
+        /// </summary>
+        /// <param name="weapon">Attacking weapon</param>
         private void PerformRbMagicAction(WeaponItem weapon)
         {
             if (_playerManager.isInteracting)
@@ -182,11 +207,17 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
         
+        /// <summary>
+        /// Cast a magic spell
+        /// </summary>
         private void SuccessfullyCastSpell()
         {
             _playerInventory.currentSpell.SuccessfullyCastSpell(_playerAnimatorHandler, _playerStats);
         }
         
+        /// <summary>
+        /// Back stab enemy or riposte enemy's attack
+        /// </summary>
         public void AttemptBackStabOrRiposte()
         {
             if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, 

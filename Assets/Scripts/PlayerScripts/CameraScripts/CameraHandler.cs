@@ -6,6 +6,9 @@ using SzymonPeszek.BaseClasses;
 
 namespace SzymonPeszek.PlayerScripts.CameraManager
 {
+    /// <summary>
+    /// Class for managing main camera
+    /// </summary>
     public class CameraHandler : MonoBehaviour
     {
         [Header("Camera Handler", order = 0)]
@@ -71,6 +74,10 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             colliders = new Collider[_collidersSize];
         }
 
+        /// <summary>
+        /// Follow player's movement
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         public void FollowTarget(float delta)
         {
             var newTargetPosition = Vector3.SmoothDamp(_myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
@@ -79,6 +86,12 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             HandleCameraCollisions(delta);
         }
 
+        /// <summary>
+        /// Handle camera rotation on mouse move
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
+        /// <param name="mouseXInput">Mouse movement on X-axis</param>
+        /// <param name="mouseYInput">Mouse movement on Y-axis</param>
         public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
         {
             if (inputHandler.lockOnFlag == false && currentLockOnTarget == null)
@@ -123,6 +136,10 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             }
         }
 
+        /// <summary>
+        /// Prevent camera from penetrating walls, doors, etc.
+        /// </summary>
+        /// <param name="delta">Time stamp</param>
         private void HandleCameraCollisions(float delta)
         {
             _targetPosition = _defaultPosition;
@@ -144,6 +161,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             cameraTransform.localPosition = _cameraTransformPosition;
         }
 
+        /// <summary>
+        /// Handle lock-on system
+        /// </summary>
         public void HandleLockOn()
         {
             var shortestDistance = Mathf.Infinity;
@@ -240,6 +260,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             }
         }
 
+        /// <summary>
+        /// Clear detected targets
+        /// </summary>
         public void ClearLockOnTargets()
         {
             _availableTargets.Clear();
@@ -247,6 +270,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             currentLockOnTarget = null;
         }
 
+        /// <summary>
+        /// Set camera's height
+        /// </summary>
         public void SetCameraHeight()
         {
             Vector3 velocity = Vector3.zero;

@@ -5,6 +5,9 @@ using SzymonPeszek.PlayerScripts;
 
 namespace SzymonPeszek.GameUI.WindowsManagers
 {
+    /// <summary>
+    /// Class for upgrading player's stats during resting at the bonfire
+    /// </summary>
     public class StatWindowManager : MonoBehaviour
     {
         public PlayerStats playerStats;
@@ -39,6 +42,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             UpdateVisibleValues();
         }
 
+        /// <summary>
+        /// Update visible stats base on player's stats
+        /// </summary>
         public void UpdateVisibleValues()
         {
             visibleLevel.text = playerStats.playerLevel.ToString();
@@ -51,6 +57,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleStamina.text = playerStats.bonusStamina.ToString();
         }
 
+        /// <summary>
+        /// Update visible level value
+        /// </summary>
+        /// <param name="update">Increase or decrease level</param>
         private void UpdateLevel(bool update)
         {
             if (update)
@@ -69,6 +79,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleLevel.text = (playerStats.playerLevel + levelToAdd).ToString();
         }
 
+        /// <summary>
+        /// Update visible soul costs base on current level
+        /// </summary>
         private void UpdateSouls()
         {
             if (levelToAdd > 0)
@@ -86,6 +99,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleSouls.text = soulsCost.ToString();
         }
 
+        /// <summary>
+        /// Update visible strength value
+        /// </summary>
+        /// <param name="update">Increase or decrease strength</param>
         public void UpdateStrength(bool update) 
         {
             if (update)
@@ -116,6 +133,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleStrength.text = (playerStats.strength + strengthToAdd).ToString();
         }
 
+        /// <summary>
+        /// Update visible agility value
+        /// </summary>
+        /// <param name="update">Increase or decrease agility</param>
         public void UpdateAgility(bool update)
         {
             if (update)
@@ -146,6 +167,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleAgility.text = (playerStats.agility + agilityToAdd).ToString();
         }
 
+        /// <summary>
+        /// Update visible defence value
+        /// </summary>
+        /// <param name="update">Increase or decrease defence</param>
         public void UpdateDefence(bool update)
         {
             if (update)
@@ -176,6 +201,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleDefence.text = (playerStats.defence + defenceToAdd).ToString();
         }
 
+        /// <summary>
+        /// Update visible health value
+        /// </summary>
+        /// <param name="update">Increase or decrease health</param>
         public void UpdateHealth(bool update)
         {
             if (update)
@@ -206,6 +235,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleHealth.text = (playerStats.bonusHealth + healthToAdd).ToString();
         }
 
+        /// <summary>
+        /// Update visible stamina value
+        /// </summary>
+        /// <param name="update">Increase or decrease stamina</param>
         public void UpdateStamina(bool update)
         {
             if (update)
@@ -236,6 +269,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             visibleStamina.text = (playerStats.bonusStamina + staminaToAdd).ToString();
         }
 
+        /// <summary>
+        /// Upgrade player if posses needed amount of souls
+        /// </summary>
         public void UpgradePlayer()
         {
             if (soulsCost <= playerStats.soulsAmount)
@@ -255,6 +291,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             }
         }
 
+        /// <summary>
+        /// Reset added values
+        /// </summary>
         public void ResetAddedStatsValues()
         {
             levelToAdd = 0;

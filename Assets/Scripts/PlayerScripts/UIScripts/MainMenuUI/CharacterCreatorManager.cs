@@ -9,6 +9,9 @@ namespace SzymonPeszek.MainMenuUI
 {
     public class CharacterCreatorManager : MonoBehaviour
     {
+        /// <summary>
+        /// Class which manages character creation in main menu 
+        /// </summary>
         private MainMenuManager _mainMenuManager;
         
         [Header("Character Creator Manager", order = 0)]
@@ -51,6 +54,9 @@ namespace SzymonPeszek.MainMenuUI
             pointsToSpendText.text = pointsToSpend.ToString();
         }
 
+        /// <summary>
+        /// Load main level if character is created
+        /// </summary>
         public void PlayGame()
         {
             if (currentLevel == 12 && pointsToSpend == 0)
@@ -64,6 +70,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Save created character's stats
+        /// </summary>
         private void SaveStartingStats()
         {
             SettingsHolder.currentLevel = currentLevel;
@@ -76,6 +85,9 @@ namespace SzymonPeszek.MainMenuUI
         }
 
         #region Character Appearance
+        /// <summary>
+        /// Set character's gender to male
+        /// </summary>
         public void SetMaleGender()
         {
             if (!SettingsHolder.isMale)
@@ -92,6 +104,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Set character's gender to female
+        /// </summary>
         public void SetFemaleGender()
         {
             if (SettingsHolder.isMale)
@@ -108,17 +123,29 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Set character's name
+        /// </summary>
+        /// <param name="newName">Player name</param>
         public void SetPlayerName(string newName)
         {
             SettingsHolder.playerName = newName;
         }
 
+        /// <summary>
+        /// Set character's head
+        /// </summary>
+        /// <param name="partID">Head's part id</param>
         public void SetHead(float partID)
         {
             SettingsHolder.partsID[2] = (int)partID;
             modularCharacterManager.ActivatePart(ModularBodyPart.Head, (int)partID);
         }
-
+        
+        /// <summary>
+        /// Set character's hairs
+        /// </summary>
+        /// <param name="partID">Hairs part id</param>
         public void SetHair(float partID)
         {
             SettingsHolder.partsID[5] = (int)partID;
@@ -133,6 +160,10 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Set character's eyebrows
+        /// </summary>
+        /// <param name="partID">Eyebrows part id</param>
         public void SetEyebrow(float partID)
         {
             SettingsHolder.partsID[6] = (int)partID;
@@ -147,6 +178,10 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Set character's ears
+        /// </summary>
+        /// <param name="partID">Ears part id</param>
         public void SetEar(float partID)
         {
             SettingsHolder.partsID[7] = (int)partID;
@@ -161,6 +196,10 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
 
+        /// <summary>
+        /// Set character's facial hair
+        /// </summary>
+        /// <param name="partID">Facial hairs part id</param>
         public void SetFacialHair(float partID)
         {
             SettingsHolder.partsID[8] = (int)partID;
@@ -177,6 +216,9 @@ namespace SzymonPeszek.MainMenuUI
         #endregion
 
         #region Character Stats
+        /// <summary>
+        /// Increase player's strength
+        /// </summary>
         public void IncreaseStrength()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -190,6 +232,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's strength
+        /// </summary>
         public void DecreaseStrength()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startStrength > 0)
@@ -203,6 +248,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Increase player's agility
+        /// </summary>
         public void IncreaseAgility()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -216,6 +264,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's agility
+        /// </summary>
         public void DecreaseAgility()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startAgility > 0)
@@ -229,6 +280,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Increase player's defence
+        /// </summary>
         public void IncreaseDefence()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -242,6 +296,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's defence
+        /// </summary>
         public void DecreaseDefence()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startDefence > 0)
@@ -255,6 +312,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Increase player's health
+        /// </summary>
         public void IncreaseHealth()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -268,6 +328,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's health
+        /// </summary>
         public void DecreaseHealth()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startBonusHealth > 0)
@@ -281,6 +344,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Increase player's stamina
+        /// </summary>
         public void IncreaseStamina()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -294,6 +360,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's stamina
+        /// </summary>
         public void DecreaseStamina()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startBonusStamina > 0)
@@ -307,6 +376,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Increase player's focus
+        /// </summary>
         public void IncreaseFocus()
         {
             if (pointsToSpend > 0 && currentLevel < 12)
@@ -320,6 +392,9 @@ namespace SzymonPeszek.MainMenuUI
             }
         }
         
+        /// <summary>
+        /// Decrease player's focus
+        /// </summary>
         public void DecreaseFocus()
         {
             if (currentLevel > 1 && pointsToSpend < 12 && startBonusFocus > 0)

@@ -9366,7 +9366,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7891900441932888577}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21302,7 +21302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5496388150815155700}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22390,7 +22390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4737224407163355460}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26588,7 +26588,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8349210834135153108}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34846,7 +34846,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 112923516464747510}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35286,7 +35286,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6969647200732805268}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35578,7 +35578,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3938934091717622463}
-        m_MethodName: HandleEquiping
+        m_MethodName: HandleEquipping
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
