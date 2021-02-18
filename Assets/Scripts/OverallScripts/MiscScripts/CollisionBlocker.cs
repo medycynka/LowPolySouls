@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 namespace SzymonPeszek.Misc
 {
     public class CollisionBlocker : MonoBehaviour

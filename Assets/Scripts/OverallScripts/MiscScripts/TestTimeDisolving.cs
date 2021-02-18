@@ -1,46 +1,50 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TestTimeDisolving : MonoBehaviour
+
+namespace SzymonPeszek.Misc
 {
-    public List<Material> characterMaterials;
-    public bool shouldDisolve = false;
-    public float currentTime_ = 0.0f;
-    public float endTime_ = 2.0f;
-    public bool reset = false;
-
-    void Start()
+    public class TestTimeDisolving : MonoBehaviour
     {
-        Renderer[] renders_ = GetComponentsInChildren<Renderer>();
+        public List<Material> characterMaterials;
+        public bool shouldDisolve = false;
+        public float currentTime_ = 0.0f;
+        public float endTime_ = 2.0f;
+        public bool reset = false;
 
-        foreach(var r_ in renders_)
+        void Start()
         {
-            characterMaterials.Add(r_.material);
-        }
-    }
+            Renderer[] renders_ = GetComponentsInChildren<Renderer>();
 
-    void Update()
-    {
-        if (shouldDisolve)
-        {
-            currentTime_ += Time.deltaTime;
-            foreach (var characterMaterial in characterMaterials)
+            foreach (var r_ in renders_)
             {
-                characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentTime_ / endTime_));
-            }
-
-            if(currentTime_ >= endTime_)
-            {
-                shouldDisolve = false;
+                characterMaterials.Add(r_.material);
             }
         }
-        else if (reset)
+
+        void Update()
         {
-            reset = false;
-            currentTime_ = 0.0f;
-            foreach (var characterMaterial in characterMaterials)
+            if (shouldDisolve)
             {
-                characterMaterial.SetFloat("_DisolveValue", -0.1f);
+                currentTime_ += Time.deltaTime;
+                foreach (var characterMaterial in characterMaterials)
+                {
+                    characterMaterial.SetFloat("_DisolveValue", Mathf.Lerp(-0.1f, 1.0f, currentTime_ / endTime_));
+                }
+
+                if (currentTime_ >= endTime_)
+                {
+                    shouldDisolve = false;
+                }
+            }
+            else if (reset)
+            {
+                reset = false;
+                currentTime_ = 0.0f;
+                foreach (var characterMaterial in characterMaterials)
+                {
+                    characterMaterial.SetFloat("_DisolveValue", -0.1f);
+                }
             }
         }
     }
