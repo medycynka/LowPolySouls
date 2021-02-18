@@ -75,3 +75,6 @@ crashlytics-build.properties
 
 # Or ignore only specific files types
 /[Aa]ssets/Scenes/**/OcclusionCullingData.*
+
+#Ignore lightning cache
+/[Gg]raphicCache/

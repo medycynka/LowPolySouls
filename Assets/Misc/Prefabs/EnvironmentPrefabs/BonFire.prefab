@@ -116,7 +116,7 @@ MonoBehaviour:
   interactableText: Activate Bonfire
   playerInventory: {fileID: 0}
   playerLocomotion: {fileID: 0}
-  animatorHandler: {fileID: 0}
+  playerAnimatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
 --- !u!114 &2094540011
 MonoBehaviour:
@@ -134,7 +134,7 @@ MonoBehaviour:
   interactableText: Rest at the bonfire
   playerInventory: {fileID: 0}
   playerLocomotion: {fileID: 0}
-  animatorHandler: {fileID: 0}
+  playerAnimatorHandler: {fileID: 0}
   uIManager: {fileID: 0}
 --- !u!114 &2094540012
 MonoBehaviour:
@@ -158,14 +158,13 @@ MonoBehaviour:
   uiWindow: {fileID: 0}
   restUI: {fileID: 0}
   quickMoveScreen: {fileID: 0}
-  playerStats: {fileID: 0}
   playerManager: {fileID: 0}
-  locationName: Test Field
+  locationName: Valley of the lost
   locationListScreen: {fileID: 0}
   locationScreen: {fileID: 0}
-  qucikMoveID: 0
+  quickMoveID: 0
   spawnPoint: {fileID: 1204769307}
-  isBossBonfire: 0
+  isBossBonfire: 1
   enemySpawner: {fileID: 0}
 --- !u!114 &6532777734007141858
 MonoBehaviour:
@@ -451,6 +450,10 @@ PrefabInstance:
       propertyPath: LightsModule.intensityCurve.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 0ca899321fcc4e345828e4e78ca8650e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca899321fcc4e345828e4e78ca8650e, type: 3}
 --- !u!4 &448311542173932669 stripped
@@ -533,6 +536,11 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23019494539852092, guid: 0c14f3ea30af4174ba288b3c2042f665,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c14f3ea30af4174ba288b3c2042f665, type: 3}
 --- !u!4 &1858837995454378535 stripped
@@ -606,6 +614,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2373152, guid: bc69307c2f84e9748bd3cedb18c6e7fa, type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373152, guid: bc69307c2f84e9748bd3cedb18c6e7fa, type: 3}
+      propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

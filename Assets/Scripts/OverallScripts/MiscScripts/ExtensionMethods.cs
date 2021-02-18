@@ -426,16 +426,16 @@ namespace SzymonPeszek.Misc
                     terrainLayer))
                 {
                     terrainHeight = hit.point.y;
-                }
-
-                if (terrainHeight <= maxHeight)
-                {
-                    heightCheck = false;
-                }
-                else
-                {
-                    randomX = Random.Range(terrainLeft, terrainRight);
-                    randomZ = Random.Range(terrainBottom, terrainTop);
+                    
+                    if (terrainHeight <= maxHeight)
+                    {
+                        heightCheck = false;
+                    }
+                    else
+                    {
+                        randomX = Random.Range(terrainLeft, terrainRight);
+                        randomZ = Random.Range(terrainBottom, terrainTop);
+                    }
                 }
             }
 
