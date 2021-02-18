@@ -415,12 +415,28 @@ namespace SzymonPeszek.Misc
             float terrainBottom = terrainPosition.z;
             float terrainTop = terrainBottom + terrainSize.z;
             float terrainHeight = 0.0f;
+            float maxHeight = terrainSize.y;
+            bool heightCheck = true;
             float randomX = Random.Range(terrainLeft, terrainRight);
-            float randomZ = Random.Range(terrainBottom, terrainTop);
+            float randomZ = Random.Range(terrainBottom, terrainTop);;
 
-            if (Physics.Raycast(new Vector3(randomX, 9999f, randomZ), Vector3.down, out RaycastHit hit, 15000f, terrainLayer))
+            while (heightCheck)
             {
-                terrainHeight = hit.point.y;
+                if (Physics.Raycast(new Vector3(randomX, 9999f, randomZ), Vector3.down, out RaycastHit hit, 15000f,
+                    terrainLayer))
+                {
+                    terrainHeight = hit.point.y;
+                }
+
+                if (terrainHeight <= maxHeight)
+                {
+                    heightCheck = false;
+                }
+                else
+                {
+                    randomX = Random.Range(terrainLeft, terrainRight);
+                    randomZ = Random.Range(terrainBottom, terrainTop);
+                }
             }
 
             Vector3 randomPosition = new Vector3(randomX, terrainHeight, randomZ);

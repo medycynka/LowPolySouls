@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using SzymonPeszek.Environment.Areas;
 using UnityEngine;
 
 
@@ -14,12 +16,13 @@ namespace SzymonPeszek.Misc
         public LayerMask terrainLayer;
         private Vector3 _centerPoint;
         private List<GameObject> _createdObjects = new List<GameObject>();
+        public Vector3[] points;
+        public EnemySpawner enemySpawner;
 
         public void CreateObjectAtRandomPosition()
         {
-            Vector3[] points = useBounds
-                ? ExtensionMethods.GetRandomPointsOnSurfaceInBoundsNonRefFast(bounds, terrainLayer,
-                    objectsAmount)
+            points = useBounds
+                ? ExtensionMethods.GetRandomPointsOnSurfaceInBoundsNonRefFast(bounds, terrainLayer, objectsAmount)
                 : ExtensionMethods.GetRandomPointsOnSurfaceNonRef(worldTerrain.transform.position,
                     worldTerrain.terrainData.size, terrainLayer, objectsAmount);
 
@@ -39,6 +42,19 @@ namespace SzymonPeszek.Misc
                 }
 
                 _createdObjects.Clear();
+            }
+        }
+
+        public void SavePointsToSpawner()
+        {
+            if (enemySpawner != null)
+            {
+                enemySpawner.positionsList = new List<Vector3>();
+
+                for (int i = 0; i < _createdObjects.Count; i++)
+                {
+                    enemySpawner.positionsList.Add(_createdObjects[i].transform.position);
+                }
             }
         }
     }

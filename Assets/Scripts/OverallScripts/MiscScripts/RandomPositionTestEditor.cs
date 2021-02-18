@@ -29,6 +29,11 @@ namespace SzymonPeszek.Misc
                     testerScript.DeleteCreatedObjects();
                 }
             GUILayout.EndHorizontal();
+            
+            if (GUILayout.Button("Save positions"))
+            {
+                testerScript.SavePointsToSpawner();
+            }
         }
     }
 }
