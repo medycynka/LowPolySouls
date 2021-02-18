@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 4670558424589930231}
   - component: {fileID: 4670558425706581896}
   m_Layer: 17
-  m_Name: Enemy Skeleton A
+  m_Name: Enemy Skeleton B
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,9 +794,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 0}
-  healthLevel: 10
-  maxHealth: 100
-  currentHealth: 100
+  healthLevel: 25
+  maxHealth: 250
+  currentHealth: 250
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
   healthBar: {fileID: 4670558424220370308}
   healthBarFill: {fileID: 0}
   damageValue: {fileID: 4670558424719175783}
-  soulsGiveAmount: 10
+  soulsGiveAmount: 250
   playerStats: {fileID: 0}
   enemyObject: {fileID: 7686385313952653152}
   isBoss: 0

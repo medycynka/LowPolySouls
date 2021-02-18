@@ -5095,9 +5095,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 0}
-  healthLevel: 10
-  maxHealth: 100
-  currentHealth: 100
+  healthLevel: 12
+  maxHealth: 120
+  currentHealth: 120
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -5115,7 +5115,7 @@ MonoBehaviour:
   healthBar: {fileID: 8504432947325886344}
   healthBarFill: {fileID: 0}
   damageValue: {fileID: 8504432948965665387}
-  soulsGiveAmount: 10
+  soulsGiveAmount: 50
   playerStats: {fileID: 0}
   enemyObject: {fileID: 6665184688892314988}
   isBoss: 0
@@ -5193,16 +5193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChance: 0.45
-  weaponChance: 0.25
-  equipmentChance: 0.2
+  consumableChance: 1
+  weaponChance: 0
+  equipmentChance: 0
   consumableDropPool:
   - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
-  weaponDropPool:
-  - {fileID: 11400000, guid: 8d3a99efa49105c49a210678a6fb7340, type: 2}
-  equipmentDropPool:
-  - {fileID: 11400000, guid: 90cd5c31ba0210f48b2d0fe1affdc046, type: 2}
-  - {fileID: 11400000, guid: bfa3170a09393424393b8ce64e9b8917, type: 2}
+  weaponDropPool: []
+  equipmentDropPool: []
   dropList: []
   deathDrop: {fileID: 7946515326730370419, guid: 4d928ade9cb139c4fba3948661e7ba91,
     type: 3}

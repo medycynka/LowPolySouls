@@ -797,9 +797,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 5556269244591321089}
-  healthLevel: 25
-  maxHealth: 250
-  currentHealth: 250
+  healthLevel: 30
+  maxHealth: 300
+  currentHealth: 300
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -817,7 +817,7 @@ MonoBehaviour:
   healthBar: {fileID: 5409160067421243501}
   healthBarFill: {fileID: 3611707020513439342}
   damageValue: {fileID: 9004676512579210589}
-  soulsGiveAmount: 250
+  soulsGiveAmount: 300
   playerStats: {fileID: 0}
   enemyObject: {fileID: 6425472112553934044}
   isBoss: 0
@@ -847,11 +847,12 @@ MonoBehaviour:
   shouldDrop: 1
   isAlive: 1
   deadFromBackStab: 0
-  shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 2584373423317221552}
-  distanceFromTarget: 0
-  viewableAngle: 0
+  navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
+  rotationSpeed: 15
   detectionRadius: 15
   maximumAttackRange: 3
   maximumDetectionAngle: 75
@@ -864,6 +865,7 @@ MonoBehaviour:
   disolveDurationTime: 4
   shouldGlow: 0
   objectDestructionDuration: 5
+  enemyTransform: {fileID: 0}
 --- !u!114 &3273144207642128337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,9 +878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8f14037264634db09d485a350d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navmeshAgent: {fileID: 8690727462886663001}
-  navMeshBlocker: {fileID: 6611003099846226059}
-  enemyRigidBody: {fileID: 6814617603118602728}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   stoppingDistance: 2
   rotationSpeed: 100
 --- !u!114 &8033529458226900825

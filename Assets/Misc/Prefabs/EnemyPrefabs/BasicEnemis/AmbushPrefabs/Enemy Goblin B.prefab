@@ -5327,9 +5327,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 0}
-  healthLevel: 10
-  maxHealth: 100
-  currentHealth: 100
+  healthLevel: 12
+  maxHealth: 120
+  currentHealth: 120
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -5347,7 +5347,7 @@ MonoBehaviour:
   healthBar: {fileID: 4634543974932121889}
   healthBarFill: {fileID: 4634543975959801925}
   damageValue: {fileID: 4634543975498562754}
-  soulsGiveAmount: 10
+  soulsGiveAmount: 50
   playerStats: {fileID: 0}
   enemyObject: {fileID: 7650379557730636741}
   isBoss: 0
@@ -5377,11 +5377,12 @@ MonoBehaviour:
   shouldDrop: 1
   isAlive: 1
   deadFromBackStab: 0
-  shouldFollowTarget: 0
   currentTarget: {fileID: 0}
   currentState: {fileID: 1569073868183009415}
-  distanceFromTarget: 0
-  viewableAngle: 0
+  navmeshAgent: {fileID: 0}
+  navMeshBlocker: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
+  rotationSpeed: 15
   detectionRadius: 15
   maximumAttackRange: 1.5
   maximumDetectionAngle: 75
@@ -5394,6 +5395,7 @@ MonoBehaviour:
   disolveDurationTime: 4
   shouldGlow: 0
   objectDestructionDuration: 5
+  enemyTransform: {fileID: 0}
 --- !u!114 &7650379557730636751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5406,9 +5408,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d8f14037264634db09d485a350d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navmeshAgent: {fileID: 0}
-  navMeshBlocker: {fileID: 0}
-  enemyRigidBody: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   stoppingDistance: 1.25
   rotationSpeed: 100
 --- !u!114 &4634543974566625874
@@ -5423,18 +5425,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChance: 0.45
-  weaponChance: 0.25
-  equipmentChance: 0.2
+  consumableChance: 1
+  weaponChance: 0
+  equipmentChance: 0
   consumableDropPool:
-  - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
   - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
-  - {fileID: 11400000, guid: fd432d8437ac4f54b88539b46e00499b, type: 2}
-  weaponDropPool:
-  - {fileID: 11400000, guid: 8d3a99efa49105c49a210678a6fb7340, type: 2}
-  equipmentDropPool:
-  - {fileID: 11400000, guid: 90cd5c31ba0210f48b2d0fe1affdc046, type: 2}
-  - {fileID: 11400000, guid: bfa3170a09393424393b8ce64e9b8917, type: 2}
+  weaponDropPool: []
+  equipmentDropPool: []
   dropList: []
   deathDrop: {fileID: 7946515326730370419, guid: 4d928ade9cb139c4fba3948661e7ba91,
     type: 3}

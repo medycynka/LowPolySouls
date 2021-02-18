@@ -740,9 +740,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 0}
-  healthLevel: 10
-  maxHealth: 100
-  currentHealth: 100
+  healthLevel: 17.5
+  maxHealth: 175
+  currentHealth: 175
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
@@ -795,9 +795,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb50d976b74cf249bee5938f61cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableChance: 1
-  weaponChance: 0
-  equipmentChance: 0
+  consumableChance: 0.65
+  weaponChance: 0.25
+  equipmentChance: 0.09
   consumableDropPool:
   - {fileID: 11400000, guid: 81ff5b8f5e7485b4ca20e3bc9e05c2c0, type: 2}
   weaponDropPool:
