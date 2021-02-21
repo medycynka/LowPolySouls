@@ -43,12 +43,12 @@ namespace SzymonPeszek.Items.Bonfire
         private void RestAtBonfire(PlayerManager playerManager)
         {
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            playerAnimatorHandler = playerManager.GetComponentInChildren<PlayerAnimatorHandler>();
+            playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
             _playerStats = playerManager.GetComponent<PlayerStats>();
             _bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
             _bonfireManager.playerManager.isRestingAtBonfire = true;
 
             _playerStats.RefillHealth();
@@ -65,14 +65,14 @@ namespace SzymonPeszek.Items.Bonfire
         /// </summary>
         public void GetUp()
         {
-            if (playerAnimatorHandler == null)
+            if (playerAnimatorManager == null)
             {
-                playerAnimatorHandler = _bonfireManager.playerManager.GetComponentInChildren<PlayerAnimatorHandler>();
+                playerAnimatorManager = _bonfireManager.playerManager.GetComponentInChildren<PlayerAnimatorManager>();
             }
 
             _bonfireManager.uiManager.UpdateSouls();
             _bonfireManager.CloseRestUI();
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
             _bonfireManager.playerManager.isRestingAtBonfire = false;
 
             if(_playerStats == null)
@@ -86,9 +86,9 @@ namespace SzymonPeszek.Items.Bonfire
         /// </summary>
         public void QuickMove()
         {
-            if(playerAnimatorHandler == null)
+            if(playerAnimatorManager == null)
             {
-                playerAnimatorHandler = _bonfireManager.playerManager.GetComponentInChildren<PlayerAnimatorHandler>();
+                playerAnimatorManager = _bonfireManager.playerManager.GetComponentInChildren<PlayerAnimatorManager>();
             }
 
             StartCoroutine(TeleportToNextBonfire());
@@ -108,7 +108,7 @@ namespace SzymonPeszek.Items.Bonfire
             yield return CoroutineYielder.bonfireTeleportFirstWaiter;
 
             _bonfireManager.CloseQuickMoveScreen();
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
             _bonfireManager.locationScreen.SetActive(true);
             _locationNameScree.text = _bonfireManager.locationName;
 

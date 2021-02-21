@@ -31,5 +31,6 @@ namespace SzymonPeszek.Misc
         public static WaitForSeconds lesserBuffWaiter { get; } = new WaitForSeconds(20f);
         public static WaitForSeconds mediumBuffWaiter { get; } = new WaitForSeconds(40f);
         public static WaitForSeconds grandBuffWaiter { get; } = new WaitForSeconds(60f);
+        public static WaitForSeconds chestOpeningWaiter { get; } = new WaitForSeconds(4f);
     }
 }

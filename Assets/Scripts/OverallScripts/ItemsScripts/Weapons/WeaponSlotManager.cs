@@ -28,7 +28,7 @@ namespace SzymonPeszek.Items.Weapons
         public DamageCollider leftHandDamageCollider;
         public DamageCollider rightHandDamageCollider;
 
-        private PlayerAnimatorHandler _playerAnimatorHandler;
+        private PlayerAnimatorManager _playerAnimatorManager;
 
         [Header("Quick Slots", order = 1)]
         public QuickSlotsUI quickSlotsUI;
@@ -40,7 +40,7 @@ namespace SzymonPeszek.Items.Weapons
         private void Awake()
         {
             _playerManager = GetComponentInParent<PlayerManager>();
-            _playerAnimatorHandler = GetComponent<PlayerAnimatorHandler>();
+            _playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             _playerStats = GetComponentInParent<PlayerStats>();
             _inputHandler = GetComponentInParent<InputHandler>();
             quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
@@ -74,11 +74,11 @@ namespace SzymonPeszek.Items.Weapons
                 #region Handle Left Weapon Idle Animation
                 if (weaponItem != null)
                 {
-                    _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.leftHandIdle], false);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.leftHandIdle], false);
                 }
                 else
                 {
-                    _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LeftArmEmptyName], false);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LeftArmEmptyName], false);
                 }
                 #endregion
 
@@ -102,22 +102,22 @@ namespace SzymonPeszek.Items.Weapons
                 {
                     _backSlot.LoadWeaponModel(_leftHandSlot.currentWeapon);
                     _leftHandSlot.UnloadWeaponAndDestroy();
-                    _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.thIdle], false);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.thIdle], false);
                 }
                 else
                 {
                     #region Handle Right Weapon Idle Animation
 
-                    _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BothArmsEmptyName], false);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BothArmsEmptyName], false);
                     _backSlot.UnloadWeaponAndDestroy();
 
                     if (weaponItem != null)
                     {
-                        _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.rightHandIdle], false);
+                        _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weaponItem.rightHandIdle], false);
                     }
                     else
                     {
-                        _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RightArmEmptyName], false);
+                        _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RightArmEmptyName], false);
                     }
                     #endregion
                 }

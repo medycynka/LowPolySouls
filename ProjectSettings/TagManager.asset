@@ -24,6 +24,7 @@ TagManager:
   - UI Settings
   - Inventory Holder
   - Destructible
+  - Chest
   layers:
   - Default
   - TransparentFX

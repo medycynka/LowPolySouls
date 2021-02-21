@@ -29,9 +29,9 @@ namespace SzymonPeszek.BaseClasses
         /// <summary>
         /// Attempt to cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public virtual void AttemptToCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
             
         }
@@ -39,9 +39,9 @@ namespace SzymonPeszek.BaseClasses
         /// <summary>
         /// Successfully cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public virtual void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
             playerStats.TakeFocusDamage(focusPointCost);
         }

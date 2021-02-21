@@ -20,7 +20,7 @@ namespace SzymonPeszek.BaseClasses
 
         [HideInInspector] public PlayerInventory playerInventory;
         [HideInInspector] public PlayerLocomotion playerLocomotion;
-        [HideInInspector] public PlayerAnimatorHandler playerAnimatorHandler;
+        [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public UIManager uIManager;
 
         private void OnDrawGizmosSelected()
@@ -46,11 +46,11 @@ namespace SzymonPeszek.BaseClasses
         {
             playerInventory = playerManager.GetComponent<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            playerAnimatorHandler = playerManager.GetComponentInChildren<PlayerAnimatorHandler>();
+            playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
             uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
             playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.PickUpName], true); //Plays the animation of looting the item
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.PickUpName], true); //Plays the animation of looting the item
         }
     }
 

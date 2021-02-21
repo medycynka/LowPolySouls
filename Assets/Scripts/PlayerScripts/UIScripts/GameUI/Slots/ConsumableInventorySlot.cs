@@ -15,7 +15,7 @@ namespace SzymonPeszek.GameUI.Slots
     {
         public PlayerStats playerStats;
         public PlayerManager playerManager;
-        public PlayerAnimatorHandler playerAnimatorHandler;
+        public PlayerAnimatorManager playerAnimatorManager;
 
         private ConsumableItem _item;
 
@@ -55,11 +55,11 @@ namespace SzymonPeszek.GameUI.Slots
                     case ConsumableType.HealItem:
                         playerStats.healthRefillAmount = _item.healAmount;
                         playerManager.shouldRefillHealth = true;
-                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
+                        playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EstusName], true);
                         break;
                     case ConsumableType.SoulItem:
                         playerStats.soulsAmount += _item.soulAmount;
-                        playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.UseItemName], true);
+                        playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.UseItemName], true);
                         break;
                     case ConsumableType.ManaItem:
                         break;

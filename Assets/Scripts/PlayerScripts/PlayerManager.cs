@@ -17,7 +17,7 @@ namespace SzymonPeszek.PlayerScripts
     public class PlayerManager : CharacterManager
     {
         private InputHandler _inputHandler;
-        private PlayerAnimatorHandler _playerAnimatorHandler;
+        private PlayerAnimatorManager _playerAnimatorManager;
         [Header("Player Components", order = 1)]
         [Header("Camera Component", order = 2)]
         public CameraHandler cameraHandler;
@@ -65,6 +65,7 @@ namespace SzymonPeszek.PlayerScripts
         private const string BonfireTag = "Bonfire";
         private const string InteractableTag = "Interactable";
         private const string FogWallTag = "Fog Wall";
+        private const string ChestTag = "Chest";
         private LayerMask _pickUpLayer;
         private Collider[] _interactColliders;
 
@@ -75,7 +76,7 @@ namespace SzymonPeszek.PlayerScripts
             characterTransform = transform;
             
             _inputHandler = GetComponent<InputHandler>();
-            _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
+            _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _playerStats = GetComponent<PlayerStats>();
             _animator = GetComponentInChildren<Animator>();
@@ -94,7 +95,7 @@ namespace SzymonPeszek.PlayerScripts
             isUsingLeftHand = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
             isInvulnerable = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
             _animator.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
-            _playerAnimatorHandler.canRotate = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName]);
+            _playerAnimatorManager.canRotate = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName]);
 
             _inputHandler.TickInput(delta);
             _playerLocomotion.HandleRollingAndSprinting(delta);
@@ -218,7 +219,7 @@ namespace SzymonPeszek.PlayerScripts
                             }
                         }
                     }
-                    else if (_interactColliders[i].CompareTag(InteractableTag))
+                    else if (_interactColliders[i].CompareTag(InteractableTag) || _interactColliders[i].CompareTag(ChestTag))
                     {
                         Interactable interactableObject = _interactColliders[i].GetComponent<Interactable>();
 
@@ -398,5 +399,12 @@ namespace SzymonPeszek.PlayerScripts
             }
         }
         #endregion
+        
+        public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
+        {
+            _playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from ice skating
+            transform.position = playerStandsHereWhenOpeningChest.transform.position;
+            _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.ChestOpeningName], true);            
+        }
     }
 }

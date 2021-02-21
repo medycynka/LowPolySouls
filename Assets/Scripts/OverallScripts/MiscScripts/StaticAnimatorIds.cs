@@ -44,6 +44,7 @@ namespace SzymonPeszek.Misc
         public const string BackStabName = "Back Stab";
         public const string BackStabbedName = "Back Stabbed";
         public const string LayDownName = "Laying Down";
+        public const string ChestOpeningName = "Open Chest";
         #endregion
 
         #region Player Attacks
@@ -87,6 +88,10 @@ namespace SzymonPeszek.Misc
         public const string EnemySwordAttack05 = "OH_Sword_Attack_05";
         public const string EnemySwordAttack06 = "OH_Sword_Attack_06";
         #endregion
+
+        #region Items Animations
+        public const string ChestOpenName = "Chest Opening";
+        #endregion
         #endregion
         
         #region Player Animation Ids
@@ -95,6 +100,10 @@ namespace SzymonPeszek.Misc
         
         #region Enemy Animation Ids
         public static Dictionary<string, int> enemyAnimationIds;
+        #endregion
+
+        #region Interactable Items Animations Id
+        public static int chestOpenId;
         #endregion
     }
 }

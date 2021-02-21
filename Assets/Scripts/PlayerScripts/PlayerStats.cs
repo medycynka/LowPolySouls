@@ -22,7 +22,7 @@ namespace SzymonPeszek.PlayerScripts
     {
         private PlayerManager _playerManager;
         private WeaponSlotManager _weaponSlotManager;
-        private PlayerAnimatorHandler _playerAnimatorHandler;
+        private PlayerAnimatorManager _playerAnimatorManager;
 
         [Header("Player Properties", order = 1)]
 
@@ -65,7 +65,7 @@ namespace SzymonPeszek.PlayerScripts
 
         private void Awake()
         {
-            _playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
+            _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
             _playerManager = GetComponent<PlayerManager>();
             _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             uiManager = FindObjectOfType<UIManager>();
@@ -247,7 +247,7 @@ namespace SzymonPeszek.PlayerScripts
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
 
                 if (currentHealth <= 0)
                 {
@@ -407,19 +407,19 @@ namespace SzymonPeszek.PlayerScripts
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
-            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
+            _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
             
             if (isJumpDeath)
             {
-                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LayDownName], true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LayDownName], true);
             }
             else if(isBackStabbed)
             {
-                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
             }
             else
             {
-                _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Death01Name], true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Death01Name], true);
             }
 
             isPlayerAlive = false;
@@ -440,7 +440,7 @@ namespace SzymonPeszek.PlayerScripts
 
             youDiedLogo.SetActive(false);
             _playerManager.quickMoveScreen.SetActive(true);
-            _playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
+            _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
             UpdateHealthBar(maxHealth);
             UpdateStaminaBar(maxStamina);
             characterTransform.position = _playerManager.currentSpawnPoint.transform.position;
@@ -451,7 +451,7 @@ namespace SzymonPeszek.PlayerScripts
             yield return CoroutineYielder.playerRespawnWaiter;
             
             isPlayerAlive = true;
-            _playerAnimatorHandler.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
+            _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
             _playerManager.quickMoveScreen.SetActive(false);
 
             if (isJumpDeath)

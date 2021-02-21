@@ -28,33 +28,33 @@ namespace SzymonPeszek.Items.Spells
         /// <summary>
         /// Attempt to cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public override void AttemptToCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
-            base.AttemptToCastSpell(playerAnimatorHandler, playerStats);
+            base.AttemptToCastSpell(playerAnimatorManager, playerStats);
 
             _raycastDetectionLayer = (1 << LayerMask.NameToLayer(EnvironmentName) | 1 << LayerMask.NameToLayer(EnemyName));
             _mainCamera = Camera.main;
             
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
-            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.spellProjectilesTransform);
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
+            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorManager.spellProjectilesTransform);
         }
 
         /// <summary>
         /// Successfully cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public override void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public override void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
-            base.SuccessfullyCastSpell(playerAnimatorHandler, playerStats);
+            base.SuccessfullyCastSpell(playerAnimatorManager, playerStats);
 
             Vector3 rayOrigin = _mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
             if (Physics.Raycast(rayOrigin, _mainCamera.transform.forward, out _hit, 100f, _raycastDetectionLayer))
             {
-                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorHandler.spellProjectilesTransform.position, playerAnimatorHandler.spellProjectilesTransform.rotation);
+                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorManager.spellProjectilesTransform.position, playerAnimatorManager.spellProjectilesTransform.rotation);
                 fireball.transform.LookAt(_hit.point);
                 _spellCollision = fireball.GetComponent<SpellCollision>();
                 _spellCollision.startPosition = fireball.transform.position;
@@ -64,7 +64,7 @@ namespace SzymonPeszek.Items.Spells
             }
             else
             {
-                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorHandler.spellProjectilesTransform.position, playerAnimatorHandler.spellProjectilesTransform.rotation);
+                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorManager.spellProjectilesTransform.position, playerAnimatorManager.spellProjectilesTransform.rotation);
                 fireball.transform.LookAt(rayOrigin + (_mainCamera.transform.forward * 100f));
                 _spellCollision = fireball.GetComponent<SpellCollision>();
                 _spellCollision.startPosition = fireball.transform.position;

@@ -19,26 +19,26 @@ namespace SzymonPeszek.Items.Spells
         /// <summary>
         /// Attempt to cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public override void AttemptToCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
-            base.AttemptToCastSpell(playerAnimatorHandler, playerStats);
+            base.AttemptToCastSpell(playerAnimatorManager, playerStats);
             
-            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorHandler.transform);
-            playerAnimatorHandler.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
+            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorManager.transform);
+            playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[spellAnimation], true);
         }
 
         /// <summary>
         /// Successfully cast this spell
         /// </summary>
-        /// <param name="playerAnimatorHandler">Player animation manager</param>
+        /// <param name="playerAnimatorManager">Player animation manager</param>
         /// <param name="playerStats">Player stats</param>
-        public override void SuccessfullyCastSpell(PlayerAnimatorHandler playerAnimatorHandler, PlayerStats playerStats)
+        public override void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
-            base.SuccessfullyCastSpell(playerAnimatorHandler, playerStats);
+            base.SuccessfullyCastSpell(playerAnimatorManager, playerStats);
             
-            GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerAnimatorHandler.transform);
+            GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerAnimatorManager.transform);
             playerStats.HealPlayer(healAmount);
         }
     }
