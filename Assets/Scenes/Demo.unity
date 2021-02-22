@@ -434,7 +434,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 747808057}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: b56d778355a12124bb34e9f86bf35a9b, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -1401,7 +1401,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 1314466352}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: 8e5871445beabe84496da8270797867b, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -4053,7 +4053,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 1630203062}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: 309f7db0e91292643be4e33d717c07ae, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -6397,7 +6397,7 @@ MonoBehaviour:
   locationScreenText: {fileID: 1799910683}
   bonfiresInArea: []
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: d3fd2fc3771d28c4ea7e095a7c568090, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -7561,7 +7561,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 385383314}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: f88be26ec3f675941aac2fd9ee13fce5, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -7746,12 +7746,12 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 802741139}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: b5e9bb90c9eddad4d837f960655f0a4c, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
   playerStats: {fileID: 0}
-  bgMusicBossDefeat: {fileID: 0}
+  bgMusicBossDefeat: {fileID: 8300000, guid: 79fbba8fd50332f4d91964ae1feb2b1e, type: 3}
   fogWalls:
   - {fileID: 210639288}
   bossName: Stone Giant
@@ -9221,7 +9221,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 978964636}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: 48b6e9306a539bc43b16444db62a0951, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -10449,7 +10449,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 811708034}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: c49a40c4274b71b41922439f144593fd, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0
@@ -10659,7 +10659,7 @@ MonoBehaviour:
   bonfiresInArea:
   - {fileID: 444026209}
   playerSoundManager: {fileID: 0}
-  areaBgMusic: {fileID: 0}
+  areaBgMusic: {fileID: 8300000, guid: 8630c0cb9daef0e40a5cd9b8c21bc830, type: 3}
   footSteps: []
   isInside: 0
   isPlayerDead: 0

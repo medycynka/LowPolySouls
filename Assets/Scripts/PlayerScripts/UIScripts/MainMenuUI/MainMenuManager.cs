@@ -30,7 +30,7 @@ namespace SzymonPeszek.MainMenuUI {
         public Slider volumeSlider;
 
         private float _startMusicVolume;
-        private float _currentTime = 0.0f;
+        private float _currentTime;
 
         private void Start()
         {
@@ -117,6 +117,8 @@ namespace SzymonPeszek.MainMenuUI {
         /// </summary>
         public void FadeOutMusic()
         {
+            _currentTime = 0.0f;
+            
             StartCoroutine(SwitchToNextScene());
         }
         

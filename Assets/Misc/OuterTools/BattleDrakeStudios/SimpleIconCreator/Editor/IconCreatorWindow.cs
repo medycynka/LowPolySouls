@@ -70,7 +70,6 @@ namespace BattleDrakeStudios.SimpleIconCreator {
             _saveOptionsArea = new Rect(_xPadding + _previewRect.width + _xPadding, _yPadding + _previewRect.height + _yPadding, 241, 241);
 
             _transparencyColor = Color.magenta;
-
         }
 
         private void UpdateOptionsToPreviewSettings() {

@@ -18,6 +18,7 @@ namespace SzymonPeszek.MainMenuUI
         [Header("Character Creator Components", order = 1)]
         public GameObject creatorScreen;
         public ModularCharacterManager modularCharacterManager;
+        public TMP_InputField nameInputField;
         public Slider headSlider;
         public Slider hairSlider;
         public Slider eyebrowSlider;
@@ -213,6 +214,26 @@ namespace SzymonPeszek.MainMenuUI
                 modularCharacterManager.DeactivatePart(ModularBodyPart.FacialHair);
             }
         }
+
+        /// <summary>
+        /// Resets character's look
+        /// </summary>
+        public void ResetCharacterLook()
+        {
+            SetMaleGender();
+            //SetPlayerName("");
+            nameInputField.text = "";
+            //SetHead(0);
+            headSlider.value = 0;
+            //SetHair(-1);
+            hairSlider.value = -1;
+            //SetEyebrow(-1);
+            eyebrowSlider.value = -1;
+            //SetEar(-1);
+            earSlider.value = -1;
+            //SetFacialHair(-1);
+            facialHairSlider.value = -1;
+        }
         #endregion
 
         #region Character Stats
@@ -406,6 +427,29 @@ namespace SzymonPeszek.MainMenuUI
                 focusText.text = startBonusFocus.ToString();
                 pointsToSpendText.text = pointsToSpend.ToString();
             }
+        }
+
+        /// <summary>
+        /// Resets Beginning Stats
+        /// </summary>
+        public void ResetStats()
+        {
+            currentLevel = 1;
+            pointsToSpend = 11;
+            startStrength = 1f;
+            startAgility = 0f;
+            startDefence = 0f;
+            startBonusHealth = 0f;
+            startBonusStamina = 0f;
+            startBonusFocus = 0f;
+            
+            strengthText.text = startStrength.ToString();
+            agilityText.text = startAgility.ToString();
+            defenceText.text = startDefence.ToString();
+            healthText.text = startBonusHealth.ToString();
+            staminaText.text = startBonusStamina.ToString();
+            focusText.text = startBonusFocus.ToString();
+            pointsToSpendText.text = pointsToSpend.ToString();
         }
         #endregion
     }

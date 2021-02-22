@@ -1,4 +1,4 @@
-﻿using System;
+﻿#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
@@ -37,3 +37,4 @@ namespace SzymonPeszek.Misc
         }
     }
 }
+#endif
