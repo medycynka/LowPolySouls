@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1H_Sword_003
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: ed4fbcdd690e97a4694008128c14995e, type: 3}
-  itemName: 1H_Sword_003
+  itemName: Bucher
   itemId: 1
   itemType: 0
   modelPrefab: {fileID: 1574553127320600, guid: feb83cd72c8f8164b93bf4dc742f55a8,

@@ -24,24 +24,25 @@ MonoBehaviour:
   backSlotPosition: {x: 0, y: 0, z: 0}
   backSlotRotation: {x: 0, y: 0, z: 0}
   backSlotScale: 1
+  baseAttack: 25
   lightAttackDamageMult: 1
   heavyAttackDamageMult: 1.5
-  backStabDamage: 50
+  criticalDamageMult: 2.5
   weight: 0
   durability: 0
   rightHandIdle: Right Arm Empty
   leftHandIdle: Left Arm Empty
   thIdle: Both Arms Empty
-  ohLightAttack1: OH_Light_Attack_01
-  ohLightAttack2: OH_Light_Attack_02
-  ohLightAttack3: OH_Light_Attack_03
-  ohHeavyAttack1: OH_Heavy_Attack_01
-  ohHeavyAttack2: OH_Heavy_Attack_02
-  thLightAttack1: TH_Light_Attack_01
-  thLightAttack2: TH_Light_Attack_02
-  thLightAttack3: TH_Light_Attack_03
-  thHeavyAttack1: TH_Heavy_Attack_01
-  thHeavyAttack2: TH_Heavy_Attack_02
+  ohLightAttack1: Light_Punch_01
+  ohLightAttack2: Light_Punch_01
+  ohLightAttack3: Light_Punch_01
+  ohHeavyAttack1: Heavy_Punch_01
+  ohHeavyAttack2: Heavy_Punch_01
+  thLightAttack1: 
+  thLightAttack2: 
+  thLightAttack3: 
+  thHeavyAttack1: 
+  thHeavyAttack2: 
   baseStamina: 5
   ohLightAttackMultiplier: 0
   ohHeavyAttackMultiplier: 0

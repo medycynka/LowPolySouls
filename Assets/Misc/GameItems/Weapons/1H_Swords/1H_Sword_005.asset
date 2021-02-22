@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1H_Sword_005
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 3d8b9c0a783285147adbf4677e881530, type: 3}
-  itemName: 1H_Sword_005
+  itemName: Goblin Machete
   itemId: 3
   itemType: 0
   modelPrefab: {fileID: 185350, guid: c9576268205bb4144a891cbfa89ff33c, type: 3}

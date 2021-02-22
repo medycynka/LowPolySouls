@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2H_Sword_001
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 2936552f5f9d29b49ba3a1c8f1f88862, type: 3}
-  itemName: 2H_Sword_001
+  itemName: Zweihandler
   itemId: 5
   itemType: 0
   modelPrefab: {fileID: 106878, guid: 02ffcb4bf5b2aa64fa310e411800bfdb, type: 3}

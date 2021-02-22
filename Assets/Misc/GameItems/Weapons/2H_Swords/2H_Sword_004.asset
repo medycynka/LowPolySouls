@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2H_Sword_004
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: df6ee123ee0824041ad3f4c00c17deba, type: 3}
-  itemName: 2H_Sword_004
+  itemName: Hell Slasher
   itemId: 8
   itemType: 0
   modelPrefab: {fileID: 4763626469804173689, guid: ba81278084ebf344bb9c6ffe6b417eed,

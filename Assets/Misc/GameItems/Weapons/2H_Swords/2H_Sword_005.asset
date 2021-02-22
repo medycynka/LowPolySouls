@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2H_Sword_005
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 3392ddc98f68825438f9034a4203619a, type: 3}
-  itemName: 2H_Sword_005
+  itemName: Sky Slasher
   itemId: 9
   itemType: 0
   modelPrefab: {fileID: 7110657959693620272, guid: c808e41f119b7ec4e9f3c14d8467b0d6,
