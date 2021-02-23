@@ -10,7 +10,7 @@ namespace SzymonPeszek.SaveScripts
     {
         // Settings
         public static int resolutionID = 0;
-        public static bool isFullscreen = false;
+        public static bool isFullscreen = true;
         public static int qualityID = 2;
         public static float mouseSensibility = 25;
         public static float soundVolume = 1;
@@ -36,7 +36,7 @@ namespace SzymonPeszek.SaveScripts
         public static bool[] bossAreaAlive = { true };
 
         // Bonfires
-        public static bool[] bonfiresActivation = { false, false, false };
+        public static bool[] bonfiresActivation = { false, false, false, false, false, false, false, false, false };
         
         // Data Manager
         public static DataManager dataManager;

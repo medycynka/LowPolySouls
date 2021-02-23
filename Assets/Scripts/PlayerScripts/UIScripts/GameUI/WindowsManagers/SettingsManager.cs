@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -13,14 +14,14 @@ namespace SzymonPeszek.GameUI.WindowsManagers
     /// <summary>
     /// Class for managing settings during game
     /// </summary>
-    public class SettingsMenager : MonoBehaviour
+    public class SettingsManager : MonoBehaviour
     {
-        private PlayerManager _playerManager;
-        private CameraHandler _cameraHandler;
         private readonly List<AudioSource> _audioSources = new List<AudioSource>();
         private Resolution[] _resolutionsOpts;
 
-        [Header("Settings Manager Manager", order = 0)]
+        [Header("Settings Manager", order = 0)]
+        public PlayerManager playerManager;
+        public CameraHandler cameraHandler;
         [Header("Settings Options", order = 1)]
         public TMP_Dropdown resolutionDropdown;
         public Toggle fullScreenToggle;
@@ -30,9 +31,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
 
         private void Start()
         {
-            _playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
-            _cameraHandler = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraHandler>();
-            _audioSources.Add(_playerManager.GetComponent<AudioSource>());
+            _audioSources.Add(playerManager.GetComponent<AudioSource>());
 
             foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
@@ -55,7 +54,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
                 }
             }
 
-            resolutionDropdown.AddOptions(resList);
+            resolutionDropdown.AddOptions(resList.Distinct().ToList());
 
             LoadSettings();
         }
@@ -63,20 +62,18 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         /// <summary>
         /// Loads settings properties
         /// </summary>
-        private void LoadSettings()
+        public void LoadSettings()
         {
             resolutionDropdown.value = SettingsHolder.resolutionID;
             resolutionDropdown.RefreshShownValue();
-
+            
             fullScreenToggle.isOn = SettingsHolder.isFullscreen;
+            
             qualityDropdown.value = SettingsHolder.qualityID;
             qualityDropdown.RefreshShownValue();
+            
             mouseSlider.value = SettingsHolder.mouseSensibility;
             volumeSlider.value = SettingsHolder.soundVolume;
-
-            SetAllSounds(SettingsHolder.soundVolume);
-
-            _cameraHandler.lookSpeed = SettingsHolder.mouseSensibility / 1000f;
         }
 
         /// <summary>
@@ -124,7 +121,7 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         /// <param name="sensibility">Mouse sensibility</param>
         public void SetMouseSensibility(float sensibility)
         {
-            _cameraHandler.lookSpeed = (sensibility / 1000f);
+            cameraHandler.lookSpeed = (sensibility / 1000f);
         }
 
         /// <summary>
@@ -141,7 +138,8 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         /// </summary>
         public void SaveAndExit()
         {
-            SaveManager.SaveGame(_playerManager, _playerManager.GetComponent<PlayerStats>(), _playerManager.GetComponent<PlayerInventory>());
+            SaveSettings();
+            SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>());
             Application.Quit();
         }
 
@@ -151,9 +149,9 @@ namespace SzymonPeszek.GameUI.WindowsManagers
         /// <param name="volume">Sounds volume</param>
         private void SetAllSounds(float volume)
         {
-            foreach (var audioSource in _audioSources)
+            for (var i = 0; i < _audioSources.Count; i++)
             {
-                audioSource.volume = volume;
+                _audioSources[i].volume = volume;
             }
         }
     }

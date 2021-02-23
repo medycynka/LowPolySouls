@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using SzymonPeszek.BaseClasses;
 using SzymonPeszek.EnemyScripts.Animations;
+using SzymonPeszek.Misc;
 
 
 namespace SzymonPeszek.EnemyScripts.States
@@ -31,6 +32,11 @@ namespace SzymonPeszek.EnemyScripts.States
         {
             if (enemyStats.currentHealth > 0)
             {
+                if (!enemyManager.shouldFollowTarget)
+                {
+                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
+                }
+                
                 #region Handle Enemy Target Detection
                 int detectLength = Physics.OverlapSphereNonAlloc(enemyManager.enemyTransform.position, enemyManager.detectionRadius, detectPlayer, detectionLayer);
 
@@ -54,6 +60,8 @@ namespace SzymonPeszek.EnemyScripts.States
                 #region Handle Switching To Next State
                 if (enemyManager.currentTarget != null)
                 {
+                    enemyManager.shouldFollowTarget = true;
+                    
                     return pursueTargetState;
                 }
                 

@@ -73,7 +73,6 @@ namespace SzymonPeszek.PlayerScripts
             staminaBar = FindObjectOfType<StaminaBar>();
             focusBar = FindObjectOfType<FocusBar>();
             characterTransform = GetComponent<Transform>();
-            
         }
 
         private void Start()
@@ -407,6 +406,7 @@ namespace SzymonPeszek.PlayerScripts
         private void HandleDeathAndRespawn(bool isBackStabbed)
         {
             currentHealth = 0;
+            _playerAnimatorManager.UpdateAnimatorValues(0, 0, false, false);
             _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], true);
             
             if (isJumpDeath)

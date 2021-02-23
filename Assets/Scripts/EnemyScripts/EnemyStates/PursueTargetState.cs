@@ -28,37 +28,50 @@ namespace SzymonPeszek.EnemyScripts.States
         {
             if (enemyStats.currentHealth > 0)
             {
-                if (enemyManager.isPreformingAction)
+                if (enemyManager.shouldFollowTarget)
                 {
-                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f, Time.deltaTime);
-                    
+                    if (enemyManager.isPreformingAction)
+                    {
+                        enemyAnimationManager.anim.SetFloat(
+                            StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 0, 0.1f,
+                            Time.deltaTime);
+
+                        return this;
+                    }
+
+                    //Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;
+                    float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position,
+                        enemyManager.enemyTransform.position);
+                    //float viewableAngle = Vector3.Angle(targetDirection, enemyManager.enemyTransform.forward);
+
+                    if (distanceFromTarget > enemyManager.detectionRadius)
+                    {
+                        enemyManager.currentTarget = null;
+                        enemyManager.shouldFollowTarget = false;
+
+                        return idleState;
+                    }
+
+                    if (distanceFromTarget > enemyManager.maximumAttackRange)
+                    {
+                        enemyAnimationManager.anim.SetFloat(
+                            StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f,
+                            Time.deltaTime);
+                    }
+
+                    HandleRotateTowardsTarget(enemyManager);
+                    enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
+                    enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
+
+                    if (distanceFromTarget <= enemyManager.maximumAttackRange)
+                    {
+                        return combatStanceState;
+                    }
+
                     return this;
                 }
 
-                //Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;
-                float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
-                //float viewableAngle = Vector3.Angle(targetDirection, enemyManager.enemyTransform.forward);
-
-                if (distanceFromTarget > enemyManager.detectionRadius)
-                {
-                    return idleState;
-                }
-                
-                if (distanceFromTarget > enemyManager.maximumAttackRange)
-                {
-                    enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.VerticalName], 1, 0.1f, Time.deltaTime);
-                }
-
-                HandleRotateTowardsTarget(enemyManager);
-                enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
-                enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
-
-                if (distanceFromTarget <= enemyManager.maximumAttackRange)
-                {
-                    return combatStanceState;
-                }
-
-                return this;
+                return idleState;
             }
             
             return deathState;

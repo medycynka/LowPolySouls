@@ -40,7 +40,7 @@ namespace SzymonPeszek.Items.Bonfire
         public bool isBossBonfire = false;
         public EnemySpawner enemySpawner;
 
-        private void Awake()
+        private void Start()
         {
             if (isActivated)
             {

@@ -147,13 +147,13 @@ namespace SzymonPeszek.SaveScripts
             #endregion
 
             #region Area
-            areaBossesAlive = new bool[1];
+            areaBossesAlive = new bool[SettingsHolder.bossAreaAlive.Length];
             for(int i = 0; i < areaBossesAlive.Length; i++)
             {
                 areaBossesAlive[i] = SettingsHolder.bossAreaAlive[i];
             }
 
-            bonfireActivators = new bool[3];
+            bonfireActivators = new bool[SettingsHolder.bonfiresActivation.Length];
             for(int i = 0; i < bonfireActivators.Length; i++)
             {
                 bonfireActivators[i] = SettingsHolder.bonfiresActivation[i];
@@ -162,7 +162,6 @@ namespace SzymonPeszek.SaveScripts
             
             #region Inventory
             #region Quick Slots
-
             leftHandSlots = new int[4];
             leftHandSlots[0] = playerInventory.weaponsInLeftHandSlots[0].meleeType == MeleeType.Shield ? 1 : 0;
             leftHandSlots[1] = playerInventory.weaponsInLeftHandSlots[0].itemId;

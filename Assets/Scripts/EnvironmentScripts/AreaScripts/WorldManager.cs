@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using SzymonPeszek.Items.Bonfire;
 using SzymonPeszek.Items.Weapons;
 using SzymonPeszek.Items.Equipment;
@@ -28,7 +29,7 @@ namespace SzymonPeszek.Environment.Areas
         public EquipmentItem[] ringsHolder;
         public ConsumableItem[] consumableHolder;
 
-        private const int FrameCheckRate = 5;
+        private const int FrameCheckRate = 3;
         private const int BossCheckVal = 0;
         private const int BonfireCheckVal = 1;
         
@@ -68,13 +69,12 @@ namespace SzymonPeszek.Environment.Areas
                     SettingsHolder.partsArmor[i] = dataManager.partsArmor[i];
                 }
                 
-                CurrentEquipments player = GameObject.FindObjectOfType<CurrentEquipments>();
-                if (player != null)
-                {
-                    player.InitializeCurrentEquipment();
-                    player.EquipPlayerWithCurrentItems();
-                    player.UpdateArmorValue();
-                }
+                // if (playerEq != null)
+                // {
+                //     playerEq.InitializeCurrentEquipment();
+                //     playerEq.EquipPlayerWithCurrentItems();
+                //     playerEq.UpdateArmorValue();
+                // }
                 #endregion
             }
         }

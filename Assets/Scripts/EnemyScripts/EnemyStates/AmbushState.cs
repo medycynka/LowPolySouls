@@ -69,6 +69,8 @@ namespace SzymonPeszek.EnemyScripts.States
                 #region Handle State Change
                 if (enemyManager.currentTarget != null)
                 {
+                    enemyManager.shouldFollowTarget = true;
+                    
                     return pursueTargetState;
                 }
                 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -31,14 +32,15 @@ namespace SzymonPeszek.MainMenuUI {
 
         private float _startMusicVolume;
         private float _currentTime;
-
+        
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
             _resolutionsOpts = Screen.resolutions;
             SettingsHolder.qualityID = QualitySettings.GetQualityLevel();
-
+            
             List<string> resList = new List<string>();
+            
             for (int i = 0; i < _resolutionsOpts.Length; i++)
             {
                 resList.Add(_resolutionsOpts[i].width + "x" + _resolutionsOpts[i].height);
@@ -49,7 +51,7 @@ namespace SzymonPeszek.MainMenuUI {
                 }
             }
 
-            resolutionDropdown.AddOptions(resList);
+            resolutionDropdown.AddOptions(resList.Distinct().ToList());
 
             DataManager dataManager = SaveManager.LoadGame();
 

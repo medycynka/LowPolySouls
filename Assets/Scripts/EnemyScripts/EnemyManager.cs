@@ -50,6 +50,7 @@ namespace SzymonPeszek.EnemyScripts
         public float maximumAttackRange = 1.5f;
         public float maximumDetectionAngle = 75;
         public float minimumDetectionAngle = -75;
+        public bool shouldFollowTarget;
 
         [Header("Recovery Timer", order = 2)]
         public float currentRecoveryTime = 0;

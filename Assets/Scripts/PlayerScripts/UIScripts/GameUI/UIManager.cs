@@ -7,6 +7,7 @@ using SzymonPeszek.PlayerScripts.Controller;
 using SzymonPeszek.GameUI.WindowsManagers;
 using SzymonPeszek.GameUI.Slots;
 using SzymonPeszek.Enums;
+using SzymonPeszek.SaveScripts;
 
 
 namespace SzymonPeszek.GameUI
@@ -27,6 +28,7 @@ namespace SzymonPeszek.GameUI
         public GameObject selectWindow;
         public GameObject equipmentScreenWindow;
         public GameObject weaponInventoryWindow;
+        public SettingsManager settingsManager;
 
         [Header("Consumables Quick Slots")]
         public TextMeshProUGUI estusSlotAmount;
@@ -72,16 +74,16 @@ namespace SzymonPeszek.GameUI
         public GameObject consumableInventorySlotsPrefab;
         public GameObject consumableInventorySlotsParent;
 
-        [SerializeField] WeaponInventorySlot[] weaponInventorySlots;
-        [SerializeField] WeaponInventorySlot[] shieldInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] helmetInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] chestInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] shoulderInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] handInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] legInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] footInventorySlots;
-        [SerializeField] EquipmentInventorySlot[] ringInventorySlots;
-        [SerializeField] ConsumableInventorySlot[] consumableInventorySlots;
+        [SerializeField] private WeaponInventorySlot[] weaponInventorySlots;
+        [SerializeField] private WeaponInventorySlot[] shieldInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] helmetInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] chestInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] shoulderInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] handInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] legInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] footInventorySlots;
+        [SerializeField] private EquipmentInventorySlot[] ringInventorySlots;
+        [SerializeField] private ConsumableInventorySlot[] consumableInventorySlots;
 
         private void Start()
         {
@@ -100,7 +102,9 @@ namespace SzymonPeszek.GameUI
         /// </summary>
         public void UpdateUI()
         {
+            equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
             equipmentWindowUI.UpdateStatsWindow(playerStats);
+            settingsManager.LoadSettings();
             GetAllInventorySlots();
             UpdateAllInventoryTabs();
         }

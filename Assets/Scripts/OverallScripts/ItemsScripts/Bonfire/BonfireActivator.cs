@@ -2,6 +2,7 @@
 using SzymonPeszek.BaseClasses;
 using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.Misc;
+using SzymonPeszek.SaveScripts;
 
 
 namespace SzymonPeszek.Items.Bonfire

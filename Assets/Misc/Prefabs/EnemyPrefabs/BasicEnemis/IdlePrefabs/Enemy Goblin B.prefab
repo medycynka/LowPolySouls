@@ -5115,7 +5115,7 @@ MonoBehaviour:
   healthBar: {fileID: 8504432947325886344}
   healthBarFill: {fileID: 0}
   damageValue: {fileID: 8504432948965665387}
-  soulsGiveAmount: 50
+  soulsGiveAmount: 150
   playerStats: {fileID: 0}
   enemyObject: {fileID: 6665184688892314988}
   isBoss: 0
@@ -5155,6 +5155,7 @@ MonoBehaviour:
   maximumAttackRange: 1.5
   maximumDetectionAngle: 120
   minimumDetectionAngle: -120
+  shouldFollowTarget: 0
   currentRecoveryTime: 0
   disolveEdgeWidth: 0.015
   disolveNoiseScale: 30

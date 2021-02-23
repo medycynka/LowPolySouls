@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 0b5d9931d0c97c04d9e2992b36448997, type: 3}
   itemName: Faith Spikes
-  itemId: 0
+  itemId: 10
   itemType: 0
   modelPrefab: {fileID: 1240486851756129723, guid: 49c6f4bdba862a64584114944e308a10,
     type: 3}

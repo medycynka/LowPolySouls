@@ -5,6 +5,7 @@ using SzymonPeszek.Items.Equipment;
 using SzymonPeszek.Items.Consumable;
 using SzymonPeszek.BaseClasses;
 using SzymonPeszek.Environment.Areas;
+using SzymonPeszek.GameUI.WindowsManagers;
 using SzymonPeszek.SaveScripts;
 
 
