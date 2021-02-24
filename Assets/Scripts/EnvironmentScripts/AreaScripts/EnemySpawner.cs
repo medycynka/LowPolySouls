@@ -35,19 +35,6 @@ namespace SzymonPeszek.Environment.Areas
         }
 
         /// <summary>
-        /// Remove alive enemies
-        /// </summary>
-        private void ClearAliveEnemies()
-        {
-            for (var i = 0; i < _enemiesAlive.Count; i++)
-            {
-                Destroy(_enemiesAlive[i].gameObject);
-            }
-
-            _enemiesAlive.Clear();
-        }
-
-        /// <summary>
         /// Initialize spawning list
         /// </summary>
         private void InitializeSpawnerList()
@@ -64,21 +51,15 @@ namespace SzymonPeszek.Environment.Areas
         /// <returns>Coroutine's enumerator</returns>
         private IEnumerator RefreshSpawner()
         {
-            ClearAliveEnemies();
-
             yield return CoroutineYielder.spawnRefreshWaiter;
 
             for (int i = 0; i < prefabsList.Count; i++)
             {
-                _enemiesAlive.Add(Instantiate(prefabsList[i], positionsList[i], Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f), parentTransform));
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            if (Time.frameCount % FrameCheckRate == RefreshCheckVal)
-            {
-                _enemiesAlive.RemoveAll(enemy => enemy == null);
+                if (_enemiesAlive[i] == null)
+                {
+                    _enemiesAlive[i] = Instantiate(prefabsList[i], positionsList[i],
+                        Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f), parentTransform);
+                }
             }
         }
     }

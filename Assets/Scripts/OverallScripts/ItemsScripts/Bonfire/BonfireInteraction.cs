@@ -51,8 +51,8 @@ namespace SzymonPeszek.Items.Bonfire
             playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
             _bonfireManager.playerManager.isRestingAtBonfire = true;
 
-            _playerStats.RefillHealth();
-            _playerStats.RefillStamina();
+            _playerStats.HealPlayer(_playerStats.maxHealth);
+            _playerStats.HealStamina(_playerStats.maxStamina);
             _bonfireManager.ActivateRestUI();
             playerManager.currentSpawnPoint = _bonfireManager.spawnPoint;
             _bonfireManager.RespawnEnemies();

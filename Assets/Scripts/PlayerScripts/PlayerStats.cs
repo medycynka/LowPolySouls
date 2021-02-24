@@ -62,6 +62,7 @@ namespace SzymonPeszek.PlayerScripts
         private RectTransform _hpBarTransform;
         private RectTransform _staminaBarTransform;
         private RectTransform _focusBarTransform;
+        private ConsumablePickUp _currentDeathDrop;
 
         private void Awake()
         {
@@ -284,8 +285,8 @@ namespace SzymonPeszek.PlayerScripts
                 currentHealth = maxHealth;
             }
 
-            healthBar.healthBarSlider.value += healAmount;
-            healthBar.backgroundSlider.value += healAmount;
+            healthBar.healthBarSlider.value = currentHealth;
+            healthBar.backgroundSlider.value = currentHealth;
         }
 
         /// <summary>
@@ -346,6 +347,22 @@ namespace SzymonPeszek.PlayerScripts
             }
 
             staminaBar.staminaBarSlider.value += staminaRefillAmount * Time.deltaTime;
+        }
+
+        /// <summary>
+        /// Replenish player's stamina with given amount of stamina
+        /// </summary>
+        /// <param name="staminaAmount">Health points amount to heal</param>
+        public void HealStamina(float staminaAmount)
+        {
+            currentStamina += staminaAmount * bonusBuffMagic;
+            
+            if(currentStamina > maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+
+            staminaBar.staminaBarSlider.value = currentStamina;
         }
         
         /// <summary>
@@ -489,7 +506,14 @@ namespace SzymonPeszek.PlayerScripts
                 uiManager.UpdateSouls();
                 soulDeathDrop.consumableItems = new []{ deathDrop };
                 soulDeathDrop.interactableText = "Recover souls";
-                Instantiate(soulDeathDrop, dropPosition, Quaternion.identity);
+
+                if (_currentDeathDrop != null)
+                {
+                    Destroy(_currentDeathDrop.gameObject);
+                    _currentDeathDrop = null;
+                }
+                
+                _currentDeathDrop = Instantiate(soulDeathDrop, dropPosition, Quaternion.identity);
             }
         }
 
