@@ -141,6 +141,10 @@ namespace SzymonPeszek.GameUI.WindowsManagers
             SaveSettings();
             SaveManager.SaveGame(playerManager, playerManager.GetComponent<PlayerStats>(), playerManager.GetComponent<PlayerInventory>());
             Application.Quit();
+            
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
 
         /// <summary>

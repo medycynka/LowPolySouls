@@ -37,12 +37,14 @@ namespace SzymonPeszek.Environment.Sounds
         public bool fadingMusic;
         
         private AudioSource _audioSource;
+        private Animator _anim;
         private bool _playFootsteps = true;
         private float _currTime;
 
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _anim = GetComponentInChildren<Animator>();
             _audioSource.loop = true;
             _audioSource.clip = currentBackgroundMusic;
             _audioSource.volume = SettingsHolder.soundVolume;
@@ -83,7 +85,11 @@ namespace SzymonPeszek.Environment.Sounds
         {
             if (movingClips.Length > 0 && _playFootsteps)
             {
-                _audioSource.PlayOneShot(GetRandomClip(movingClips));
+                if (!_anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInteractingName]) &&
+                    !_anim.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName]))
+                {
+                    _audioSource.PlayOneShot(GetRandomClip(movingClips));
+                }
             }
         }
 

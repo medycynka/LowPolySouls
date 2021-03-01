@@ -10240,6 +10240,14 @@ PrefabInstance:
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 2065993545, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+      propertyPath: cameraHandler
+      value: 
+      objectReference: {fileID: 1212298296339491854}
+    - target: {fileID: 2065993545, guid: 84da8b3a542b35048a10f9ce890833ea, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 3883487034852017534}
     - target: {fileID: 112923516464747510, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: playerInventory

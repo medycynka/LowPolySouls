@@ -16,8 +16,6 @@ namespace SzymonPeszek.Environment.Areas
         public List<Vector3> positionsList;
 
         private List<GameObject> _enemiesAlive;
-        private readonly int FrameCheckRate = 3;
-        private const int RefreshCheckVal = 0;
 
         private void Start()
         {
