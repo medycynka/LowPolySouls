@@ -372,12 +372,12 @@ namespace SzymonPeszek.PlayerScripts
         /// <returns>Coroutine's enumerator</returns>
         private IEnumerator ResizeCollider()
         {
-            yield return CoroutineYielder.jumpFirstWaiter;
+            yield return CoroutineYielder.waitFor02Second;
 
             _playerCollider.center = Vector3.up * 1.25f;
             _playerCollider.height = 1f;
 
-            yield return CoroutineYielder.jumpSecondWaiter;
+            yield return CoroutineYielder.waitFor05Second;
 
             _playerCollider.center = Vector3.up;
             _playerCollider.height = 1.5f;

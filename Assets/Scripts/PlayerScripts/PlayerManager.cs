@@ -72,7 +72,7 @@ namespace SzymonPeszek.PlayerScripts
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
-            backStabCollider = GetComponentInChildren<BackStabCollider>();
+            backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             characterTransform = transform;
             
             _inputHandler = GetComponent<InputHandler>();

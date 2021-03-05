@@ -41,7 +41,7 @@ namespace SzymonPeszek.Items.Chests
 
         private IEnumerator SpawnItemInChest()
         {
-            yield return CoroutineYielder.chestOpeningWaiter;
+            yield return CoroutineYielder.waitFor4Second;
             
             Instantiate(miscPickUpPrefab, transform);
             Destroy(_chestOpener);

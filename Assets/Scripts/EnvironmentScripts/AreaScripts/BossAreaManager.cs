@@ -171,7 +171,7 @@ namespace SzymonPeszek.Environment.Areas
                 bossHpBar.SetActive(true);
             }
 
-            yield return CoroutineYielder.areaNameWaiter;
+            yield return CoroutineYielder.waitFor1HalfSecond;
 
             locationScreenText.text = "";
             locationScreen.SetActive(false);
@@ -182,11 +182,11 @@ namespace SzymonPeszek.Environment.Areas
             bossHpBar.SetActive(false);
             fogWalls[0].canInteract = true;
 
-            yield return CoroutineYielder.bossHealWaiter;
+            yield return CoroutineYielder.waitFor1Second;
 
             _bossStats.InitializeHealth();
 
-            yield return CoroutineYielder.bossPositionResetWaiter;
+            yield return CoroutineYielder.waitFor5Second;
 
             bossPrefab.transform.position = startPosition;
         }

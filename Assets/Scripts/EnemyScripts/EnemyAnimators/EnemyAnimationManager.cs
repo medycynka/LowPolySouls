@@ -48,6 +48,9 @@ namespace SzymonPeszek.EnemyScripts.Animations
                 {StaticAnimatorIds.EnemySwordAttack04, Animator.StringToHash(StaticAnimatorIds.EnemySwordAttack04)},
                 {StaticAnimatorIds.EnemySwordAttack05, Animator.StringToHash(StaticAnimatorIds.EnemySwordAttack05)},
                 {StaticAnimatorIds.EnemySwordAttack06, Animator.StringToHash(StaticAnimatorIds.EnemySwordAttack06)},
+                {StaticAnimatorIds.LayDown2Name, Animator.StringToHash(StaticAnimatorIds.LayDown2Name)},
+                {StaticAnimatorIds.RiposteName, Animator.StringToHash(StaticAnimatorIds.RiposteName)},
+                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)}
             };
             
             anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], false);

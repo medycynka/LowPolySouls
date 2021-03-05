@@ -62,7 +62,7 @@ namespace SzymonPeszek.Environment.Areas
             playerManager.isRemovingFog = true;
             wallParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
-            yield return CoroutineYielder.fogWallDestroyWaiter;
+            yield return CoroutineYielder.waitFor2Seconds;
 
             playerManager.isRemovingFog = false;
 
@@ -79,11 +79,11 @@ namespace SzymonPeszek.Environment.Areas
             canInteract = false;
             playerManager.isRemovingFog = true;
             
-            yield return CoroutineYielder.fogWallRemoveFirstWaiter;
+            yield return CoroutineYielder.waitFor2Seconds;
             
             playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FogRemoveName], true);
 
-            yield return CoroutineYielder.fogWallRemoveSecondWaiter;
+            yield return CoroutineYielder.waitFor2HalfSeconds;
 
             playerManager.isRemovingFog = false;
             boxCollider.enabled = true;

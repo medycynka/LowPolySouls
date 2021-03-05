@@ -6,8 +6,8 @@ namespace SzymonPeszek.Misc
     /// <summary>
     /// Class representing back stab collider
     /// </summary>
-    public class BackStabCollider : MonoBehaviour
+    public class CriticalDamageCollider : MonoBehaviour
     {
-        public Transform backStabberStandPoint;
+        public Transform criticalDamageStandPosition;
     }
 }

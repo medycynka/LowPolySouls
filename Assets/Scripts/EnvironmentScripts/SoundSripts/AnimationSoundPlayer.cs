@@ -89,7 +89,7 @@ namespace SzymonPeszek.Environment.Sounds
 
 	    private IEnumerator EnableStepsAfterSecond()
         {
-            yield return CoroutineYielder.stepSoundEnablerWaiter;
+            yield return CoroutineYielder.waitFor1Second;
 
 		    _animationSoundManager.EnableFootStepsSound();
 	    }

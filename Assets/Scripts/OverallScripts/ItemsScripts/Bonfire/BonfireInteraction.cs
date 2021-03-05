@@ -105,14 +105,14 @@ namespace SzymonPeszek.Items.Bonfire
             _playerStats.characterTransform.position = _bonfireManager.spawnPoint.transform.position;
             _playerStats.characterTransform.rotation = _bonfireManager.spawnPoint.transform.rotation;
 
-            yield return CoroutineYielder.bonfireTeleportFirstWaiter;
+            yield return CoroutineYielder.waitFor5Second;
 
             _bonfireManager.CloseQuickMoveScreen();
             playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.StandUpName], true);
             _bonfireManager.locationScreen.SetActive(true);
             _locationNameScree.text = _bonfireManager.locationName;
 
-            yield return CoroutineYielder.bonfireTeleportSecondWaiter;
+            yield return CoroutineYielder.waitFor1HalfSecond;
 
             _bonfireManager.locationScreen.SetActive(false);
             _bonfireManager.playerManager.isRestingAtBonfire = false;

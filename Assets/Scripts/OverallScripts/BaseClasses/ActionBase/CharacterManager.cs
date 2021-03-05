@@ -15,7 +15,11 @@ namespace SzymonPeszek.BaseClasses
         
         [Header("Combat Colliders", order = 1)]
         public BoxCollider backStabBoxCollider;
-        public BackStabCollider backStabCollider;
+        public CriticalDamageCollider backStabCollider;
+        public CriticalDamageCollider riposteCollider;
+        
+        [Header("Combat Flags", order = 1)]
+        public bool canBeRiposted;
 
         [Header("Combat Colliders", order = 1)]
         public Transform characterTransform;

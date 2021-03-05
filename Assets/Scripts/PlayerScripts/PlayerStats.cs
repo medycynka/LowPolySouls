@@ -453,7 +453,7 @@ namespace SzymonPeszek.PlayerScripts
             youDiedLogo.SetActive(true);
             DropSouls(isJumpDeath ? jumpDeathDropPosition : transform.position);
 
-            yield return CoroutineYielder.playerRespawnWaiter;
+            yield return CoroutineYielder.waitFor5Second;
 
             youDiedLogo.SetActive(false);
             _playerManager.quickMoveScreen.SetActive(true);
@@ -465,7 +465,7 @@ namespace SzymonPeszek.PlayerScripts
             // Respawn enemies and refresh boss health if alive
             RespawnEnemiesOnDead();
 
-            yield return CoroutineYielder.playerRespawnWaiter;
+            yield return CoroutineYielder.waitFor5Second;
             
             isPlayerAlive = true;
             _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
@@ -530,13 +530,13 @@ namespace SzymonPeszek.PlayerScripts
             switch (buffRang)
             {
                 case BuffRang.Lesser:
-                    yield return CoroutineYielder.lesserBuffWaiter;
+                    yield return CoroutineYielder.waitFor20Second;
                     break;
                 case BuffRang.Medium:
-                    yield return CoroutineYielder.mediumBuffWaiter;
+                    yield return CoroutineYielder.waitFor40Second;
                     break;
                 case BuffRang.Grand:
-                    yield return CoroutineYielder.grandBuffWaiter;
+                    yield return CoroutineYielder.waitFor60Second;
                     break;
                 default:
                     yield return null;
@@ -559,13 +559,13 @@ namespace SzymonPeszek.PlayerScripts
             switch (buffRang)
             {
                 case BuffRang.Lesser:
-                    yield return CoroutineYielder.lesserBuffWaiter;
+                    yield return CoroutineYielder.waitFor20Second;
                     break;
                 case BuffRang.Medium:
-                    yield return CoroutineYielder.mediumBuffWaiter;
+                    yield return CoroutineYielder.waitFor40Second;
                     break;
                 case BuffRang.Grand:
-                    yield return CoroutineYielder.grandBuffWaiter;
+                    yield return CoroutineYielder.waitFor60Second;
                     break;
                 default:
                     yield return null;
@@ -588,13 +588,13 @@ namespace SzymonPeszek.PlayerScripts
             switch (buffRang)
             {
                 case BuffRang.Lesser:
-                    yield return CoroutineYielder.lesserBuffWaiter;
+                    yield return CoroutineYielder.waitFor20Second;
                     break;
                 case BuffRang.Medium:
-                    yield return CoroutineYielder.mediumBuffWaiter;
+                    yield return CoroutineYielder.waitFor40Second;
                     break;
                 case BuffRang.Grand:
-                    yield return CoroutineYielder.grandBuffWaiter;
+                    yield return CoroutineYielder.waitFor60Second;
                     break;
                 default:
                     yield return null;
@@ -617,13 +617,13 @@ namespace SzymonPeszek.PlayerScripts
             switch (buffRang)
             {
                 case BuffRang.Lesser:
-                    yield return CoroutineYielder.lesserBuffWaiter;
+                    yield return CoroutineYielder.waitFor20Second;
                     break;
                 case BuffRang.Medium:
-                    yield return CoroutineYielder.mediumBuffWaiter;
+                    yield return CoroutineYielder.waitFor40Second;
                     break;
                 case BuffRang.Grand:
-                    yield return CoroutineYielder.grandBuffWaiter;
+                    yield return CoroutineYielder.waitFor60Second;
                     break;
                 default:
                     yield return null;

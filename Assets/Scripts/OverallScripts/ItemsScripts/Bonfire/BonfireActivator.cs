@@ -51,7 +51,7 @@ namespace SzymonPeszek.Items.Bonfire
         {
             _bonfireManager.bonfireLitScreen.SetActive(true);
 
-            yield return CoroutineYielder.bonfireLitWaiter;
+            yield return CoroutineYielder.waitFor2Seconds;
 
             _bonfireManager.bonfireLitScreen.SetActive(false);
             _bonfireManager.showRestPopUp = true;

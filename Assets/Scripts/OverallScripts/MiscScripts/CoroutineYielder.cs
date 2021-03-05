@@ -8,29 +8,22 @@ namespace SzymonPeszek.Misc
     /// </summary>
     public static class CoroutineYielder
     {
-        public static WaitForFixedUpdate fixedUpdateWait { get; } = new WaitForFixedUpdate();
+        public static WaitForFixedUpdate fixedUpdateWaiter { get; } = new WaitForFixedUpdate();
         public static WaitForEndOfFrame endOffFrameWaiter { get; } = new WaitForEndOfFrame();
 
-        public static WaitForSeconds stepSoundStopWaiter { get; } = new WaitForSeconds(1f);
-        public static WaitForSeconds stepSoundEnablerWaiter { get; } = new WaitForSeconds(1f);
-        public static WaitForSeconds bonfireLitWaiter { get; } = new WaitForSeconds(2f);
-        public static WaitForSeconds bonfireTeleportFirstWaiter { get; } = new WaitForSeconds(5f);
-        public static WaitForSeconds bonfireTeleportSecondWaiter { get; } = new WaitForSeconds(1.5f);
-        public static WaitForSeconds areaNameWaiter { get; } = new WaitForSeconds(1.5f);
-        public static WaitForSeconds bossHealWaiter { get; } = new WaitForSeconds(1f);
-        public static WaitForSeconds bossPositionResetWaiter { get; } = new WaitForSeconds(5f);
-        public static WaitForSeconds spawnRefreshWaiter { get; } = new WaitForSeconds(1f);
-        public static WaitForSeconds fogWallDestroyWaiter { get; } = new WaitForSeconds(2f);
-        public static WaitForSeconds fogWallRemoveFirstWaiter { get; } = new WaitForSeconds(1f);
-        public static WaitForSeconds fogWallRemoveSecondWaiter { get; } = new WaitForSeconds(2.5f);
-        public static WaitForSeconds playerRespawnWaiter { get; } = new WaitForSeconds(5f);
-        public static WaitForSeconds enemyHpUpdateWaiter { get; } = new WaitForSeconds(3.5f);
-        public static WaitForSeconds jumpFirstWaiter { get; } = new WaitForSeconds(0.2f);
-        public static WaitForSeconds jumpSecondWaiter { get; } = new WaitForSeconds(0.5f);
-        public static WaitForSeconds disolveAfterBackStabWaiter { get; } = new WaitForSeconds(1.5f);
-        public static WaitForSeconds lesserBuffWaiter { get; } = new WaitForSeconds(20f);
-        public static WaitForSeconds mediumBuffWaiter { get; } = new WaitForSeconds(40f);
-        public static WaitForSeconds grandBuffWaiter { get; } = new WaitForSeconds(60f);
-        public static WaitForSeconds chestOpeningWaiter { get; } = new WaitForSeconds(4f);
+        public static WaitForSeconds waitFor02Second { get; } = new WaitForSeconds(0.2f);
+        public static WaitForSeconds waitFor05Second { get; } = new WaitForSeconds(0.5f);
+        public static WaitForSeconds waitFor1Second { get; } = new WaitForSeconds(1f);
+        public static WaitForSeconds waitFor1HalfSecond { get; } = new WaitForSeconds(1.5f);
+        public static WaitForSeconds waitFor2Seconds { get; } = new WaitForSeconds(2f);
+        public static WaitForSeconds waitFor2HalfSeconds { get; } = new WaitForSeconds(2.5f);
+        public static WaitForSeconds waitFor3Seconds { get; } = new WaitForSeconds(3f);
+        public static WaitForSeconds waitFor3HalfSeconds { get; } = new WaitForSeconds(3.5f);
+        public static WaitForSeconds waitFor4Second { get; } = new WaitForSeconds(4f);
+        public static WaitForSeconds waitFor4HalfSecond { get; } = new WaitForSeconds(4.5f);
+        public static WaitForSeconds waitFor5Second { get; } = new WaitForSeconds(5f);
+        public static WaitForSeconds waitFor20Second { get; } = new WaitForSeconds(20f);
+        public static WaitForSeconds waitFor40Second { get; } = new WaitForSeconds(40f);
+        public static WaitForSeconds waitFor60Second { get; } = new WaitForSeconds(60f);
     }
 }

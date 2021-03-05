@@ -155,6 +155,7 @@ namespace SzymonPeszek.EnemyScripts
         private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed, bool isRiposted)
         {
             _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
+            _enemyManager.deadFromRiposte = (isRiposted && currentHealth - damage <= 0.0f);
             healthBar.SetActive(true);
             currentHealth -= damage;
             healthBarFill.fillAmount = currentHealth / maxHealth;
@@ -162,10 +163,24 @@ namespace SzymonPeszek.EnemyScripts
 
             if (currentHealth > 0)
             {
-                animator.PlayTargetAnimation(isBackStabbed ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name], true);
+                if (isBackStabbed)
+                {
+                    animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName],
+                        true);
+                }
+                else if (isRiposted)
+                {
+                    animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.RipostedName],
+                        true);
+                }
+                else
+                {
+                    animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Damage01Name],
+                        true);
+                }
             }
 
-            yield return CoroutineYielder.enemyHpUpdateWaiter;
+            yield return CoroutineYielder.waitFor3HalfSeconds;
 
             healthBar.SetActive(false);
         }

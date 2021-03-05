@@ -34,6 +34,7 @@ namespace SzymonPeszek.EnemyScripts
         public bool shouldDrop = true;
         public bool isAlive = true;
         public bool deadFromBackStab;
+        public bool deadFromRiposte;
 
         [Header("Current Target", order = 2)]
         public CharacterStats currentTarget;
@@ -73,7 +74,6 @@ namespace SzymonPeszek.EnemyScripts
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             _enemyStats = GetComponent<EnemyStats>();
             _enemyDrops = GetComponent<EnemyDrops>();
-            backStabCollider = GetComponentInChildren<BackStabCollider>();
             enemyRigidBody = GetComponent<Rigidbody>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             navmeshAgent.enabled = false;
@@ -167,9 +167,16 @@ namespace SzymonPeszek.EnemyScripts
         /// <summary>
         /// Get back stabbed
         /// </summary>
-        public void HandleGettingBackStabbed()
+        public void HandleBackStabOrRiposte(bool backStab)
         {
-            _enemyStats.TakeDamage(pendingCriticalDamage, true);
+            if (backStab)
+            {
+                _enemyStats.TakeDamage(pendingCriticalDamage, true);
+            }
+            else
+            {
+                _enemyStats.TakeDamage(pendingCriticalDamage, false, true);
+            }
         }
 
         /// <summary>
@@ -179,7 +186,19 @@ namespace SzymonPeszek.EnemyScripts
         {
             isAlive = false;
             _enemyStats.currentHealth = 0;
-            _enemyStats.animator.PlayTargetAnimation(deadFromBackStab ? StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName] : StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Death01Name], true);
+            
+            if (deadFromBackStab)
+            {
+                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName], true);
+            }
+            else if(deadFromRiposte)
+            {
+                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.RipostedName], true);
+            }
+            else
+            {
+                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Death01Name], true);
+            }
 
             #region Disolve Effect
             foreach (var cM in _characterMaterials)
@@ -218,7 +237,7 @@ namespace SzymonPeszek.EnemyScripts
         {
             if (deadFromBackStab)
             {
-                yield return CoroutineYielder.disolveAfterBackStabWaiter;
+                yield return CoroutineYielder.waitFor1HalfSecond;
             }
             
             while(currentDisolveTime < disolveDurationTime)

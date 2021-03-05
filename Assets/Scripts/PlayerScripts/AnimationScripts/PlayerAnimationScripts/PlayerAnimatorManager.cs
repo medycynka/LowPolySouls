@@ -84,7 +84,10 @@ namespace SzymonPeszek.PlayerScripts.Animations
                 {StaticAnimatorIds.OhHeavyCombo01, Animator.StringToHash(StaticAnimatorIds.OhHeavyCombo01)},
                 {StaticAnimatorIds.HealSpell, Animator.StringToHash(StaticAnimatorIds.HealSpell)},
                 {StaticAnimatorIds.FireballSpell, Animator.StringToHash(StaticAnimatorIds.FireballSpell)},
-                {StaticAnimatorIds.ChestOpeningName, Animator.StringToHash(StaticAnimatorIds.ChestOpeningName)}
+                {StaticAnimatorIds.ChestOpeningName, Animator.StringToHash(StaticAnimatorIds.ChestOpeningName)},
+                {StaticAnimatorIds.LayDown2Name, Animator.StringToHash(StaticAnimatorIds.LayDown2Name)},
+                {StaticAnimatorIds.RiposteName, Animator.StringToHash(StaticAnimatorIds.RiposteName)},
+                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)}
             };
             
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);

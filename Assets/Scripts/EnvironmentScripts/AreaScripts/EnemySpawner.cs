@@ -49,7 +49,7 @@ namespace SzymonPeszek.Environment.Areas
         /// <returns>Coroutine's enumerator</returns>
         private IEnumerator RefreshSpawner()
         {
-            yield return CoroutineYielder.spawnRefreshWaiter;
+            yield return CoroutineYielder.waitFor1Second;
 
             for (int i = 0; i < prefabsList.Count; i++)
             {

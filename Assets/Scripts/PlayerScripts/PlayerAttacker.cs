@@ -25,6 +25,7 @@ namespace SzymonPeszek.PlayerScripts
         private RaycastHit _hit;
         
         public LayerMask backStabLayer;
+        public LayerMask riposteLayer;
 
         [Header("Last Attack Name")]
         public string lastAttack;
@@ -38,6 +39,7 @@ namespace SzymonPeszek.PlayerScripts
             _playerManager = GetComponentInParent<PlayerManager>();
             _playerStats = GetComponentInParent<PlayerStats>();
             backStabLayer = 1 << LayerMask.NameToLayer("Back Stab");
+            riposteLayer = 1 << LayerMask.NameToLayer("Riposte");
         }
 
         /// <summary>
@@ -227,7 +229,7 @@ namespace SzymonPeszek.PlayerScripts
 
                 if (enemyCharacterManager != null)
                 {
-                    _playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    _playerManager.transform.position = enemyCharacterManager.backStabCollider.criticalDamageStandPosition.position;
                     Vector3 rotationDirection = _hit.transform.position - _playerStats.characterTransform.position;
                     rotationDirection.y = 0;
                     rotationDirection.Normalize();
@@ -239,7 +241,29 @@ namespace SzymonPeszek.PlayerScripts
 
                     enemyCharacterManager.pendingCriticalDamage = criticalHitDamage;
                     _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BackStabName], true);
-                    enemyCharacterManager.HandleGettingBackStabbed();
+                    enemyCharacterManager.HandleBackStabOrRiposte(true);
+                }
+            }
+            else if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out _hit, 0.7f, riposteLayer))
+            {
+                EnemyManager enemyCharacterManager = _hit.transform.gameObject.GetComponentInParent<EnemyManager>();
+
+                if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+                {
+                    _playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamageStandPosition.position;
+
+                    Vector3 rotationDirection = _hit.transform.position - _playerManager.transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(_playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    _playerManager.transform.rotation = targetRotation;
+
+                    float criticalDamage = _playerInventory.rightWeapon.criticalDamageMult * _weaponSlotManager.rightHandDamageCollider.currentWeaponDamage;
+                    enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.RiposteName], true);
+                    enemyCharacterManager.HandleBackStabOrRiposte(false);
                 }
             }
         }

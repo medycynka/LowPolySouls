@@ -196,7 +196,7 @@ namespace SzymonPeszek.Environment.Sounds
         {
             DisableFootStepsSound();
 
-            yield return CoroutineYielder.stepSoundStopWaiter;
+            yield return CoroutineYielder.waitFor1Second;
             
             EnableFootStepsSound();
         }

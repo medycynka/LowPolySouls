@@ -87,7 +87,7 @@ namespace SzymonPeszek.Environment.Areas
             locationScreenText.text = areaName;
             locationScreen.SetActive(true);
 
-            yield return CoroutineYielder.areaNameWaiter;
+            yield return CoroutineYielder.waitFor1HalfSecond;
 
             locationScreenText.text = "";
             locationScreen.SetActive(false);

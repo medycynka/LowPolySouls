@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using SzymonPeszek.PlayerScripts.Controller;
 using SzymonPeszek.BaseClasses;
+using SzymonPeszek.Misc;
 
 
 namespace SzymonPeszek.PlayerScripts.CameraManager
@@ -48,16 +50,18 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
 
         [Header("Camera Lock-on Properties", order = 1)]
         public Transform currentLockOnTarget;
-        private readonly List<CharacterManager> _availableTargets = new List<CharacterManager>();
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;
         public Transform rightLockTarget;
         public float maximumLockOnDistance = 20;
+        public float lockOnSmoothFactor = 100f;
+        public bool transitDuringLockOn;
         private const string EnvironmentTag = "Environment";
         private LayerMask _lockOnLayer;
         private RaycastHit _hit;
         private float _LockOnAngle = 120f;
         public Collider[] colliders;
+        private List<CharacterManager> _availableTargets = new List<CharacterManager>();
         private int _collidersSize = 512;
         private int _collidersPrevSize = 512;
         
@@ -94,28 +98,56 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         /// <param name="mouseYInput">Mouse movement on Y-axis</param>
         public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
         {
+            float smooth = lockOnSmoothFactor;
+            
             if (inputHandler.lockOnFlag == false && currentLockOnTarget == null)
             {
                 _lookAngle += (mouseXInput * lookSpeed) / delta;
                 _pivotAngle -= (mouseYInput * pivotSpeed) / delta;
                 _pivotAngle = Mathf.Clamp(_pivotAngle, minimumPivot, maximumPivot);
 
-                var rotation = Vector3.zero;
+                Vector3 rotation = Vector3.zero;
                 rotation.y = _lookAngle;
-                var targetRotation = Quaternion.Euler(rotation);
+                Quaternion targetRotation = Quaternion.Euler(rotation);
                 _myTransform.rotation = targetRotation;
 
                 rotation = Vector3.zero;
-                rotation.x = _pivotAngle;
 
+                if (transitDuringLockOn)
+                {
+                    smooth = 20f;
+                    rotation.x = Mathf.Lerp(rotation.x, _pivotAngle, 5f);
+                }
+                else
+                {
+                    rotation.x = _pivotAngle;
+                }
+
+                _myTransform.rotation = Quaternion.Lerp(_myTransform.rotation, targetRotation, delta * smooth / 10f);
                 targetRotation = Quaternion.Euler(rotation);
-                cameraPivotTransform.localRotation = targetRotation;
+
+                if (transitDuringLockOn)
+                {
+                    cameraPivotTransform.localRotation = Quaternion.Lerp(cameraPivotTransform.localRotation, targetRotation, delta * smooth);
+                }
+                else
+                {
+                    cameraPivotTransform.localRotation = targetRotation;
+                }
             }
             else
             {
                 if (currentLockOnTarget == null)
                 {
                     return;
+                }
+                
+                Vector3 rotation = Vector3.zero;
+
+                if (transitDuringLockOn)
+                {
+                    smooth = 20;
+                    rotation.x = Mathf.Lerp(rotation.x, _pivotAngle, 5f);
                 }
 
                 Vector3 currentLockOnTargetPosition = currentLockOnTarget.position;
@@ -124,12 +156,19 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                 dir.y = 0;
 
                 Quaternion targetRotation = Quaternion.LookRotation(dir);
-                transform.rotation = targetRotation;
+                //transform.rotation = targetRotation;
+                _myTransform.rotation = Quaternion.Lerp(_myTransform.rotation, targetRotation, delta * smooth / 10f);
 
                 dir = currentLockOnTargetPosition - cameraPivotTransform.position;
                 dir.Normalize();
 
                 targetRotation = Quaternion.LookRotation(dir);
+
+                if (transitDuringLockOn)
+                {
+                    targetRotation = Quaternion.Lerp(cameraPivotTransform.rotation, targetRotation, delta * smooth);
+                }
+                
                 Vector3 eulerAngle = targetRotation.eulerAngles;
                 eulerAngle.y = 0;
                 cameraPivotTransform.localEulerAngles = eulerAngle;
@@ -143,12 +182,12 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         private void HandleCameraCollisions(float delta)
         {
             _targetPosition = _defaultPosition;
-            var direction = cameraTransform.position - cameraPivotTransform.position;
+            Vector3 direction = cameraTransform.position - cameraPivotTransform.position;
             direction.Normalize();
 
             if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out var hit, Mathf.Abs(_targetPosition), ignoreLayers))
             {
-                var dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
+                float dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
                 _targetPosition = -(dis - cameraCollisionOffSet);
             }
 
@@ -166,9 +205,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         /// </summary>
         public void HandleLockOn()
         {
-            var shortestDistance = Mathf.Infinity;
-            var shortestDistanceOfLeftTarget = Mathf.Infinity;
-            var shortestDistanceOfRightTarget = Mathf.Infinity;
+            float shortestDistance = Mathf.Infinity;
+            float shortestDistanceOfLeftTarget = Mathf.Infinity;
+            float shortestDistanceOfRightTarget = Mathf.Infinity;
             int collidersLenght = Physics.OverlapSphereNonAlloc(targetTransform.position, maximumLockOnDistance, colliders, _lockOnLayer);
 
             if (2 * collidersLenght < _collidersSize)
@@ -188,9 +227,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             {
                 if (colliders[i].TryGetComponent(out CharacterManager character))
                 {
-                    var lockTargetDirection = character.transform.position - targetTransform.position;
-                    var distanceFromTarget = Vector3.Distance(currentTargetPosition, character.characterTransform.position);
-                    var viewableAngle = Vector3.Angle(lockTargetDirection, playerManager.gameObject.transform.forward);
+                    Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
+                    float distanceFromTarget = Vector3.Distance(currentTargetPosition, character.characterTransform.position);
+                    float viewableAngle = Vector3.Angle(lockTargetDirection, playerManager.gameObject.transform.forward);
 
                     if (character.transform.root == targetTransform.transform.root || !(viewableAngle > -_LockOnAngle) || !(viewableAngle < _LockOnAngle) || !(distanceFromTarget <= maximumLockOnDistance))
                     {
@@ -219,8 +258,8 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
 
             for (int i = 0; i < _availableTargets.Count; i++)
             {
-                var availableTarget = _availableTargets[i];
-                var distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
+                CharacterManager availableTarget = _availableTargets[i];
+                float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
 
                 if (distanceFromTarget < shortestDistance)
                 {
@@ -265,6 +304,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         /// </summary>
         public void ClearLockOnTargets()
         {
+            transitDuringLockOn = true;
+            StartCoroutine(TransitionBetweenLockOn());
+            
             _availableTargets.Clear();
             nearestLockOnTarget = null;
             currentLockOnTarget = null;
@@ -279,9 +321,20 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             Vector3 newLockedPosition = new Vector3(0, lockedPivotPosition);
             Vector3 newUnlockedPosition = new Vector3(0, unlockedPivotPosition);
 
-            cameraPivotTransform.localPosition = currentLockOnTarget != null ? Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity, Time.deltaTime) : Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
+            cameraPivotTransform.localPosition = currentLockOnTarget != null
+                ? Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity,
+                    Time.deltaTime * 10f)
+                : Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity,
+                    Time.deltaTime * 10f);
         }
 
+        private IEnumerator TransitionBetweenLockOn()
+        {
+            yield return CoroutineYielder.waitFor1Second;
+            
+            transitDuringLockOn = false;
+        }
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
