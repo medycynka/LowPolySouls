@@ -47,6 +47,8 @@ namespace SzymonPeszek.Misc
         public const string LayDown2Name = "Laying Down 2";
         public const string RiposteName = "Riposte";
         public const string RipostedName = "Riposted";
+        public const string ParryName = "Parry";
+        public const string ParriedName = "Parried";
         public const string ChestOpeningName = "Open Chest";
         #endregion
 

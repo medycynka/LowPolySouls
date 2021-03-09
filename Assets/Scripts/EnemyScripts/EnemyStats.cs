@@ -27,6 +27,9 @@ namespace SzymonPeszek.EnemyScripts
         public Image healthBarFill;
         public TextMeshProUGUI damageValue;
 
+        [Header("Attack properties", order = 2)]
+        public float enemyAttack = 25f;
+
         [Header("Souls & souls target", order = 2)]
         public float soulsGiveAmount;
         public PlayerStats playerStats;
@@ -109,8 +112,9 @@ namespace SzymonPeszek.EnemyScripts
         /// <param name="damage">Damage amount</param>
         /// <param name="isBackStabbed">Is it from back stab?</param>
         /// <param name="isRiposted">Is it from riposte?</param>
-        public void TakeDamage(float damage, bool isBackStabbed, bool isRiposted = false)
+        public void TakeDamage(float damage, bool isBackStabbed, bool isRiposted)
         {
+            Debug.Log("Enemy TakeDamage called with isBackStabbed=" + isBackStabbed + " and isRiposted=" + isRiposted);
             if (_enemyManager.isAlive)
             {
                 if (isBoss)
@@ -135,14 +139,18 @@ namespace SzymonPeszek.EnemyScripts
             }
         }
 
+        public void GetParried()
+        {
+            animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.ParriedName], true);
+        }
+
         /// <summary>
         /// Deal damage to the player
         /// </summary>
         /// <param name="playerStat">Player stats</param>
-        /// <param name="weaponDamage">Current weapon damage</param>
-        public void DealDamage(PlayerStats playerStat, float weaponDamage)
+        public void DealDamage(PlayerStats playerStat)
         {
-            playerStat.TakeDamage(weaponDamage + strength);
+            playerStat.TakeDamage(enemyAttack);
         }
 
         /// <summary>
@@ -172,6 +180,7 @@ namespace SzymonPeszek.EnemyScripts
                 {
                     animator.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.RipostedName],
                         true);
+                    _enemyManager.isGettingRiposted = false;
                 }
                 else
                 {

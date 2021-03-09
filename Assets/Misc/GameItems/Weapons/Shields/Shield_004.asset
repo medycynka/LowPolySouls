@@ -19,7 +19,7 @@ MonoBehaviour:
   modelPrefab: {fileID: 190032, guid: ce93da153974d3745a391c1324306687, type: 3}
   isUnarmed: 0
   pivotPositionTransform: {x: 0, y: 0, z: 0}
-  pivotRotationTransform: {x: 0, y: 0, z: 0}
+  pivotRotationTransform: {x: -80, y: -75, z: -85}
   backSlotPosition: {x: 5, y: 0, z: -35}
   backSlotRotation: {x: 0, y: 0, z: 0}
   backSlotScale: 1
@@ -42,6 +42,7 @@ MonoBehaviour:
   thLightAttack3: TH_Light_Attack_03
   thHeavyAttack1: TH_Heavy_Attack_01
   thHeavyAttack2: TH_Heavy_Attack_02
+  weaponArt: Parry
   baseStamina: 25
   ohLightAttackMultiplier: 0
   ohHeavyAttackMultiplier: 0

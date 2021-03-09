@@ -31,6 +31,7 @@ namespace SzymonPeszek.EnemyScripts
         [Header("Bools", order = 2)]
         public bool isPreformingAction;
         public bool isInteracting;
+        public bool isGettingRiposted;
         public bool shouldDrop = true;
         public bool isAlive = true;
         public bool deadFromBackStab;
@@ -171,7 +172,7 @@ namespace SzymonPeszek.EnemyScripts
         {
             if (backStab)
             {
-                _enemyStats.TakeDamage(pendingCriticalDamage, true);
+                _enemyStats.TakeDamage(pendingCriticalDamage, true, false);
             }
             else
             {

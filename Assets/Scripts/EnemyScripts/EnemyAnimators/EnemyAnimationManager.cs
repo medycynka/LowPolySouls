@@ -50,7 +50,9 @@ namespace SzymonPeszek.EnemyScripts.Animations
                 {StaticAnimatorIds.EnemySwordAttack06, Animator.StringToHash(StaticAnimatorIds.EnemySwordAttack06)},
                 {StaticAnimatorIds.LayDown2Name, Animator.StringToHash(StaticAnimatorIds.LayDown2Name)},
                 {StaticAnimatorIds.RiposteName, Animator.StringToHash(StaticAnimatorIds.RiposteName)},
-                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)}
+                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)},
+                {StaticAnimatorIds.ParryName, Animator.StringToHash(StaticAnimatorIds.ParryName)},
+                {StaticAnimatorIds.ParriedName, Animator.StringToHash(StaticAnimatorIds.ParriedName)}
             };
             
             anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], false);
@@ -73,12 +75,31 @@ namespace SzymonPeszek.EnemyScripts.Animations
                 _enemyManager.enemyRigidBody.velocity = Vector3.zero;
             }
         }
-
+        
         public override void TakeCriticalDamageAnimationEvent()
         {
             _enemyStats.TakeDamage(_enemyManager.pendingCriticalDamage, false, true);
             _enemyManager.pendingCriticalDamage = 0.0f;
         }
-    }
+        
+        public void EnableIsParrying()
+        {
+            _enemyManager.isParrying = true;
+        }
 
+        public void DisableIsParrying()
+        {
+            _enemyManager.isParrying = false;
+        }
+
+        public void EnableCanBeRiposted()
+        {
+            _enemyManager.canBeRiposted = true;
+        }
+
+        public void DisableCanBeRiposted()
+        {
+            _enemyManager.canBeRiposted = false;
+        }
+    }
 }

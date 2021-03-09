@@ -42,6 +42,7 @@ MonoBehaviour:
   thLightAttack3: TH_Light_Attack_03
   thHeavyAttack1: TH_Heavy_Attack_01
   thHeavyAttack2: TH_Heavy_Attack_02
+  weaponArt: Parry
   baseStamina: 10
   ohLightAttackMultiplier: 1
   ohHeavyAttackMultiplier: 2

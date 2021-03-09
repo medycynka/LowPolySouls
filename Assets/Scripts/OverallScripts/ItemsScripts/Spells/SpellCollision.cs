@@ -46,7 +46,7 @@ namespace SzymonPeszek.Items.Spells.Helpers
 
                 if (other.CompareTag(EnemyTag))
                 {
-                    other.GetComponent<EnemyStats>().TakeDamage(damage, false);
+                    other.GetComponent<EnemyStats>().TakeDamage(damage, false, false);
                 }
                 else if (other.CompareTag(DestructibleTag))
                 {

@@ -244,6 +244,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LT"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4b6c1ae-61ec-4836-bc0e-9d93a09999ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -367,6 +375,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Critical Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4ba156b-0988-4e65-ba08-d63f499aa0c4"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -476,6 +495,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions_Y = m_PlayerActions.FindAction("Y", throwIfNotFound: true);
         m_PlayerActions_Walk = m_PlayerActions.FindAction("Walk", throwIfNotFound: true);
         m_PlayerActions_EstusQuickSlotUse = m_PlayerActions.FindAction("EstusQuickSlotUse", throwIfNotFound: true);
+        m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
         // Player Quick Slots
         m_PlayerQuickSlots = asset.FindActionMap("Player Quick Slots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D Pad Up", throwIfNotFound: true);
@@ -599,6 +619,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_Y;
     private readonly InputAction m_PlayerActions_Walk;
     private readonly InputAction m_PlayerActions_EstusQuickSlotUse;
+    private readonly InputAction m_PlayerActions_LT;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -614,6 +635,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Y => m_Wrapper.m_PlayerActions_Y;
         public InputAction @Walk => m_Wrapper.m_PlayerActions_Walk;
         public InputAction @EstusQuickSlotUse => m_Wrapper.m_PlayerActions_EstusQuickSlotUse;
+        public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -656,6 +678,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @EstusQuickSlotUse.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnEstusQuickSlotUse;
                 @EstusQuickSlotUse.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnEstusQuickSlotUse;
                 @EstusQuickSlotUse.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnEstusQuickSlotUse;
+                @LT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @LT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @LT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -693,6 +718,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @EstusQuickSlotUse.started += instance.OnEstusQuickSlotUse;
                 @EstusQuickSlotUse.performed += instance.OnEstusQuickSlotUse;
                 @EstusQuickSlotUse.canceled += instance.OnEstusQuickSlotUse;
+                @LT.started += instance.OnLT;
+                @LT.performed += instance.OnLT;
+                @LT.canceled += instance.OnLT;
             }
         }
     }
@@ -774,6 +802,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnY(InputAction.CallbackContext context);
         void OnWalk(InputAction.CallbackContext context);
         void OnEstusQuickSlotUse(InputAction.CallbackContext context);
+        void OnLT(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

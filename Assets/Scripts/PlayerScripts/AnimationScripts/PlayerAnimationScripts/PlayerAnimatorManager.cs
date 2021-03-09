@@ -87,12 +87,29 @@ namespace SzymonPeszek.PlayerScripts.Animations
                 {StaticAnimatorIds.ChestOpeningName, Animator.StringToHash(StaticAnimatorIds.ChestOpeningName)},
                 {StaticAnimatorIds.LayDown2Name, Animator.StringToHash(StaticAnimatorIds.LayDown2Name)},
                 {StaticAnimatorIds.RiposteName, Animator.StringToHash(StaticAnimatorIds.RiposteName)},
-                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)}
+                {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)},
+                {StaticAnimatorIds.ParryName, Animator.StringToHash(StaticAnimatorIds.ParryName)},
+                {StaticAnimatorIds.ParriedName, Animator.StringToHash(StaticAnimatorIds.ParriedName)}
             };
             
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
         }
 
+        private void OnAnimatorMove()
+        {
+            if (_playerManager.isInteracting == false)
+            {
+                return;
+            }
+
+            var delta = Time.deltaTime;
+            _playerLocomotion.rigidbody.drag = 0;
+            var deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            var velocity = deltaPosition / delta;
+            _playerLocomotion.rigidbody.velocity = velocity;
+        }
+        
         /// <summary>
         /// Update animator vertical and horizontal parameter
         /// </summary>
@@ -219,20 +236,37 @@ namespace SzymonPeszek.PlayerScripts.Animations
         {
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName], false);
         }
-
-        private void OnAnimatorMove()
+        
+        /// <summary>
+        /// Enable parrying
+        /// </summary>
+        public void EnableIsParrying()
         {
-            if (_playerManager.isInteracting == false)
-            {
-                return;
-            }
+            _playerManager.isParrying = true;
+        }
 
-            var delta = Time.deltaTime;
-            _playerLocomotion.rigidbody.drag = 0;
-            var deltaPosition = anim.deltaPosition;
-            deltaPosition.y = 0;
-            var velocity = deltaPosition / delta;
-            _playerLocomotion.rigidbody.velocity = velocity;
+        /// <summary>
+        /// Disable parrying
+        /// </summary>
+        public void DisableIsParrying()
+        {
+            _playerManager.isParrying = false;
+        }
+
+        /// <summary>
+        /// Enable ability to be riposted
+        /// </summary>
+        public void EnableCanBeRiposted()
+        {
+            _playerManager.canBeRiposted = true;
+        }
+
+        /// <summary>
+        /// Disable ability to be riposted
+        /// </summary>
+        public void DisableCanBeRiposted()
+        {
+            _playerManager.canBeRiposted = false;
         }
 
         /// <summary>

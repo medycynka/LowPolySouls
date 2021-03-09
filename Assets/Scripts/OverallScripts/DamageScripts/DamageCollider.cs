@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SzymonPeszek.BaseClasses;
+using UnityEngine;
 using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.EnemyScripts;
 
@@ -12,6 +13,7 @@ namespace SzymonPeszek.Damage
     {
         [Header("Damage Collider", order = 0)]
         [SerializeField] private Collider damageCollider;
+        [SerializeField] private CharacterManager characterManager;
 
         [Header("Weapon Damage", order = 1)]
         public float currentWeaponDamage = 25;
@@ -45,22 +47,45 @@ namespace SzymonPeszek.Damage
 
         private void OnTriggerEnter(Collider collision)
         {
+            if (characterManager == null)
+            {
+                characterManager = GetComponentInParent<CharacterManager>();
+            }
+            
             if (collision.CompareTag("Player"))
             {
-                PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 EnemyStats enemyStats = GetComponentInParent<EnemyStats>();
+                PlayerManager playerManager = collision.GetComponentInParent<PlayerManager>();
 
+                if (playerManager.isParrying)
+                {
+                    enemyStats.GetParried();
+                    
+                    return;
+                }
+                
+                PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+                
                 if (playerStats != null && enemyStats != null)
                 {
-                    enemyStats.DealDamage(playerStats, currentWeaponDamage);
+                    enemyStats.DealDamage(playerStats);
                 }
             }
 
             if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
             {
-                EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
                 PlayerStats playerStats = GetComponentInParent<PlayerStats>();
+                EnemyManager enemyManager = collision.GetComponentInParent<EnemyManager>();
 
+                if (enemyManager.isParrying)
+                {
+                    playerStats.GetParried();
+                    
+                    return;
+                }
+                
+                EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+                
                 if (enemyStats != null && playerStats != null)
                 {
                     playerStats.DealDamage(enemyStats, currentWeaponDamage);

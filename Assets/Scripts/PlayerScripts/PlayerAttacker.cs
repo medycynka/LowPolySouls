@@ -24,8 +24,10 @@ namespace SzymonPeszek.PlayerScripts
         private PlayerStats _playerStats;
         private RaycastHit _hit;
         
+        public LayerMask specialAttackLayer;
         public LayerMask backStabLayer;
         public LayerMask riposteLayer;
+        
 
         [Header("Last Attack Name")]
         public string lastAttack;
@@ -38,6 +40,7 @@ namespace SzymonPeszek.PlayerScripts
             _playerInventory = GetComponentInParent<PlayerInventory>();
             _playerManager = GetComponentInParent<PlayerManager>();
             _playerStats = GetComponentInParent<PlayerStats>();
+            specialAttackLayer = (1 << LayerMask.NameToLayer("Back Stab") | 1 << LayerMask.NameToLayer("Riposte"));
             backStabLayer = 1 << LayerMask.NameToLayer("Back Stab");
             riposteLayer = 1 << LayerMask.NameToLayer("Riposte");
         }
@@ -54,29 +57,29 @@ namespace SzymonPeszek.PlayerScripts
 
                 if (lastAttack == weapon.ohLightAttack1)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.ohLightAttack2, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.ohLightAttack2], true);
                     lastAttack = weapon.ohLightAttack2;
                 }
                 else if (lastAttack == weapon.ohLightAttack2)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.ohLightAttack3, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.ohLightAttack3], true);
                 } 
                 else if(lastAttack == weapon.ohHeavyAttack1)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.ohHeavyAttack2, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.ohHeavyAttack2], true);
                 }
                 else if (lastAttack == weapon.thLightAttack1)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.thLightAttack2, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.thLightAttack2], true);
                     lastAttack = weapon.thLightAttack2;
                 }
                 else if (lastAttack == weapon.thLightAttack2)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.thLightAttack3, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.thLightAttack3], true);
                 }
                 else if (lastAttack == weapon.thHeavyAttack1)
                 {
-                    _playerAnimatorManager.PlayTargetAnimation(weapon.thHeavyAttack2, true);
+                    _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.thHeavyAttack2], true);
                     lastAttack = weapon.thHeavyAttack2;
                 }
             }
@@ -92,12 +95,12 @@ namespace SzymonPeszek.PlayerScripts
 
             if (_inputHandler.twoHandFlag)
             {
-                _playerAnimatorManager.PlayTargetAnimation(weapon.thLightAttack1, true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.thLightAttack1], true);
                 lastAttack = weapon.thLightAttack1;
             }
             else
             {
-                _playerAnimatorManager.PlayTargetAnimation(weapon.ohLightAttack1, true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.ohLightAttack1], true);
                 lastAttack = weapon.ohLightAttack1;
             }
         }
@@ -112,12 +115,12 @@ namespace SzymonPeszek.PlayerScripts
 
             if (_inputHandler.twoHandFlag)
             {
-                _playerAnimatorManager.PlayTargetAnimation(weapon.thHeavyAttack1, true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.thHeavyAttack1], true);
                 lastAttack = weapon.thHeavyAttack1;
             }
             else
             {
-                _playerAnimatorManager.PlayTargetAnimation(weapon.ohHeavyAttack1, true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[weapon.ohHeavyAttack1], true);
                 lastAttack = weapon.ohHeavyAttack1;
             }
         }
@@ -136,6 +139,24 @@ namespace SzymonPeszek.PlayerScripts
                     PerformRbMagicAction(_playerInventory.rightWeapon);
                     break;
                 case WeaponType.Shooting:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Handle left hand action (block, parry, etc.)
+        /// </summary>
+        public void HandleLtAction()
+        {
+            switch (_playerInventory.leftWeapon.meleeType)
+            {
+                case MeleeType.Shield:
+                    PerformLtWeaponArt(_inputHandler.twoHandFlag);
+                    break;
+                case MeleeType.NotMelee:
+                    break;
+                default:
+                    // Handle left hand attack
                     break;
             }
         }
@@ -166,6 +187,26 @@ namespace SzymonPeszek.PlayerScripts
 
                 _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
                 HandleLightAttack(_playerInventory.rightWeapon);
+            }
+        }
+
+        /// <summary>
+        /// Perform left hand action
+        /// </summary>
+        private void PerformLtWeaponArt(bool isTwoHanding)
+        {
+            if (_playerManager.isInteracting)
+            {
+                return;
+            }
+
+            if (isTwoHanding)
+            {
+                // Handle two handle input
+            }
+            else
+            {
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[_playerInventory.leftWeapon.weaponArt], true);
             }
         }
 
@@ -223,7 +264,7 @@ namespace SzymonPeszek.PlayerScripts
         public void AttemptBackStabOrRiposte()
         {
             if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, 
-                transform.TransformDirection(Vector3.forward), out _hit, 0.5f, backStabLayer))
+                transform.TransformDirection(Vector3.forward), out _hit, 0.75f, backStabLayer))
             {
                 EnemyManager enemyCharacterManager = _hit.transform.gameObject.GetComponentInParent<EnemyManager>();
 
@@ -244,12 +285,14 @@ namespace SzymonPeszek.PlayerScripts
                     enemyCharacterManager.HandleBackStabOrRiposte(true);
                 }
             }
-            else if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out _hit, 0.7f, riposteLayer))
+            else if (Physics.Raycast(_inputHandler.criticalAttackRayCastStartPoint.position, 
+                transform.TransformDirection(Vector3.forward), out _hit, 1.5f, riposteLayer))
             {
                 EnemyManager enemyCharacterManager = _hit.transform.gameObject.GetComponentInParent<EnemyManager>();
 
                 if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
                 {
+                    enemyCharacterManager.isGettingRiposted = true;
                     _playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamageStandPosition.position;
 
                     Vector3 rotationDirection = _hit.transform.position - _playerManager.transform.position;

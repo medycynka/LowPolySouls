@@ -757,10 +757,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 3060950883069289617}
-  backStabBoxCollider: {fileID: 7384066787226523223}
   backStabCollider: {fileID: 5512710071133574259}
   riposteCollider: {fileID: 6179842857656653261}
   canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   characterTransform: {fileID: 0}
   pendingCriticalDamage: 0
   enemyLocomotionManager: {fileID: 0}
@@ -824,6 +825,7 @@ MonoBehaviour:
   healthBar: {fileID: 1130068639}
   healthBarFill: {fileID: 228082683}
   damageValue: {fileID: 555634556}
+  enemyAttack: 25
   soulsGiveAmount: 100
   playerStats: {fileID: 0}
   enemyObject: {fileID: 3060950883499712635}
@@ -2362,8 +2364,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3060950883607855329}
-  m_LocalRotation: {x: -0.21644217, y: 0.26385146, z: 0.58170056, w: -0.7383494}
-  m_LocalPosition: {x: 0.21057136, y: 85.53696, z: 0.8781432}
+  m_LocalRotation: {x: -0.21644214, y: 0.26385146, z: 0.5817006, w: -0.73834926}
+  m_LocalPosition: {x: 0.21070556, y: 85.53696, z: 0.8773681}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3060950883607511547}
@@ -5634,7 +5636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4763128082046833413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3831975622488111390}

@@ -14,12 +14,13 @@ namespace SzymonPeszek.BaseClasses
         public Transform lockOnTransform;
         
         [Header("Combat Colliders", order = 1)]
-        public BoxCollider backStabBoxCollider;
         public CriticalDamageCollider backStabCollider;
         public CriticalDamageCollider riposteCollider;
         
         [Header("Combat Flags", order = 1)]
         public bool canBeRiposted;
+        public bool canBeParried;
+        public bool isParrying;
 
         [Header("Combat Colliders", order = 1)]
         public Transform characterTransform;

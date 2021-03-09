@@ -33,7 +33,6 @@ namespace SzymonPeszek.BaseClasses
         /// <param name="playerStats">Player stats</param>
         public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats)
         {
-            
         }
 
         /// <summary>

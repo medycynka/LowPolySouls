@@ -255,6 +255,11 @@ namespace SzymonPeszek.PlayerScripts
                 }
             }
         }
+        
+        public void GetParried()
+        {
+            _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.ParriedName], true);
+        }
 
         /// <summary>
         /// Heal player to max health
@@ -403,7 +408,9 @@ namespace SzymonPeszek.PlayerScripts
         /// <param name="weaponDamage">Damage to deal</param>
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage((weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + strength * 0.5f) * bonusBuffAttack, false);
+            enemyStats.TakeDamage(
+                (weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + strength * 0.5f) *
+                bonusBuffAttack, false, false);
         }
 
         /// <summary>

@@ -49,6 +49,9 @@ namespace SzymonPeszek.Items.Weapons
         public string thLightAttack3 = "TH_Light_Attack_03";
         public string thHeavyAttack1 = "TH_Heavy_Attack_01";
         public string thHeavyAttack2 = "TH_Heavy_Attack_02";
+        
+        [Header("Weapon Art")]
+        public string weaponArt = "Parry";
 
         [Header("Stamina Costs", order = 2)]
         public int baseStamina;

@@ -71,7 +71,12 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             playerManager = FindObjectOfType<PlayerManager>();
             _myTransform = transform;
             _defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 5 | 1 << 8 | 1 << 9 | 1 << 14 | 1 << 20 | 1 << 21 | 1 << 23);
+            ignoreLayers = ~(1 << LayerMask.NameToLayer("UI") | 1 << LayerMask.NameToLayer("Camera") |
+                             1 << LayerMask.NameToLayer("Controller") | 1 << LayerMask.NameToLayer("Pick Up") |
+                             1 << LayerMask.NameToLayer("Spawner") | 1 << LayerMask.NameToLayer("Area Manager") |
+                             1 << LayerMask.NameToLayer("Boss Area Manager") | 1 << LayerMask.NameToLayer("Back Stab") |
+                             1 << LayerMask.NameToLayer("Spell") | 1 << LayerMask.NameToLayer("Riposte") |
+                             1 << LayerMask.NameToLayer("Collider Blocker"));
             targetTransform = playerManager.transform;
             environmentLayer = 1 << LayerMask.NameToLayer(EnvironmentTag);
             _lockOnLayer = (1 << LayerMask.NameToLayer(EnvironmentTag) | 1 << LayerMask.NameToLayer("Enemy"));

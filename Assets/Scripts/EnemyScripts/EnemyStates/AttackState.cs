@@ -41,7 +41,7 @@ namespace SzymonPeszek.EnemyScripts.States
                 float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
                 
-                if (enemyManager.isPreformingAction)
+                if (enemyManager.isPreformingAction || enemyManager.isGettingRiposted || enemyManager.isInteracting)
                 {
                     return combatStanceState;
                 }

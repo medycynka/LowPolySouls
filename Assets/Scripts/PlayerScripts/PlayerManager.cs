@@ -122,6 +122,7 @@ namespace SzymonPeszek.PlayerScripts
             _inputHandler.rollFlag = false;
             _inputHandler.rbInput = false;
             _inputHandler.rtInput = false;
+            _inputHandler.ltInput = false;
             _inputHandler.dPadUp = false;
             _inputHandler.dPadDown = false;
             _inputHandler.dPadLeft = false;

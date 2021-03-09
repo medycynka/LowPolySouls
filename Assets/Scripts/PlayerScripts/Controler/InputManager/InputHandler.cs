@@ -31,6 +31,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         public bool yInput;
         public bool rbInput;
         public bool rtInput;
+        public bool ltInput;
         public bool criticalAttackInput;
         public bool jumpInput;
         public bool inventoryInput;
@@ -96,6 +97,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 _playerInputActions.PlayerMovement.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
                 _playerInputActions.PlayerActions.RB.performed += i => rbInput = true;
                 _playerInputActions.PlayerActions.RT.performed += i => rtInput = true;
+                _playerInputActions.PlayerActions.LT.performed += i => ltInput = true;
                 _playerInputActions.PlayerQuickSlots.DPadRight.performed += i => dPadRight = true;
                 _playerInputActions.PlayerQuickSlots.DPadLeft.performed += i => dPadLeft = true;
                 _playerInputActions.PlayerActions.E.performed += i => aInput = true;
@@ -248,6 +250,20 @@ namespace SzymonPeszek.PlayerScripts.Controller
 
                         _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName], true);
                         _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
+                    }
+                }
+                #endregion
+
+                #region Handle Left Hand Action
+                if (ltInput)
+                {
+                    if (twoHandFlag)
+                    {
+                        //if two handing handle weapon art
+                    }
+                    else
+                    {
+                        _playerAttacker.HandleLtAction();
                     }
                 }
                 #endregion
