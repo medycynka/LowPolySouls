@@ -15,8 +15,8 @@ namespace SzymonPeszek.EnemyScripts
     /// </summary>
     public class EnemyManager : CharacterManager
     {
-        [HideInInspector] public EnemyLocomotionManager enemyLocomotionManager;
-        [HideInInspector] public EnemyAnimationManager enemyAnimationManager;
+        private EnemyLocomotionManager _enemyLocomotionManager;
+        private EnemyAnimationManager _enemyAnimationManager;
         private EnemyStats _enemyStats;
         private EnemyDrops _enemyDrops; 
         private List<Material> _characterMaterials;
@@ -53,9 +53,12 @@ namespace SzymonPeszek.EnemyScripts
         public float maximumDetectionAngle = 75;
         public float minimumDetectionAngle = -75;
         public bool shouldFollowTarget;
+        
+        [Header("Combat Flags", order = 2)]
+        public bool canDoCombo;
 
         [Header("Recovery Timer", order = 2)]
-        public float currentRecoveryTime = 0;
+        public float currentRecoveryTime;
 
         [Header("Death Disolve Effect", order = 2)]
         public float disolveEdgeWidth = 0.015f;
@@ -71,8 +74,8 @@ namespace SzymonPeszek.EnemyScripts
         private void Awake()
         {
             characterTransform = transform;
-            enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+            _enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+            _enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             _enemyStats = GetComponent<EnemyStats>();
             _enemyDrops = GetComponent<EnemyDrops>();
             enemyRigidBody = GetComponent<Rigidbody>();
@@ -107,18 +110,21 @@ namespace SzymonPeszek.EnemyScripts
         {
             enemyRigidBody.isKinematic = false;
         }
-
+        
         private void Update()
         {
             HandleRecoveryTimer();
+            HandleStateMachine();
 
-            isInteracting = enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
-            enemyAnimationManager.anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], _enemyStats.currentHealth <= 0.0f);
+            isInteracting = _enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
+            canDoCombo = _enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.CanDoComboName]);
+            _enemyAnimationManager.anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], _enemyStats.currentHealth <= 0.0f);
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            HandleStateMachine();
+            navmeshAgent.transform.localPosition = Vector3.zero;
+            navmeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         /// <summary>
@@ -128,7 +134,7 @@ namespace SzymonPeszek.EnemyScripts
         {
             if (currentState != null)
             {
-                State nextState = currentState.Tick(this, _enemyStats, enemyAnimationManager);
+                State nextState = currentState.Tick(this, _enemyStats, _enemyAnimationManager);
 
                 if (nextState != null)
                 {
@@ -190,15 +196,15 @@ namespace SzymonPeszek.EnemyScripts
             
             if (deadFromBackStab)
             {
-                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName], true);
+                _enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.BackStabbedName], true);
             }
             else if(deadFromRiposte)
             {
-                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.RipostedName], true);
+                _enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.RipostedName], true);
             }
             else
             {
-                enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Death01Name], true);
+                _enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.Death01Name], true);
             }
 
             #region Disolve Effect

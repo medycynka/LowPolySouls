@@ -60,8 +60,6 @@ namespace SzymonPeszek.EnemyScripts.States
                     }
 
                     HandleRotateTowardsTarget(enemyManager);
-                    enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
-                    enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
 
                     if (distanceFromTarget <= enemyManager.maximumAttackRange)
                     {
@@ -95,7 +93,7 @@ namespace SzymonPeszek.EnemyScripts.States
                 }
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.enemyTransform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+                enemyManager.transform.rotation = Quaternion.Lerp(enemyManager.enemyTransform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
             }
             //Rotate with pathfinding (navmesh) -> Change to A*
             else
@@ -106,7 +104,7 @@ namespace SzymonPeszek.EnemyScripts.States
                 enemyManager.navmeshAgent.enabled = true;
                 enemyManager.navmeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyManager.enemyRigidBody.velocity = targetVelocity;
-                enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+                enemyManager.transform.rotation = Quaternion.Lerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
             }
         }
     }

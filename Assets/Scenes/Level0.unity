@@ -8345,6 +8345,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817441357}
   m_Mesh: {fileID: -4030036486845361923, guid: 9b709c85412760c44b75428f141f290b, type: 3}
+--- !u!114 &1820026210 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4966070490633684521, guid: af9c25b9d53bc6144b03db375a32366f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3517719973692865816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eea794b954e55c4f9e91e5395b2c957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1853834963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 103198, guid: 85d2d612976eb574f9cc9d6f1d95f4e0,
@@ -10229,6 +10241,11 @@ PrefabInstance:
       propertyPath: weaponSlotManager
       value: 
       objectReference: {fileID: 3883487034065767965}
+    - target: {fileID: 2353712344547593155, guid: 84da8b3a542b35048a10f9ce890833ea,
+        type: 3}
+      propertyPath: playerAnimatorManager
+      value: 
+      objectReference: {fileID: 1820026210}
     - target: {fileID: 3454041924395339369, guid: 84da8b3a542b35048a10f9ce890833ea,
         type: 3}
       propertyPath: m_Camera

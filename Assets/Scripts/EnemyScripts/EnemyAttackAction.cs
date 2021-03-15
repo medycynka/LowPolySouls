@@ -24,5 +24,9 @@ namespace SzymonPeszek.EnemyScripts
         [Header("Attack Distance", order = 2)]
         public float minimumDistanceNeededToAttack = 0.5f;
         public float maximumDistanceNeededToAttack = 3;
+        
+        [Header("Combo Actions", order = 2)]
+        public bool canCombo;
+        public EnemyAttackAction comboAction;
     }
 }

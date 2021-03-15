@@ -21,6 +21,8 @@ namespace SzymonPeszek.EnemyScripts.States
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
 
+        private bool _isComboing;
+
         /// <summary>
         /// Use state behaviour
         /// </summary>
@@ -36,15 +38,28 @@ namespace SzymonPeszek.EnemyScripts.States
                 {
                     return idleState;
                 }
+                
+                if ((enemyManager.isInteracting || enemyManager.isGettingRiposted) && enemyManager.canDoCombo == false)
+                {
+                    return this;
+                }
+                if (enemyManager.isInteracting && enemyManager.canDoCombo)
+                {
+                    if (_isComboing)
+                    {
+                        enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[currentAttack.actionAnimation], true);
+                        _isComboing = false;
+                    }
+                }
+                
+                if (enemyManager.isPreformingAction)
+                {
+                    return combatStanceState;
+                }
 
                 Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.enemyTransform.position;
                 float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.enemyTransform.position);
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-                
-                if (enemyManager.isPreformingAction || enemyManager.isGettingRiposted || enemyManager.isInteracting)
-                {
-                    return combatStanceState;
-                }
 
                 if (currentAttack != null)
                 {
@@ -63,9 +78,17 @@ namespace SzymonPeszek.EnemyScripts.States
                                 enemyAnimationManager.anim.SetFloat(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.HorizontalName], 0, 0.1f, Time.deltaTime);
                                 enemyAnimationManager.PlayTargetAnimation(StaticAnimatorIds.enemyAnimationIds[currentAttack.actionAnimation], true);
                                 enemyManager.isPreformingAction = true;
+
+                                if (currentAttack.canCombo)
+                                {
+                                    currentAttack = currentAttack.comboAction;
+                                    
+                                    return this;
+                                }
+
                                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
                                 currentAttack = null;
-                                
+
                                 return combatStanceState;
                             }
                         }

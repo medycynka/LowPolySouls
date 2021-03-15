@@ -114,7 +114,6 @@ namespace SzymonPeszek.EnemyScripts
         /// <param name="isRiposted">Is it from riposte?</param>
         public void TakeDamage(float damage, bool isBackStabbed, bool isRiposted)
         {
-            Debug.Log("Enemy TakeDamage called with isBackStabbed=" + isBackStabbed + " and isRiposted=" + isRiposted);
             if (_enemyManager.isAlive)
             {
                 if (isBoss)
