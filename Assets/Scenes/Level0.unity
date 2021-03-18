@@ -10607,10 +10607,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 1775283085576989764, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: riposteLayer.m_Bits
+      value: 33554432
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775283085576989764, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: backStabLayer.m_Bits
+      value: 8388608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775283085576989764, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: specialAttackLayer.m_Bits
+      value: 41943040
+      objectReference: {fileID: 0}
     - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: jumpMult
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
