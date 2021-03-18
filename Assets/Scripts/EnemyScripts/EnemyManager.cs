@@ -27,8 +27,10 @@ namespace SzymonPeszek.EnemyScripts
         private int _aliveId;
         private int _disolveId;
 
-        [Header("Manager Properties", order = 1)]
+        [Header("Manager Properties", order = 1)] 
         [Header("Bools", order = 2)]
+        public bool isNeutral;
+        public bool isPassive;
         public bool isPreformingAction;
         public bool isInteracting;
         public bool isGettingRiposted;
@@ -53,6 +55,9 @@ namespace SzymonPeszek.EnemyScripts
         public float maximumDetectionAngle = 75;
         public float minimumDetectionAngle = -75;
         public bool shouldFollowTarget;
+        public bool canPatrol = true;
+        [Range(1f, 15f)] public float maxRandomPatrolDistance = 5f;
+        [Range(2, 32)] public int maxRandomPointSearchIterations = 16;
         
         [Header("Combat Flags", order = 2)]
         public bool canDoCombo;
@@ -119,6 +124,7 @@ namespace SzymonPeszek.EnemyScripts
             isInteracting = _enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsInteractingName]);
             canDoCombo = _enemyAnimationManager.anim.GetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.CanDoComboName]);
             _enemyAnimationManager.anim.SetBool(StaticAnimatorIds.enemyAnimationIds[StaticAnimatorIds.IsDeadName], _enemyStats.currentHealth <= 0.0f);
+            isNeutral = _enemyStats.currentHealth < _enemyStats.maxHealth;
         }
 
         private void LateUpdate()

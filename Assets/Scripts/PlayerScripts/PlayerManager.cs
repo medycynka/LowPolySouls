@@ -161,7 +161,6 @@ namespace SzymonPeszek.PlayerScripts
         /// <param name="delta">Time stamp</param>
         private void CheckAllFunctions(float delta)
         {
-            CheckForJumpForce(delta);
             CheckForInteractableObject();
             FillHealthBarBackGround(delta);
             CheckForHealthRefill();
@@ -358,25 +357,6 @@ namespace SzymonPeszek.PlayerScripts
             else
             {
                 _focusRefillTimer = 0.0f;
-            }
-        }
-
-        /// <summary>
-        /// Check if there should be added force to player's jump
-        /// </summary>
-        /// <param name="delta">Time stamp</param>
-        private void CheckForJumpForce(float delta)
-        {
-            if (shouldAddJumpForce)
-            {
-                _addJumpForceTimer -= delta;
-                _playerLocomotion.AddJumpForce(delta, _addJumpForceTimer <= 0.5);
-
-                if(_addJumpForceTimer <= 0)
-                {
-                    shouldAddJumpForce = false;
-                    _addJumpForceTimer = 1.25f;
-                }
             }
         }
 

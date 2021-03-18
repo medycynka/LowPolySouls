@@ -764,10 +764,11 @@ MonoBehaviour:
   isParrying: 0
   characterTransform: {fileID: 0}
   pendingCriticalDamage: 0
-  enemyLocomotionManager: {fileID: 0}
-  enemyAnimationManager: {fileID: 0}
+  isNeutral: 0
+  isPassive: 0
   isPreformingAction: 0
   isInteracting: 0
+  isGettingRiposted: 0
   shouldDrop: 1
   isAlive: 1
   deadFromBackStab: 0
@@ -783,6 +784,10 @@ MonoBehaviour:
   maximumDetectionAngle: 120
   minimumDetectionAngle: -120
   shouldFollowTarget: 0
+  canPatrol: 0
+  maxRandomPatrolDistance: 5
+  maxRandomPointSearchIterations: 16
+  canDoCombo: 0
   currentRecoveryTime: 0
   disolveEdgeWidth: 0.015
   disolveNoiseScale: 30
@@ -5636,7 +5641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4763128082046833413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3831975622488111390}
