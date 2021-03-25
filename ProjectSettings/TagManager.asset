@@ -25,6 +25,7 @@ TagManager:
   - Inventory Holder
   - Destructible
   - Chest
+  - Arrow
   layers:
   - Default
   - TransparentFX

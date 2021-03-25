@@ -7,6 +7,7 @@ using SzymonPeszek.Items.Weapons;
 using SzymonPeszek.Items.Consumable;
 using SzymonPeszek.Misc;
 using SzymonPeszek.Enums;
+using UnityEngine.InputSystem;
 
 
 namespace SzymonPeszek.PlayerScripts.Controller
@@ -40,6 +41,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         public bool rightStickLeftInput;
         public bool estusQuickSlotUse;
         public bool blockInput;
+        public bool bowInput;
 
         public bool dPadUp;
         public bool dPadDown;
@@ -54,6 +56,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         public bool comboFlag;
         public bool lockOnFlag;
         public bool inventoryFlag;
+        public bool isBowReady;
         
         [Header("Back Stabs", order = 1)]
         public Transform criticalAttackRayCastStartPoint;
@@ -69,16 +72,19 @@ namespace SzymonPeszek.PlayerScripts.Controller
         private PlayerStats _playerStats;
         private WeaponSlotManager _weaponSlotManager;
         private PlayerAnimatorManager _playerAnimatorManager;
-
-        private bool _canPlayBlock = true;
-        private bool _canPlayLeftIdle = true;
-
         [Header("Camera & UI", order = 1)]
         public CameraHandler cameraHandler;
         public UIManager uiManager;
+        public GameObject aimObject;
+
+        private float _bowTimer;
+        private bool _canPlayBlock = true;
+        private bool _canPlayLeftIdle = true;
 
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
+
+        public PlayerControls playerControls => _playerInputActions;
 
         private void Awake()
         {
@@ -119,6 +125,8 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 _playerInputActions.PlayerActions.CriticalAttack.performed += i => criticalAttackInput = true;
                 _playerInputActions.PlayerActions.Block.performed += i => blockInput = true;
                 _playerInputActions.PlayerActions.Block.canceled += i => blockInput = false;
+                _playerInputActions.PlayerActions.BowAction.performed += i => bowInput = true;
+                _playerInputActions.PlayerActions.BowAction.canceled += i => bowInput = false;
             }
 
             _playerInputActions.Enable();
@@ -142,7 +150,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
                     HandleMoveInput();
                     HandleRollInput(delta);
                     HandleWalkInput(delta);
-                    HandleAttackInput();
+                    HandleAttackInput(delta);
                     HandleQuickSlotsInput();
                     HandleLockOnInput();
                     HandleTwoHandInput();
@@ -222,7 +230,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         /// <summary>
         /// Handle attack input
         /// </summary>
-        private void HandleAttackInput()
+        private void HandleAttackInput(float delta)
         {
             if (_playerStats.currentStamina > 0)
             {
@@ -291,6 +299,31 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 }
                 
                 #endregion
+                
+                #region Handle Bow Action
+                if (bowInput)
+                {
+                    if (!isBowReady)
+                    {
+                        _playerAttacker.PrepareToShoot();
+                        aimObject.SetActive(true);
+                    }
+
+                    if (_bowTimer <= 3f)
+                    {
+                        _bowTimer += delta;
+                    }
+                }
+                else
+                {
+                    if (isBowReady)
+                    {
+                        _playerAttacker.HandleBowAction(_bowTimer > 3f ? 3f : _bowTimer);
+                        aimObject.SetActive(false);
+                        _bowTimer = 0f;
+                    }
+                }
+                #endregion
             }
         }
 
@@ -322,6 +355,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
 
                 if (inventoryFlag)
                 {
+                    Time.timeScale = 0f;
                     horizontal = 0f;
                     vertical = 0f;
                     moveAmount = 0f;
@@ -335,6 +369,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 }
                 else
                 {
+                    Time.timeScale = 1f;
                     uiManager.CloseSelectWindow();
                     uiManager.CloseAllInventoryWindows();
                     uiManager.hudWindow.SetActive(true);

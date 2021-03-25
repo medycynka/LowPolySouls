@@ -52,6 +52,7 @@ namespace SzymonPeszek.Misc
         public const string ParryName = "Parry";
         public const string ParriedName = "Parried";
         public const string ChestOpeningName = "Open Chest";
+        public const string BowIdleName = "Bow_Idle";
         #endregion
 
         #region Player Attacks

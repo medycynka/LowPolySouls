@@ -61,7 +61,6 @@ namespace SzymonPeszek.PlayerScripts
         private float _healthBgRefillTimer = 0.0f;
         private float _staminaRefillTimer = 0.0f;
         private float _focusRefillTimer = 0.0f;
-        private float _addJumpForceTimer = 1.25f;
 
         private const string BonfireTag = "Bonfire";
         private const string InteractableTag = "Interactable";
