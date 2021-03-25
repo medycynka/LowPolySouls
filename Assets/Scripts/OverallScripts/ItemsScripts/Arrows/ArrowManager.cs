@@ -53,8 +53,6 @@ namespace SzymonPeszek.Items.Arrows
             
             rb.isKinematic = false;
             rb.useGravity = true;
-            Debug.Log("Initial speed: " 
-                      + Mathf.Lerp(minArrowSpeed, maxArrowSpeed, bowStretchTime.Remap(0f, 3f, 0f, 1f)));
             rb.velocity = cameraTransform.forward *
                           Mathf.Lerp(minArrowSpeed, maxArrowSpeed, bowStretchTime.Remap(0f, 3f, 0f, 1f));
             

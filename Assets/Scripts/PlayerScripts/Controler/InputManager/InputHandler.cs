@@ -301,28 +301,32 @@ namespace SzymonPeszek.PlayerScripts.Controller
                 #endregion
                 
                 #region Handle Bow Action
-                if (bowInput)
+                if (_playerInventory.leftWeapon.weaponType == WeaponType.Shooting)
                 {
-                    if (!isBowReady)
+                    if (bowInput)
                     {
-                        _playerAttacker.PrepareToShoot();
-                        aimObject.SetActive(true);
-                    }
+                        if (!isBowReady)
+                        {
+                            _playerAttacker.PrepareToShoot();
+                            aimObject.SetActive(true);
+                        }
 
-                    if (_bowTimer <= 3f)
+                        if (_bowTimer <= 3f)
+                        {
+                            _bowTimer += delta;
+                        }
+                    }
+                    else
                     {
-                        _bowTimer += delta;
+                        if (isBowReady)
+                        {
+                            _playerAttacker.HandleBowAction(_bowTimer > 3f ? 3f : _bowTimer);
+                            aimObject.SetActive(false);
+                            _bowTimer = 0f;
+                        }
                     }
                 }
-                else
-                {
-                    if (isBowReady)
-                    {
-                        _playerAttacker.HandleBowAction(_bowTimer > 3f ? 3f : _bowTimer);
-                        aimObject.SetActive(false);
-                        _bowTimer = 0f;
-                    }
-                }
+
                 #endregion
             }
         }

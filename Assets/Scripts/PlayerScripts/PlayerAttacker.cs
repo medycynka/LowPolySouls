@@ -173,14 +173,12 @@ namespace SzymonPeszek.PlayerScripts
                     .GetComponent<ArrowManager>();
             _arrowManager.cameraTransform = _mainCamera;
             _inputHandler.isBowReady = true;
-            Debug.Log("Arrow prepared");
         }
 
         public void HandleBowAction(float bowStretchTime)
         {
             if (_inputHandler.isBowReady)
             {
-                Debug.Log("Arrow fired");
                 _arrowManager.Fire(bowStretchTime);
                 _inputHandler.isBowReady = false;
             }

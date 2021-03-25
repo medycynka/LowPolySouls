@@ -10431,10 +10431,6 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 3883487034065829722}
-    - target: {fileID: 2010100216, guid: f050979d68d58564e9ad88f71ace2f2b, type: 3}
-      propertyPath: maximumLockOnDistance
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1212298295835785009, guid: f050979d68d58564e9ad88f71ace2f2b,
         type: 3}
       propertyPath: m_RootOrder
@@ -11122,11 +11118,21 @@ PrefabInstance:
       propertyPath: cameraHandler
       value: 
       objectReference: {fileID: 1212298296339491854}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: groundDetectionRayStartPoint
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4966070490633684526, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: quickSlotsUI
       value: 
       objectReference: {fileID: 4386205256953320705}
+    - target: {fileID: 4966070491420200264, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: focusBar
