@@ -13,8 +13,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
     /// </summary>
     public class CameraHandler : MonoBehaviour
     {
-        [Header("Camera Handler", order = 0)]
+        [Header("Camera Handler", order = 0)] 
         [Header("Player Components", order = 1)]
+        public Camera mainCamera;
         public InputHandler inputHandler;
         public PlayerManager playerManager;
 
@@ -40,6 +41,7 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         private float _pivotAngle;
         public float minimumPivot = -35;
         public float maximumPivot = 35;
+        public float zoomFactor = 5f;
 
         [Header("Camera Detection Properties", order = 1)]
         public float cameraSphereRadius = 0.2f;
@@ -64,12 +66,21 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         private List<CharacterManager> _availableTargets = new List<CharacterManager>();
         private int _collidersSize = 512;
         private int _collidersPrevSize = 512;
-        
+        private float _startingFOV;
+        private const float MinFov = 20f;
+        private float _startingCameraXPosition;
+        private Vector3 _cameraStartingPosition;
+        private const float MINPivotXPosition = 0.5f;
+
         private void Awake()
         {
+            mainCamera = Camera.main;
+            _myTransform = transform;
+            _startingFOV = mainCamera.fieldOfView;
+            _startingCameraXPosition = _myTransform.position.x;
+            _cameraStartingPosition = _myTransform.position;
             inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
-            _myTransform = transform;
             _defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << LayerMask.NameToLayer("UI") | 1 << LayerMask.NameToLayer("Camera") |
                              1 << LayerMask.NameToLayer("Controller") | 1 << LayerMask.NameToLayer("Pick Up") |
@@ -331,6 +342,32 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                     Time.deltaTime * 10f)
                 : Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity,
                     Time.deltaTime * 10f);
+        }
+
+        public void ZoomInDuringAiming(float delta)
+        {
+            if (mainCamera.fieldOfView > MinFov)
+            {
+                mainCamera.fieldOfView -= zoomFactor * delta;
+                
+                if (mainCamera.fieldOfView <= MinFov)
+                {
+                    mainCamera.fieldOfView = MinFov;
+                }
+            }
+        }
+        
+        public void ZoomOutDuringAiming(float delta)
+        {
+            if (mainCamera.fieldOfView < _startingFOV)
+            {
+                mainCamera.fieldOfView += zoomFactor * delta;
+                
+                if (mainCamera.fieldOfView >= _startingFOV)
+                {
+                    mainCamera.fieldOfView = _startingFOV;
+                }
+            }
         }
 
         private IEnumerator TransitionBetweenLockOn()

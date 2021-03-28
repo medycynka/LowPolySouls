@@ -52,7 +52,6 @@ namespace SzymonPeszek.PlayerScripts
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
         public bool isInvulnerable;
-        public bool isBlocking;
 
         [Header("Respawn Places", order = 2)]
         public GameObject quickMoveScreen;
@@ -94,6 +93,7 @@ namespace SzymonPeszek.PlayerScripts
             isUsingRightHand = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingRightHandName]);
             isUsingLeftHand = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsUsingLeftHandName]);
             isInvulnerable = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInvulnerableName]);
+            isBlocking = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsBlockingName]);
             _animator.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsInAirName], isInAir);
             _playerAnimatorManager.canRotate = _animator.GetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.CanRotateName]);
 

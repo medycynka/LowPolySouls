@@ -28,21 +28,22 @@ MonoBehaviour:
   lightAttackDamageMult: 1
   heavyAttackDamageMult: 1.5
   criticalDamageMult: 2.5
+  physicalDamageAbsorption: 2
   weight: 0
   durability: 0
   rightHandIdle: 
   leftHandIdle: 
   thIdle: Bow_Idle
-  ohLightAttack1: OH_Light_Attack_01
-  ohLightAttack2: OH_Light_Attack_02
-  ohLightAttack3: OH_Light_Attack_03
-  ohHeavyAttack1: OH_Heavy_Attack_01
-  ohHeavyAttack2: OH_Heavy_Attack_02
-  thLightAttack1: TH_Light_Attack_01
-  thLightAttack2: TH_Light_Attack_02
-  thLightAttack3: TH_Light_Attack_03
-  thHeavyAttack1: TH_Heavy_Attack_01
-  thHeavyAttack2: TH_Heavy_Attack_02
+  ohLightAttack1: 
+  ohLightAttack2: 
+  ohLightAttack3: 
+  ohHeavyAttack1: 
+  ohHeavyAttack2: 
+  thLightAttack1: 
+  thLightAttack2: 
+  thLightAttack3: 
+  thHeavyAttack1: 
+  thHeavyAttack2: 
   weaponArt: Parry
   baseStamina: 0
   ohLightAttackMultiplier: 0

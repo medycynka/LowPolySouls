@@ -1355,12 +1355,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d2d612976eb574f9cc9d6f1d95f4e0, type: 3}
---- !u!4 &391402430 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6721411827328355408, guid: af9c25b9d53bc6144b03db375a32366f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3517719973692865816}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &465343992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4353395921811104, guid: a523b2a222cd33041a9851edfed862dd,
@@ -6412,36 +6406,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1427742465
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1427742466}
-  m_Layer: 9
-  m_Name: Arrow Spawn Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1427742466
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427742465}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 391402430}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437093857
 GameObject:
   m_ObjectHideFlags: 0
@@ -11102,37 +11066,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1775283085576989764, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: arrowPrefab
-      value: 
-      objectReference: {fileID: 1852217077181313420, guid: e7f43b91af31c824b89bfe1cbccfca48,
-        type: 3}
-    - target: {fileID: 1775283085576989764, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: arrowSpawnPlace
-      value: 
-      objectReference: {fileID: 1427742466}
     - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: cameraHandler
       value: 
       objectReference: {fileID: 1212298296339491854}
-    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: groundDetectionRayStartPoint
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4966070490633684526, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: quickSlotsUI
       value: 
       objectReference: {fileID: 4386205256953320705}
-    - target: {fileID: 4966070491420200264, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4966070491420200265, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: focusBar
@@ -11218,18 +11161,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4966070491420200268, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: weaponsInLeftHandSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 481525fa85548e84ba35ffaf4b07a57d,
-        type: 2}
-    - target: {fileID: 4966070491420200268, guid: af9c25b9d53bc6144b03db375a32366f,
-        type: 3}
-      propertyPath: weaponsInRightHandSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 1f9ac8a3e1dab4c41baf0baf42b0c313,
-        type: 2}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: cameraHandler

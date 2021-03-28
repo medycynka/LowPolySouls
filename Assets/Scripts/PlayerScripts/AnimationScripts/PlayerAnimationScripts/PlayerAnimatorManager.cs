@@ -92,7 +92,8 @@ namespace SzymonPeszek.PlayerScripts.Animations
                 {StaticAnimatorIds.RipostedName, Animator.StringToHash(StaticAnimatorIds.RipostedName)},
                 {StaticAnimatorIds.ParryName, Animator.StringToHash(StaticAnimatorIds.ParryName)},
                 {StaticAnimatorIds.ParriedName, Animator.StringToHash(StaticAnimatorIds.ParriedName)},
-                {StaticAnimatorIds.BowIdleName, Animator.StringToHash(StaticAnimatorIds.BowIdleName)}
+                {StaticAnimatorIds.BowIdleName, Animator.StringToHash(StaticAnimatorIds.BowIdleName)},
+                {StaticAnimatorIds.BlockDamageName, Animator.StringToHash(StaticAnimatorIds.BlockDamageName)}
             };
             
             anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsDeadName], false);
@@ -295,7 +296,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         /// </summary>
         public override void TakeCriticalDamageAnimationEvent()
         {
-            _playerStats.TakeDamage(_playerManager.pendingCriticalDamage, false, true);
+            _playerStats.TakeDamage(_playerManager.pendingCriticalDamage, "", false, true);
             _playerManager.pendingCriticalDamage = 0.0f;
         }
     }

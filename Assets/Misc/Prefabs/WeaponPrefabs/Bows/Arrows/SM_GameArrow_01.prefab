@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 9138949177091853799}
-  minArrowSpeed: 5
-  maxArrowSpeed: 25
+  minArrowSpeed: 10
+  maxArrowSpeed: 50
   arrowDamage: 20
   lifeTime: 5
   startPosition: {x: 0, y: 0, z: 0}

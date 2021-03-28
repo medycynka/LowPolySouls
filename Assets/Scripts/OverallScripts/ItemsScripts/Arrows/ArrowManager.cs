@@ -68,7 +68,7 @@ namespace SzymonPeszek.Items.Arrows
 
                 if (other.collider.CompareTag(EnemyTag) || other.collider.CompareTag(BossTag))
                 {
-                    other.gameObject.GetComponent<EnemyStats>().TakeDamage(arrowDamage, false, false);
+                    other.gameObject.GetComponent<EnemyStats>().TakeDamage(arrowDamage);
                 }
 
                 rb.constraints = RigidbodyConstraints.FreezeAll;

@@ -184,11 +184,11 @@ namespace SzymonPeszek.EnemyScripts
         {
             if (backStab)
             {
-                _enemyStats.TakeDamage(pendingCriticalDamage, true, false);
+                _enemyStats.TakeDamage(pendingCriticalDamage, "",true, false);
             }
             else
             {
-                _enemyStats.TakeDamage(pendingCriticalDamage, false, true);
+                _enemyStats.TakeDamage(pendingCriticalDamage, "", false, true);
             }
         }
 

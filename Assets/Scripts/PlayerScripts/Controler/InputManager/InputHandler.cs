@@ -7,6 +7,7 @@ using SzymonPeszek.Items.Weapons;
 using SzymonPeszek.Items.Consumable;
 using SzymonPeszek.Misc;
 using SzymonPeszek.Enums;
+using SzymonPeszek.Misc.ColliderManagers;
 using UnityEngine.InputSystem;
 
 
@@ -64,7 +65,12 @@ namespace SzymonPeszek.PlayerScripts.Controller
         [Header("Timers", order = 1)]
         public float rollInputTimer;
         public float walkInputTimer;
-
+        
+        [Header("Camera & UI", order = 1)]
+        public CameraHandler cameraHandler;
+        public UIManager uiManager;
+        public GameObject aimObject;
+        
         private PlayerControls _playerInputActions;
         private PlayerAttacker _playerAttacker;
         private PlayerInventory _playerInventory;
@@ -72,10 +78,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
         private PlayerStats _playerStats;
         private WeaponSlotManager _weaponSlotManager;
         private PlayerAnimatorManager _playerAnimatorManager;
-        [Header("Camera & UI", order = 1)]
-        public CameraHandler cameraHandler;
-        public UIManager uiManager;
-        public GameObject aimObject;
+        private BlockManager _blockManager;
 
         private float _bowTimer;
         private bool _canPlayBlock = true;
@@ -96,6 +99,7 @@ namespace SzymonPeszek.PlayerScripts.Controller
             _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
+            _blockManager = GetComponentInChildren<BlockManager>();
         }
 
         public void OnEnable()
@@ -290,12 +294,14 @@ namespace SzymonPeszek.PlayerScripts.Controller
                         _canPlayBlock = false;
                         _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsBlockingName], true);
                         _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.BlockIdleName], false, true);
+                        _blockManager.OpenBlockingCollider(twoHandFlag);
                     }
                 }
                 else
                 {
                     _canPlayBlock = true;
                     _playerAnimatorManager.anim.SetBool(StaticAnimatorIds.animationIds[StaticAnimatorIds.IsBlockingName], false);
+                    _blockManager.CloseBlockingCollider();
                 }
                 
                 #endregion
@@ -315,6 +321,8 @@ namespace SzymonPeszek.PlayerScripts.Controller
                         {
                             _bowTimer += delta;
                         }
+                        
+                        cameraHandler.ZoomInDuringAiming(delta);
                     }
                     else
                     {
@@ -324,6 +332,8 @@ namespace SzymonPeszek.PlayerScripts.Controller
                             aimObject.SetActive(false);
                             _bowTimer = 0f;
                         }
+                        
+                        cameraHandler.ZoomOutDuringAiming(delta);
                     }
                 }
 

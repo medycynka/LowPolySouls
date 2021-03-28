@@ -239,9 +239,10 @@ namespace SzymonPeszek.PlayerScripts
         /// Damage player
         /// </summary>
         /// <param name="damage">Damage dealt to the player</param>
+        /// <param name="damageAnimation">Name of damage animation</param>
         /// <param name="isBackStabbed">Is damage from back stab?</param>
         /// <param name="isRiposted">Is damage from riposte?</param>
-        public void TakeDamage(float damage, bool isBackStabbed = false, bool isRiposted = false)
+        public void TakeDamage(float damage, string damageAnimation = "Damage_01", bool isBackStabbed = false, bool isRiposted = false)
         {
             if (isPlayerAlive && !_playerManager.isInvulnerable)
             {
@@ -249,7 +250,7 @@ namespace SzymonPeszek.PlayerScripts
                 currentHealth -= damage;
                 healthBar.SetCurrentHealth(currentHealth);
 
-                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.Damage01Name], true);
+                _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[damageAnimation], true);
 
                 if (currentHealth <= 0)
                 {
@@ -410,9 +411,9 @@ namespace SzymonPeszek.PlayerScripts
         /// <param name="weaponDamage">Damage to deal</param>
         public void DealDamage(EnemyStats enemyStats, float weaponDamage)
         {
-            enemyStats.TakeDamage(
-                (weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult + strength * 0.5f) *
-                bonusBuffAttack, false, false);
+            enemyStats.TakeDamage(Mathf.RoundToInt(
+                weaponDamage * _weaponSlotManager.attackingWeapon.lightAttackDamageMult +
+                strength * 0.5f * bonusBuffAttack));
         }
 
         /// <summary>
