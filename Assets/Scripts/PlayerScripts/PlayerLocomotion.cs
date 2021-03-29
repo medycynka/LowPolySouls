@@ -131,7 +131,7 @@ namespace SzymonPeszek.PlayerScripts
                     }
                     else
                     {
-                        Vector3 rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
+                        Vector3 rotationDirection = cameraHandler.currentLockOnTarget.characterTransform.position - transform.position;
                         rotationDirection.y = 0;
                         rotationDirection.Normalize();
                         Quaternion tr = Quaternion.LookRotation(rotationDirection);

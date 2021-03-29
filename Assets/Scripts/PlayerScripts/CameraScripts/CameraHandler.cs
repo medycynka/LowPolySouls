@@ -51,18 +51,19 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         public float unlockedPivotPosition = 1.65f;
 
         [Header("Camera Lock-on Properties", order = 1)]
-        public Transform currentLockOnTarget;
-        public Transform nearestLockOnTarget;
-        public Transform leftLockTarget;
-        public Transform rightLockTarget;
+        public CharacterManager currentLockOnTarget;
+        public CharacterManager nearestLockOnTarget;
+        public CharacterManager leftLockTarget;
+        public CharacterManager rightLockTarget;
         public float maximumLockOnDistance = 20;
         public float lockOnSmoothFactor = 100f;
         public bool transitDuringLockOn;
+        
         private const string EnvironmentTag = "Environment";
         private LayerMask _lockOnLayer;
         private RaycastHit _hit;
         private float _LockOnAngle = 120f;
-        public Collider[] colliders;
+        [SerializeField] private Collider[] colliders;
         private List<CharacterManager> _availableTargets = new List<CharacterManager>();
         private int _collidersSize = 512;
         private int _collidersPrevSize = 512;
@@ -166,7 +167,7 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
                     rotation.x = Mathf.Lerp(rotation.x, _pivotAngle, 5f);
                 }
 
-                Vector3 currentLockOnTargetPosition = currentLockOnTarget.position;
+                Vector3 currentLockOnTargetPosition = currentLockOnTarget.characterTransform.position;
                 Vector3 dir = currentLockOnTargetPosition - transform.position;
                 dir.Normalize();
                 dir.y = 0;
@@ -222,7 +223,7 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
         public void HandleLockOn()
         {
             float shortestDistance = Mathf.Infinity;
-            float shortestDistanceOfLeftTarget = Mathf.Infinity;
+            float shortestDistanceOfLeftTarget = -Mathf.Infinity;
             float shortestDistanceOfRightTarget = Mathf.Infinity;
             int collidersLenght = Physics.OverlapSphereNonAlloc(targetTransform.position, maximumLockOnDistance, colliders, _lockOnLayer);
 
@@ -274,39 +275,33 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
 
             for (int i = 0; i < _availableTargets.Count; i++)
             {
-                CharacterManager availableTarget = _availableTargets[i];
-                float distanceFromTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
+                float distanceFromTarget = Vector3.Distance(targetTransform.position, _availableTargets[i].transform.position);
 
                 if (distanceFromTarget < shortestDistance)
                 {
                     shortestDistance = distanceFromTarget;
-                    nearestLockOnTarget = availableTarget.lockOnTransform;
+                    nearestLockOnTarget = _availableTargets[i];
                 }
 
-                if (!inputHandler.lockOnFlag)
+                if (inputHandler.lockOnFlag)
                 {
-                    continue;
+                    Vector3 relativeEnemyPosition =
+                        playerManager.characterTransform.InverseTransformPoint(_availableTargets[i].characterTransform.position);
+                    float xDistanceFromTarget = relativeEnemyPosition.x;
+
+                    if (relativeEnemyPosition.x <= 0.00 && xDistanceFromTarget > shortestDistanceOfLeftTarget 
+                                                        && currentLockOnTarget != _availableTargets[i])
+                    {
+                        shortestDistanceOfLeftTarget = xDistanceFromTarget;
+                        leftLockTarget = _availableTargets[i];
+                    }
+                    else if (relativeEnemyPosition.x >= 0.00 && xDistanceFromTarget < shortestDistanceOfRightTarget 
+                                                             && currentLockOnTarget != _availableTargets[i])
+                    {
+                        shortestDistanceOfRightTarget = xDistanceFromTarget;
+                        rightLockTarget = _availableTargets[i];
+                    }
                 }
-
-                Vector3 availableTargetPosition = availableTarget.characterTransform.position;
-                Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(availableTargetPosition);
-                Vector3 currentLockOnTargetPosition = currentLockOnTarget.position;
-                float distanceFromLeftTarget = currentLockOnTargetPosition.x - availableTargetPosition.x;
-                float distanceFromRightTarget = currentLockOnTargetPosition.x + availableTargetPosition.x;
-
-                if (relativeEnemyPosition.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
-                {
-                    shortestDistanceOfLeftTarget = distanceFromLeftTarget;
-                    leftLockTarget = availableTarget.lockOnTransform;
-                }
-
-                if (!(relativeEnemyPosition.x < 0.00) || !(distanceFromRightTarget < shortestDistanceOfRightTarget))
-                {
-                    continue;
-                }
-
-                shortestDistanceOfRightTarget = distanceFromRightTarget;
-                rightLockTarget = availableTarget.lockOnTransform;
             }
 
             if (_collidersPrevSize != _collidersSize)

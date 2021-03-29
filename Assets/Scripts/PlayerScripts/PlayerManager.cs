@@ -18,12 +18,13 @@ namespace SzymonPeszek.PlayerScripts
     {
         private InputHandler _inputHandler;
         private PlayerAnimatorManager _playerAnimatorManager;
-        [Header("Player Components", order = 1)]
-        [Header("Camera Component", order = 2)]
-        public CameraHandler cameraHandler;
         private PlayerLocomotion _playerLocomotion;
         private PlayerStats _playerStats;
         private Animator _animator;
+        
+        [Header("Player Components", order = 1)]
+        [Header("Camera Component", order = 2)]
+        public CameraHandler cameraHandler;
         
         [Header("UI", order = 2)]
         public InteractableUI interactableUI;
