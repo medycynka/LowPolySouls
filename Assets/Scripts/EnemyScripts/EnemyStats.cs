@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,8 +17,6 @@ namespace SzymonPeszek.EnemyScripts
     /// </summary>
     public class EnemyStats : CharacterStats
     {
-        private EnemyManager _enemyManager;
-
         [Header("Enemy Properties", order = 1)]
         [Header("Animator", order = 2)]
         public EnemyAnimationManager animator;
@@ -40,7 +39,11 @@ namespace SzymonPeszek.EnemyScripts
         public BossAreaManager bossAreaManager;
         public Slider bossHpSlider;
 
+        private EnemyManager _enemyManager;
         private Transform _mainCameraTransform;
+        private const float HpBarHideTimeoutTime = 3f;
+        private float _hideHpBarTimer;
+        private float _accumulateDamage;
 
         private void Awake()
         {
@@ -58,6 +61,28 @@ namespace SzymonPeszek.EnemyScripts
         void Start()
         {
             InitializeHealth();
+        }
+
+        private void Update()
+        {
+            if (healthBar)
+            {
+                _hideHpBarTimer -= Time.deltaTime;
+                
+                if (_hideHpBarTimer <= 0)
+                {
+                    _hideHpBarTimer = 0;
+                    _accumulateDamage = 0f;
+                    healthBar.SetActive(false);
+                }
+                else
+                {
+                    if (!healthBar.activeInHierarchy)
+                    {
+                        healthBar.SetActive(true);
+                    }
+                }
+            }
         }
 
         private void LateUpdate()
@@ -134,7 +159,7 @@ namespace SzymonPeszek.EnemyScripts
                 }
                 else
                 {
-                    StartCoroutine(UpdateEnemyHealthBar(damage, isBackStabbed, isRiposted));
+                    UpdateEnemyHealth(damage, isBackStabbed, isRiposted);
                 }
             }
         }
@@ -155,20 +180,21 @@ namespace SzymonPeszek.EnemyScripts
         }
 
         /// <summary>
-        /// Coroutine for updating enemy's health bar
+        /// Update enemy's health bar
         /// </summary>
         /// <param name="damage">Damage get form player</param>
         /// <param name="isBackStabbed">Is it from back stab?</param>
         /// <param name="isRiposted">Is it from riposte?</param>
         /// <returns>Coroutine's enumerator</returns>
-        private IEnumerator UpdateEnemyHealthBar(float damage, bool isBackStabbed, bool isRiposted)
+        private void UpdateEnemyHealth(float damage, bool isBackStabbed, bool isRiposted)
         {
             _enemyManager.deadFromBackStab = (isBackStabbed && currentHealth - damage <= 0.0f);
             _enemyManager.deadFromRiposte = (isRiposted && currentHealth - damage <= 0.0f);
-            healthBar.SetActive(true);
+            _hideHpBarTimer = HpBarHideTimeoutTime;
             currentHealth -= damage;
             healthBarFill.fillAmount = currentHealth / maxHealth;
-            damageValue.text = damage.ToString();
+            _accumulateDamage += damage;
+            damageValue.text = _accumulateDamage.ToString();
 
             if (currentHealth > 0)
             {
@@ -189,10 +215,6 @@ namespace SzymonPeszek.EnemyScripts
                         true);
                 }
             }
-
-            yield return CoroutineYielder.waitFor3HalfSeconds;
-
-            healthBar.SetActive(false);
         }
     }
 
