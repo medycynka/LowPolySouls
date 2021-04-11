@@ -47,7 +47,7 @@ namespace SzymonPeszek.Items.Bonfire
             _playerStats = playerManager.GetComponent<PlayerStats>();
             _bonfireManager.restUI.GetComponent<RestManager>().bonfireInteraction = this;
 
-            playerLocomotion.rigidbody.velocity = Vector3.zero;
+            playerLocomotion.rb.velocity = Vector3.zero;
             playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.SitName], true);
             _bonfireManager.playerManager.isRestingAtBonfire = true;
 

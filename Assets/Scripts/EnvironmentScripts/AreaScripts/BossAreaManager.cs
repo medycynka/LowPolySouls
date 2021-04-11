@@ -124,7 +124,7 @@ namespace SzymonPeszek.Environment.Areas
                 isInside = false;
                 _insideReset = true;
                 playerSoundManager.ChangeBackGroundMusic(null);
-                playerSoundManager.currentMovingClips = _footStepsOnExit;
+                // playerSoundManager.currentMovingClips = _footStepsOnExit;
                 bossHpBar.SetActive(false);
             }
         }

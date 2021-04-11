@@ -16,6 +16,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         private PlayerStats _playerStats;
 
         public Transform spellProjectilesTransform;
+        public LayerMask spellRayCastLayer;
         
         /// <summary>
         /// Initialize fields and Animator's hash values of all animations
@@ -26,6 +27,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
             anim = GetComponent<Animator>();
             _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             _playerStats = GetComponentInParent<PlayerStats>();
+            spellRayCastLayer = (1 << LayerMask.NameToLayer("Environment") | 1 << LayerMask.NameToLayer("Enemy"));
 
             StaticAnimatorIds.animationIds = new Dictionary<string, int>
             {
@@ -107,11 +109,11 @@ namespace SzymonPeszek.PlayerScripts.Animations
             }
 
             float delta = Time.deltaTime;
-            _playerLocomotion.rigidbody.drag = 0;
+            _playerLocomotion.rb.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
-            _playerLocomotion.rigidbody.velocity = velocity;
+            _playerLocomotion.rb.velocity = velocity;
         }
         
         /// <summary>
@@ -279,7 +281,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         public void EnableIsJumping()
         {
             _playerManager.isJumping = true;
-            _playerLocomotion.rigidbody.useGravity = false;
+            _playerLocomotion.rb.useGravity = false;
         }
 
         /// <summary>
@@ -288,7 +290,7 @@ namespace SzymonPeszek.PlayerScripts.Animations
         public void DisableIsJumping()
         {
             _playerManager.isJumping = false;
-            _playerLocomotion.rigidbody.useGravity = true;
+            _playerLocomotion.rb.useGravity = true;
         }
 
         /// <summary>

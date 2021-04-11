@@ -115,7 +115,7 @@ namespace SzymonPeszek.PlayerScripts
 
             _playerLocomotion.HandleMovement(delta);
             _playerLocomotion.HandleRotation(delta);
-            _playerLocomotion.HandleFalling(_playerLocomotion.moveDirection);
+            _playerLocomotion.HandleFalling(_playerLocomotion.moveDirection, delta);
         }
 
         private void LateUpdate()
@@ -389,7 +389,7 @@ namespace SzymonPeszek.PlayerScripts
         
         public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
         {
-            _playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from ice skating
+            _playerLocomotion.rb.velocity = Vector3.zero; //Stops the player from ice skating
             transform.position = playerStandsHereWhenOpeningChest.transform.position;
             _playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.ChestOpeningName], true);            
         }

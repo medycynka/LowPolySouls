@@ -26,6 +26,18 @@ TagManager:
   - Destructible
   - Chest
   - Arrow
+  - Concrete
+  - Dirt
+  - Glass
+  - Gravel
+  - Hardwood
+  - Ice
+  - Metal
+  - Mud
+  - Sand
+  - Stone
+  - Wood
+  - Terrain
   layers:
   - Default
   - TransparentFX

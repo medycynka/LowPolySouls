@@ -11,6 +11,7 @@ using SzymonPeszek.Environment.Areas;
 using SzymonPeszek.Misc;
 using SzymonPeszek.Enums;
 using SzymonPeszek.EnemyScripts;
+using SzymonPeszek.PlayerScripts.Controller;
 
 
 namespace SzymonPeszek.PlayerScripts
@@ -23,6 +24,8 @@ namespace SzymonPeszek.PlayerScripts
         private PlayerManager _playerManager;
         private WeaponSlotManager _weaponSlotManager;
         private PlayerAnimatorManager _playerAnimatorManager;
+        private InputHandler _inputHandler;
+        [HideInInspector] public Camera mainCamera;
 
         [Header("Player Properties", order = 1)]
 
@@ -69,6 +72,8 @@ namespace SzymonPeszek.PlayerScripts
             _playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
             _playerManager = GetComponent<PlayerManager>();
             _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            _inputHandler = GetComponent<InputHandler>();
+            mainCamera = Camera.main;
             uiManager = FindObjectOfType<UIManager>();
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
@@ -424,6 +429,15 @@ namespace SzymonPeszek.PlayerScripts
         public int CalculateSoulsCost(int level)
         {
             return (int)(0.02f * level * level * level + 3.06f * level * level + 105.6f * level - 895f);
+        }
+
+        /// <summary>
+        /// Is player locking-on an enemy?
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLockOn()
+        {
+            return _inputHandler.lockOnFlag;
         }
 
         /// <summary>

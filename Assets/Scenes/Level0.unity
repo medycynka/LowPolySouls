@@ -11072,9 +11072,34 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
+      propertyPath: jumpHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: fallingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
       propertyPath: cameraHandler
       value: 
       objectReference: {fileID: 1212298296339491854}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: fallPushSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: jumpMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281836137122507302, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: minimumDistanceNeededToBeginFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4966070490633684526, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: quickSlotsUI
@@ -11165,6 +11190,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4966070491420200268, guid: af9c25b9d53bc6144b03db375a32366f,
+        type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b4bfca7ae14a20d409431db3ec18aa0c,
+        type: 2}
     - target: {fileID: 4966070491420200269, guid: af9c25b9d53bc6144b03db375a32366f,
         type: 3}
       propertyPath: cameraHandler

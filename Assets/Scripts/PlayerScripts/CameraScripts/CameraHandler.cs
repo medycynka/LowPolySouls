@@ -333,9 +333,9 @@ namespace SzymonPeszek.PlayerScripts.CameraManager
             Vector3 newUnlockedPosition = new Vector3(0, unlockedPivotPosition);
 
             cameraPivotTransform.localPosition = currentLockOnTarget != null
-                ? Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedPosition, ref velocity,
+                ? Vector3.SmoothDamp(cameraPivotTransform.localPosition, newLockedPosition, ref velocity,
                     Time.deltaTime * 10f)
-                : Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity,
+                : Vector3.SmoothDamp(cameraPivotTransform.localPosition, newUnlockedPosition, ref velocity,
                     Time.deltaTime * 10f);
         }
 

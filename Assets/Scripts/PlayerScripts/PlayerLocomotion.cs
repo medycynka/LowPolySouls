@@ -25,7 +25,7 @@ namespace SzymonPeszek.PlayerScripts
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
 
         [Header("Player Rigidbody", order = 1)]
-        public new Rigidbody rigidbody;
+        public Rigidbody rb;
 
         [Header("Ground & Air Detection Stats", order = 1)]
         [SerializeField] private float groundDetectionRayStartPoint = 0.5f;
@@ -39,9 +39,10 @@ namespace SzymonPeszek.PlayerScripts
         public float walkingSpeed = 1f;
         public float sprintSpeed = 7f;
         public float rotationSpeed = 16f;
-        public float fallingSpeed = 80f;
-        public float jumpHeight = 25f;
-        [Range(2f, 10f)] public float jumpMultiplier = 5f;
+        public float fallPushSpeed = 5f;
+        public float fallingSpeed = 15f;
+        [Range(1f, 50f)] public float jumpHeight = 5f;
+        [Range(1f, 50f)] public float jumpMultiplier = 15f;
 
         [Header("Next Jump Cooldown", order = 1)]
         public float nextJump = 2.0f;
@@ -61,12 +62,11 @@ namespace SzymonPeszek.PlayerScripts
         private FootIkManager _footIkManager;
         private RaycastHit _hit;
         private float _playerColliderRadius;
-        private Vector3 _move = Vector3.zero;
 
         private void Awake()
         {
             _playerManager = GetComponent<PlayerManager>();
-            rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
             _inputHandler = GetComponent<InputHandler>();
             _playerStats = GetComponent<PlayerStats>();
             playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
@@ -203,7 +203,7 @@ namespace SzymonPeszek.PlayerScripts
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, _normalVector);
-            rigidbody.velocity = projectedVelocity;
+            rb.velocity = projectedVelocity;
 
             if (_inputHandler.lockOnFlag && _inputHandler.sprintFlag == false)
             {
@@ -254,32 +254,41 @@ namespace SzymonPeszek.PlayerScripts
         /// Handle falling and ground detection
         /// </summary>
         /// <param name="moveDir">Move direction</param>
-        public void HandleFalling(Vector3 moveDir)
+        /// <param name="delta">Time stamp</param>
+        public void HandleFalling(Vector3 moveDir, float delta)
         {
-            _move = moveDir;
             _playerManager.isGrounded = false;
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
-
+            
             if (Physics.Raycast(origin, myTransform.forward, out _hit, 0.4f))
             {
                 moveDir = Vector3.zero;
             }
-
+            
             if (_playerManager.isInAir)
             {
-                rigidbody.velocity = Vector3.down * (fallingSpeed * 0.05f) + moveDir * (fallingSpeed * 0.01f);
+                // if (inAirTimer > 1f)
+                // {
+                //     Debug.Log(moveDir * (fallPushSpeed / inAirTimer));
+                //     rb.AddForce(moveDir * (fallPushSpeed / inAirTimer));
+                // }
+                // else
+                // {
+                //     Debug.Log(moveDir * (fallPushSpeed * 2));
+                //     rb.AddForce(moveDir * (fallPushSpeed * 2));
+                // }
+                // rb.AddForce(Vector3.down * (fallingSpeed * inAirTimer));
+                rb.velocity = (Vector3.down * fallingSpeed + moveDir * fallPushSpeed) * (1f + inAirTimer);
             }
-
+            
             Vector3 dir = moveDir;
             dir.Normalize();
             origin += dir * groundDirectionRayDistance;
-
             _targetPosition = myTransform.position;
-
-            Debug.DrawRay(origin, Vector3.down * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-
-            //if (Physics.Raycast(origin, Vector3.down, out _hit, minimumDistanceNeededToBeginFall, _ignoreForGroundCheck))
+            
+            // Debug.DrawRay(origin, Vector3.down * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
+            
             if (Physics.SphereCast(origin, _playerColliderRadius, Vector3.down, out _hit, minimumDistanceNeededToBeginFall, _ignoreForGroundCheck) 
                 || Physics.Raycast(origin, Vector3.down, out _hit, minimumDistanceNeededToBeginFall, _ignoreForGroundCheck))
             {
@@ -287,14 +296,13 @@ namespace SzymonPeszek.PlayerScripts
                 Vector3 tp = _hit.point;
                 _playerManager.isGrounded = true;
                 _targetPosition.y = tp.y;
-
+            
                 if (_playerManager.isInAir)
                 {
                     if (inAirTimer > 0.5f)
                     {
-                        //Debug.Log("You were in the air for " + inAirTimer);
                         playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.LandName], true);
-
+            
                         if (inAirTimer > 2.5f)
                         {
                             _playerStats.TakeDamage(fallDamage * inAirTimer);
@@ -307,7 +315,7 @@ namespace SzymonPeszek.PlayerScripts
                         playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.EmptyName], false);
                         inAirTimer = 0;
                     }
-
+            
                     _playerManager.isInAir = false;
                     _footIkManager.enableFeetIk = true;
                 }
@@ -318,7 +326,7 @@ namespace SzymonPeszek.PlayerScripts
                 {
                     _playerManager.isGrounded = false;
                 }
-
+            
                 if (_playerManager.isInAir == false)
                 {
                     _footIkManager.enableFeetIk = false;
@@ -327,14 +335,14 @@ namespace SzymonPeszek.PlayerScripts
                     {
                         playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.FallName], true);
                     }
-
-                    Vector3 vel = rigidbody.velocity;
+            
+                    Vector3 vel = rb.velocity;
                     vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed / 2);
+                    rb.velocity = vel * (movementSpeed / 2);
                     _playerManager.isInAir = true;
                 }
             }
-
+            
             if (_playerManager.isInteracting || _inputHandler.moveAmount > 0)
             {
                 myTransform.position = Vector3.Lerp(myTransform.position, _targetPosition, Time.deltaTime / 0.1f);
@@ -360,11 +368,9 @@ namespace SzymonPeszek.PlayerScripts
             {
                 if (_inputHandler.moveAmount > 0)
                 {
-                    //nextJump -= delta;
-
                     StartCoroutine(ResizeCollider());
-                    rigidbody.velocity += new Vector3(moveDirection.x * jumpMultiplier,
-                        jumpHeight * jumpMultiplier, moveDirection.z * jumpMultiplier);
+                    // rigidbody.velocity += new Vector3(moveDirection.x * jumpMultiplier,
+                    //     jumpHeight * jumpMultiplier, moveDirection.z * jumpMultiplier);
                     playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.JumpName], true);
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;

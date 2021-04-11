@@ -49,7 +49,7 @@ namespace SzymonPeszek.BaseClasses
             playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
             uIManager = playerManager.GetComponent<InputHandler>().uiManager;
 
-            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
+            playerLocomotion.rb.velocity = Vector3.zero; //Stops the player from moving whilst picking up item
             playerAnimatorManager.PlayTargetAnimation(StaticAnimatorIds.animationIds[StaticAnimatorIds.PickUpName], true); //Plays the animation of looting the item
         }
     }
