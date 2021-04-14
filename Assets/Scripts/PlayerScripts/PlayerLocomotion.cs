@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using SzymonPeszek.Enums;
 using UnityEngine;
 using SzymonPeszek.PlayerScripts.CameraManager;
 using SzymonPeszek.PlayerScripts.Controller;
@@ -305,7 +306,7 @@ namespace SzymonPeszek.PlayerScripts
             
                         if (inAirTimer > 2.5f)
                         {
-                            _playerStats.TakeDamage(fallDamage * inAirTimer);
+                            _playerStats.TakeDamage(fallDamage * inAirTimer, DamageType.Fall);
                         }
                         
                         inAirTimer = 0;

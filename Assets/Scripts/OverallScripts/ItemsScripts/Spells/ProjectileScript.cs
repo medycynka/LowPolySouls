@@ -48,25 +48,29 @@ namespace SzymonPeszek.Items.Spells
 
             if (Physics.Raycast(rayOrigin, playerStats.mainCamera.transform.forward, out _hit, 100f, playerAnimatorManager.spellRayCastLayer))
             {
-                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorManager.spellProjectilesTransform.position, playerAnimatorManager.spellProjectilesTransform.rotation);
-                fireball.transform.LookAt(playerStats.IsLockOn() ? _hit.point + Vector3.up : _hit.point);
+                Transform fireball = Instantiate(fireballPrefab,
+                    playerAnimatorManager.spellProjectilesTransform.position,
+                    playerAnimatorManager.spellProjectilesTransform.rotation).transform;
+                fireball.LookAt(playerStats.IsLockOn() ? _hit.point + Vector3.up : _hit.point);
                 _spellCollision = fireball.GetComponent<SpellCollision>();
-                _spellCollision.startPosition = fireball.transform.position;
-                _spellCollision.projectileTransform = fireball.transform;
+                _spellCollision.startPosition = fireball.position;
+                _spellCollision.projectileTransform = fireball;
                 _spellCollision.damage = spellDamage;
                 _spellCollision.maxTravelDistanceSqr = maxTravelDistanceSqr;
-                fireball.GetComponent<Rigidbody>().AddForce(fireball.transform.forward * projectileSpeed);
+                fireball.GetComponent<Rigidbody>().AddForce(fireball.forward * projectileSpeed);
             }
             else
             {
-                GameObject fireball = Instantiate(fireballPrefab, playerAnimatorManager.spellProjectilesTransform.position, playerAnimatorManager.spellProjectilesTransform.rotation);
-                fireball.transform.LookAt(rayOrigin + (playerStats.mainCamera.transform.forward * 100f));
+                Transform fireball = Instantiate(fireballPrefab,
+                    playerAnimatorManager.spellProjectilesTransform.position,
+                    playerAnimatorManager.spellProjectilesTransform.rotation).transform;
+                fireball.LookAt(rayOrigin + (playerStats.mainCamera.transform.forward * 100f));
                 _spellCollision = fireball.GetComponent<SpellCollision>();
-                _spellCollision.startPosition = fireball.transform.position;
-                _spellCollision.projectileTransform = fireball.transform;
+                _spellCollision.startPosition = fireball.position;
+                _spellCollision.projectileTransform = fireball;
                 _spellCollision.damage = spellDamage;
                 _spellCollision.maxTravelDistanceSqr = maxTravelDistanceSqr;
-                fireball.GetComponent<Rigidbody>().AddForce(fireball.transform.forward * projectileSpeed);
+                fireball.GetComponent<Rigidbody>().AddForce(fireball.forward * projectileSpeed);
             }
         }
     }

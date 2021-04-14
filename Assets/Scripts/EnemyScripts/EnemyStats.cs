@@ -8,6 +8,7 @@ using SzymonPeszek.PlayerScripts;
 using SzymonPeszek.Environment.Areas;
 using SzymonPeszek.Misc;
 using SzymonPeszek.EnemyScripts.Animations;
+using SzymonPeszek.Enums;
 
 
 namespace SzymonPeszek.EnemyScripts
@@ -56,10 +57,7 @@ namespace SzymonPeszek.EnemyScripts
             {
                 _mainCameraTransform = Camera.main.transform;
             }
-        }
-
-        void Start()
-        {
+            
             InitializeHealth();
         }
 
@@ -93,7 +91,40 @@ namespace SzymonPeszek.EnemyScripts
                 healthBar.transform.Rotate(0, 180, 0);
             }
         }
-        
+
+        /// <summary>
+        /// Calculate damage received based on damage type and current modifiers
+        /// </summary>
+        /// <param name="damageType">Type of damage</param>
+        /// <param name="damage">Damage amount</param>
+        /// <returns>Calculated Damage</returns>
+        protected override int CalculateDamage(DamageType damageType, float damage)
+        {
+            switch (damageType)
+            {
+                case DamageType.Physic:
+                    float armorValue = Mathf.Clamp(2.5f * defence + baseArmor, 0, 999);
+                    float defMod = Mathf.Clamp01(1 - Mathf.Lerp(armorValue, 999, armorValue / 999) / 999);
+                    int damageMod = (int) (damage * defMod);
+                    return damageMod;
+                case DamageType.AbsolutePhysic:
+                    return (int) damage;
+                case DamageType.Magic:
+                    // float magicDefMod = Mathf.Clamp01(1 - Mathf.Lerp(defence, 999, defence / 999) / 999); // Make magic defence stat
+                    float magicDefMod = 1.0f;
+                    int magicMod = (int) (damage * magicDefMod);
+                    return magicMod;
+                case DamageType.AbsoluteMagic:
+                    return (int) damage;
+                case DamageType.Fall:
+                    return (int) damage;
+                case DamageType.Other:
+                    return (int) damage;
+                default:
+                    return (int) damage;
+            }
+        }
+
         /// <summary>
         /// Calculate maximum health value
         /// </summary>
@@ -135,16 +166,18 @@ namespace SzymonPeszek.EnemyScripts
         /// Take damage from player
         /// </summary>
         /// <param name="damage">Damage amount</param>
+        /// <param name="damageType">Type of damage</param>
         /// <param name="damageAnimation">Name of damage animation</param>
         /// <param name="isBackStabbed">Is it from back stab?</param>
         /// <param name="isRiposted">Is it from riposte?</param>
-        public void TakeDamage(float damage, string damageAnimation = "Damage_01", bool isBackStabbed = false, bool isRiposted = false)
+        public void TakeDamage(float damage, DamageType damageType, string damageAnimation = "Damage_01", 
+            bool isBackStabbed = false, bool isRiposted = false)
         {
             if (_enemyManager.isAlive)
             {
                 if (isBoss)
                 {
-                    currentHealth -= damage;
+                    currentHealth -= CalculateDamage(damageType, damage);
                     bossHpSlider.value = currentHealth;
 
                     if (currentHealth > 0)
@@ -159,7 +192,7 @@ namespace SzymonPeszek.EnemyScripts
                 }
                 else
                 {
-                    UpdateEnemyHealth(damage, isBackStabbed, isRiposted);
+                    UpdateEnemyHealth(CalculateDamage(damageType, damage), isBackStabbed, isRiposted);
                 }
             }
         }
@@ -173,10 +206,11 @@ namespace SzymonPeszek.EnemyScripts
         /// Deal damage to the player
         /// </summary>
         /// <param name="playerStat">Player stats</param>
+        /// <param name="damageType">Type of damage</param>
         /// <param name="damageAnimation">Name of damage animation</param>
-        public void DealDamage(PlayerStats playerStat, string damageAnimation = "Damage_01")
+        public void DealDamage(PlayerStats playerStat, DamageType damageType, string damageAnimation = "Damage_01")
         {
-            playerStat.TakeDamage(Mathf.RoundToInt(enemyAttack), damageAnimation);
+            playerStat.TakeDamage(Mathf.RoundToInt(enemyAttack), damageType, damageAnimation);
         }
 
         /// <summary>
